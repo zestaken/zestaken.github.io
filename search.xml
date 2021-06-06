@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>Linux中man命令的使用</title>
+      <link href="2021/06/06/Linux%E4%B8%ADman%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>2021/06/06/Linux%E4%B8%ADman%E5%91%BD%E4%BB%A4%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1>man命令介绍</h1><ul><li>Linux提供了丰富的帮助手册，当你需要查看某个命令的参数时不必到处上网查找，只要<code>man</code>一下即可。</li><li>可以使用<code>man man</code>查看man的使用方法。</li><li>man命令分为以下几个章节（按真实顺序排列）：<ol><li>标准用户命令（Executable programs or shell commands）</li><li>系统调用（System calls）functions provided by the kernel</li><li>库调用（Library call）functions within program libraries</li><li>特殊文件（设备文件）的访问入口（/dev）Special files (usually found in /dev)</li><li>文件格式（配置文件的语法），指定程序的运行特性 File formats and conventions</li><li>游戏（Games）</li><li>杂项（Miscellaneous）including macro packages and conventions</li><li>管理命令 System administration commands</li><li>跟kernel有关的文件 Kernel routines</li></ol></li></ul><h1>man命令的常用参数</h1><ul><li><code>man -f</code>:与<code>whatis</code>命令功能相同，可以简洁地显示命令的功能，以及它所属的章节。<br><img src="https://gitee.com/zhangjie0524/picgo/raw/master/20210606220020.jpg" alt=""></li><li><code>man -k</code>:与<code>apropos</code>命令功能相同，可以在所有命令的manual页面中的Description部分中查找命令后接的关键词，然后对查找到关键词的页面简洁地返回一行描述，以及有该命令完整的名字和所在的页面。<br><img src="https://gitee.com/zhangjie0524/picgo/raw/master/20210606220638.png" alt=""></li><li>可以在查命令时，指定对应的章节，如：<code>man 3 sleep</code>只查第二节的sleep：<br><img src="https://gitee.com/zhangjie0524/picgo/raw/master/20210606220936.png" alt=""><ul><li>如果不指定对应的章节如：<code>man sleep</code>，则默认查最小的章节，对sleep来说，就是Sleep（1）</li></ul></li></ul><h1>man的基本使用方法</h1><ul><li>翻页：<ul><li>向后翻一屏：space(空格键)</li><li>向前翻一屏：b</li><li>向后翻一行：Enter(回车键) 或者j</li><li>向前翻一行：k</li></ul></li><li>查找：<ul><li><code>/KEYWORD</code>: 向后查找</li><li><code>?KEYWORD</code>:  向前查找</li><li>在进入查找模式之后：<ul><li>N：前一个</li><li>n：下一个</li></ul></li></ul></li><li>退出：q</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>搜索引擎命令</title>
       <link href="2021/05/25/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/"/>
       <url>2021/05/25/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/</url>
