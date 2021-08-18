@@ -1019,11 +1019,11 @@
             
             <tag> Java </tag>
             
-            <tag> 数据库 </tag>
-            
             <tag> JDBC </tag>
             
             <tag> Druid </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
       
@@ -1100,9 +1100,9 @@
       
         <tags>
             
-            <tag> Mysql </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> Mysql </tag>
             
         </tags>
       
@@ -1152,9 +1152,9 @@
       
         <tags>
             
-            <tag> Mysql </tag>
-            
             <tag> 数据库 </tag>
+            
+            <tag> Mysql </tag>
             
         </tags>
       
