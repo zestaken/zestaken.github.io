@@ -585,6 +585,13 @@
   </url>
   
   <url>
+    <loc>http://www.zestaken.top/tags/HTTP/</loc>
+    <lastmod>2021-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.zestaken.top/tags/HTML/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
@@ -599,7 +606,7 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/HTTP/</loc>
+    <loc>http://www.zestaken.top/tags/JQuery/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -614,13 +621,6 @@
   
   <url>
     <loc>http://www.zestaken.top/tags/JSTL/</loc>
-    <lastmod>2021-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.zestaken.top/tags/JQuery/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -662,14 +662,14 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/MakeFile/</loc>
+    <loc>http://www.zestaken.top/tags/Markdown/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/Markdown/</loc>
+    <loc>http://www.zestaken.top/tags/MakeFile/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -711,14 +711,14 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/Tomcat/</loc>
+    <loc>http://www.zestaken.top/tags/XML/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/XML/</loc>
+    <loc>http://www.zestaken.top/tags/Tomcat/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -767,6 +767,20 @@
   </url>
   
   <url>
+    <loc>http://www.zestaken.top/tags/Mysql/</loc>
+    <lastmod>2021-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zestaken.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2021-08-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.zestaken.top/tags/HDFS/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
@@ -782,20 +796,6 @@
   
   <url>
     <loc>http://www.zestaken.top/tags/Druid/</loc>
-    <lastmod>2021-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.zestaken.top/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2021-08-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.zestaken.top/tags/Mysql/</loc>
     <lastmod>2021-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
