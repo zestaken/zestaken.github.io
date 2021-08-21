@@ -1,0 +1,630 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HDFS | ZestJourney</title><meta name="keywords" content="HDFS"><meta name="author" content="Zestaken"><meta name="copyright" content="Zestaken"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="HDFS概述 hadoop源码镜像  HDFS，即Hadoop分布式文件系统，是可以运行在通用硬件上，提供流式数据操作，能够处理超大文件的分布式文件管理系统。  分布式文件管理系统：一种系统来管理多台机器上的文件。 HDFS是分布式的，意味着它的功能需要很多服务器联合起来实现。   HDFS有高度容错，高吞吐量，高可靠性，容易扩展等特性。  高容错性：  数据自动保存多个副本。 某一个副本丢失后，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS">
+<meta property="og:url" content="http://www.zestaken.top/59429.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="HDFS概述 hadoop源码镜像  HDFS，即Hadoop分布式文件系统，是可以运行在通用硬件上，提供流式数据操作，能够处理超大文件的分布式文件管理系统。  分布式文件管理系统：一种系统来管理多台机器上的文件。 HDFS是分布式的，意味着它的功能需要很多服务器联合起来实现。   HDFS有高度容错，高吞吐量，高可靠性，容易扩展等特性。  高容错性：  数据自动保存多个副本。 某一个副本丢失后，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.zestaken.top/img/b3.jpg">
+<meta property="article:published_time" content="2020-12-13T14:00:43.000Z">
+<meta property="article:modified_time" content="2021-08-21T14:44:52.123Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="HDFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.zestaken.top/img/b3.jpg"><link rel="shortcut icon" href="/img/logo.jpg"><link rel="canonical" href="http://www.zestaken.top/59429"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu_site_verification" content="code-YNSOEvGA8A"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HDFS',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-21 22:44:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ZestJourney</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">HDFS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-13T14:00:43.000Z" title="发表于 2020-12-13 22:00:43">2020-12-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-21T14:44:52.123Z" title="更新于 2021-08-21 22:44:52">2021-08-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HDFS"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1>HDFS概述</h1>
+<p><a target="_blank" rel="noopener" href="http://mirrors.hust.edu.cn/apache/">hadoop源码镜像</a></p>
+<ul>
+<li>HDFS，即Hadoop分布式文件系统，是可以运行在通用硬件上，提供流式数据操作，能够处理超大文件的分布式文件管理系统。
+<ul>
+<li>分布式文件管理系统：一种系统来管理多台机器上的文件。</li>
+<li>HDFS是分布式的，意味着它的功能需要很多服务器联合起来实现。</li>
+</ul>
+</li>
+<li>HDFS有高度容错，高吞吐量，高可靠性，容易扩展等特性。
+<ul>
+<li>高容错性：
+<ul>
+<li>数据自动保存多个副本。</li>
+<li>某一个副本丢失后，它可以自动恢复。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HDFS的使用场景：适合一次写入，多次读出的场景，且不支持文件的修改。适合用来做数据分析。</li>
+<li>HDFS的缺点：
+<ul>
+<li>不适合低延时的数据访问；</li>
+<li>无法高效对大量<strong>小文件</strong>进行存储；
+<ul>
+<li>存储大量小文件，它会占用<strong>NameNode大量的内存</strong>来存储文件目录和块信息。</li>
+<li>小文件存储的<strong>寻址时间</strong>会超过读取时间，违反了Hdfs的设计目标。</li>
+</ul>
+</li>
+<li>不支持并发写入，文件随机修改:
+<ul>
+<li>一个文件只能有一个写，不允许多个线程同时写；</li>
+<li>仅支持数据追加，不支持文件的随机修改。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1>HDFS的体系结构</h1>
+<ul>
+<li>HDFS是一个主从(Master/Slave)体系结构的分布式系统。</li>
+<li>体系结构如图；<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201213221011.jpg" alt=""></li>
+<li><strong>NameNode</strong>是HDFS的Master节点，负责管理文件系统的<strong>命名空间(namespace)</strong>,以及<strong>数据块到具体DataNode的映射</strong>等信息。</li>
+<li><strong>DataNode</strong>一般是一个节点上一个，负责管理它所在节点上的存储。</li>
+<li>用户与HDFS的交互：
+<ol>
+<li>用户能够通过<strong>HDFS客户端(client)</strong>,发起<strong>读写</strong>HDFS文件的请求，同时还能通过client执行HDFS命名空间的操作，如<strong>打开，关闭，重命名文件或者目录</strong>。</li>
+<li><strong>NameNode会响应客户端的请求</strong>，来更改命名空间的信息以及DataNode和数据块的映射关系；</li>
+<li>NameNode会指导<strong>DataNode来处理client的文件读写请求</strong>。</li>
+</ol>
+</li>
+</ul>
+<h1>HDFS基本概念</h1>
+<h2 id="数据块-Block">数据块(Block)</h2>
+<ul>
+<li>HDFS的文件是以数据块存储的，数据块是HDFS文件处理的<strong>最小单元</strong>。</li>
+<li>HDFS的数据块很大，默认为每块<strong>128MB</strong>。</li>
+<li>HDFS<strong>数据块会以文件</strong>的形式存储在数据节点的磁盘上。</li>
+<li>HDFS中所有文件都会被<strong>切分成若干个数据块</strong>分布在数据节点上存储。</li>
+<li>HDFS会将同一个数据块<strong>冗余备份</strong>到不同的数据节点上(一个数据块默认保存<strong>3份</strong>)。</li>
+</ul>
+<h2 id="名字节点-NameNode">名字节点(NameNode)</h2>
+<ul>
+<li>NameNode是HDFSMaster/Slave结构中的<strong>主节点</strong>。</li>
+<li>NameNode管理文件系统<strong>命名空间(NameSpace)<strong>以及</strong>数据块和数据节点之间的对应关系</strong>。
+<ul>
+<li>NameSpace:
+<ul>
+<li>包括<strong>文件系统目录树</strong>，<strong>文件目录信息</strong>，以及<strong>文件的数据块索引</strong>（文件-&gt;数据块）；</li>
+<li>这些信息以<strong>命名空间镜像文件</strong>和<strong>编辑日志文件</strong>这两个文件的形式<strong>永久的保存在NameNode的本地磁盘上</strong>。</li>
+</ul>
+</li>
+<li>数据块与数据节点之间的对应关系：
+<ul>
+<li>并不保存在NameNode的本地磁盘上，而是在NameNode启动时<strong>动态构建</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NameNode是HDFS的<strong>单一故障点</strong>，如果NameNode丢失元数据或者损坏，文件系统将出现错误。
+<ul>
+<li>Hadoop 2.X版本引入<strong>名字节点高可用性(HA)</strong>,来解决这个问题：</li>
+</ul>
+</li>
+<li>NameNode中要保存数据块与数据节点之间的对应关系，如果文件数量过多，<strong>NameNode的内存将成为限制系统横向扩展的瓶颈</strong>。
+<ul>
+<li>Hadoop 2.X版本引入<strong>联邦HDFS机制(HDFS Federation)</strong>,来解决这个问题。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据节点-DataNode">数据节点(DataNode)</h2>
+<ul>
+<li>DataNode是HDFS的<strong>从结点</strong>;</li>
+<li>DataNode会根据Client的请求和NameNode的指令来从本地存储中读取数据块，或者向本地存储中写入数据块。</li>
+<li>DataNode会不断向NameNode发送<strong>数据块汇报，心跳和缓存汇报</strong>。</li>
+</ul>
+<h2 id="客户端-client">客户端(client)</h2>
+<ul>
+<li>HDFS提供了多种客户端接口供<strong>应用程序</strong>和<strong>用户</strong>使用，这些接口包括<strong>命令行接口</strong>，<strong>浏览器接口</strong>和<strong>代码API接口</strong>。</li>
+</ul>
+<h2 id="HDFS通信协议">HDFS通信协议</h2>
+<ul>
+<li>HDFS的使用流程需要client，NameNode，DataNode三者之间的配合和相互调用。HDFS将这些节点间的调用抽象成不同的<strong>接口</strong>。</li>
+<li>HDFS节点间的接口主要有两种类型：
+<ol>
+<li>Hadoop RPC接口</li>
+<li>流式接口</li>
+</ol>
+</li>
+</ul>
+<h1>Hadoop RPC接口</h1>
+<ul>
+<li>Hadoop RPC接口是基于Protobuf实现的，主要定义在<code>org.apache.hadoop.hdfs.protocol</code>包和<code>org.apache.hadoop.hdfs.server.protocol</code>包中、</li>
+<li>Hadoop RPC接口主要包含以下几个接口：
+<ol>
+<li><strong>ClentProtocol</strong>:这个接口定义了<strong>client和NameNode</strong>之间的接口，clent对文件的所有操作都要通过这个接口。</li>
+<li><strong>ClientDatanodeProtocol</strong>:这是<strong>client和DataNode</strong>之间的接口，其中的方法是在<strong>client获取DataNode的信息时调用</strong>，而不是直接的数据读写交互。</li>
+<li><strong>DatanodeProtocol</strong>:DataNode通过这个接口和<strong>NameNode通信</strong>，同时NameNode通过这个接口中方法的返回值向DataNode下发指令，这个接口是<strong>DataNode和NameNode之间通信的唯一方式</strong>。</li>
+<li><strong>InnerDatanodeProtocol</strong>:这是<strong>DataNode和DataNode之间通信的接口</strong>，这个接口主要用于<strong>数据块的恢复操作，以及同步DataNode上存储的数据块副本的信息</strong>。</li>
+<li><strong>NameNodeProtocol</strong>: <strong>Secondary NameNode和NameNode之间的接口</strong>，如果引入了HA机制，则不使用Secondary NameNode，这个接口作用有限。</li>
+<li>其它接口：如安全相关接口，HA相关接口。</li>
+</ol>
+</li>
+</ul>
+<h2 id="ClientProtocol">ClientProtocol</h2>
+<ul>
+<li>是Client发起调用的接口。</li>
+</ul>
+<h3 id="读数据相关方法">读数据相关方法</h3>
+<ul>
+<li><code>getBlockLocations()</code>:客户端调用该方法获取指定范围内所有<strong>数据块的位置信息</strong>。
+<ul>
+<li>参数：HDFS文件的<strong>文件名</strong>和<strong>读取范围</strong>。</li>
+<li>返回值：文件指定范围内所有数据块的文件名以及它们的位置信息，用<strong>LocatedBlocks对象</strong>封装。
+<ul>
+<li>数据块的位置信息是指所有存储这个数据块副本的DataNode信息，这些DataNode会以与当前客户端的距离远近排序。</li>
+</ul>
+</li>
+<li>定义：<code>public LocatedBlocks getBLockLocations(String src, long offset,long length);</code></li>
+<li>使用：client会首先调用<code>getBlockLocations()</code>方法获取文件的所有数据块的位置，然后根据这些<strong>位置信息</strong>从DataNode读取数据块。</li>
+</ul>
+</li>
+<li><code>reportBadBlocks()</code>:客户端调用该方法向NameNode汇报错误的数据块。
+<ul>
+<li>参数：LocatedBlock对象数组</li>
+<li>定义：<code>public void reportBadBlocks(LocatedBlock[]  blocks);</code></li>
+<li>使用： 当client从DataNode<strong>读取数据块并且发现数据块的校验和并不正确时</strong>，调用这个方法向NameNode汇报这个错误数据块的信息。</li>
+</ul>
+</li>
+</ul>
+<h3 id="写-追加写数据相关方法">写/追加写数据相关方法</h3>
+<ul>
+<li><code>creat()</code>:用于在HDFS文件系统目录树中创建一个新的空文件。
+<ul>
+<li>参数：由<code>String src</code>参数指定创建文件的路径。</li>
+<li>返回值：</li>
+<li>定义:<code>public HDFSFileStatus create(String src,...(此处省略后续参数));</code></li>
+</ul>
+</li>
+<li><code>append()</code>:用于打开一个已有的文件。
+<ul>
+<li>如果这个文件的<strong>最后一个数据块没有写满</strong>，则返回这个数据块的位置信息(用LocatedBlock对象封装);</li>
+<li>如果这个文件的<strong>最后一个数据块恰好写满</strong>，则<strong>创建一个新数据块</strong>并添加到这个文件中，然后返回这个新添加数据块的位置信息。</li>
+<li>定义:<code>public LocatedBlock append(String src, String clientName);</code></li>
+</ul>
+</li>
+<li><code>addBlock()</code>:向指定文件<strong>添加一个新数据块</strong>，并获取存储这个数据块副本的所有<strong>DataNode的位置信息</strong>。
+<ul>
+<li>调用该方法需要传入<strong>上一个数据块的引用</strong>（即previous参数）；</li>
+<li>excludeNodes参数：是DataNode的黑名单，保存了client<strong>无法连接的一些DataNode</strong>；</li>
+<li>favoredNodes参数：是client希望保存数据块副本的<strong>DataNode列表</strong>.</li>
+<li>定义：<code>public LocatedBlock addBlock(String src, String clientName, ExtenedNode previous, DataNodeInfo[] excludeNodes, long fileId,  String[] favoredNodes);</code></li>
+</ul>
+</li>
+<li><code>complete()</code>:当客户端<strong>完成了整个文件的写入操作后</strong>，会调用该方法<strong>通知NameNode</strong>。
+<ul>
+<li>该方法会<strong>提交所有新写入的数据块信息</strong>；</li>
+<li>当该文件的<strong>所有数据块至少都有一个副本</strong>时，该方法会返回true,这时NameNode中文件的状态也会从<strong>构建中状态转换为正常状态</strong>；</li>
+<li>否则，该方法返回false，**client需要反复调用<code>complete()</code>方法,直到返回ture。</li>
+<li>定义：<code>public boolean complete(String src, String clientName, ExtendedBlock last, long fileId);</code></li>
+</ul>
+</li>
+<li>正常写新文件流程：
+<ol>
+<li>client调用<code>create</code>方法在文件系统目录树上<strong>创建一个空文件</strong>；</li>
+<li>client调用<code>addBlock</code>方法获取存储文件的<strong>数据块的位置信息</strong>；</li>
+<li>client根据数据块的位置信息构建<strong>数据流管道，向DataNode中写入数据</strong>；</li>
+<li>client完成数据的写入，调用<code>complete</code>方法<strong>通知NameNode</strong>。</li>
+</ol>
+</li>
+<li>正常追写数据流程：
+<ol>
+<li>client调用<code>append</code>方法<strong>获取最后一个可写数据块的位置信息</strong>；</li>
+<li>client根据该数据块的位置信息构建<strong>数据流管道，向这个未写满的DataNode中写入数据</strong>；</li>
+<li>client如果将原文件的最后一个数据块写满了，则调用<code>addBlock</code>方法获取存储文件的<strong>数据块的位置信息</strong>；</li>
+<li>client根据数据块的位置信息构建<strong>数据流管道，向DataNode中写入数据</strong>；</li>
+<li>client完成数据的写入，调用<code>complete</code>方法<strong>通知NameNode</strong>。</li>
+</ol>
+</li>
+</ul>
+<h3 id="对命名空间的管理相关方法">对命名空间的管理相关方法</h3>
+<ul>
+<li>HDFS对NameNode信息的修改的相关方法与FileSystem类抽象的所有方法。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201216103550.jpg" alt=""></li>
+</ul>
+<h3 id="系统问题与管理操作">系统问题与管理操作</h3>
+<ul>
+<li>ClientProtocol支持**DFSAdmin工具（供HDFS管理员管理HDFS集群的命令行工具）**的接口方法。</li>
+<li>典型的dfsadmin命令：<code>hdfs dfsadmin[参数]</code>;<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201216135353.jpg" alt=""><br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201216135358.jpg" alt=""></li>
+<li><strong>安全模式</strong>：
+<ul>
+<li>安全模式是NameNode的一种状态，处于安全模式的NameNode不接受client对NameSpace的修改操作，NameSpace处于<strong>只读状态</strong>。同时，NameNode也不会<strong>向DataNode下发任何数据块的复制，删除操作</strong>。</li>
+<li>刚刚启动的NameNode会<strong>自动进入安全模式</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="快照操作">快照操作</h3>
+<ul>
+<li>快照保存了HDFS在一个时间点某个路径中所有数据的拷贝；</li>
+<li>快照可以将集群回滚到之间的一个正常的时间点上。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201217151155.jpg" alt=""></li>
+</ul>
+<h3 id="缓存操作">缓存操作</h3>
+<ul>
+<li>集中式缓存管理功能：用户可以指定一些经常使用的数据或者高优先级任务的数据，使它们常驻缓存而不被淘汰到磁盘上。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201217151806.jpg" alt=""></li>
+</ul>
+<h3 id="其它操作">其它操作</h3>
+<ul>
+<li>如安全相关或者XAtrr相关命令</li>
+</ul>
+<h2 id="ClientDatanodeProtocol">ClientDatanodeProtocol</h2>
+<ul>
+<li>ClientDatanodeProtocol定义了client和Datonode之间的接口，由client发起调用。</li>
+<li><code>getRepublicaVisibleLength()</code>:用于从某个DataNode获取某个数据块副本真实的数据长度。</li>
+<li><code>getBlockLocalPathInfo();</code>:client调用该方法获取指定数据块文件以及数据块校验文件在当前DataNode（和client一个物理机）上的本地路径。</li>
+<li><code>refreshNamenodes()</code>:用于触发指定的DataNode重新加载配置文件，停止服务那些已经从配置文件中删除的块池，开始服务新添加的块池。</li>
+<li><code>deleteBlockPool();</code>:用于从指定的DataNode删除指定的块池。</li>
+<li><code>getHdfsBlocksMetadata();</code>:获取是存储在指定的DataNode的哪个卷上的。</li>
+<li><code>shutdownDatanode();</code>:用于关闭一个数据节点。</li>
+<li><code>getDatanodeInfo();</code>:获取指定的DataNode的信息：DataNode运行和配置的HDFS版本，以及DataNode的启动时间等信息。</li>
+<li><code>startReconfiguration();</code>:触发DataNode异步地从磁盘加载并应用配置。</li>
+<li><code>getReconfigurationStatus();</code>:用于查询上一次触发的重新加载配置操作的运行情况。</li>
+</ul>
+<h2 id="DatanodeProtocol">DatanodeProtocol</h2>
+<ul>
+<li>Datanode使用这个接口与NameNode进行握手，注册，发送心跳，进行数据块汇报。</li>
+<li>NameNode会<strong>在心跳响应中携带名字节点指令</strong>，NameNode向DataNode下发名字节点指令只能通过这个接口进行。</li>
+<li>DataNode<strong>启动</strong>方法：
+<ol>
+<li>首先调用<code>versionRequest();</code>与NameNode进行握手操作，在这个过程中会判断DataNode的HDFS版本与NameNode的HDFS版本能否协同工作，如果不能，则抛出异常；</li>
+<li>然后调用<code>registerDatanode();</code>向NameNode注册当前的DataNode。</li>
+<li>接着DataNode调用<code>blockReport();</code>方法向NameNode汇报它所管理的所有数据块信息，NameNode根据上报的数据库信息，建立数据块与DataNode之间的对应关系，并且在对<code>blockReport()</code>的响应中携带名字节点指令。</li>
+<li>最后调用<code>cacheReport()</code>上报DataNode缓存的所有数据块信息。</li>
+</ol>
+</li>
+<li><strong>心跳</strong>相关方法：
+<ul>
+<li>心跳用来维护节点的健康状态，DataNode会调用用<code>sengHeartbeat()</code>定期向NameNode发送心跳,如果NameNode长时间没有收到该DataNode的心跳，会认为该节点失效。</li>
+<li>NameNode在对心跳的响应中会包含名字节点指令。</li>
+</ul>
+</li>
+<li><strong>数据块读写</strong>相关方法:
+<ul>
+<li><code>reportBadBlocks()</code>:用于汇报损坏的数据块；</li>
+<li><code>blockReceivedAndDeleted()</code>：汇报DataNode新接受或者删除的数据块。</li>
+<li>。。。</li>
+</ul>
+</li>
+<li><code>errorReport()</code>:用于汇报运行过程中发生的一些状况。</li>
+<li>DatanodeCommand类描述NameNode向DataNode发送的名字节点指令。</li>
+</ul>
+<h2 id="InterDatanodeProtocol">InterDatanodeProtocol</h2>
+<ul>
+<li>是DataNode和DataNode之间的接口，用于同步数据块的状态。</li>
+</ul>
+<h2 id="NamenodeProtocol">NamenodeProtocol</h2>
+<ul>
+<li>是NameNode和Secondary NameNode之间的接口。</li>
+</ul>
+<h1>流式接口</h1>
+<ul>
+<li>流式接口是HDFS中基于TCP或者HTTP实现的的接口。</li>
+<li>包括：
+<ol>
+<li>基于TCP的DataTransferProtocol;</li>
+<li>基于HTTP的HA架构中Active NameNode和Standby之间的接口。</li>
+</ol>
+</li>
+</ul>
+<h2 id="DataTransferProtocol">DataTransferProtocol</h2>
+<ul>
+<li>描述写入或者读出DataNode上的数据。</li>
+<li>client和DataNode，以及DataNode和DataNode之间的数据传输都是基于这个接口的。</li>
+<li>主要方法：
+<ol>
+<li><code>readBlock();</code>:从当前DateNode读取指定的数据块。</li>
+<li><code>writeBlock();</code>:将指定的数据块写入数据流管道中（pipeLine）。</li>
+</ol>
+</li>
+<li>主要类：
+<ul>
+<li><code>Sender类</code>:发送DataTransferProtocol请求；</li>
+<li><code>Receiver类</code>:接收DataTransferProtocol请求；</li>
+<li>调用示例：<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201217190221.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="Active-Namenode和Standby之间的HTTP接口">Active Namenode和Standby之间的HTTP接口</h2>
+<ul>
+<li>未采用HA的NameNode会定期将<strong>命名空间</strong>保存到<strong>fsimage</strong>中，但是NameNode会先将<strong>对命名空间的修改操作</strong>保存到editlog文件，然后再定期合并fsimage和editlog文件。
+<ul>
+<li>合并fsimage和editlog文件十分耗费资源，引进Secondary NameNode来专门负责合并。</li>
+</ul>
+</li>
+<li>采用了HA的HDFS，会让Standby NameNode不断将读入的editlog文件写到自己的fsimage中，始终维持一个最新版本的命名空间。
+<ul>
+<li>Standby NameNode需要<strong>定期将自己的命名空间写入一个新的fsimage</strong>，并通过<strong>HTTP协议</strong>将这个fsimage文件传回Active NameNode。这就是二者之间的HTTP接口的作用。</li>
+</ul>
+</li>
+</ul>
+<h1>HDFS的主要流程</h1>
+<h2 id="客户端读流程">客户端读流程</h2>
+<ol>
+<li>打开HDFS文件：
+<ol>
+<li>首先调用：<code>DistributedFileSystem.open()</code>方法打开HDFS文件，该方法在底层调用<code>ClientProtocol.open()</code>方法；</li>
+<li>返回得到一个HdfsDataInputStream对象用于读取数据块。</li>
+</ol>
+</li>
+<li>从NameNode获取DataNode地址：
+<ol>
+<li>调用<code>ClientProtocol.getBlockLocations()</code>方法向NameNode获取该HDFS文件起始数据块的位置。</li>
+<li>按照距离Client的距离远近来选取最优的DataNode。</li>
+</ol>
+</li>
+<li>连接到DataNode读取数据块：
+<ol>
+<li>Client通过<code>DFSInputStream.read()</code>方法连接到最优的DataNode来读取数据块；</li>
+<li>数据会以<strong>数据包(packet)<strong>为单位，通过</strong>流式接口</strong>从DataNode传到Client。</li>
+<li>一个数据块读取到末尾时DFSInputStream对象会再调用<code>ClientProtocol.getBlockLocations()</code>方法获取下一个数据块的地址。</li>
+</ol>
+</li>
+<li>关闭输入流：
+<ol>
+<li>完成文件读取后，通过<code>HdfsDataInputStream()</code>方法，关闭输入流。</li>
+</ol>
+</li>
+<li>如果数据出现损坏DFSStream会尝试从存有该数据块副本的其它DataNode读取数据。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201218100559.jpg" alt=""></li>
+</ol>
+<h2 id="客户端写流程">客户端写流程</h2>
+<ol>
+<li>创建文件：
+<ol>
+<li>首先调用<code>DistributedFileSystem.create()</code>方法在HDFS文件系统中创建一个新的空文件。这个方法在底层通过调用<code>ClientProtocol.create()</code>方法通知NameNode创建新文件。</li>
+<li>之后，该方法会返回一个HdfsDataOutputStream对象，这个对象在底层封装了DFSOutputStream对象。</li>
+</ol>
+</li>
+<li>建立数据流管道：
+<ol>
+<li>DFSOutputStream对象首先调用<code>ClientProtocol.addBlock()</code>方法向NameNode申请一个空数据块，这个方法返回一个LocatedBlock对象,这个对象包含了存储这个数据块的所有DataNode的位置信息。</li>
+<li>根据返回的DataNode的位置信息，通过<code>DFSOutputStream.write()</code>方法建立数据流管道。</li>
+</ol>
+</li>
+<li>通过数据流管道写入数据：
+<ol>
+<li>写入DFSOutputSteam的数据首先被缓存在数据流中；</li>
+<li>之后这些数据被切分成一个个数据包通过数据流管道发送到DataNode。</li>
+<li>每个数据包中都含有一个确认包，它会逆序通过数据流管道回到输入流；</li>
+<li>在确认所有DataNode都已经写入这个数据包后，就会从缓存队列删除这个数据包；</li>
+<li>当一个数据块被写满之后，就会再调用<code>addBlock()</code>方法申请新的数据块，重复上述操作。</li>
+</ol>
+</li>
+<li>关闭输入流并提交文件：
+<ol>
+<li>完成对整个文件的写入之后，就会调用<code>close()</code>方法关闭输入流，并调用<code>ClientProtocol.complete()</code>通知NameNode提交这个文件中的所有数据块。</li>
+</ol>
+</li>
+<li>DataNode汇报
+<ol>
+<li>当DataNode成功接收一个数据块时，会调用<code>Datanode.blockRecievedAndDeleted()</code>向NameNode汇报；</li>
+<li>之后，NameNode会更新内存中数据块与DataNode之间的对应关系。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201218113317.jpg" alt=""></li>
+</ol>
+</li>
+</ol>
+<h2 id="客户端追加写流程">客户端追加写流程</h2>
+<ol>
+<li>打开已有的HDFS文件：
+<ol>
+<li>调用<code>DistributedFileSystem.append();</code>方法打开一个<strong>已有的HDFS文件</strong></li>
+<li>append方法会首先调用<code>ClientProtocol.append();</code>方法获取最后一个数据块的位置信息，如果最后一个数据快已满则返回null。</li>
+<li>之后创建到这个数据块的DFSOutputStream输出流对象。</li>
+</ol>
+</li>
+<li>建立数据流管道：
+<ol>
+<li>DFSOutputStream类判断最后一个数据块是否已经写满；</li>
+<li>如果没有写满，根据第一步返回的数据块位置信息，建立到该数据块的数据流管道；</li>
+<li>如果已经写满了，则向NameNode新申请一个数据块再建立输出流管道。</li>
+</ol>
+</li>
+<li>通过数据流管道写入数据；类似</li>
+<li>关闭数据流并提交文件：类似</li>
+</ol>
+<h2 id="DataNode启动，心跳以及执行名字节点指令流程">DataNode启动，心跳以及执行名字节点指令流程</h2>
+<ul>
+<li>Datanode启动流程：
+<ol>
+<li><strong>握手</strong>：Datanode首先通过<code>DatanodeProtocol.versionRequese()</code>方法获取NameNode的版本号等信息，与自身的软件、版本号等进行比较，确保它们是一致的。</li>
+<li><strong>注册</strong>：Datanode通过<code>DatanodeProtocol.register()</code>方法向NameNode注册；</li>
+<li><strong>汇报</strong>：注册成功后，DataNode会将本地存储的所有数据块和缓存的数据块信息上传到NameNode，NameNode利用这些信息建立数据块到DataNode的对应关系。</li>
+</ol>
+</li>
+<li>DataNode启动之后会定期向NameNode发送心跳。</li>
+<li>DataNode成功的添加或者删除了一个数据块时会向NameNode汇报，NameNode根据这些汇报的信息，更新数据块和Datanode对应关系。</li>
+</ul>
+<h1>Hadoop RPC</h1>
+<ul>
+<li>RPC（Remote Peocedure CallProtocol 远程过程调用协议），是基于IPC(Inter-Process Communications 进程间通信),模型实现的通信框架。</li>
+<li>工作模式:客户端/服务器模式，请求程序是一个客户端，服务提供程序就是一个服务器。
+<ol>
+<li>客户端首先会发送一个有参数调用的请求到服务器端；</li>
+<li>服务器端会在睡眠状态等待调用请求到达，之后执行调用请求，向客户端发送响应信息。</li>
+<li>客户端接收响应信息，远程调用结束。</li>
+</ol>
+</li>
+<li>框架结构：
+<ul>
+<li>通信模块：基于网络通信协议的网络通信模块。</li>
+<li>客户端Stub程序：客户端和服务器端都具有Stub程序，主要用于发起和响应请求。</li>
+<li>服务器端Stub程序：接收调用请求，触发对应的服务程序，并返回响应信息。</li>
+<li>请求程序：调用客户端Stub程序，然后接收服务器Stub程序返回的响应信息。</li>
+<li>服务程序：接收来自服务器端的调用请求，执行对应的操作，并返回结果。<br>
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201218180708.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Zestaken</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.zestaken.top/59429.html">http://www.zestaken.top/59429.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.zestaken.top" target="_blank">ZestJourney</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/HDFS/">HDFS</a></div><div class="post_share"><div class="social-share" data-image="/img/b3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/11629.html"><img class="prev-cover" src="/img/b9.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Bootstrap</div></div></a></div><div class="next-post pull-right"><a href="/18006.html"><img class="next-cover" src="/img/b1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaScript</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Zestaken</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">49</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zestaken"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:1224649136@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://gitee.com/zhangjie0524/picgo/raw/master/20210529172855.jpg" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://gitee.com/zhangjie0524/picgo/raw/master/20210529172955.jpg" target="_blank" title="WeChat"><i class="fab fa-weixin"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">HDFS概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">HDFS的体系结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">HDFS基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%9D%97-Block"><span class="toc-text">数据块(Block)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E8%8A%82%E7%82%B9-NameNode"><span class="toc-text">名字节点(NameNode)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8A%82%E7%82%B9-DataNode"><span class="toc-text">数据节点(DataNode)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-client"><span class="toc-text">客户端(client)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HDFS%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="toc-text">HDFS通信协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Hadoop RPC接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ClientProtocol"><span class="toc-text">ClientProtocol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%BB%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="toc-text">读数据相关方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99-%E8%BF%BD%E5%8A%A0%E5%86%99%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="toc-text">写&#x2F;追加写数据相关方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95"><span class="toc-text">对命名空间的管理相关方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E9%97%AE%E9%A2%98%E4%B8%8E%E7%AE%A1%E7%90%86%E6%93%8D%E4%BD%9C"><span class="toc-text">系统问题与管理操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E7%85%A7%E6%93%8D%E4%BD%9C"><span class="toc-text">快照操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E6%93%8D%E4%BD%9C"><span class="toc-text">缓存操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%93%8D%E4%BD%9C"><span class="toc-text">其它操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClientDatanodeProtocol"><span class="toc-text">ClientDatanodeProtocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DatanodeProtocol"><span class="toc-text">DatanodeProtocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InterDatanodeProtocol"><span class="toc-text">InterDatanodeProtocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NamenodeProtocol"><span class="toc-text">NamenodeProtocol</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">流式接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DataTransferProtocol"><span class="toc-text">DataTransferProtocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Active-Namenode%E5%92%8CStandby%E4%B9%8B%E9%97%B4%E7%9A%84HTTP%E6%8E%A5%E5%8F%A3"><span class="toc-text">Active Namenode和Standby之间的HTTP接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">HDFS的主要流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%BB%E6%B5%81%E7%A8%8B"><span class="toc-text">客户端读流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%86%99%E6%B5%81%E7%A8%8B"><span class="toc-text">客户端写流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%BD%E5%8A%A0%E5%86%99%E6%B5%81%E7%A8%8B"><span class="toc-text">客户端追加写流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DataNode%E5%90%AF%E5%8A%A8%EF%BC%8C%E5%BF%83%E8%B7%B3%E4%BB%A5%E5%8F%8A%E6%89%A7%E8%A1%8C%E5%90%8D%E5%AD%97%E8%8A%82%E7%82%B9%E6%8C%87%E4%BB%A4%E6%B5%81%E7%A8%8B"><span class="toc-text">DataNode启动，心跳以及执行名字节点指令流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Hadoop RPC</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/42060.html" title="视频记录">视频记录</a><time datetime="2021-07-10T10:19:25.000Z" title="发表于 2021-07-10 18:19:25">2021-07-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/52778.html" title="杂志摘">杂志摘</a><time datetime="2021-07-01T10:19:25.000Z" title="发表于 2021-07-01 18:19:25">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/13383.html" title="Python实现词云">Python实现词云</a><time datetime="2021-06-13T00:10:19.000Z" title="发表于 2021-06-13 08:10:19">2021-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/14280.html" title="Python深度学习环境">Python深度学习环境</a><time datetime="2021-06-13T00:01:19.000Z" title="发表于 2021-06-13 08:01:19">2021-06-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/31269.html" title="书摘">书摘</a><time datetime="2021-06-06T10:19:25.000Z" title="发表于 2021-06-06 18:19:25">2021-06-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Zestaken</div><div class="footer_custom_text">张杰之港！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+      appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+      placeholder: 'Please leave your footprints',
+      avatar: 'robohash',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/source/js/bottom.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="为,人,民,服,务" data-fontsize="24px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='all'|| 'all' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="http://www.zestaken.top/categories/技术笔记/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 技术笔记 (49)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://www.zestaken.top/categories/专业基础/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">👩‍💻 专业学习 (11)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://www.zestaken.top/categories/文/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 人文社科 (3)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="http://www.zestaken.top/categories/项目/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🎮 随便做做 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><a class="magnet_link_more"  href="http://www.zestaken.top/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #f2f2f2;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #b30070}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><!-- hexo injector body_end end --></body></html>
