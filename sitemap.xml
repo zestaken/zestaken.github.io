@@ -529,13 +529,6 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/BootStrap/</loc>
-    <lastmod>2021-08-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.zestaken.top/tags/Java/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
@@ -544,6 +537,13 @@
   
   <url>
     <loc>http://www.zestaken.top/tags/BeanUtils/</loc>
+    <lastmod>2021-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.zestaken.top/tags/BootStrap/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -606,14 +606,14 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/JSON/</loc>
+    <loc>http://www.zestaken.top/tags/JQuery/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/JQuery/</loc>
+    <loc>http://www.zestaken.top/tags/JSON/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -669,6 +669,13 @@
   </url>
   
   <url>
+    <loc>http://www.zestaken.top/tags/Maven/</loc>
+    <lastmod>2021-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.zestaken.top/tags/Markdown/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
@@ -676,7 +683,7 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/Maven/</loc>
+    <loc>http://www.zestaken.top/tags/Nginx/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -704,20 +711,6 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/Nginx/</loc>
-    <lastmod>2021-08-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.zestaken.top/tags/Tomcat/</loc>
-    <lastmod>2021-08-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.zestaken.top/tags/XML/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
@@ -732,6 +725,13 @@
   </url>
   
   <url>
+    <loc>http://www.zestaken.top/tags/Tomcat/</loc>
+    <lastmod>2021-08-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.zestaken.top/tags/Junit/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
@@ -739,14 +739,14 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/</loc>
+    <loc>http://www.zestaken.top/tags/%E4%B9%A6%E6%91%98/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/%E4%B9%A6%E6%91%98/</loc>
+    <loc>http://www.zestaken.top/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -823,14 +823,14 @@
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/SpringMVC/</loc>
+    <loc>http://www.zestaken.top/tags/Spring/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.zestaken.top/tags/Spring/</loc>
+    <loc>http://www.zestaken.top/tags/SpringMVC/</loc>
     <lastmod>2021-08-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
