@@ -2422,7 +2422,7 @@
                 Mt = { class: "flex flex-col gap-1.5" },
                 xt = { class: "font-extrabold" },
                 Ft = Object(a["i"])(" . "),
-                Bt = Object(a["i"])("->"),
+                Bt = Object(a["i"])(""),
                 Lt = Object(a["j"])("a", { href: "https://www.zestaken.top/" }, [Object(a["j"])("b", { class: "font-extrabold border-b-2 border-ob hover:text-ob" }, "  ZestJourney@乐游记  ")], -1),
                 Zt = Object(a["i"])(" && "),
                 At = { href: "" },
