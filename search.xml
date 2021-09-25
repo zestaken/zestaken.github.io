@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>编译原理一：概述</title>
+      <link href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B8%80%EF%BC%9A%E6%A6%82%E8%BF%B0/index.html"/>
+      <url>/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E4%B8%80%EF%BC%9A%E6%A6%82%E8%BF%B0/index.html</url>
+      
+        <content type="html"><![CDATA[<h1>编译的概念</h1><ul><li><strong>编译</strong>：将高级语言（源语言）翻译为汇编语言或者机器语言（目标语言）的过程。</li><li>编译器在语言处理系统的位置：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925163318.png" alt=""></li></ul><h1>编译系统的结构</h1><ul><li>编译系统结构图：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925163422.png" alt=""></li></ul><h2 id="编译器前端">编译器前端</h2><ul><li>编译器的前端与源语言的处理相关。</li></ul><h3 id="词法分析">词法分析</h3><ul><li>词法分析的任务：从左向右扫描源程序的字符，识别出各个单词，然后将单词转换为**词法单元（token）**形式。</li><li><strong>词法单元（token）</strong>：<ul><li>token组织形式：<code>&lt;种别码, 属性值&gt;</code></li><li>不同类型的单词的种别码与属性值设置：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925163938.png" alt=""><ul><li>关键词等是一词一码的设置，所以他的属性值为空，只靠种别码就能识别。</li><li>标识符（即用户定义的变量名等）是同一种种别码，通过在属性值中存储标识符的字面量（即变量名字符串）来识别不同标识符。</li></ul></li></ul></li></ul><h3 id="语法分析">语法分析</h3><ul><li>语法分析的任务：从词法分析输出的<strong>token序列</strong>中识别出各类短语，并构造<strong>语法分析树</strong>。</li><li>所谓短语就是将各个token有机的结合在一起，示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925164720.png" alt=""></li></ul><h3 id="语义分析">语义分析</h3><ul><li>语义分析的任务：<ul><li>收集标识符的属性信息，并将这些信息存入<strong>符号表</strong>中：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925164957.png" alt=""><ul><li>需要注意的是标识符的名字不是直接存储在符号表中的，而是存储在字符串表里。</li></ul></li><li>语义检查：静态检查有无程序编写的错误。</li></ul></li></ul><h3 id="中间代码生成">中间代码生成</h3><ul><li>常用的中间标识形式<ul><li>三地址码：类似于汇编语言的指令序列组成，每个指令最多有三个操作数（所以叫做三地址码）。<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210925165559.png" alt=""></li><li>语法结构树</li></ul></li></ul><h2 id="编译器后端">编译器后端</h2><ul><li><strong>目标代码生成器</strong>：以源程序的<strong>中间表示形式</strong>作为输入，并将其映射到目标语言。</li><li><strong>代码优化器</strong>：改进代码的效率（时间，空间）进行的<strong>等价程序变换</strong>。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 专业基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编译原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>人文</title>
       <link href="/post/%E6%96%87/%E4%BA%BA%E6%96%87/index.html"/>
       <url>/post/%E6%96%87/%E4%BA%BA%E6%96%87/index.html</url>
@@ -40,7 +65,7 @@
       
       <categories>
           
-          <category> 项目 </category>
+          <category> 技术笔记 </category>
           
       </categories>
       
@@ -678,9 +703,9 @@
             
             <tag> Java </tag>
             
-            <tag> Filter </tag>
-            
             <tag> 后端 </tag>
+            
+            <tag> Filter </tag>
             
         </tags>
       
@@ -705,9 +730,9 @@
       
         <tags>
             
-            <tag> 后端 </tag>
-            
             <tag> JSP </tag>
+            
+            <tag> 后端 </tag>
             
             <tag> JSTL </tag>
             
@@ -734,11 +759,11 @@
       
         <tags>
             
-            <tag> 后端 </tag>
-            
             <tag> EL表达式 </tag>
             
             <tag> JSP </tag>
+            
+            <tag> 后端 </tag>
             
         </tags>
       
@@ -819,9 +844,9 @@
       
         <tags>
             
-            <tag> 后端 </tag>
-            
             <tag> JSP </tag>
+            
+            <tag> 后端 </tag>
             
         </tags>
       
