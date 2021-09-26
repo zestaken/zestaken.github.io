@@ -31,6 +31,35 @@
     
     
     <entry>
+      <title>数据分析算法-TF-IDF原理与实现</title>
+      <link href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95-TF-IDF%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html"/>
+      <url>/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95-TF-IDF%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html</url>
+      
+        <content type="html"><![CDATA[<h1>TF-IDF简述</h1><ul><li><strong>TF-IDF</strong>(Term Frequency-Inverse Document Frequency, 词频-逆文件频率)是一种用于资讯检索与资讯探勘的常用加权技术。</li><li>TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。即：一个词语在一篇文章中出现次数越多, 同时在所有文档中出现次数越少, 越能够代表该文章。</li><li><strong>TF（Term Frequency）</strong>：TF(Term Frequency, 词频)表示词条在文本中出现的频率，这个数字通常会被归一化(一般是词频除以文章总词数), 以防止它偏向长的文件（同一个词语在长文件里可能会比短文件有更高的词频，而不管该词语重要与否）。</li><li><strong>IDF(Inverse Document Frequency)</strong>: IDF表示关键词的普遍程度。如果包含词条的文档越少，IDF越大，则说明该词条具有很好的类别区分能力。某一特定词语的IDF，可以由总文件数目除以包含该词语之文件的数目，再将得到的商取对数得到</li><li>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于过滤掉常见的词语，保留重要的词语。</li></ul><h1>Python手动实现TF-IDF</h1><p><a href="https://github.com/zestaken/newblog/tree/master/%E9%A1%B9%E7%9B%AE/pythonProject/TF-IDF">github地址</a></p><ol><li>导入相应包</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python">from collections import Counterimport math</code></pre><ol start="2"><li>创建语料库</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python">corpus &#x3D; [&#39;this is the first document&#39;,          &#39;this is the second second document&#39;,          &#39;and the third one&#39;,          &#39;is this the first document&#39;]</code></pre><ol start="3"><li>使用列表将语料库拆为单词存储</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 创建一个空列表与words_list &#x3D; []等效words_list &#x3D; list()# len(corpus)计算语料库容器的元素数量，即有4个字符串# range生成一个连续的链表，如此处len(corpus)&#x3D;4,就生成从0到3的连续链表，实质是使计数变量i从0到3递增变化for i in range(len(corpus)):    # spilt函数用指定的分隔符将字符串拆分为一个列表，将这个列表作为一个元素存入words_list列表    words_list.append(corpus[i].split(&#39; &#39;))print(words_list)</code></pre><pre><code>[['this', 'is', 'the', 'first', 'document'], ['this', 'is', 'the', 'second', 'second', 'document'], ['and', 'the', 'third', 'one'], ['is', 'this', 'the', 'first', 'document']]</code></pre><ol start="4"><li>统计每个词语在文档中出现次数</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 统计词语数量count_list &#x3D; list()for i in range(len(words_list)):    # Counter统计列表的元素的数量并返回一个key：value列表，key是原来的元素值，value是这个元素出现的次数    count &#x3D; Counter(words_list[i])    count_list.append(count)print(count_list)</code></pre><pre><code>[Counter(&#123;'this': 1, 'is': 1, 'the': 1, 'first': 1, 'document': 1&#125;), Counter(&#123;'second': 2, 'this': 1, 'is': 1, 'the': 1, 'document': 1&#125;), Counter(&#123;'and': 1, 'the': 1, 'third': 1, 'one': 1&#125;), Counter(&#123;'is': 1, 'this': 1, 'the': 1, 'first': 1, 'document': 1&#125;)]</code></pre><ol start="5"><li>定义计算tf、idf、tf-idf参数的函数</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 定义函数def tf(word, count):    &quot;&quot;&quot;计算某单词在文本中出现的频率除以该文本的总词数&quot;&quot;&quot;    return count[word] &#x2F; sum(count.values())def idf(word, count_list):    &quot;&quot;&quot;计算某单词在多少文档中出现&quot;&quot;&quot;    # 每次遍历到一个满足条件的元素就返回一个一    # n_contain是这些1的和，代表了一个词语在几个文档中出现    n_contain &#x3D; sum([1 for count in count_list if word in count])    # 某一特定词语的IDF，由总文件数目除以包含该词语之文件的数目，再将得到的商取对数得到    # 加一是为了防止除数为0    # 因为取了对数，idf值可能小于0    return math.log(len(count_list) &#x2F; (1 + n_contain))def tf_idf(word, count, count_list):    &quot;&quot;&quot;结合tf、idf参数，计算tf-idf参数&quot;&quot;&quot;    # 计算某词的综合参考参数tf——idf,即将二者相乘    return tf(word, count) * idf(word, count_list)</code></pre><ol start="6"><li>计算每个文档的每个单词的tf——idf参数，降序排列后输出</li></ol><pre class="line-numbers language-python" data-language="python"><code class="language-python"># 输出结果# enumerate函数将链表添加上下标，形如：[(0, &quot;a&quot;), (1, &quot;b&quot;)]for i, count in enumerate(count_list):    print(&quot;第&#123;&#125;个文档的统计信息&quot;.format(i + 1))    # 求取当前文档的每一个词语的tf_idf参数指标，每一个word的值由遍历count列表得到    scores &#x3D; &#123;word: tf_idf(word, count, count_list) for word in count&#125;    # 用lambda表达式来定义用于比较的元素    # x代表从迭代对象中得到的对象，x[1]表示实际用来比较的值    # reverse &#x3D; True表示降序排列    sorted_word &#x3D; sorted(scores.items(), key&#x3D;lambda x: x[1], reverse&#x3D;True)    for word, score in sorted_word:        # round函数表示只取5位小数        print(&quot;\tword: &#123;&#125;, TF-IDF: &#123;&#125;&quot;.format(word, round(score, 5)))</code></pre><pre class="line-numbers language-none"><code class="language-none">第1个文档的统计信息word: first, TF-IDF: 0.05754word: this, TF-IDF: 0.0word: is, TF-IDF: 0.0word: document, TF-IDF: 0.0word: the, TF-IDF: -0.04463第2个文档的统计信息word: second, TF-IDF: 0.23105word: this, TF-IDF: 0.0word: is, TF-IDF: 0.0word: document, TF-IDF: 0.0word: the, TF-IDF: -0.03719第3个文档的统计信息word: and, TF-IDF: 0.17329word: third, TF-IDF: 0.17329word: one, TF-IDF: 0.17329word: the, TF-IDF: -0.05579第4个文档的统计信息word: first, TF-IDF: 0.05754word: is, TF-IDF: 0.0word: this, TF-IDF: 0.0word: document, TF-IDF: 0.0word: the, TF-IDF: -0.04463</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 大数据 </tag>
+            
+            <tag> 机器学习算法 </tag>
+            
+            <tag> TF-IDF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>人文</title>
       <link href="/post/%E6%96%87/%E4%BA%BA%E6%96%87/index.html"/>
       <url>/post/%E6%96%87/%E4%BA%BA%E6%96%87/index.html</url>
@@ -1706,11 +1735,11 @@
       
         <tags>
             
+            <tag> C </tag>
+            
             <tag> Linux </tag>
             
             <tag> MakeFile </tag>
-            
-            <tag> C </tag>
             
         </tags>
       

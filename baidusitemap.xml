@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.zestaken.top//post/%E9%A1%B9%E7%9B%AE/Java%E5%AE%9E%E7%8E%B0%E5%8C%BA%E5%9D%97%E9%93%BEDemo/index.html</loc>
+    <lastmod>2021-09-26</lastmod>
+  </url>
+  <url>
+    <loc>http://www.zestaken.top//post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95-TF-IDF%20%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html</loc>
+    <lastmod>2021-09-26</lastmod>
+  </url>
+  <url>
     <loc>http://www.zestaken.top//post/%E9%A1%B9%E7%9B%AE/Java%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/index.html</loc>
     <lastmod>2021-09-25</lastmod>
   </url>
@@ -11,10 +19,6 @@
   <url>
     <loc>http://www.zestaken.top//post/%E6%96%87/%E4%BA%BA%E6%96%87/index.html</loc>
     <lastmod>2021-09-23</lastmod>
-  </url>
-  <url>
-    <loc>http://www.zestaken.top//post/%E9%A1%B9%E7%9B%AE/Java%E5%AE%9E%E7%8E%B0%E5%8C%BA%E5%9D%97%E9%93%BEDemo/index.html</loc>
-    <lastmod>2021-09-18</lastmod>
   </url>
   <url>
     <loc>http://www.zestaken.top//post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/index.html</loc>
