@@ -15,6 +15,8 @@
           
           <category> 专业基础 </category>
           
+          <category> 编译原理 </category>
+          
       </categories>
       
       
@@ -65,7 +67,7 @@
       
       <categories>
           
-          <category> 技术笔记 </category>
+          <category> 项目 </category>
           
       </categories>
       
@@ -1704,11 +1706,11 @@
       
         <tags>
             
-            <tag> C </tag>
-            
             <tag> Linux </tag>
             
             <tag> MakeFile </tag>
+            
+            <tag> C </tag>
             
         </tags>
       
