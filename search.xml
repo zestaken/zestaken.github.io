@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>第二章 面向对象建模基础</title>
+      <link href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/index.html"/>
+      <url>/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%BB%BA%E6%A8%A1%E5%9F%BA%E7%A1%80/index.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="面向对象基础">面向对象基础</h1><ul><li><strong>对象(Object)</strong> 的含义是物体(个体)，即物理世界中的实体。<ul><li>对象的属性描述了对象的特定信息</li><li>对象行为指定对象可以做什么，即定义了对象执行的操作。</li></ul></li><li><strong>类</strong>是一组具有相同属性与行为的对象集合，即对象的模板。<ul><li>类是抽象，对象是具体。</li><li>类是集合，对象是集合中的个体。</li><li>类的属性可以没有值，对象的属性必须分配值。</li><li>类之间的关系：<ul><li><strong>关联</strong>-两个类以某种方式相关或联系。如一个类与另一个类协同工作以执行任务，或者一个类对另一个类执行操作。</li><li><strong>聚合</strong>-表示<em>整体与其部分之间</em>的关系。如“学生”对象是“学校”对象的一部分。</li><li><strong>泛化</strong>-子类基于父类的<em>继承</em>关系。它表明这两个类是相似的，但子类包含了比父类更多的信息。如“本科生”类是“学生”类的子类。</li></ul></li></ul></li><li><strong>抽象</strong>:抽象是从众多事物中抽取出共同的、本质的特征，而舍弃其非本质特征的信息处理方法。</li><li><strong>封装</strong>:封装是将对象的属性与行为都包装起来，形成一-个独立的单元，从而建立对象的独立性和边界性。</li><li><strong>继承</strong>：继承是指子类复用父类数据结构和操作方法的机制，它是实现软件代码复用的基本方法。</li><li><strong>多态性</strong>是指对象<em>在相同操作方法名下具有不同的处理能力</em>。在面向对象思想中，多个子类与父类可以有相同的操作方法名，但各个子类的操作方法实现代码不同，即实现相同消息的不同功能处理。</li><li><strong>消息</strong>：对象之间进行通信的方法调用或信息传输。在面向对象系统中，对象之间通过消息通信机制来实现功能处理。</li><li><strong>方法</strong>：在类中封装的程序操作方法。这些操作方法可以是功能函数或过程函数。当外部通过对象消息调用操作方法时，将执行该方法实现操作功能处理。</li></ul><h1 id="uml建模语言">UML建模语言</h1><h2 id="系统建模概述">系统建模概述</h2><ul><li>系统建模的意义:在现实世界中，信息系统通常是一个复杂系统。为了开发实现信息系统，需要<em>抽象出一套模型反映系统最本质</em>的东西。这样可略去枝节，实现对信息系统实质性的分析描述和某种程度的系统设计简化。</li><li>系统模型的作用<ul><li>有助于按照所需样式提供待开发系统的<em>可视化表示</em></li><li>模型可以描述系统的<em>结构和行为</em></li><li>模型提供构造系统的<em>模板</em></li><li>模型可以<em>文档化设计决策</em></li></ul></li><li>系统建模的原则<ul><li>选择合适的<em>建模方法</em></li><li>提供<em>不同抽象层次</em>的模型</li><li>从<em>多个视角</em>创建不同的视图模型</li><li>模型应准确刻画系统的<em>静态结构与动态行为</em>。</li></ul></li><li>UML建模语言简介<ul><li>UML (UnifiedModeling Language)是一种面向对象的可视化建模语言。</li><li>UML是一个<em>通用的标准建模语言</em>，可以对任何具有静态结构和动态行为的系统进行建模，而且适用于<em>系统开发的不同阶段</em>，从需求规格描述直至系统完成后的测试和维护。</li><li>UML包含描述系统的静态结构和动态行为的两大类模型图，共计14种图形:<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022112240.png" /></li></ul></li></ul><h2 id="uml模型图">UML模型图</h2><h3 id="用例图">1. 用例图</h3><ul><li>系统用例图( System Use Case Diagram)从<strong>系统分析员角度</strong>对系统需求功能进行描述的模型图。<ul><li><strong>用例</strong>是系统的功能点抽象。</li><li><strong>角色</strong>是系统的用户类型抽象。</li><li>角色与用例、用例与用例之间的关联表示它们存在一定的联系。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022112713.png" /></li></ul></li><li>业务用例图( Business Use CaseDiagram)从<strong>用户角度</strong>对业务功能进行描述的模型图。<ul><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022112943.png" /></li></ul></li><li>用例图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022113136.png" /></li></ul><h3 id="活动图">2. 活动图</h3><ul><li>活动图(Activity Diagram)是描述<strong>用例内部活动执行顺序以及活动输入输出</strong>的模型图。<ul><li>活动图还可用于描述业务<strong>流程</strong>或系统控制流程。</li></ul></li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114123.png" /></li><li>活动图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114211.png" /></li></ul><h3 id="类图">3. 类图</h3><ul><li>类图(Class Diagram) 是描述系统由哪些类组成，即<strong>面向程序代码组成</strong>。<ul><li>它也用于描述表示系统中类程序之间的关系，直观呈现<strong>系统程序的静态结构</strong>。</li></ul></li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114422.png" /></li><li>类图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114609.png" /></li></ul><h3 id="顺序图">4. 顺序图</h3><ul><li>顺序图(Sequence Di agr am )是一种描述<strong>对象之间消息交互</strong>的模型图。用来反映若干个对象之间的动态协作关系，也就是对象之间的交互关系。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114722.png" /></li><li>顺序图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022114814.png" /></li></ul><h3 id="通信图">5. 通信图</h3><ul><li>通信图( Commun icat ionDiagram)是表现对象间直接消息交互关系的模型图。它展现了<strong>多个对象在协同工作达成共同目标的过程中互相通信</strong>的情况。通过对象和对象之间的链接、发送的消息来显示对象之间的交互关系。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022115141.png" /></li><li>通信图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022123834.png" /></li></ul><h3 id="状态机图">6. 状态机图</h3><ul><li>状态机图(State Machine Diagram)是描述<strong>一个对象在其生命周期内所经历的各种状态以及状态变迁</strong>的模型图。描述类的对象所有可能的状态以及事件发生时状态的转移条件。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022124023.png" /></li><li>状态机模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022124317.png" /></li></ul><h3 id="构件图">7. 构件图</h3><ul><li>构件图(Component Diagram)是描述<strong>系统的构件组成及其关系</strong>的模型图。描述软件实现的物理结构，从而反映出基于构件的软件实现。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022124732.png" /></li><li>构件图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022124820.png" /></li></ul><h3 id="部署图">8. 部署图</h3><ul><li>部署图(Deployment Diagram)是表示<strong>系统构件在运行环境节点中的部署方案</strong>。从部署图还可以获知软件和硬件节点之间的物理拓扑、连接关系以及处理节点的分布情况。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022125046.png" /></li><li>部署图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022125145.png" /></li></ul><h3 id="包图">9. 包图</h3><ul><li>包图(Package Diagram)是<strong>采用类似文件夹的包符号表示模型元素的组织结构模型图</strong>。包被描述成文件夹，可以应用在任何一种UML图上。系统中的每个元素都只能为一个包所有，一个包可嵌套在另一个包中。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022125349.png" /></li><li>包图模型元素：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022125415.png" /></li></ul><h3 id="对象图">10. 对象图</h3><ul><li>对象图( Object Diagram)显示结构元素的实例间如何关联，以及在运行时如何使用的模型图。UML对象图与类图一样均反映系统的静态结构，但它是从实例化情景来表达。UML对象图<strong>显示某时刻对象和对象之间的关系</strong>。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022125857.png" /></li></ul><h3 id="组合结构图">11. 组合结构图</h3><ul><li>组合结构图(Composite Structure Diagram) 提供了一种<strong>对系统部件的内部结构建模方法同时也描述本部件与系统其它部件的交互点</strong>。内部部件通过端口与环境交互。内部部件之间的协作关系。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022130051.png" /></li></ul><h3 id="扩展图">12. 扩展图</h3><ul><li>扩展图(Profile Diagr am)为特定领域或平台提供一种轻量级UML扩展机制。使用域专用的属性与限制定义一组构建体，从而扩展潜在的UML元素。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022130206.png" /></li></ul><h3 id="交互概览图">13. 交互概览图</h3><ul><li>交互概览图(Profile Diagram)为交互图和活动图的混合物。提供<strong>在活动流程节点中描述对象之间的交互行为</strong>。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022130355.png" /></li></ul><h3 id="时间图">14. 时间图</h3><ul><li>时间图( Time Diagram )被用来显示<strong>随时间变化，一个或多个元素的值或状态的更改</strong>。也显示时控事件之间的交互和管理它们的时间和期限约束物。</li><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022130514.png" /></li></ul><h1 id="bpmn建模语言">BPMN建模语言</h1><h2 id="业务建模概述">业务建模概述</h2><ul><li>业务建模(Business Modeling, BM)是以业务模型方式描述<strong>组织机构管理及其业务所涉及的对象要素、以及它们的行为关系</strong>，为持续改进业务过程提供基础。</li><li>业务建模内容：<ul><li>组织机构建模</li><li>部门门职能建模</li><li>业务过程建模</li><li>业务信息数据建模</li></ul></li><li>业务模型图之间的关系： <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022143113.png" /></li><li>业务过程：业务过程是指组织机构为开展业务所实施的<strong>过程活动</strong>，如企业中的采购业务过程、销售业务过程、计划业务过程、生产业务过程等。<ul><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022143322.png" /></li></ul></li><li>业务过程模型：业务过程模型是指采用模型图方法对组织机构业务流程进行可视化描述。<ul><li>示例：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022143419.png" /></li></ul></li><li>业务过程建模语言BPMN：<ul><li>BPMN（Business Process Modeling Notation) 定义了一套标准的业务流程图符号，使用这些符号可以创建描述业务过程操作的图形化模型。</li><li>它是目前工业界业务过程建模的标准语言。</li></ul></li></ul><h2 id="bpmn模型元素">BPMN模型元素</h2><h3 id="流对象">1. 流对象</h3><ul><li>活动(Activity) :是在流程中执行的任何工作。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022143827.png" /></li><li>事件(Event) :在业务流程中发生的任何事情。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022143919.png" /></li><li>网关(Gateway): 用于控制流程的分支。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144029.png" /></li></ul><h3 id="流">2. 流</h3><ul><li>流(FIow)用于<strong>连接流对象</strong>，与流对象一起定义业务流程的过程。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144140.png" /></li></ul><h3 id="数据">3. 数据</h3><ul><li>数据(Data)是业务流程中的数据表示，具体又分为数据对象、数据对象集、数据输入和数据输出等。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144344.png" /></li></ul><h3 id="人工制品">4. 人工制品</h3><ul><li>人工制品(Art ifact)用以表示<strong>流程附加一些额外的信息</strong>，支持业务流程的过程说明。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144449.png" /></li></ul><h3 id="泳池与泳道">5. 泳池与泳道</h3><ul><li>泳池(Pool) 标识一个过程中各业务实体参与的活动及流程，通过<strong>泳池将活动进行形象化分类</strong>。一个泳池可以包含多个泳道。 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144730.png" /></li></ul><h2 id="bpmn业务过程建模案例">BPMN业务过程建模案例</h2><ul><li>电商系统订货业务过程建模 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144900.png" /></li><li>订单采购流程建模 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211022144945.png" /></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 专业基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件工程 </tag>
+            
+            <tag> 软件系统架构设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一章 系统分析与设计概述</title>
+      <link href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/index.html"/>
+      <url>/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/index.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="信息系统概述">信息系统概述</h1><ul><li><p>信息系统概念：信息系统是一种能够完成对业务数据进行采集、转换、加工、计算、分析 、传输、维护等信息处理，并能就某个方面问题给用户提供信息服务的计算机应用系统。</p></li><li><p>信息系统的组成：</p><ul><li>信息化基础设施(计算机、计算机网络、服务器、系统软件等)</li><li>应用软件</li><li>数据库系统</li><li>业务数据（数据和用户也是组成部分）</li><li>用户</li></ul></li><li><p>信息系统类型：</p><ul><li><strong>业务处理系统(Transact ion Process System, TPS) </strong>是一类运用IT技术对机构业务活动(如订购、销售、支付、出货、核算等)进行信息处理，实现<em>业务处理自动化与提高业务处理效率</em>的信息系统。如网络银行业务系统。</li><li><strong>管理信息系统(Manage Informat ion System, MIS)</strong>是一类以机构信息管理为主导，利用计算机软硬件、网络通信、数据库等IT技术，对机构职能进行<em>整体信息化管理</em>，以达到提高机构工作效率和服务价值，并<em>支持机构职能与运营管理</em>的信息系统。如人力资源管理系统。</li><li><strong>决策支持系统(decision support system ，简称DSS) </strong>是一类通过数据分析、模型评估和知识推理等信息处理，<em>以人机交互方式，为决策者解决特定策略问题提供服务支持</em>的信息系统。如防汛指挥决策系统。</li><li><strong>专家系统(Expert System, ES)</strong> 是一种具有获取、存储与利用专家智慧解决某类问题的信息系统。它一般是采用人工智能中的知识表示、知识推理、深度学习等技术来<em>模拟通常由领域专家才能解决</em>的复杂问题。如阿尔法go围棋机器人。</li><li><strong>办公自动化系统(Office Automation， 0A)</strong>是一种实现<em>办公业务流程信息化、自动化处理</em>的信息系统。</li><li><strong>知识工作支持系统(Knowledge Work System， KWS) </strong>是一种具有强大的数据、图形、图像以及多媒体处理能力，能够在网络化条件下<em>广泛应用多方面信息和技术资源，并为知识工作者提供设计创造、技术创新等服务工具</em>的信息系统。如AutoCAD工程制图系统。</li></ul></li><li><p>信息系统的利益相关者：客户，用户，开发人员<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Y7gi0Q.png" alt="Y7gi0Q" /></p></li><li><p>信息系统用户分类：</p><ul><li>系统内部用户</li><li>系统外部用户</li></ul></li><li><p>信息系统开发人员：</p><ul><li>系统分析人员</li><li>系统设计人员</li><li>系统构造人员</li><li>系统管理人员</li></ul><figure><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/FeSQkF.png" alt="FeSQkF" /><figcaption aria-hidden="true">FeSQkF</figcaption></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 专业基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件工程 </tag>
+            
+            <tag> 软件系统架构设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Scikit-Learn工具包</title>
       <link href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Scikit-Learn%E5%B7%A5%E5%85%B7%E5%8C%85/index.html"/>
       <url>/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Scikit-Learn%E5%B7%A5%E5%85%B7%E5%8C%85/index.html</url>
@@ -22,9 +76,9 @@
       
         <tags>
             
-            <tag> 大数据 </tag>
-            
             <tag> Python </tag>
+            
+            <tag> 大数据 </tag>
             
             <tag> Scikit-Learn </tag>
             
@@ -55,9 +109,9 @@
       
         <tags>
             
-            <tag> 大数据 </tag>
-            
             <tag> Python </tag>
+            
+            <tag> 大数据 </tag>
             
             <tag> Pandas </tag>
             
@@ -86,9 +140,9 @@
       
         <tags>
             
-            <tag> 大数据 </tag>
-            
             <tag> Python </tag>
+            
+            <tag> 大数据 </tag>
             
             <tag> Numpy </tag>
             
@@ -117,9 +171,9 @@
       
         <tags>
             
-            <tag> 大数据 </tag>
-            
             <tag> Python </tag>
+            
+            <tag> 大数据 </tag>
             
         </tags>
       
