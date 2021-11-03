@@ -15,6 +15,8 @@
           
           <category> 技术笔记 </category>
           
+          <category> Python </category>
+          
       </categories>
       
       
@@ -650,9 +652,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -679,9 +681,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -793,9 +795,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -1102,9 +1104,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -1189,11 +1191,11 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> JS </tag>
             
             <tag> AJAX </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -1220,9 +1222,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> JS </tag>
+            
+            <tag> 前端 </tag>
             
             <tag> JQuery </tag>
             
@@ -1640,9 +1642,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> JS </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -2075,9 +2077,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -2135,9 +2137,9 @@
       
         <tags>
             
-            <tag> LeetCode </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> LeetCode </tag>
             
         </tags>
       
@@ -2409,11 +2411,11 @@
       
         <tags>
             
+            <tag> C </tag>
+            
             <tag> Linux </tag>
             
             <tag> MakeFile </tag>
-            
-            <tag> C </tag>
             
         </tags>
       
