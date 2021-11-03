@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Python数据可视化</title>
+      <link href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/index.html"/>
+      <url>/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/index.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="matplotlib">Matplotlib</h1><ul><li>Matplotlib来自于由John Hunter在2002年启动的一个用于创建图表的绘图项目，其目的是为Python构建一个与Matlab之间进行交互的绘图接口。是最著名Python绘图库， 主要用于二维绘图。具有画图质量高、方便快捷的绘图模块等特点。</li></ul><h2 id="matplotlib入门">Matplotlib入门</h2><ul><li><p>绘图API：pyplot模块</p></li><li><p>集成库：pylab模块（包含NumPy和pyplot中的常用函数）</p></li><li><p>导入Matplotlib绘图包</p></li><li><p>pyplot对象相当于画笔，<code>plot()</code>函数在设置画笔绘制的对象，其它的类似函数在设置画笔的其它性质，最后通过<code>show()</code>函数使用画笔绘制出图像</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">import matplotlib.pyplot as pltimport numpy as np</code></pre><pre class="line-numbers language-python" data-language="python"><code class="language-python">t &#x3D; np.arange(0., 4.0, 0.1) # 从0到4，步频为0.1生成t数字序列plt.plot(t, t) # 前面一位是横坐标，后面对应的是纵坐标plt.show()t</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090642.png" /></p><pre><code>array([0. , 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1. , 1.1, 1.2,       1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2. , 2.1, 2.2, 2.3, 2.4, 2.5,       2.6, 2.7, 2.8, 2.9, 3. , 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8,       3.9])</code></pre><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.plot(t, t**2)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090658.png" /></p><ul><li>可以将两个曲线绘制在一个图里</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.plot(t, t, t, t**2)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090714.png" /></p><ul><li>通过<code>plot()</code>函数的<code>o</code>参数，将图像变为散点图</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.plot(t, t**2, &#39;o&#39;)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090726.png" /></p><ul><li>使用<code>bar()</code>函数，绘制柱状图</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t &#x3D; np.arange(0, 10, 1)plt.bar(t, t**2)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090742.png" /></p><h2 id="matplotlib图像属性控制">Matplotlib图像属性控制</h2><h3 id="线条属性">线条属性</h3><ul><li><p>色彩和样式通过在绘图函数如<code>plot()</code>中添加参数来控制，常用参数：<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/MF7g00.png" alt="MF7g00" /></p></li><li><p>颜色修改示例：</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t &#x3D; np.arange(0, 4, 0.1)plt.plot(t, t**2, &#39;g&#39;) # 设为绿色plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090755.png" /></p><ul><li>修改线型示例：</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.plot(t, t**2,&#39;--&#39;) # 设为虚线plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090806.png" /></p><ul><li>设置点的形状示例：</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t &#x3D; np.arange(0, 10, 1)plt.plot(t, t**2, &#39;v&#39;) #设置点的形状为三角形plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090818.png" /></p><ul><li>多个参数同时使用,需要<strong>指明参数的名称</strong>才能同时生效：<ul><li>颜色：<code>color</code></li><li>样式：<code>linestyle</code></li><li>点形状：<code>marker</code></li><li>线条宽度：<code>linewidth</code></li><li>线条含义标识：<code>label</code></li></ul></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t1 &#x3D; np.arange(0, 4, 0.1)t2 &#x3D; np.arange(0, 4, 0.5)# 先设置参数，再显示图像，才能生效（plt可以理解为画笔）plt.plot(t1, t1**2, linestyle&#x3D;&#39;--&#39;, color&#x3D;&#39;r&#39;,linewidth&#x3D;&#39;5&#39;, label&#x3D;&#39;Line1&#39;) plt.plot(t2, t2+2, color&#x3D;&#39;g&#39;, linewidth&#x3D;&#39;3&#39;, marker&#x3D;&#39;o&#39;, label&#x3D;&#39;Line2&#39;)plt.legend(loc&#x3D;&#39;upper left&#39;) # 设置线条含义标识显示位置（不设置显示不出来）plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090829.png" /></p><h3 id="添加说明文字">添加说明文字</h3><ul><li><p>可以设置整个图的名称、坐标轴的名称</p></li><li><p>设置图的名称</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t &#x3D; np.arange(0, 4, 0.1)plt.plot(t, t**2) # 设为绿色plt.title(&quot;Hello!&quot;)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090848.png" /></p><ul><li>设置横纵坐标</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.plot(t, t**2) # 设为绿色# 先设置参数，再显示图像，才能生效（plt可以理解为画笔）plt.title(&quot;Hello!&quot;)plt.xlabel(&quot;NumberX&quot;)plt.ylabel(&quot;NumberY&quot;)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090900.png" /></p><h2 id="子图">子图</h2><ul><li><p>子图是指在一次绘制过程中绘制的多个坐标图，每一个被包含的的坐标图都是子图。</p></li><li><p>子图可以通过pyplot对象的<code>subplot()</code>函数来绘制</p></li><li><p>子图也可以通过设置坐标轴的长短和坐标原点的<code>axes()</code>方法来创建。</p></li><li><p>通过<code>subplot()</code>函数在一个图中绘制四个子图示例：</p></li><li><p>参数的意义：如221(也可写成2，2，1）的意思就是创建2行2列4个子图，当前子图在第一个位置</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python"># t1 &#x3D; np.arange(0, 4, 0.1)# t2 &#x3D; np.arange(0, 4, 0.5)plt.subplot(221)plt.subplot(222)plt.subplot(223)plt.subplot(224)</code></pre><pre><code>&lt;AxesSubplot:&gt;</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103090917.png" /></p><ul><li>在子图中绘制图像</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">t1 &#x3D; np.arange(0, 4, 0.1)t2 &#x3D; np.arange(0, 4, 0.5)#先创建子图plt.subplot(1,2,1)#再绘制图像plt.plot(t1, t1**2)plt.subplot(1,2,2)plt.plot(t2, 2*t2+3)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091023.png" /></p><ul><li>使用<code>axes()</code>函数设置坐标轴来创建2个子图</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">plt.axes([.1,.1,0.8,0.8]) #创建原点在（0.1，0.1），两个坐标轴的长度都为0.8的子图plt.plot(t1, t1**2) # 在上面创建的子图上绘制曲线plt.axes([.3,.5,0.3,0.3])plt.plot(t2, 2*t2+3)plt.show()</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091038.png" /></p><h1 id="pandas绘图">Pandas绘图</h1><ul><li><p>Pandas 对 Matplotlib 绘图软件包的基础上单独封装了一个plot()接口，通过调用该接口可以实现常用的绘图操作。</p></li><li><p>Pandas 之所以能够实现了数据可视化，主要利用了 Matplotlib 库的 plot() 方法，它对 plot() 方法做了简单的封装，因此您可以直接调用该接口。</p></li><li><p>示例：</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pdimport numpy as npdf &#x3D; pd.DataFrame(np.random.randn(8, 4), index &#x3D; pd.date_range(&#39;11&#x2F;2&#x2F;2021&#39;, periods&#x3D;8), columns&#x3D;list(&#39;ABCD&#39;)) #randn使数据具有正态分布df.plot(linestyle&#x3D;&#39;--&#39;) #调用plot（）方法绘图</code></pre><pre><code>&lt;AxesSubplot:&gt;</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091048.png" /></p><ul><li><p>除了默认的线形图，Pandas也可以绘制其它图形：</p><ul><li>柱状图：bar() 或 barh()</li><li>直方图：hist()</li><li>箱状箱：box()</li><li>区域图：area()</li><li>散点图：scatter()</li></ul></li><li><p>通过关键字参数kind可以把上述方法传递给 plot()。</p></li><li><p>绘制柱状图：</p></li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">df.plot.bar()</code></pre><pre><code>&lt;AxesSubplot:&gt;</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091100.png" /></p><ul><li>绘制水平柱状图</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">df.plot(kind&#x3D;&#39;barh&#39;)</code></pre><pre><code>&lt;AxesSubplot:&gt;</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091111.png" /></p><ul><li>绘制柱状堆叠图（参数stacked设为True）</li></ul><pre class="line-numbers language-python" data-language="python"><code class="language-python">df.plot(kind&#x3D;&#39;bar&#39;, stacked&#x3D;&#39;True&#39;)</code></pre><pre><code>&lt;AxesSubplot:&gt;</code></pre><p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211103091121.png" /></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> 大数据 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>第五章 系统架构设计</title>
       <link href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html"/>
       <url>/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html</url>
@@ -128,6 +155,8 @@
       <categories>
           
           <category> 技术笔记 </category>
+          
+          <category> 深度学习 </category>
           
       </categories>
       
@@ -621,9 +650,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -650,9 +679,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -764,9 +793,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -1073,9 +1102,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -1160,11 +1189,11 @@
       
         <tags>
             
+            <tag> 前端 </tag>
+            
             <tag> JS </tag>
             
             <tag> AJAX </tag>
-            
-            <tag> 前端 </tag>
             
         </tags>
       
@@ -1191,9 +1220,9 @@
       
         <tags>
             
-            <tag> JS </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> JS </tag>
             
             <tag> JQuery </tag>
             
@@ -1611,9 +1640,9 @@
       
         <tags>
             
-            <tag> JS </tag>
-            
             <tag> 前端 </tag>
+            
+            <tag> JS </tag>
             
         </tags>
       
@@ -2046,9 +2075,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -2106,9 +2135,9 @@
       
         <tags>
             
-            <tag> 数据结构 </tag>
-            
             <tag> LeetCode </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
       
@@ -2380,11 +2409,11 @@
       
         <tags>
             
-            <tag> C </tag>
-            
             <tag> Linux </tag>
             
             <tag> MakeFile </tag>
+            
+            <tag> C </tag>
             
         </tags>
       
