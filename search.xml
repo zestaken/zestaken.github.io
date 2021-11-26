@@ -123,6 +123,8 @@
           
           <category> 技术笔记 </category>
           
+          <category> 深度学习 </category>
+          
       </categories>
       
       
@@ -236,9 +238,9 @@
       
         <tags>
             
-            <tag> 大数据 </tag>
-            
             <tag> Hadoop </tag>
+            
+            <tag> 大数据 </tag>
             
         </tags>
       
