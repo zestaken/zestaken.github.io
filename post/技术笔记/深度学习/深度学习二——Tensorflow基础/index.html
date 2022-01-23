@@ -1,207 +1,969 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>深度学习二——Tensorflow基础 | Hexo</title>
+  <meta name="description" content="Tensorflow基础数据操作  为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：  获取数据； 在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。   数据存储对象：nnn维数组，也称为张量（tensor）。 无论使用哪个深度学习框架，它的张量类（在PyTorch和TensorFlow中为Tensor）都与Nu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习二——Tensorflow基础">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="Tensorflow基础数据操作  为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：  获取数据； 在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。   数据存储对象：nnn维数组，也称为张量（tensor）。 无论使用哪个深度学习框架，它的张量类（在PyTorch和TensorFlow中为Tensor）都与Nu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-25T07:47:19.000Z">
+<meta property="article:modified_time" content="2021-10-27T23:56:57.044Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="Tensorflow">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-技术笔记/深度学习/深度学习二——Tensorflow基础" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深度学习二——Tensorflow基础
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html" class="article-date">
+	  <time datetime="2021-10-25T07:47:19.000Z" itemprop="datePublished">2021-10-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a>, <a class="article-tag-link-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="tensorflow基础数据操作"><a class="markdownIt-Anchor" href="#tensorflow基础数据操作"></a> Tensorflow基础数据操作</h1>
+<ul>
+<li>为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：
+<ol>
+<li>获取数据；</li>
+<li>在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。</li>
+</ol>
+</li>
+<li>数据存储对象：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>维数组，也称为<em>张量</em>（tensor）。</li>
+<li>无论使用哪个深度学习框架，它的<em>张量类</em>（在PyTorch和TensorFlow中为<code>Tensor</code>）都与Numpy的<code>ndarray</code>类似，但又比Numpy的<code>ndarray</code>多一些重要功能：
+<ol>
+<li>深度学习框架很好地支持GPU加速计算，而NumPy仅支持CPU计算；</li>
+<li>张量类支持自动微分。这些功能使得张量类更适合深度学习。</li>
+</ol>
+</li>
+</ul>
+<h1 id="tensorflow数组对象"><a class="markdownIt-Anchor" href="#tensorflow数组对象"></a> Tensorflow数组对象</h1>
+<ul>
+<li>首先，我们导入<code>tensorflow</code>。由于名称有点长，我们经常使用短别名<code>tf</code>导入它。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf</code></pre>
+<ul>
+<li>**张量（tensor）**表示由一个数值组成的数组，这个数组可能有多个维度。具有一个轴的张量对应数学上的<em>向量</em>（vector）。具有两个轴的张量对应数学上的<em>矩阵</em>（matrix）。具有两个轴以上的张量没有特殊的数学名称。</li>
+<li>可以使用<code>arange</code>创建一个行向量<code>x</code>。这个行向量包含从0开始的前12个整数，它们被默认创建为浮点数。张量中的每个值都称为张量的<em>元素</em>（element）。例如，张量<code>x</code>中有12个元素。
+<ul>
+<li>除非额外指定，否则新的张量将存储在内存中，并采用基于CPU的计算。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; tf.range(12)
+x</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(12,), dtype=int32, numpy=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11], dtype=int32)&gt;
+</code></pre>
+<ul>
+<li><code>shape</code>属性可以通过张量的<code>shape</code>属性来访问张量的<em>形状</em>（沿每个轴的长度）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.shape</code></pre>
+<pre><code>TensorShape([12])
+</code></pre>
+<ul>
+<li>如果只想知道张量中元素的总数，即形状的所有元素乘积，可以检查它的大小（size）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.size(x)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=int32, numpy=12&gt;
+</code></pre>
+<ul>
+<li>要改变一个张量的形状而不改变元素数量和元素值，可以调用<code>reshape</code>函数。例如，可以把张量<code>x</code>从形状为（12,）的行向量转换为形状为（3,4）的矩阵。
+<ul>
+<li>这个新的张量包含与转换前相同的值，但是它被看成一个3行4列的矩阵。要重点说明一下，虽然张量的形状发生了改变，但其元素值并没有变。注意，通过改变张量的形状，张量的大小不会改变。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D; tf.reshape(x, (3, 4))
+X</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=int32, numpy=
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]], dtype=int32)&gt;
+</code></pre>
+<ul>
+<li>不需要通过手动指定每个维度来改变形状。也就是说，如果我们的目标形状是（高度,宽度），那么在知道宽度后，高度应当会隐式得出，我们不必自己做除法。在上面的例子中，为了获得一个3行的矩阵，我们手动指定了它有3行和4列。
+<ul>
+<li>幸运的是，张量在给出其他部分后可以自动计算出一个维度。我们可以通过在希望张量自动推断的维度放置<code>-1</code>来调用此功能。在上面的例子中，我们可以用<code>x.reshape(-1,4)</code>或<code>x.reshape(3,-1)</code>来取代<code>x.reshape(3,4)</code>。</li>
+</ul>
+</li>
+<li>有时，我们希望[<strong>使用全0、全1、其他常量或者从特定分布中随机采样的数字</strong>]来初始化矩阵。我们可以创建一个形状为（2,3,4）的张量，其中所有元素都设置为0。代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.zeros((2, 3, 4))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3, 4), dtype=float32, numpy=
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>同样，我们可以创建一个形状为<code>(2,3,4)</code>的张量，其中所有元素都设置为1。代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.ones((2, 3, 4))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3, 4), dtype=float32, numpy=
+array([[[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>有时我们想通过<strong>从某个特定的概率分布中随机采样来得到张量中每个元素的值</strong>。例如，当我们构造数组来作为神经网络中的参数时，我们通常会随机初始化参数的值。以下代码创建一个形状为（3,4）的张量。其中的每个元素都从均值为0、标准差为1的标准高斯（正态）分布中随机采样。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.random.normal(shape&#x3D;[3, 4])</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=
+array([[ 1.3451171 ,  1.8505315 , -0.36672395, -0.5327307 ],
+       [-1.9183167 , -1.1994293 ,  0.37904397,  0.8061889 ],
+       [-0.3106889 ,  0.22559305, -0.96131563, -0.30276218]],
+      dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>我们还可以[<strong>通过提供包含数值的Python列表（或嵌套列表）来为所需张量中的每个元素赋予确定值</strong>]。在这里，最外层的列表对应于轴0，内层的列表对应于轴1。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.constant([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=int32, numpy=
+array([[2, 1, 4, 3],
+       [1, 2, 3, 4],
+       [4, 3, 2, 1]], dtype=int32)&gt;
+</code></pre>
+<h1 id="tensorflow的数组基本运算"><a class="markdownIt-Anchor" href="#tensorflow的数组基本运算"></a> Tensorflow的数组基本运算</h1>
+<ul>
+<li>对数组一些最简单且最有用的操作是<em>按元素</em>（elementwise）操作。它们将标准标量运算符应用于数组的每个元素。</li>
+<li>对于将两个数组作为输入的函数，按元素运算将二元运算符应用于两个数组中的<em>每对位置对应</em>的元素。我们可以基于任何从标量到标量的函数来创建按元素函数。</li>
+<li>对于任意具有相同形状的张量，[<strong>常见的标准算术运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>和<code>**</code>）都可以被升级为按元素运算</strong>]。我们可以在同一形状的任意两个张量上调用按元素操作。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; tf.constant([1.0, 2, 4, 8])
+y &#x3D; tf.constant([2.0, 2, 2, 2])
+x + y, x - y, x * y, x &#x2F; y, x ** y  # **运算符是求幂运算</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 3.,  4.,  6., 10.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([-1.,  0.,  2.,  6.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 2.,  4.,  8., 16.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([0.5, 1. , 2. , 4. ], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 1.,  4., 16., 64.], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>可以(<strong>按按元素方式应用更多的计算</strong>)，包括像求指数幂这样的一元运算符。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.exp(x)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=
+array([2.7182817e+00, 7.3890562e+00, 5.4598148e+01, 2.9809580e+03],
+      dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>除了按元素计算外，我们还可以执行线性代数运算，包括向量点积和矩阵乘法。</li>
+<li>[<strong>我们也可以把多个张量<em>连结</em>（concatenate）在一起</strong>]，把它们端对端地叠起来形成一个更大的张量。我们只需要提供张量列表，并给出沿哪个轴连结。</li>
+<li>下面的例子分别演示了当我们沿行（轴-0，形状的第一个元素）和按列（轴-1，形状的第二个元素）连结两个矩阵时会发生什么情况。我们可以看到，第一个输出张量的轴-0长度（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>）是两个输入张量轴-0长度的总和（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3 + 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>）；第二个输出张量的轴-1长度（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span>）是两个输入张量轴-1长度的总和（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>+</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 + 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D; tf.reshape(tf.range(12, dtype&#x3D;tf.float32), (3, 4))
+Y &#x3D; tf.constant([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+tf.concat([X, Y], axis&#x3D;0), tf.concat([X, Y], axis&#x3D;1)</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(6, 4), dtype=float32, numpy=
+ array([[ 0.,  1.,  2.,  3.],
+        [ 4.,  5.,  6.,  7.],
+        [ 8.,  9., 10., 11.],
+        [ 2.,  1.,  4.,  3.],
+        [ 1.,  2.,  3.,  4.],
+        [ 4.,  3.,  2.,  1.]], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(3, 8), dtype=float32, numpy=
+ array([[ 0.,  1.,  2.,  3.,  2.,  1.,  4.,  3.],
+        [ 4.,  5.,  6.,  7.,  1.,  2.,  3.,  4.],
+        [ 8.,  9., 10., 11.,  4.,  3.,  2.,  1.]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>[<strong>通过<em>逻辑运算符</em>构建二元张量</strong>]。以<code>X == Y</code>为例子。对于每个位置，如果<code>X</code>和<code>Y</code>在该位置相等，则新张量中相应项的值为1，这意味着逻辑语句<code>X == Y</code>在该位置处为真，否则该位置为0。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D;&#x3D; Y</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=bool, numpy=
+array([[False,  True, False,  True],
+       [False, False, False, False],
+       [False, False, False, False]])&gt;
+</code></pre>
+<ul>
+<li>[<strong>对张量中的所有元素进行求和会产生一个只有一个元素的张量。</strong>]</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.reduce_sum(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=66.0&gt;
+</code></pre>
+<h2 id="广播机制"><a class="markdownIt-Anchor" href="#广播机制"></a> 广播机制</h2>
+<ul>
+<li>在上面的部分中，我们看到了如何在相同形状的两个张量上执行按元素操作。在某些情况下，[<strong>即使形状不同，我们仍然可以通过调用<em>广播机制</em>（broadcasting mechanism）来执行按元素操作</strong>]。</li>
+<li>这是Tensorflow的自动机制，这种机制的工作方式如下：首先，通过适当复制元素来扩展一个或两个数组，以便在转换之后，两个张量具有相同的形状。其次，对生成的数组执行按元素操作。在大多数情况下，我们将沿着数组中长度为1的轴进行广播，如下例子：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; tf.reshape(tf.range(3), (3, 1))
+b &#x3D; tf.reshape(tf.range(2), (1, 2))
+a, b</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(3, 1), dtype=int32, numpy=
+ array([[0],
+        [1],
+        [2]], dtype=int32)&gt;,
+ &lt;tf.Tensor: shape=(1, 2), dtype=int32, numpy=array([[0, 1]], dtype=int32)&gt;)
+</code></pre>
+<ul>
+<li>由于<code>a</code>和<code>b</code>分别是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">3\times1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1\times2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>矩阵，如果我们让它们相加，它们的形状不匹配。我们将两个矩阵<em>广播</em>为一个更大的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">3\times2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>矩阵，如下所示：矩阵<code>a</code>将复制列，矩阵<code>b</code>将复制行，然后再按元素相加。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a + b</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 2), dtype=int32, numpy=
+array([[0, 1],
+       [1, 2],
+       [2, 3]], dtype=int32)&gt;
+</code></pre>
+<h2 id="索引和切片"><a class="markdownIt-Anchor" href="#索引和切片"></a> 索引和切片</h2>
+<ul>
+<li>就像在任何其他Python数组中一样，张量中的元素可以通过索引访问。与任何Python数组一样：第一个元素的索引是0；可以指定范围以包含第一个元素和最后一个之前的元素。与标准Python列表一样，我们可以通过<em>使用负索引根据元素到列表尾部的相对位置访问元素</em>。</li>
+<li>因此，我们[可以用<code>[-1]</code>选择最后一个元素，可以用<code>[1:3]</code>选择第二个和第三个元素（从1， 2 ,索引3是右开边界）]，如下所示：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X[-1], X[1:3]</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 8.,  9., 10., 11.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(2, 4), dtype=float32, numpy=
+ array([[ 4.,  5.,  6.,  7.],
+        [ 8.,  9., 10., 11.]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>TensorFlow中的<code>Tensors</code>对象是不可变的，也不能被赋值。TensorFlow中的<code>Variables</code>是支持赋值的可变容器。请记住，TensorFlow中的梯度不会通过<code>Variable</code>反向传播。</li>
+<li>除了为整个<code>Variable</code>分配一个值之外，我们还可以通过索引来写入<code>Variable</code>的元素。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X_var &#x3D; tf.Variable(X)
+X_var[1, 2].assign(-100) # 将索引为(1, 2)的元素修改为-100
+X_var</code></pre>
+<pre><code>&lt;tf.Variable 'Variable:0' shape=(3, 4) dtype=float32, numpy=
+array([[   0.,    1.,    2.,    3.],
+       [   4.,    5., -100.,    7.],
+       [   8.,    9.,   10.,   11.]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>如果我们想[<strong>为多个元素赋值相同的值，我们只需要索引所有元素，然后为它们赋值。</strong>]。例如，<code>[0:2, :]</code>访问第1行和第2行，其中“:”代表沿轴1（列）的所有元素。虽然我们讨论的是矩阵的索引，但这也适用于向量和超过2个维度的张量。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X_var &#x3D; tf.Variable(X)
+X_var[0:2, :].assign(tf.ones(X_var[0:2,:].shape, dtype &#x3D; tf.float32) * 12) # 将第一行和第二行元素全部修改为12
+X_var</code></pre>
+<pre><code>&lt;tf.Variable 'Variable:0' shape=(3, 4) dtype=float32, numpy=
+array([[12., 12., 12., 12.],
+       [12., 12., 12., 12.],
+       [ 8.,  9., 10., 11.]], dtype=float32)&gt;
+</code></pre>
+<h2 id="节省内存"><a class="markdownIt-Anchor" href="#节省内存"></a> 节省内存</h2>
+<ul>
+<li>[<strong>运行一些操作可能会导致为新结果分配内存</strong>]。例如，如果我们用<code>Y = X + Y</code>，我们将取消引用<code>Y</code>指向的张量，而是指向新分配的内存处的张量。</li>
+<li>在下面的例子中，我们用Python的<code>id()</code>函数演示了这一点，它给我们提供了内存中引用对象的确切地址。运行<code>Y = Y + X</code>后，我们会发现<code>id(Y)</code>指向另一个位置。这是因为Python首先计算<code>Y + X</code>，为结果分配新的内存，然后使<code>Y</code>指向内存中的这个新位置。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">before &#x3D; id(Y)
+Y &#x3D; Y + X
+id(Y) &#x3D;&#x3D; before</code></pre>
+<pre><code>False
+</code></pre>
+<ul>
+<li>
+<p>在机器学习中，我们可能有数百兆的参数，并且在一秒内多次更新所有参数。通常情况下，我们希望原地执行这些更新。其次，我们可能通过多个变量指向相同参数。如果我们不原地更新，其他引用仍然会指向旧的内存位置，这样我们的某些代码可能会无意中引用旧的参数。</p>
+</li>
+<li>
+<p><code>Variables</code>是TensorFlow中的可变容器。它们提供了一种存储模型参数的方法。我们可以通过<code>assign</code>将一个操作的结果分配给一个<code>Variable</code>。为了说明这一点，我们创建了一个与另一个张量<code>Y</code>相同的形状的<code>Z</code>，使用<code>zeros_like</code>来分配一个全<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的块。</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Z &#x3D; tf.Variable(tf.zeros_like(Y))
+print(&#39;id(Z):&#39;, id(Z))
+Z.assign(X + Y)
+print(&#39;id(Z):&#39;, id(Z))</code></pre>
+<pre><code>id(Z): 140470903098192
+id(Z): 140470903098192
+</code></pre>
+<ul>
+<li>即使你将状态持久存储在<code>Variable</code>中，你也可能希望避免为不是模型参数的张量过度分配内存，从而进一步减少内存使用量。由于TensorFlow的<code>Tensors</code>是不可变的，而且梯度不会通过<code>Variable</code>流动，因此TensorFlow没有提供一种明确的方式来原地运行单个操作。
+<ul>
+<li>但是，TensorFlow提供了<code>tf.function</code>修饰符，将计算封装在TensorFlow图中，该图在运行前经过编译和优化。这允许TensorFlow删除未使用的值，并复用先前分配的且不再需要的值。这样可以最大限度地减少TensorFlow计算的内存开销。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">@tf.function
+def computation(X, Y):
+    Z &#x3D; tf.zeros_like(Y)  # 这个未使用的值将被删除
+    A &#x3D; X + Y  # 当不再需要时，分配将被复用
+    B &#x3D; A + Y
+    C &#x3D; B + Y
+    return C + Y
+
+computation(X, Y)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=
+array([[ 8.,  9., 26., 27.],
+       [24., 33., 42., 51.],
+       [56., 57., 58., 59.]], dtype=float32)&gt;
+</code></pre>
+<h2 id="与其他-python-对象转化"><a class="markdownIt-Anchor" href="#与其他-python-对象转化"></a> 与其他 Python 对象转化</h2>
+<ul>
+<li><code>tensor</code>对象[<strong>转换为NumPy张量</strong>]很容易，反之也很容易。
+<ul>
+<li>转换后的结果不共享内存。这个小的不便实际上是非常重要的：当你在CPU或GPU上执行操作的时候，如果Python的NumPy包也希望使用相同的内存块执行其他操作，你不希望停下计算来等它。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">A &#x3D; X.numpy()
+B &#x3D; tf.constant(A)
+type(A), type(B)</code></pre>
+<pre><code>(numpy.ndarray, tensorflow.python.framework.ops.EagerTensor)
+</code></pre>
+<ul>
+<li>要(<strong>将大小为1的张量转换为Python标量</strong>)，我们可以调用<code>item</code>函数或Python的内置函数。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; tf.constant([3.5]).numpy()
+a, a.item(), float(a), int(a)</code></pre>
+<pre><code>(array([3.5], dtype=float32), 3.5, 3.5, 3)
+</code></pre>
+<ul>
+<li>将Pandas对象转化为Tensorflow的tensor张量对象。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
+
+inputs &#x3D; pd.DataFrame(range(5))
+inputs</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tensor &#x3D; tf.constant(inputs.values)
+tensor</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=int64, numpy=
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4]])&gt;
+</code></pre>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html" title="深度学习二——Tensorflow基础" target="_blank" rel="external">http://www.zestaken.top/post/技术笔记/深度学习/深度学习二——Tensorflow基础/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%89%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6/index.html" title="深度学习三——深度学习中的数学"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%80%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0/index.html" title="深度学习一——机器学习与深度学习概述"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>

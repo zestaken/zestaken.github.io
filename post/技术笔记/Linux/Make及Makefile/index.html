@@ -1,207 +1,906 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Make及Makefile | Hexo</title>
+  <meta name="description" content="Make及Makefile  Make  代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。 Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。 Make这个词，英语的意思是&quot;制作&quot;。Make命令直接用了这个意思，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Make及Makefile">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="Make及Makefile  Make  代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。 Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。 Make这个词，英语的意思是&quot;制作&quot;。Make命令直接用了这个意思，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200829225226.jpg">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200829230330.jpg">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830190810.jpg">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830192748.jpg">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830213731.jpg">
+<meta property="article:published_time" content="2020-07-31T14:28:31.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:42:00.073Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="C">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="MakeFile">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200829225226.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-技术笔记/Linux/Make及Makefile" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Make及Makefile
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html" class="article-date">
+	  <time datetime="2020-07-31T14:28:31.000Z" itemprop="datePublished">2020-07-31</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/C/" rel="tag">C</a>, <a class="article-tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link-link" href="/tags/MakeFile/" rel="tag">MakeFile</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="make及makefile"><a class="markdownIt-Anchor" href="#make及makefile"></a> Make及Makefile</h1>
+<h2 id="make"><a class="markdownIt-Anchor" href="#make"></a> Make</h2>
+<ul>
+<li>代码变成可执行文件，叫做编译（compile）；先编译这个，还是先编译那个（即编译的安排），叫做构建（build）。</li>
+<li>Make是最常用的构建工具，诞生于1977年，主要用于C语言的项目。但是实际上 ，任何只要某个文件有变化，就要重新构建的项目，都可以用Make构建。</li>
+<li>Make这个词，英语的意思是&quot;制作&quot;。Make命令直接用了这个意思，就是要做出某个文件。make是一个根据指定的Shell命令进行构建的工具。</li>
+<li>make命令执行的规则，都写在一个叫做Makefile的文件中，Make命令依赖这个文件进行构建。Makefile文件也可以写为makefile， 或者用命令行参数(<code>make -f &lt;指定的文件名&gt;</code>或者<code>make --file=&lt;指定的文件名&gt;</code>)指定为其他文件名。</li>
+</ul>
+<h2 id="makefile"><a class="markdownIt-Anchor" href="#makefile"></a> Makefile</h2>
+<h3 id="makefile的基本概念"><a class="markdownIt-Anchor" href="#makefile的基本概念"></a> Makefile的基本概念</h3>
+<h4 id="makefile是什么"><a class="markdownIt-Anchor" href="#makefile是什么"></a> Makefile是什么？</h4>
+<ul>
+<li>Makefile 可以简单的认为是一个工程文件的<strong>编译规则</strong>，描述了整个工程的编译和链接等规则。其中包含了那些文件需要编译，那些文件不需要编译，那些文件需要先编译，那些文件需要后编译，那些文件需要重建等等。编译整个工程需要涉及到的，在 Makefile 中都可以进行描述。换句话说，Makefile 可以使得我们的项目工程的<strong>编译变得自动化</strong>，不需要每次都手动输入一堆源文件和参数。</li>
+<li>编写Makefile的作用：
+<ol>
+<li>简化输入的编译命令：在 Makefile 中，制定相应的规则和对应的链接顺序。这样只需要执行 make 命令，工程就会自动编译。每次想要编译工程的时候就执行 make ，省略掉手动编译中的参数选项和命令。</li>
+<li>节省编译大工程的时间：Makefile 支持多线程并发操作(就像我们使用的<code>make -j8</code>)，会极大的缩短我们的编译时间，并且当我们修改了源文件之后，编译整个工程的时候，make 命令只会编译我们修改过的文件，没有修改的文件不用重新编译，也极大的解决了我们耗费时间的问题。</li>
+</ol>
+</li>
+</ul>
+<h4 id="makefile中的基本规则"><a class="markdownIt-Anchor" href="#makefile中的基本规则"></a> Makefile中的基本规则</h4>
+<ul>
+<li>
+<p>Makefile 描述的是文件编译的相关规则，它的规则主要是两个部分组成，分别是<strong>依赖的关系</strong>和<strong>执行的命令</strong></p>
+</li>
+<li>
+<p>Makefile文件由一系列规则（rules）构成。每条规则的形式如下:</p>
+  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">&lt;target&gt; : &lt;prerequisites&gt; 
+[tab]  &lt;commands&gt;</code></pre>
+<ol>
+<li>targets：规则的目标，可以是 Object File（一般称它为中间文件），也可以是可执行文件，还可以是一个标签</li>
+<li>prerequisites：规则的条件，是我们的依赖文件，要生成 targets 需要的文件或者是目标。可以是多个，也可以是没有；</li>
+<li>command：make 需要执行的命令（任意的 shell 命令）。可以有多条命令，每一条命令占一行。</li>
+<li>注意：<strong>我们的目标和依赖文件之间要使用<em>冒号</em>分隔开，命令的开始一定要使用<em>Tab</em>键</strong></li>
+</ol>
+</li>
+<li>
+<p>Makefile文件规则概要：</p>
+<ol>
+<li>显式规则：<br />
+显式规则说明了，如何生成一个或多的的<strong>目标文件</strong>。这是由 Makefile 的书写者明显指出，要生成的文件，文件的依赖文件，生成的命令。</li>
+<li>隐晦规则<br />
+由于我们的 make 命名有<strong>自动推导</strong>的功能，所以隐晦的规则可以让我们比较粗糙地简略地书写 Makefile，这是由 make 命令所支持的。</li>
+<li>变量的定义<br />
+在 Makefile 中我们要定义一系列的变量，变量一般都是字符串，这个有点像C语言中的<strong>宏</strong>，当 Makefile 被执行时，其中的变量都会被扩展到相应的引用位置上。</li>
+<li>文件指示<br />
+其包括了三个部分，一个是在一个 Makefile 中<strong>引用</strong>另一个 Makefile，就像C语言中的 include 一样；另一个是指根据某些情况指定 Makefile 中的<strong>有效部分</strong>，就像C语言中的预编译 #if 一样；还有就是定义一个多行的命令。</li>
+<li>注释<br />
+Makefile 中<strong>只有行注释</strong>，和 UNIX 的 Shell 脚本一样，其注释是<strong>用“#”字符</strong>，这个就像 C/C++ 中的“//”一样。如果你要在你的 Makefile 中使用“#”字符，可以用反斜框进行转义，如：<code>\#</code>。</li>
+</ol>
+</li>
+</ul>
+<h4 id="makefile的基本工作流程"><a class="markdownIt-Anchor" href="#makefile的基本工作流程"></a> Makefile的基本工作流程</h4>
+<ul>
+<li>当我们在执行 make 条命令的时候，make 就会去<strong>当前文件</strong>下找要执行的编译规则，也就是 Makefile 文件。我们编写 Makefile 的时可以使用的文件的名称&quot;GNUmakefile&quot; 、“makefile” 、“Makefile” ，make 执行时回去寻找 Makefile 文件，找文件的顺序也是这样的。我们推荐使用<strong>Makefile</strong>（一般在工程中都这么写，大写的会比较的规范）。如果文件不存在，make 就会给我们报错，提示：<br />
+<code>make：*** 没有明确目标并且找不到 makefile。停止</code></li>
+<li>工作流程简介：</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">main:main.o test1.o test2.o
+  gcc main.o test1.o test2.o -o main
+main.o:main.c test.h
+  gcc -c main.c -o main.o
+test1.o:test1.c test.h
+  gcc -c test1.c -o test1.o
+test2.o:test2.c test.h
+  gcc -c test2.c -o test2.o</code></pre>
+<ul>
+<li><strong>工作流程</strong>：当在 shell 提示符下输入 make 命令以后。 make 读取当前目录下的 Makefile 文件，并将 Makefile 文件中的<strong>第一个目标作为其执行的“终极目标”</strong>，开始处理第一个规则（终极目标所在的规则）。在我们的例子中，第一个规则就是目标 “main” 所在的规则。规则描述了 “main” 的<strong>依赖关系</strong>，并定义了<strong>链接 “.o” 文件生成目标 “main” 的命令</strong>；make 在执行这个规则所定义的命令之前，<strong>首先处理目标 “main” 的所有的依赖文件</strong>（例子中的那些 “.o” 文件）的更新规则（以这些 “.o” 文件为目标的规则）。</li>
+<li>对这些 “.o” 文件为目标的<strong>规则处理</strong>有下列三种情况：
+<ul>
+<li>目标 “.o” 文件<strong>不存在</strong>，使用其描述规则创建它；</li>
+<li>目标 “.o” 文件存在，目标 “.o” 文件所<strong>依赖</strong>的 “.c” 源文件 “.h” 文件中的任何一个比目标 “.o” 文件“更新”（在上一次 make 之后被修改）。则根据规则重新编译生成它；</li>
+<li>目标 “.o” 文件存在，目标 “.o” 文件比它的任何一个依赖文件（&quot;.c&quot; 源文件、&quot;.h&quot; 文件）“更新”（它的依赖文件在上一次 make 之后<strong>没有被修改</strong>），则什么也不做。</li>
+</ul>
+</li>
+<li>我们执行 make 命令时，<strong>只有修改过的源文件或者是不存在的目标文件</strong>会进行重建，而那些没有改变的文件不用重新编译，这样在很大程度上节省时间，提高编程效率。</li>
+<li>具体命令解析
+<ol>
+<li><code>main: main.o test1.o test2.o</code>:表示最终目标文件是生成main,而main的生成依赖于main.o test1.o test2.o 这三个汇编文件。</li>
+<li><code>gcc mian.o test1.o test2.o -o main</code>:指定了生成main所需要执行的shell命令，即将三个依赖的汇编文件链接输出为main。</li>
+<li><code>main.o: main.c test.h</code>:表示main.o文件依赖于main.c和test.h文件，为了生成最终文件main，make会先执行能生成main的依赖文件的命令。</li>
+<li><code>gcc -c main.c -o main.o</code>:指定了如何通过依赖文件生成main.o的shell命令，即将main.c文件编译汇编为main.o文件（注意：因为gcc会自动找到头文件及所需的链接库，所以汇编时不用加上头文件test.h，但是在<strong>描述依赖关系时还是要将test.h描述进去</strong>）</li>
+</ol>
+</li>
+<li><strong>清除工作过程中的过程文件</strong>:我们在使用的时候会产生中间文件会让整个文件看起来很乱，所以在编写 Makefile 文件的时候会在末尾加上这样的规则语句：</li>
+</ul>
+  <pre class="line-numbers language-none"><code class="language-none">.PHONY:clean
+clean:
+rm -rf *.o </code></pre>
+<p>其中 “*.o” 是执行过程中产生的中间文件，“test” 是最终生成的执行文件。(具体要删除什么文件，可以自行指定);可以在命令行中指定Makefile中的一个文件作为目标，那么这条make命令就只更新这个指定的目标(如：<code>make clean</code>，如果没有指定目标则make默认更新Makefile中的第一条规则的目标。</p>
+<h3 id="makefile中的通配符"><a class="markdownIt-Anchor" href="#makefile中的通配符"></a> Makefile中的通配符</h3>
+<ul>
+<li>由于Makefile是使用shell命令的，所以shell命令中的通配符在Makefile中也是适用的。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>匹配任意个字符,如<code>*.o</code>代表在当前文件夹下所有以<code>.o</code>结尾的文件</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>匹配一个字符</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>匹配指定的字符，指定的字符放在<code>[]</code>中，如<code>[zhangjie].o</code></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>类似于shell中打开目录时的<code>~</code>，后面为空或者接分隔符<code>/</code>或者接路径名或者文件名的时候，代表根目录。如<code>~/bin</code>代表<code>/home/usrname/bin</code>,<code>~zhangjie/bin</code>代表<code>/home/zhangjie/bin</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="makefile变量的定义和使用"><a class="markdownIt-Anchor" href="#makefile变量的定义和使用"></a> Makefile变量的定义和使用</h3>
+<h4 id="变量的定义"><a class="markdownIt-Anchor" href="#变量的定义"></a> 变量的定义</h4>
+<ul>
+<li>变量的定义：
+<ul>
+<li>变量是用来存储一个值或者使用来进行运算操作，可以用来表示多处出现而内容又可能发生变化的内容。</li>
+<li>Makefile中的变量不像c语言中一样,没有数据类型。</li>
+<li>变量的名称可以由字母，阿拉伯数字和下划线组成。</li>
+<li>变量的定义语句：<code>变量 = 值列表</code>(其中值列表既可以是零项，又可以是一项或者多项),例如：<code>value = 1 2 3</code>,一个变量的定义从<code>=</code>后面的第一个非空白字符开始，包括后面所有的字符，直到注释或者换行之前结束。</li>
+</ul>
+</li>
+<li>变量的调用：
+<ul>
+<li>调用变量可以使用<code>$(value)</code>,<code>$&#123;value&#125;</code>.</li>
+<li>示例：  <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">OBJ &#x3D; mian.o test.o 
+test: $(OBJ)
+  gcc $&#123;OBJ&#125; -o test</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="变量的定义方法"><a class="markdownIt-Anchor" href="#变量的定义方法"></a> 变量的定义方法</h4>
+<ul>
+<li>简单赋值：<code>:=</code>,编程中常见的变量赋值，只对当前语句有赋值效果,即遇到这种赋值就立即展开。</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">x :&#x3D; foo
+y :&#x3D; $(x)b
+x :&#x3D; new
+test:
+  @echo &quot;y &#x3D;&gt; $(y)&quot;
+  @echo &quot;x &#x3D;&gt; $(x)&quot;</code></pre>
+<p>结果：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200829225226.jpg" alt="" /></p>
+<ul>
+<li>递归赋值：<code>=</code>,又叫做迟滞展开，每次使用的变量都是用的最新的定义，所以这种方式甚至能做到等式右边的式子中的变量在之后才被定义,即遇到递归赋值，会在使用整个变量时才将它展开。</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">x :&#x3D; foo
+y &#x3D; $(x)b
+x :&#x3D; new
+test:
+  @echo &quot;y &#x3D;&gt; $(y)&quot;
+  @echo &quot;x &#x3D;&gt; $(x)&quot;</code></pre>
+<p>结果：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200829230330.jpg" alt="" /></p>
+<ul>
+<li>
+<p>与简单赋值不同的是，递归赋值y中的x使用的是在最后赋给x的new,而不是开始就赋给x的foo(实际上递归赋值相当于最后在使用y变量的时候，才将y的赋值式代入，此时它前面已经又有了对x的新的赋值，所以最后呈现出来的是x最后的赋值,也因此把对x的第二个赋值语句改为简单赋值也是同样的输出)。</p>
+</li>
+<li>
+<p>条件赋值：<code>?=</code>如果当前变量从未被赋值过，则相当于<code>=</code>;但如果当前变量已将被赋值过，则什么也不做，不会再重新赋值。</p>
+</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">x :&#x3D; foo
+y :&#x3D; $(x)b
+x ?&#x3D; new
+test:
+  @echo &quot;y &#x3D;&gt; $(y)&quot;
+  @echo &quot;x &#x3D;&gt; $(x)&quot;</code></pre>
+<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830190810.jpg" alt="" /></p>
+<ul>
+<li>
+<p>最后给x的条件赋值实际没有任何效果。</p>
+</li>
+<li>
+<p>追加赋值：<code>+=</code>,追加赋值类似于c语言中的<code>+=</code>,可理解为变量本身再在后面加上<code>+=</code>后面的值，但是不同定义得到的变量它的<code>+=</code>的理解会有不同。比如说，如果变量object使用<code>:=</code>定义的，那么<code>object += foo</code>,与<code>object := $(object) foo</code>,注意最后合成的object的两部分的变量间会自动生成一个空格。</p>
+</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">x :&#x3D; foo
+y :&#x3D; $(x)b
+x +&#x3D; $(y)
+test:
+  @echo &quot;y &#x3D;&gt; $(y)&quot;
+  @echo &quot;x &#x3D;&gt; $(x)&quot;</code></pre>
+<p>结果：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830192748.jpg" alt="" /></p>
+<h4 id="自动化变量"><a class="markdownIt-Anchor" href="#自动化变量"></a> 自动化变量</h4>
+<ul>
+<li><code>$@</code>:表示规则中的目标</li>
+<li><code>$&lt;</code>:表示规则中的第一个条件（即第一个依赖文件）</li>
+<li><code>$?</code>:表示规则中所有比目标新的条件，组成一个列表，以空格分隔</li>
+<li><code>$^</code>:表示规则中的所有条件(即所有依赖文件)</li>
+</ul>
+<h3 id="makefile的隐含规则"><a class="markdownIt-Anchor" href="#makefile的隐含规则"></a> Makefile的隐含规则</h3>
+<ul>
+<li>在Makefile中有内置的隐含规则可以使我们省略对一些规则的命令的编写。</li>
+</ul>
+<h3 id="makefile的条件判断"><a class="markdownIt-Anchor" href="#makefile的条件判断"></a> Makefile的条件判断</h3>
+<ul>
+<li>在Makefile编译文件时可能会遇到需要分条件使用不同命令的情况，这时可以使用Makefile的条件编译语句。</li>
+<li>常用条件判断的关键字：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ifeq</td>
+<td>判断参数是否相等，相等为true，不相等为false</td>
+</tr>
+<tr>
+<td>ifneq</td>
+<td>判断参数是否不相等，不相等为true，相等为false</td>
+</tr>
+<tr>
+<td>ifef</td>
+<td>判断是否有值，有值为true，无值为false</td>
+</tr>
+<tr>
+<td>ifnef</td>
+<td>判断是否无值，无值为true，有值为false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="makefile的伪目标"><a class="markdownIt-Anchor" href="#makefile的伪目标"></a> Makefile的伪目标</h3>
+<ul>
+<li>伪目标：这个目标没有任何依赖文件，但是有命令，它最终的结果并不会生成任何目标文件，而只是执行该规则下的命令。</li>
+<li>伪目标的创建：<code>.PHONY:变量名</code></li>
+<li>伪目标的应用：
+<ul>
+<li>执行一些没有文件产生的命令，如删除</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">.PHONY:clean
+clean:
+  rm -rf *.o </code></pre>
+<ul>
+<li>一个make命令产生多可执行文件，提升make的效率。</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">.PHONY:all
+all:test1, test2, test3
+
+test1: test1.o
+  gcc $^ -o $@
+test2: test2.o
+  gcc $^ -o $@
+test3: test3.o
+  gcc $^ -o $@</code></pre>
+<p>*如果只想生成一个test1文件，可以用<code>make test1</code>。</p>
+<h3 id="makefile的基础语法"><a class="markdownIt-Anchor" href="#makefile的基础语法"></a> Makefile的基础语法</h3>
+<h4 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h4>
+<ul>
+<li>Makefile类似Python，在每一行后以<code>#</code>来开始注释。</li>
+</ul>
+<h4 id="回声"><a class="markdownIt-Anchor" href="#回声"></a> 回声</h4>
+<ul>
+<li>默认情况下，make会打印它执行的命令行，这叫做“回声”。<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20200830213731.jpg" alt="" /></li>
+<li>在每行命令前加上<code>@</code>符号就可以关闭回声，例如经常使用的<code>@echo</code></li>
+</ul>
+<h4 id="makefile中的函数"><a class="markdownIt-Anchor" href="#makefile中的函数"></a> Makefile中的函数</h4>
+<p>Makefile中有许多<a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Functions.html">内置函数</a>可以调用。</p>
+<hr />
+<p>参考资料：<br />
+<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/02/make.html">阮一峰的博客</a><br />
+<a target="_blank" rel="noopener" href="http://c.biancheng.net/makefile/">C语言中文网</a><br />
+<a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/">GNU make</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html" title="Make及Makefile" target="_blank" rel="external">http://www.zestaken.top/post/技术笔记/Linux/Make及Makefile/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/index.html" title="第四章 串"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/index.html" title="第三章 栈与队列"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>

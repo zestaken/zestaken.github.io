@@ -1,207 +1,1521 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>深度学习十二——深度学习计算细节 | Hexo</title>
+  <meta name="description" content="层和块  单一输出的线性模型。在这里，整个模型只由一个神经元组成。单个神经元  接受一些输入； 生成相应的标量输出； 具有一组相关 参数（parameters），这些参数可以更新以优化目标函数。   具有多个输出的网络，我们就利用矢量化算法来描述整层神经元。像单个神经元一样，层接受一组输入，生成相应的输出，由一组可调整参数描述。当我们使用softmax回归时，一个单层本身就是模型。 对于多层感知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习十二——深度学习计算细节">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%BA%8C%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="层和块  单一输出的线性模型。在这里，整个模型只由一个神经元组成。单个神经元  接受一些输入； 生成相应的标量输出； 具有一组相关 参数（parameters），这些参数可以更新以优化目标函数。   具有多个输出的网络，我们就利用矢量化算法来描述整层神经元。像单个神经元一样，层接受一组输入，生成相应的输出，由一组可调整参数描述。当我们使用softmax回归时，一个单层本身就是模型。 对于多层感知">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211125110915.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211127102311.png">
+<meta property="article:published_time" content="2021-11-27T04:02:19.000Z">
+<meta property="article:modified_time" content="2021-11-27T04:32:43.066Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211125110915.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%BA%8C%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-技术笔记/深度学习/深度学习十二——深度学习计算细节" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深度学习十二——深度学习计算细节
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%BA%8C%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82/index.html" class="article-date">
+	  <time datetime="2021-11-27T04:02:19.000Z" itemprop="datePublished">2021-11-27</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%BA%8C%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="层和块"><a class="markdownIt-Anchor" href="#层和块"></a> 层和块</h1>
+<ul>
+<li>单一输出的线性模型。在这里，整个模型只由一个神经元组成。单个神经元
+<ol>
+<li>接受一些输入；</li>
+<li>生成相应的标量输出；</li>
+<li>具有一组相关 <em>参数</em>（parameters），这些参数可以更新以优化目标函数。</li>
+</ol>
+</li>
+<li>具有多个输出的网络，我们就利用矢量化算法来描述整层神经元。像单个神经元一样，层接受一组输入，生成相应的输出，由一组可调整参数描述。当我们使用softmax回归时，一个单层本身就是模型。</li>
+<li>对于多层感知机而言，整个模型及其组成层都是这种结构。整个模型接受原始输入（特征），生成输出（预测），并包含一些参数（所有组成层的参数集合）。同样，每个单独的层接收输入（由前一层提供）生成输出（到下一层的输入），并且具有一组可调参数，这些参数根据从下一层反向传播的信号进行更新。</li>
+<li>神经网络<em>块</em>的概念。
+<ul>
+<li>块可以描述单个层、由多个层组成的组件或整个模型本身。</li>
+<li>块抽象的一个主要优点是它的多功能性。我们可以子类化块以创建层（如全连接层的类）、整个模型（如上面的<code>MLP</code>类）或具有中等复杂度的各种组件。</li>
+<li>使用块进行抽象的一个好处是可以将一些块组合成更大的组件，这一过程通常是递归的。多个层被组合成块，形成更大的模型如下图所示：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211125110915.png" alt="" /></li>
+</ul>
+</li>
+<li>从编程的角度来看，块由<em>类</em>（class）表示。
+<ul>
+<li>它的任何子类都必须定义一个将其输入转换为输出的正向传播函数，并且必须存储所有必需的参数。注意，有些块不需要任何参数。</li>
+<li>为了计算梯度，块必须具有反向传播函数。由于自动微分提供了一些后端实现，我们只需要考虑正向传播函数和必需的参数。</li>
+</ul>
+</li>
+<li>总的来说，层、块和模型的概念的意思相同，只是概念的意义大小不同。可以说层也是块，块也是模型。</li>
+</ul>
+<h2 id="层的实现"><a class="markdownIt-Anchor" href="#层的实现"></a> 层的实现</h2>
+<ul>
+<li>下面的代码生成一个网络，其中包含一个具有256个单元和ReLU激活函数的全连接的<em>隐藏层</em>，然后是一个具有10个隐藏单元且不带激活函数的全连接的<em>输出层</em>。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf
+
+net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Dense(256, activation&#x3D;tf.nn.relu), # 全连接隐藏层
+    tf.keras.layers.Dense(10), # 全连接输出层
+])
+X &#x3D; tf.random.uniform((2, 20)) # 随机生成固定范围的数字，并组成2x20的矩阵
+net(X) #将矩阵传入模型，得到输出</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 10), dtype=float32, numpy=
+array([[-0.10053267, -0.52125233,  0.03423303,  0.05271533,  0.09385592,
+         0.3140592 ,  0.48896453,  0.16119169,  0.2954839 ,  0.23833668],
+       [-0.10363767, -0.360658  ,  0.08614046, -0.06917804,  0.15384349,
+         0.16218697,  0.49132586,  0.0954482 ,  0.19657846,  0.0928633 ]],
+      dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>在这个例子中，我们通过实例化<code>keras.models.Sequential</code>来构建我们的模型，层的执行顺序是作为参数传递的（即在定义时的顺序）。</li>
+<li><code>Sequential</code>定义了一种特殊的<code>keras.Model</code>，即在Keras中表示一个块的类。它维护了一个由<code>Model</code>组成的有序列表，注意两个全连接层都是<code>Model</code>类的实例，这个类本身就是<code>Model</code>的子类。</li>
+<li>正向传播（<code>call</code>）函数也非常简单：它将列表中的每个块连接在一起，将每个块的输出作为下一个块的输入。</li>
+<li>注意，到目前为止，我们一直在通过<code>net(X)</code>调用我们的模型来获得模型的输出。这实际上是<code>net.call(X)</code>的简写，这是通过Block类的<code>__call__</code>函数实现的一个Python技巧。</li>
+</ul>
+<h2 id="自定义实现块"><a class="markdownIt-Anchor" href="#自定义实现块"></a> 自定义实现块</h2>
+<ul>
+<li>每个块必须提供的基本功能：
+<ol>
+<li>将<em>输入</em>数据作为其正向传播函数的参数。</li>
+<li>通过正向传播函数来生成<em>输出</em>。请注意，输出的形状可能与输入的形状不同。例如，我们上面模型中的第一个全连接的层接收任意维的输入，但是返回一个维度256的输出。</li>
+<li>计算其输出关于输入的<em>梯度</em>，可通过其反向传播函数进行访问。通常这是自动发生的。</li>
+<li>存储和访问正向传播计算所需的<em>参数</em>。</li>
+<li>根据需要<em>初始化模型参数</em>。</li>
+</ol>
+</li>
+<li>在下面的代码片段中，我们从零开始编写一个块。
+<ul>
+<li>它包含一个多层感知机，其具有256个隐藏单元的隐藏层和一个10维输出层。</li>
+<li>注意，下面的<code>MLP</code>类继承了表示块的类。我们的实现将严重依赖父类，只需要提供我们自己的构造函数（Python中的<code>__init__</code>函数）和正向传播函数。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class MLP(tf.keras.Model): # MLP继承自tf.keras.Model类（所有表示块的类的父类）
+    # 用模型参数声明层。这里，我们声明两个全连接的层
+    def __init__(self):
+        # 调用&#96;MLP&#96;的父类&#96;Block&#96;的构造函数来执行必要的初始化。
+        # 这样，在类实例化时也可以指定其他函数参数，例如模型参数&#96;params&#96;（稍后将介绍）
+        super().__init__()
+        # Hidden layer
+        self.hidden &#x3D; tf.keras.layers.Dense(units&#x3D;256, activation&#x3D;tf.nn.relu) # 定义块的隐藏层属性
+        self.out &#x3D; tf.keras.layers.Dense(units&#x3D;10)  # Output layer 定义块的输出层属性
+
+    # 定义模型的正向传播，即如何根据输入&#96;X&#96;返回所需的模型输出
+    def call(self, X):
+        return self.out(self.hidden((X))) # 层的传播顺序</code></pre>
+<ul>
+<li>我们在构造函数中实例化多层感知机的层，然后在每次调用正向传播函数时调用这些层。</li>
+<li>首先，我们定制的<code>__init__</code>函数通过<code>super().__init__()</code>调用父类的<code>__init__</code>函数，省去了重复编写适用于大多数块的模版代码的痛苦。</li>
+<li>然后我们实例化两个全连接层，分别为<code>self.hidden</code>和<code>self.out</code>。</li>
+<li>注意，除非我们实现一个新的运算符，否则我们<em>不必担心反向传播函数或参数初始化，系统将自动生成这些</em>。</li>
+<li>如下代码尝试使用我们自定义块生成的模型。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; MLP()
+net(X) # 不用设置初始化参数，框架会帮我们完成</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 10), dtype=float32, numpy=
+array([[ 0.1348275 ,  0.02004568,  0.159919  , -0.14136608,  0.2755974 ,
+         0.2720098 , -0.02464058, -0.1562115 ,  0.16649963,  0.26428697],
+       [ 0.22408512,  0.18740931,  0.24371581, -0.01962556,  0.20510244,
+         0.10686708,  0.04737062, -0.20873724,  0.19347262,  0.24820918]],
+      dtype=float32)&gt;
+</code></pre>
+<h2 id="顺序块sequential"><a class="markdownIt-Anchor" href="#顺序块sequential"></a> 顺序块(Sequential)</h2>
+<ul>
+<li>现在我们可以更仔细地看看<code>Sequential</code>类是如何工作的。回想一下<code>Sequential</code>的设计是为了把其他模块串起来。为了构建我们自己的简化的<code>MySequential</code>，我们只需要定义两个关键函数：
+<ol>
+<li>一种将块逐个追加到列表中的函数。</li>
+<li>一种正向传播函数，用于将输入按追加块的顺序传递给块组成的“链条”。</li>
+</ol>
+</li>
+<li>下面的<code>MySequential</code>类提供了与默认<code>Sequential</code>类相同的功能。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class MySequential(tf.keras.Model):
+    def __init__(self, *args):
+        super().__init__()
+        self.modules &#x3D; [] # 存储多个层&#x2F;块
+        for block in args:
+            # 这里，&#96;block&#96;是&#96;tf.keras.layers.Layer&#96;子类的一个实例。
+            self.modules.append(block) # 将输入的层&#x2F;块添加存储
+
+    def call(self, X):
+        for module in self.modules:
+            X &#x3D; module(X) # 按添加顺序调用存储的层&#x2F;块
+        return X</code></pre>
+<ul>
+<li>当<code>MySequential</code>的正向传播函数被调用时，每个添加的块都按照它们被添加的顺序执行。现在可以使用我们的<code>MySequential</code>类重新实现多层感知机。</li>
+<li><code>MySequential</code>的用法与之前为<code>Sequential</code>类编写的代码相同。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; MySequential(
+    tf.keras.layers.Dense(units&#x3D;256, activation&#x3D;tf.nn.relu),
+    tf.keras.layers.Dense(10))
+net(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 10), dtype=float32, numpy=
+array([[-0.3732779 ,  0.13598867,  0.06229738, -0.14902727,  0.29809335,
+        -0.17750566, -0.04478821,  0.28876683,  0.36625353, -0.07922162],
+       [-0.13440742,  0.15157597, -0.04832599, -0.09506966,  0.11088407,
+        -0.2799356 , -0.09352981,  0.16300732,  0.3455552 ,  0.11073787]],
+      dtype=float32)&gt;
+</code></pre>
+<h2 id="在正向传播函数中执行代码"><a class="markdownIt-Anchor" href="#在正向传播函数中执行代码"></a> 在正向传播函数中执行代码</h2>
+<ul>
+<li><code>Sequential</code>类使模型构造变得简单，允许我们组合新的结构，而不必定义自己的类。然而，并不是所有的架构都是简单的顺序结构。当需要更大的灵活性时，我们需要定义自己的块。例如，我们可能希望在正向传播函数中执行Python的控制流。此外，我们可能希望执行任意的数学运算，而不是简单地依赖预定义的神经网络层。</li>
+<li>到目前为止，我们网络中的所有操作都对网络的激活值及网络的参数起作用。然而，有时我们可能希望合并既不是上一层的结果也不是可更新参数的项。我们称之为常数参数（constant parameters）。
+<ul>
+<li>例如，我们需要一个计算函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi mathvariant="bold">x</mi><mo separator="true">,</mo><mi mathvariant="bold">w</mi><mo stretchy="false">)</mo><mo>=</mo><mi>c</mi><mo>⋅</mo><msup><mi mathvariant="bold">w</mi><mi mathvariant="normal">⊤</mi></msup><mi mathvariant="bold">x</mi></mrow><annotation encoding="application/x-tex">f(\mathbf{x},\mathbf{w}) = c \cdot \mathbf{w}^\top \mathbf{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">x</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">x</span></span></span></span></span>的层，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">x</mi></mrow><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">x</span></span></span></span></span>是输入，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">w</mi></mrow><annotation encoding="application/x-tex">\mathbf{w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span></span></span></span>是我们的参数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span>是某个在优化过程中没有更新的指定常量。因此我们实现了一个<code>FixedHiddenMLP</code>类，如下所示：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class FixedHiddenMLP(tf.keras.Model):
+    def __init__(self):
+        super().__init__()
+        self.flatten &#x3D; tf.keras.layers.Flatten() # Flatten层用来将输入“压平”，即把多维的输入一维化。
+        # 使用&#96;tf.constant&#96;函数创建的随机权重参数在训练期间不会更新（即为常量参数）。
+        self.rand_weight &#x3D; tf.constant(tf.random.uniform((20, 20)))
+        self.dense &#x3D; tf.keras.layers.Dense(20, activation&#x3D;tf.nn.relu) # 全连接层
+
+    def call(self, inputs):
+        X &#x3D; self.flatten(inputs)
+        # 使用创建的常量参数以及&#96;relu&#96;和&#96;matmul&#96;函数。
+        X &#x3D; tf.nn.relu(tf.matmul(X, self.rand_weight) + 1) # 对输入值进行运算转换
+        # 复用全连接层。这相当于两个全连接层共享参数。
+        X &#x3D; self.dense(X)
+        # 控制流
+        while tf.reduce_sum(tf.math.abs(X)) &gt; 1:
+            X &#x2F;&#x3D; 2
+        return tf.reduce_sum(X)</code></pre>
+<ul>
+<li>在这个<code>FixedHiddenMLP</code>模型中，我们实现了一个隐藏层，其权重（<code>self.rand_weight</code>）在实例化时被随机初始化，之后为常量。这个权重不是一个模型参数，因此它永远不会被反向传播更新。然后，网络将这个固定层的输出通过一个全连接层。</li>
+<li>在返回输出之前，我们的模型运行了一个while循环，在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">L_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>范数大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>的条件下，将输出向量除以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn></mrow><annotation encoding="application/x-tex">2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>，直到它满足条件为止。最后，我们返回了<code>X</code>中所有项的和。据我们所知，没有标准的神经网络执行这种操作。注意，此特定操作在任何实际任务中可能都没有用处，只是展示如何将任意代码集成到神经网络计算的流程中。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; FixedHiddenMLP()
+net(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=0.6047544&gt;
+</code></pre>
+<ul>
+<li>我们可以[<strong>混合搭配各种组合块的方法</strong>]。在下面的例子中，我们以一些想到的方法嵌套块。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class NestMLP(tf.keras.Model):
+    def __init__(self):
+        super().__init__()
+        self.net &#x3D; tf.keras.Sequential()
+        self.net.add(tf.keras.layers.Dense(64, activation&#x3D;tf.nn.relu))
+        self.net.add(tf.keras.layers.Dense(32, activation&#x3D;tf.nn.relu))
+        self.dense &#x3D; tf.keras.layers.Dense(16, activation&#x3D;tf.nn.relu)
+
+    def call(self, inputs):
+        return self.dense(self.net(inputs))
+
+chimera &#x3D; tf.keras.Sequential()
+chimera.add(NestMLP())
+chimera.add(tf.keras.layers.Dense(20))
+chimera.add(FixedHiddenMLP())
+chimera(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=0.96118724&gt;
+</code></pre>
+<h1 id="参数管理"><a class="markdownIt-Anchor" href="#参数管理"></a> 参数管理</h1>
+<ul>
+<li>一旦我们选择了架构并设置了超参数，我们就进入了训练阶段。我们的目标是找到使损失函数最小化的参数值。
+<ul>
+<li>经过训练后，我们将需要使用这些参数来做出未来的预测。</li>
+<li>此外，有时我们希望提取参数，以便在其他环境中复用它们，将模型保存到磁盘，以便它可以在其他软件中执行，或者为了获得科学的理解而进行检查。</li>
+</ul>
+</li>
+<li>接下来将介绍参数使用的三个方面：
+<ul>
+<li>访问参数，用于调试、诊断和可视化。</li>
+<li>参数初始化。</li>
+<li>在不同模型组件间共享参数。</li>
+</ul>
+</li>
+<li>我们首先定义一个具有单隐藏层的多层感知机。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf
+
+net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(), # Flatten层用来将输入“压平”，即把多维的输入一维化。
+    tf.keras.layers.Dense(4, activation&#x3D;tf.nn.relu),
+    tf.keras.layers.Dense(1),
+])
+
+X &#x3D; tf.random.uniform((2, 4))
+net(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
+array([[1.0823346 ],
+       [0.22759864]], dtype=float32)&gt;
+</code></pre>
+<h2 id="参数访问"><a class="markdownIt-Anchor" href="#参数访问"></a> 参数访问</h2>
+<ul>
+<li>我们从已有模型中访问参数。当通过<code>Sequential</code>类定义模型时，我们可以通过索引来访问模型的任意层。这就像模型是一个列表一样。每层的参数都在其属性中。如下所示，我们可以检查第二个全连接层的参数：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print(net.layers[2].weights)</code></pre>
+<pre><code>[&lt;tf.Variable 'dense_1/kernel:0' shape=(4, 1) dtype=float32, numpy=
+array([[-1.0443994 ],
+       [ 0.9794688 ],
+       [-0.9471145 ],
+       [ 0.72745836]], dtype=float32)&gt;, &lt;tf.Variable 'dense_1/bias:0' shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+</code></pre>
+<ul>
+<li>输出的结果告诉我们一些重要的事情：
+<ul>
+<li>首先，这个全连接层包含两个参数，分别是该层的权重和偏置。两者都存储为单精度浮点数（float32）。</li>
+<li>其次，权重参数有4个，偏置参数有1个</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问目标参数"><a class="markdownIt-Anchor" href="#访问目标参数"></a> 访问目标参数</h3>
+<ul>
+<li>注意，每个参数都表示为参数（parameter）类的一个实例。要对参数执行任何操作，首先我们需要访问底层的数值。</li>
+<li>下面的代码从第二个神经网络层提取偏置，提取后返回的是一个参数类实例，并进一步访问该参数的值。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print(type(net.layers[2].weights[1]))
+print(net.layers[2].weights[1])
+print(tf.convert_to_tensor(net.layers[2].weights[1]))</code></pre>
+<pre><code>&lt;class 'tensorflow.python.ops.resource_variable_ops.ResourceVariable'&gt;
+&lt;tf.Variable 'dense_1/bias:0' shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;
+tf.Tensor([0.], shape=(1,), dtype=float32)
+</code></pre>
+<h3 id="一次性访问所有参数"><a class="markdownIt-Anchor" href="#一次性访问所有参数"></a> 一次性访问所有参数</h3>
+<ul>
+<li>当我们需要对所有参数执行操作时，逐个访问它们可能会很麻烦。</li>
+<li>下面，我们将通过演示来比较访问第一个全连接层的参数和访问所有层。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print(net.layers[1].weights)
+print(&quot;-------------------&quot;)
+print(net.get_weights())</code></pre>
+<pre><code>[&lt;tf.Variable 'dense/kernel:0' shape=(4, 4) dtype=float32, numpy=
+array([[-0.7153008 , -0.47379696,  0.24041837, -0.47431007],
+       [-0.27177972,  0.8531895 ,  0.81762785,  0.09699482],
+       [ 0.5649834 , -0.11347246, -0.760539  ,  0.643614  ],
+       [ 0.38823944,  0.85819894, -0.51748407, -0.8652288 ]],
+      dtype=float32)&gt;, &lt;tf.Variable 'dense/bias:0' shape=(4,) dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;]
+-------------------
+[array([[-0.7153008 , -0.47379696,  0.24041837, -0.47431007],
+       [-0.27177972,  0.8531895 ,  0.81762785,  0.09699482],
+       [ 0.5649834 , -0.11347246, -0.760539  ,  0.643614  ],
+       [ 0.38823944,  0.85819894, -0.51748407, -0.8652288 ]],
+      dtype=float32), array([0., 0., 0., 0.], dtype=float32), array([[-1.0443994 ],
+       [ 0.9794688 ],
+       [-0.9471145 ],
+       [ 0.72745836]], dtype=float32), array([0.], dtype=float32)]
+</code></pre>
+<ul>
+<li>这为我们提供了另一种访问网络参数的方式，如下所示。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net.get_weights()[1]</code></pre>
+<pre><code>array([0., 0., 0., 0.], dtype=float32)
+</code></pre>
+<h3 id="从嵌套块收集参数"><a class="markdownIt-Anchor" href="#从嵌套块收集参数"></a> 从嵌套块收集参数</h3>
+<ul>
+<li>如果我们将多个块相互嵌套，参数命名约定是如何工作的。为此，我们首先定义一个生成块的函数（可以说是块工厂），然后将这些块组合到更大的块中。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def block1(name):
+    return tf.keras.Sequential([
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(4, activation&#x3D;tf.nn.relu)],
+        name&#x3D;name)
+
+def block2():
+    net &#x3D; tf.keras.Sequential()
+    for i in range(4):
+        # 在这里嵌套
+        net.add(block1(name&#x3D;f&#39;block-&#123;i&#125;&#39;))
+    return net
+
+rgnet &#x3D; tf.keras.Sequential()
+rgnet.add(block2())
+rgnet.add(tf.keras.layers.Dense(1))
+rgnet(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
+array([[0.29514068],
+       [0.24460116]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>现在我们已经设计了网络，让我们看看它是如何组织的。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print(rgnet.summary())</code></pre>
+<pre><code>Model: &quot;sequential_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+sequential_2 (Sequential)    (2, 4)                    80        
+_________________________________________________________________
+dense_6 (Dense)              (2, 1)                    5         
+=================================================================
+Total params: 85
+Trainable params: 85
+Non-trainable params: 0
+_________________________________________________________________
+None
+</code></pre>
+<ul>
+<li>因为层是分层嵌套的，所以我们也可以像通过嵌套列表索引一样访问它们。例如，我们下面访问第一个主要的块，其中第二个子块的第一层的偏置项。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">rgnet.layers[0].layers[1].layers[1].weights[1]</code></pre>
+<pre><code>&lt;tf.Variable 'dense_3/bias:0' shape=(4,) dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;
+</code></pre>
+<h2 id="参数初始化"><a class="markdownIt-Anchor" href="#参数初始化"></a> 参数初始化</h2>
+<ul>
+<li>
+<p>深度学习框架提供默认随机初始化。然而，我们经常希望根据其他规则初始化权重。</p>
+</li>
+<li>
+<p>深度学习框架提供了最常用的规则，也允许创建自定义初始化方法。</p>
+</li>
+<li>
+<p>默认情况下，Keras会根据一个范围均匀地初始化权重矩阵，这个范围是根据输入和输出维度计算出的。偏置参数设置为0。</p>
+</li>
+<li>
+<p>TensorFlow在根模块和<code>keras.initializers</code>模块中提供了各种初始化方法。</p>
+</li>
+</ul>
+<h3 id="内置初始化"><a class="markdownIt-Anchor" href="#内置初始化"></a> 内置初始化</h3>
+<ul>
+<li>让我们首先调用内置的初始化器。下面的代码将所有权重参数初始化为标准差为0.01的高斯随机变量，且将偏置参数设置为0。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(
+        4, activation&#x3D;tf.nn.relu,
+        # 调用内置的权重和偏置初始化器
+        kernel_initializer&#x3D;tf.random_normal_initializer(mean&#x3D;0, stddev&#x3D;0.01), 
+        bias_initializer&#x3D;tf.zeros_initializer()),
+    tf.keras.layers.Dense(1)])
+
+net(X)
+net.weights[0], net.weights[1]</code></pre>
+<pre><code>(&lt;tf.Variable 'dense_7/kernel:0' shape=(4, 4) dtype=float32, numpy=
+ array([[ 0.00011626, -0.00243756,  0.0289169 ,  0.01210678],
+        [-0.0209518 , -0.00309604,  0.00333905,  0.00578496],
+        [ 0.00712939,  0.00440856,  0.01441487, -0.01851764],
+        [ 0.00087012,  0.00539779, -0.01484406,  0.00173946]],
+       dtype=float32)&gt;,
+ &lt;tf.Variable 'dense_7/bias:0' shape=(4,) dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>我们还可以将所有参数初始化为给定的常数（比如1）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(
+        4, activation&#x3D;tf.nn.relu,
+        kernel_initializer&#x3D;tf.keras.initializers.Constant(1), # 权重参数初始化为常数1
+        bias_initializer&#x3D;tf.zeros_initializer()),
+    tf.keras.layers.Dense(1),
+])
+
+net(X)
+net.weights[0], net.weights[1]</code></pre>
+<pre><code>(&lt;tf.Variable 'dense_9/kernel:0' shape=(4, 4) dtype=float32, numpy=
+ array([[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]], dtype=float32)&gt;,
+ &lt;tf.Variable 'dense_9/bias:0' shape=(4,) dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>我们还可以对不同块应用不同的初始化方法。例如，下面我们使用<a href="https://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%2F%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%9D%E2%80%94%E2%80%94%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%92%8C%E6%A8%A1%E5%9E%8B%E5%88%9D%E5%A7%8B%E5%8C%96">Xavier初始化方法</a>初始化第一层，然后第二层初始化为常量值42。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(
+        4,
+        activation&#x3D;tf.nn.relu,
+        kernel_initializer&#x3D;tf.keras.initializers.GlorotUniform()),
+    tf.keras.layers.Dense(
+        1, kernel_initializer&#x3D;tf.keras.initializers.Constant(1)),
+])
+
+net(X)
+print(net.layers[1].weights[0])
+print(net.layers[2].weights[0])</code></pre>
+<pre><code>&lt;tf.Variable 'dense_11/kernel:0' shape=(4, 4) dtype=float32, numpy=
+array([[ 0.13322777, -0.28714836,  0.48435372, -0.23824066],
+       [-0.8576961 , -0.37366742, -0.5298128 , -0.57621306],
+       [ 0.15267748, -0.55146253,  0.2456879 ,  0.8000147 ],
+       [-0.84722054,  0.26036924,  0.14320487,  0.2029993 ]],
+      dtype=float32)&gt;
+&lt;tf.Variable 'dense_12/kernel:0' shape=(4, 1) dtype=float32, numpy=
+array([[1.],
+       [1.],
+       [1.],
+       [1.]], dtype=float32)&gt;
+</code></pre>
+<h3 id="自定义初始化"><a class="markdownIt-Anchor" href="#自定义初始化"></a> 自定义初始化</h3>
+<ul>
+<li>当深度学习框架没有提供我们需要的初始化方法,这时就需要自己去定义初始化方法。</li>
+<li>在下面的例子中，我们使用以下的分布为任意权重参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span>定义初始化方法：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right" columnspacing=""><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>w</mi><mo>∼</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>U</mi><mo stretchy="false">(</mo><mn>5</mn><mo separator="true">,</mo><mn>10</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> with probability </mtext><mfrac><mn>1</mn><mn>4</mn></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> with probability </mtext><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>U</mi><mo stretchy="false">(</mo><mo>−</mo><mn>10</mn><mo separator="true">,</mo><mo>−</mo><mn>5</mn><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mtext> with probability </mtext><mfrac><mn>1</mn><mn>4</mn></mfrac></mrow></mstyle></mtd></mtr></mtable></mrow></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+    w \sim \begin{cases}
+        U(5, 10) &amp; \text{ with probability } \frac{1}{4} \\
+            0    &amp; \text{ with probability } \frac{1}{2} \\
+        U(-10, -5) &amp; \text{ with probability } \frac{1}{4}
+    \end{cases}
+\end{aligned}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.62em;vertical-align:-2.06em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.56em;"><span style="top:-4.5600000000000005em;"><span class="pstrut" style="height:4.41em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.35002em;"><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎩</span></span></span><span style="top:-2.19999em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-3.1500100000000004em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎨</span></span></span><span style="top:-4.30001em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎪</span></span></span><span style="top:-4.60002em;"><span class="pstrut" style="height:3.15em;"></span><span class="delimsizinginner delim-size4"><span>⎧</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.8500199999999998em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.41em;"><span style="top:-4.41em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mopen">(</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mclose">)</span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span></span></span><span style="top:-1.5300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">−</span><span class="mord">5</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.9099999999999997em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.41em;"><span style="top:-4.41em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord text"><span class="mord"> with probability </span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.97em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord text"><span class="mord"> with probability </span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-1.5300000000000002em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord text"><span class="mord"> with probability </span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.9099999999999997em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.06em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li>下面我们定义了一个<code>Initializer</code>的子类，并实现了<code>__call__</code>函数。该函数返回给定形状和数据类型的所需张量（即返回指定类型的参数）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class MyInit(tf.keras.initializers.Initializer): # 需要继承
+    def __call__(self, shape, dtype&#x3D;None):
+        data&#x3D;tf.random.uniform(shape, -10, 10, dtype&#x3D;dtype)
+        factor&#x3D;(tf.abs(data) &gt;&#x3D; 5)
+        factor&#x3D;tf.cast(factor, tf.float32)
+        return data * factor
+
+net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(
+        4,
+        activation&#x3D;tf.nn.relu,
+        kernel_initializer&#x3D;MyInit()),
+    tf.keras.layers.Dense(1),
+])
+
+net(X)
+print(net.layers[1].weights[0])</code></pre>
+<pre><code>&lt;tf.Variable 'dense_13/kernel:0' shape=(4, 4) dtype=float32, numpy=
+array([[ 5.3779716, -0.       , -0.       , -0.       ],
+       [ 9.236822 ,  5.445669 ,  6.13076  ,  0.       ],
+       [ 0.       , -7.9621553, -6.879289 ,  0.       ],
+       [ 7.567747 , -9.157478 , -9.440246 , -0.       ]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>此外，我们始终可以直接设置参数。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net.layers[1].weights[0][:].assign(net.layers[1].weights[0] + 1)
+net.layers[1].weights[0][0, 0].assign(42)
+net.layers[1].weights[0]</code></pre>
+<pre><code>&lt;tf.Variable 'dense_13/kernel:0' shape=(4, 4) dtype=float32, numpy=
+array([[42.       ,  1.       ,  1.       ,  1.       ],
+       [10.236822 ,  6.445669 ,  7.13076  ,  1.       ],
+       [ 1.       , -6.9621553, -5.879289 ,  1.       ],
+       [ 8.567747 , -8.157478 , -8.440246 ,  1.       ]], dtype=float32)&gt;
+</code></pre>
+<h2 id="参数绑定"><a class="markdownIt-Anchor" href="#参数绑定"></a> 参数绑定</h2>
+<ul>
+<li>有时我们希望<em>在多个层间共享参数</em>。让我们看看如何优雅地做这件事。</li>
+<li>在下面，我们定义一个稠密层，然后<em>使用它的参数来设置另一个层的参数</em>。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"># tf.keras的表现有点不同。它会自动删除重复层
+shared &#x3D; tf.keras.layers.Dense(4, activation&#x3D;tf.nn.relu)
+net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),
+    shared,
+    shared,
+    tf.keras.layers.Dense(1),
+])
+
+net(X)
+# 检查参数是否不同
+print(len(net.layers) &#x3D;&#x3D; 3)</code></pre>
+<pre><code>True
+</code></pre>
+<h1 id="延后初始化"><a class="markdownIt-Anchor" href="#延后初始化"></a> 延后初始化</h1>
+<ul>
+<li>到目前为止，似乎我们在建立网络时表现得很简单。我们没有做以下必要的工作，却能够建立可运行的网络：
+<ul>
+<li>我们定义了网络架构，但没有指定输入维度。</li>
+<li>我们添加层时没有指定前一层的输出维度。</li>
+<li>我们在初始化参数时，甚至没有足够的信息来确定模型应该包含多少参数。</li>
+</ul>
+</li>
+<li>深度学习框架无法判断网络的输入维度是什么。但是框架通过**延后初始化（defers initialization）**来解决这个问题，即等到我们第一次将数据通过模型传递时，才会<em>动态地推断</em>出每个层的大小。</li>
+</ul>
+<h2 id="实例化网络"><a class="markdownIt-Anchor" href="#实例化网络"></a> 实例化网络</h2>
+<ul>
+<li>首先，让我们实例化一个多层感知机。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf
+
+net &#x3D; tf.keras.models.Sequential([
+    tf.keras.layers.Dense(256, activation&#x3D;tf.nn.relu),
+    tf.keras.layers.Dense(10),
+])</code></pre>
+<ul>
+<li>此时，因为输入维数是未知的，所以网络不可能知道输入层权重的维数。因此，<em>框架尚未初始化任何参数</em>。我们通过尝试访问以下参数进行确认。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">[net.layers[i].get_weights() for i in range(len(net.layers))]</code></pre>
+<pre><code>[[], []]
+</code></pre>
+<ul>
+<li>
+<p>请注意，每个层对象都存在，但权重为空。使用<code>net.get_weights()</code>将抛出一个错误，因为权重尚未初始化。</p>
+</li>
+<li>
+<p>接下来让我们将数据通过网络，最终使框架初始化参数。</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D; tf.random.uniform((2, 20))
+net(X)
+[w.shape for w in net.get_weights()]</code></pre>
+<pre><code>[(20, 256), (256,), (256, 10), (10,)]
+</code></pre>
+<ul>
+<li>一旦我们知道输入维数是20，框架可以通过代入值20来识别第一层权重矩阵的形状。识别出第一层的形状后，框架处理第二层，依此类推，直到所有形状都已知为止。注意，在这种情况下，只有第一层需要延迟初始化，但是框架仍是按顺序初始化的。等到知道了所有的参数形状，框架就可以初始化参数。</li>
+</ul>
+<h1 id="自定义层"><a class="markdownIt-Anchor" href="#自定义层"></a> 自定义层</h1>
+<ul>
+<li>深度学习成功背后的一个因素是，可以用创造性的方式组合广泛的层，从而设计出适用于各种任务的结构。例如，研究人员发明了专门用于处理图像、文本、序列数据和执行动态编程的层。早晚有一天，你会遇到或要自己发明一个在深度学习框架中还不存在的层。在这些情况下，你必须构建自定义层。</li>
+</ul>
+<h2 id="不带参数的层"><a class="markdownIt-Anchor" href="#不带参数的层"></a> 不带参数的层</h2>
+<ul>
+<li>首先，我们(<strong>构造一个没有任何参数的自定义层</strong>)。下面的<code>CenteredLayer</code>类要从其输入中减去均值。要构建它，我们只需继承基础层类并实现正向传播功能。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf
+
+
+class CenteredLayer(tf.keras.Model): # 要继承Model类（层，块，模型同义）
+    def __init__(self):
+        super().__init__()
+
+    def call(self, inputs):
+        return inputs - tf.reduce_mean(inputs)</code></pre>
+<ul>
+<li>让我们通过向其提供一些数据来验证该层是否按预期工作。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">layer &#x3D; CenteredLayer()
+layer(tf.constant([1, 2, 3, 4, 5]))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5,), dtype=int32, numpy=array([-2, -1,  0,  1,  2])&gt;
+</code></pre>
+<ul>
+<li>我们可以将层作为组件合并到构建更复杂的模型中。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; tf.keras.Sequential([tf.keras.layers.Dense(128), CenteredLayer()])</code></pre>
+<ul>
+<li>作为额外的健全性检查，我们可以向网络发送随机数据后，检查均值是否为0。由于我们处理的是浮点数，因为存储精度的原因，我们仍然可能会看到一个非常小的非零数。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Y &#x3D; net(tf.random.uniform((4, 8)))
+tf.reduce_mean(Y)# 在自定义层中所有数已经减去了均值，此时再求他们的均值就为0</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=2.3283064e-10&gt;
+</code></pre>
+<h2 id="带参数的层"><a class="markdownIt-Anchor" href="#带参数的层"></a> 带参数的层</h2>
+<ul>
+<li>在知道如何定义简单的层后，让我们继续定义具有参数的层，这些参数可以通过训练进行调整。</li>
+<li>我们可以使用内置函数来创建参数，这些函数提供一些基本的管理功能。比如管理访问、初始化、共享、保存和加载模型参数。这样做的好处之一是，我们不需要为每个自定义层编写自定义序列化程序。</li>
+<li>下面实现<em>自定义版本的全连接层</em>。该层需要两个参数，一个用于表示权重，另一个用于表示偏置项。在此实现中，我们使用ReLU作为激活函数。该层需要输入参数：<code>in_units</code>和<code>units</code>，分别表示输入和输出的数量。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class MyDense(tf.keras.Model): # 继承
+    def __init__(self, units):
+        super().__init__()
+        self.units &#x3D; units # 激活函数的参数：输出的数量
+
+    # 通过继承的add_weight函数设置参数
+    # weight和bias参数也是继承而来的
+    def build(self, X_shape):
+        self.weight &#x3D; self.add_weight(name&#x3D;&#39;weight&#39;,
+            shape&#x3D;[X_shape[-1], self.units],# 定义形状
+            initializer&#x3D;tf.random_normal_initializer()) # 权重参数的设置
+        self.bias &#x3D; self.add_weight(
+            name&#x3D;&#39;bias&#39;, shape&#x3D;[self.units], 
+            initializer&#x3D;tf.zeros_initializer()) # 偏置参数的设置
+
+    def call(self, X):
+        linear &#x3D; tf.matmul(X, self.weight) + self.bias # 线性模型的计算式，模型的核心
+        return tf.nn.relu(linear) # 返回通过激活函数转换的结果</code></pre>
+<ul>
+<li>接下来，我们实例化<code>MyDense</code>类并访问其模型参数。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dense &#x3D; MyDense(3)
+dense(tf.random.uniform((2, 5)))
+dense.get_weights()</code></pre>
+<pre><code>[array([[ 0.06708992,  0.00083597,  0.02334282],
+        [-0.03166975, -0.03228635,  0.0486607 ],
+        [ 0.01708961,  0.04761021,  0.04423346],
+        [-0.00652742, -0.04853096,  0.0032647 ],
+        [ 0.07011791, -0.06639327, -0.07551213]], dtype=float32),
+ array([0., 0., 0.], dtype=float32)]
+</code></pre>
+<ul>
+<li>我们可以[<strong>使用自定义层直接执行正向传播计算</strong>]。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dense(tf.random.uniform((2, 5)))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3), dtype=float32, numpy=
+array([[0.07556991, 0.        , 0.        ],
+       [0.03051041, 0.        , 0.04300407]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>我们还可以(<strong>使用自定义层构建模型</strong>)。我们可以像使用内置的全连接层一样使用自定义层。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net &#x3D; tf.keras.models.Sequential([MyDense(8), MyDense(1)])
+net(tf.random.uniform((2, 64)))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
+array([[0.04842976],
+       [0.02571042]], dtype=float32)&gt;
+</code></pre>
+<h1 id="读写文件"><a class="markdownIt-Anchor" href="#读写文件"></a> 读写文件</h1>
+<ul>
+<li>有时我们对所学的模型足够满意，我们希望保存训练的模型以备将来在各种环境中使用（甚至可能在部署中进行预测）。此外，当运行一个耗时较长的训练过程时，最佳的做法是定期保存中间结果（检查点），以确保在服务器电源被不小心断掉时不会损失几天的计算结果。因此，我们需要学习如何加载和存储权重向量和整个模型。</li>
+</ul>
+<h2 id="加载和保存张量"><a class="markdownIt-Anchor" href="#加载和保存张量"></a> 加载和保存张量</h2>
+<ul>
+<li>对于单个张量，我们可以直接调用<code>load</code>和<code>save</code>函数分别读写它们。这两个函数都要求我们提供一个名称，<code>save</code>要求将要保存的变量作为输入。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import numpy as np
+import tensorflow as tf
+
+x &#x3D; tf.range(4)
+np.save(&#39;x-file.npy&#39;, x) # 保存为npy文件</code></pre>
+<ul>
+<li>我们现在可以将存储在文件中的数据读回内存。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x2 &#x3D; np.load(&#39;x-file.npy&#39;, allow_pickle&#x3D;True)
+x2</code></pre>
+<pre><code>array([0, 1, 2, 3], dtype=int32)
+</code></pre>
+<ul>
+<li>我们可以存储一个张量列表，然后把它们读回内存。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">y &#x3D; tf.zeros(4)
+np.save(&#39;xy-files.npy&#39;, [x, y]) # 存储一个张量列表
+x2, y2 &#x3D; np.load(&#39;xy-files.npy&#39;, allow_pickle&#x3D;True) # 将张量列表读回内存
+(x2, y2)</code></pre>
+<pre><code>(array([0., 1., 2., 3.]), array([0., 0., 0., 0.]))
+</code></pre>
+<ul>
+<li>我们甚至可以(<strong>写入或读取从字符串映射到张量的字典</strong>)。当我们要读取或写入模型中的所有权重时，这很方便。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">mydict &#x3D; &#123;&#39;x&#39;: x, &#39;y&#39;: y&#125; # 将张量映射到字典
+np.save(&#39;mydict.npy&#39;, mydict)
+mydict2 &#x3D; np.load(&#39;mydict.npy&#39;, allow_pickle&#x3D;True)
+mydict2</code></pre>
+<pre><code>array(&#123;'x': &lt;tf.Tensor: shape=(4,), dtype=int32, numpy=array([0, 1, 2, 3], dtype=int32)&gt;, 'y': &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;&#125;,
+      dtype=object)
+</code></pre>
+<h2 id="加载和保存模型参数"><a class="markdownIt-Anchor" href="#加载和保存模型参数"></a> 加载和保存模型参数</h2>
+<ul>
+<li>深度学习框架提供了内置函数来保存和加载整个网络。
+<ul>
+<li>需要注意的一个重要细节是，这将<em>保存模型的参数而不是保存整个模型</em>。</li>
+<li>例如，如果我们有一个3层多层感知机，我们需要单独指定结构。<em>因为模型本身可以包含任意代码，所以模型本身难以序列化</em>。因此，为了恢复模型，我们需要用代码生成结构，然后从磁盘加载参数。让我们从熟悉的多层感知机开始尝试一下。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">class MLP(tf.keras.Model):
+    def __init__(self):
+        super().__init__()
+        self.flatten &#x3D; tf.keras.layers.Flatten()
+        self.hidden &#x3D; tf.keras.layers.Dense(units&#x3D;256, activation&#x3D;tf.nn.relu)
+        self.out &#x3D; tf.keras.layers.Dense(units&#x3D;10)
+
+    def call(self, inputs):
+        x &#x3D; self.flatten(inputs)
+        x &#x3D; self.hidden(x)
+        return self.out(x)
+
+net &#x3D; MLP()
+X &#x3D; tf.random.uniform((2, 20))
+Y &#x3D; net(X)</code></pre>
+<ul>
+<li>接下来，我们使用<code>sava_weights</code>函数将模型的参数存储为一个叫做“mlp.params”的文件。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net.save_weights(&#39;mlp.params&#39;)</code></pre>
+<ul>
+<li>为了恢复模型，我们[<strong>实例化了原始多层感知机模型的一个备份。</strong>]
+<ul>
+<li>我们没有随机初始化模型参数，而是(<strong>直接读取文件中存储的参数。</strong>)</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">clone &#x3D; MLP()
+clone.load_weights(&#39;mlp.params&#39;) # 初始化模型再加载参数</code></pre>
+<pre><code>&lt;tensorflow.python.training.tracking.util.CheckpointLoadStatus at 0x7fd648f496a0&gt;
+</code></pre>
+<ul>
+<li>由于两个实例具有相同的模型参数，在输入相同的<code>X</code>时，两个实例的计算结果应该相同。让我们来验证一下。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Y_clone &#x3D; clone(X)
+Y_clone &#x3D;&#x3D; Y</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 10), dtype=bool, numpy=
+array([[ True,  True,  True,  True,  True,  True,  True,  True,  True,
+         True],
+       [ True,  True,  True,  True,  True,  True,  True,  True,  True,
+         True]])&gt;
+</code></pre>
+<h1 id="gpu"><a class="markdownIt-Anchor" href="#gpu"></a> GPU</h1>
+<ul>
+<li>使用单个GPU，然后是如何使用多个GPU和多个服务器（具有多个GPU）来提高模型计算性能。</li>
+<li>具体来说，我们将讨论如何使用单个NVIDIA GPU进行计算。
+<ul>
+<li>首先，确保至少安装了一个NVIDIA GPU。</li>
+<li>然后，下载<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">NVIDIA驱动和CUDA</a>并按照提示设置适当的路径。当这些准备工作完成，就可以使用<code>nvidia-smi</code>命令来(<strong>查看显卡信息。</strong>)</li>
+</ul>
+</li>
+<li>对于深度学习计算经常会使用多个GPU，对于大多数桌面计算机来说，这可能是奢侈的，但在云中很容易获得，例如，通过使用AWS EC2的多GPU实例。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">!nvidia-smi</code></pre>
+<pre><code>Sat Nov 27 10:07:27 2021       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 465.89       Driver Version: 465.89       CUDA Version: 11.3     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name            TCC/WDDM | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA GeForce ... WDDM  | 00000000:01:00.0  On |                  N/A |
+| N/A   42C    P8     6W /  N/A |    356MiB /  6144MiB |      1%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A      1244    C+G   ...cw5n1h2txyewy\LockApp.exe    N/A      |
+|    0   N/A  N/A      6020    C+G   ...ekyb3d8bbwe\YourPhone.exe    N/A      |
+|    0   N/A  N/A      6180    C+G   C:\WINDOWS\System32\dwm.exe     N/A      |
+|    0   N/A  N/A     16764    C+G   C:\WINDOWS\explorer.exe         N/A      |
+|    0   N/A  N/A     19744    C+G   ...nputApp\TextInputHost.exe    N/A      |
+|    0   N/A  N/A     20788    C+G   ...5n1h2txyewy\SearchApp.exe    N/A      |
+|    0   N/A  N/A     21320    C+G   ...lPanel\SystemSettings.exe    N/A      |
+|    0   N/A  N/A     22164    C+G   ...TeamViewer\TeamViewer.exe    N/A      |
+|    0   N/A  N/A     23152    C+G   ...ge\Application\msedge.exe    N/A      |
+|    0   N/A  N/A     24896    C+G   ...bbwe\Microsoft.Photos.exe    N/A      |
+|    0   N/A  N/A     25116    C+G   ...8wekyb3d8bbwe\Cortana.exe    N/A      |
+|    0   N/A  N/A     26084    C+G   ...ram Files\PicGo\PicGo.exe    N/A      |
++-----------------------------------------------------------------------------+
+</code></pre>
+<h2 id="计算设备"><a class="markdownIt-Anchor" href="#计算设备"></a> 计算设备</h2>
+<ul>
+<li>我们可以指定用于存储和计算的设备，如CPU和GPU。默认情况下，张量是在内存中创建的，然后使用CPU计算它。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf
+
+tf.device(&#39;&#x2F;CPU:0&#39;), tf.device(&#39;&#x2F;GPU:0&#39;), tf.device(&#39;&#x2F;GPU:1&#39;)</code></pre>
+<pre><code>(&lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b20df00&gt;,
+ &lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b20df40&gt;,
+ &lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b214b40&gt;)
+</code></pre>
+<ul>
+<li>我们可以(<strong>查询可用gpu的数量。</strong>)</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">len(tf.config.experimental.list_physical_devices(&#39;GPU&#39;)) # 结果显示可用GPU只有一个。</code></pre>
+<pre><code>1
+</code></pre>
+<ul>
+<li>现在我们定义了两个方便的函数，[<strong>这两个函数允许我们在请求的GPU不存在的情况下运行代码。</strong>]</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">def try_gpu(i&#x3D;0):  #@save
+    &quot;&quot;&quot;如果存在，则返回gpu(i)，否则返回cpu()。&quot;&quot;&quot;
+    if len(tf.config.experimental.list_physical_devices(&#39;GPU&#39;)) &gt;&#x3D; i + 1:
+        return tf.device(f&#39;&#x2F;GPU:&#123;i&#125;&#39;)
+    return tf.device(&#39;&#x2F;CPU:0&#39;)
+
+def try_all_gpus():  #@save
+    &quot;&quot;&quot;返回所有可用的GPU，如果没有GPU，则返回[cpu(),]。&quot;&quot;&quot;
+    num_gpus &#x3D; len(tf.config.experimental.list_physical_devices(&#39;GPU&#39;))
+    devices &#x3D; [tf.device(f&#39;&#x2F;GPU:&#123;i&#125;&#39;) for i in range(num_gpus)]
+    return devices if devices else [tf.device(&#39;&#x2F;CPU:0&#39;)]
+
+try_gpu(), try_gpu(10), try_all_gpus()</code></pre>
+<pre><code>(&lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b272040&gt;,
+ &lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b272380&gt;,
+ [&lt;tensorflow.python.eager.context._EagerDeviceContext at 0x2343b2723c0&gt;])
+</code></pre>
+<h2 id="张量与gpu"><a class="markdownIt-Anchor" href="#张量与gpu"></a> 张量与gpu</h2>
+<ul>
+<li>默认情况下，张量是在CPU上创建的。我们可以[<strong>查询张量所在的设备。</strong>]</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; tf.constant([1, 2, 3])
+x.device</code></pre>
+<pre><code>'/job:localhost/replica:0/task:0/device:CPU:0'
+</code></pre>
+<ul>
+<li>需要注意的是，无论何时我们要对多个项进行操作，它们都必须在同一个设备上。例如，如果我们对两个张量求和，我们需要确保两个张量都位于同一个设备上，否则框架将不知道在哪里存储结果，甚至不知道在哪里执行计算。</li>
+</ul>
+<h3 id="存储在gpu上"><a class="markdownIt-Anchor" href="#存储在gpu上"></a> 存储在GPU上</h3>
+<ul>
+<li>有几种方法可以在GPU上存储张量。</li>
+<li>例如，我们可以在<em>创建张量时指定存储设备</em>。</li>
+<li>接下来，我们在第一个<code>gpu</code>上创建张量变量<code>X</code>。在GPU上创建的张量只消耗这个GPU的显存。
+<ul>
+<li>我们可以使用<code>nvidia-smi</code>命令查看显存使用情况。一般来说，我们需要确保不创建超过GPU显存限制的数据。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">with try_gpu():
+    X &#x3D; tf.ones((2, 3))
+X.device, X</code></pre>
+<pre><code>('/job:localhost/replica:0/task:0/device:GPU:0',
+ &lt;tf.Tensor: shape=(2, 3), dtype=float32, numpy=
+ array([[1., 1., 1.],
+        [1., 1., 1.]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>假设你至少有两个GPU，下面的代码将在(<strong>第二个GPU上创建一个随机张量。</strong>)(但是我的电脑实际只有一个GPU）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">with try_gpu(1):
+    Y &#x3D; tf.random.uniform((2, 3))
+Y.device, Y </code></pre>
+<pre><code>('/job:localhost/replica:0/task:0/device:CPU:0',
+ &lt;tf.Tensor: shape=(2, 3), dtype=float32, numpy=
+ array([[0.1963296 , 0.29300058, 0.94139194],
+        [0.2455548 , 0.59477484, 0.2650982 ]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>因为第二个gpu不存在，所以<code>try_gpu</code>函数默认返回CPU。</li>
+</ul>
+<h3 id="复制"><a class="markdownIt-Anchor" href="#复制"></a> 复制</h3>
+<ul>
+<li>如果我们[<strong>要计算<code>X + Y</code>，我们需要决定在哪里执行这个操作</strong>]。</li>
+<li>如下图所示，我们可以将<code>X</code>传输到第二个GPU并在那里执行操作。</li>
+<li>不要简单地<code>X</code>加上<code>Y</code>，因为这会导致异常。运行时引擎不知道该怎么做：它在同一设备上找不到数据会导致失败。由于<code>Y</code>位于第二个GPU上，所以我们需要将<code>X</code>移到那里，然后才能执行相加运算。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211127102311.png" alt="" /></li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">with try_gpu(1):
+    Z &#x3D; X
+X.device, Z.device, X is Z # 因为只有一个GPU，实际没有复制成功，只是同一变量的引用</code></pre>
+<pre><code>('/job:localhost/replica:0/task:0/device:GPU:0',
+ '/job:localhost/replica:0/task:0/device:GPU:0',
+ True)
+</code></pre>
+<p>[<strong>现在数据在同一个GPU上（<code>Z</code>和<code>Y</code>都在），我们可以将它们相加。</strong>]</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Y + Z</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3), dtype=float32, numpy=
+array([[1.1963296, 1.2930006, 1.941392 ],
+       [1.2455548, 1.5947748, 1.2650982]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>假设变量<code>Z</code>已经存在于第二个GPU上。如果我们仍然在同一个设备作用域下调用<code>Z2 = Z</code>会怎么样？它将返回<code>Z</code>，而不会复制并分配新内存。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">with try_gpu(1):
+    Z2 &#x3D; Z
+Z2 is Z</code></pre>
+<pre><code>True
+</code></pre>
+<h3 id="旁注"><a class="markdownIt-Anchor" href="#旁注"></a> 旁注</h3>
+<ul>
+<li>在设备（CPU、GPU和其他机器）之间传输数据比计算慢得多。这也使得并行化变得更加困难，因为我们必须等待数据被发送（或者接收），然后才能继续进行更多的操作。这就是为什么拷贝操作要格外小心。</li>
+<li>此外，除非你知道自己在做什么，否则，一次执行几个操作比代码中散布的许多单个操作要好得多。如果一个设备必须等待另一个设备才能执行其他操作，那么这样的操作可能会阻塞。</li>
+</ul>
+<h2 id="神经网络与gpu"><a class="markdownIt-Anchor" href="#神经网络与gpu"></a> 神经网络与GPU</h2>
+<ul>
+<li>类似地，神经网络模型可以指定设备。下面的代码将模型参数放在GPU上。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">strategy &#x3D; tf.distribute.MirroredStrategy()
+with strategy.scope():
+    net &#x3D; tf.keras.models.Sequential([
+        tf.keras.layers.Dense(1)])</code></pre>
+<pre><code>WARNING:tensorflow:Collective ops is not configured at program startup. Some performance features may not be enabled.
+INFO:tensorflow:Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:GPU:0',)
+</code></pre>
+<ul>
+<li>当输入为GPU上的张量时，模型将在同一GPU上计算结果。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Y &#x3D; net(X)
+X.device,Y, Y.device</code></pre>
+<pre><code>('/job:localhost/replica:0/task:0/device:GPU:0',
+ &lt;tf.Tensor: shape=(2, 1), dtype=float32, numpy=
+ array([[1.2583696],
+        [1.2583696]], dtype=float32)&gt;,
+ '/job:localhost/replica:0/task:0/device:GPU:0')
+</code></pre>
+<ul>
+<li>让我们(<strong>确认模型参数存储在同一个GPU上。</strong>)</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">net.layers[0].weights[0].device, net.layers[0].weights[1].device</code></pre>
+<pre><code>('/job:localhost/replica:0/task:0/device:GPU:0',
+ '/job:localhost/replica:0/task:0/device:GPU:0')
+</code></pre>
+<ul>
+<li>总之，只要所有的数据和参数都在同一个设备上，我们就可以有效地学习模型。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%BA%8C%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82/index.html" title="深度学习十二——深度学习计算细节" target="_blank" rel="external">http://www.zestaken.top/post/技术笔记/深度学习/深度学习十二——深度学习计算细节/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" title="第六章之一 软件建模详细设计"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%80%E2%80%94%E2%80%94Kaggle%E5%AE%9E%E6%88%98%E4%B9%8B%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B/index.html" title="深度学习十一——Kaggle实战之房价预测"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>

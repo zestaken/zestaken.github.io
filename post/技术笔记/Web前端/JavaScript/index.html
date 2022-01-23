@@ -1,207 +1,1727 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>JavaScript | Hexo</title>
+  <meta name="description" content="JavaScript概述 参考资料  概念：一门客户端脚本语言  运行在客户端浏览器中。每一个浏览器都有JavaScript的解析引擎。 脚本语言；不需要编译，直接就可以被浏览器解析执行。   功能：可以用来增强用户与html页面的交互过程，可以控制html元素，让页面有一些动态效果。 JavaScript发展史：  1992年，Nombase公司，开发出第一门客户端脚本语言，专门用于表单的校验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JavaScript/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="JavaScript概述 参考资料  概念：一门客户端脚本语言  运行在客户端浏览器中。每一个浏览器都有JavaScript的解析引擎。 脚本语言；不需要编译，直接就可以被浏览器解析执行。   功能：可以用来增强用户与html页面的交互过程，可以控制html元素，让页面有一些动态效果。 JavaScript发展史：  1992年，Nombase公司，开发出第一门客户端脚本语言，专门用于表单的校验">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201214170043.jpg">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201220211801.jpg">
+<meta property="article:published_time" content="2020-12-13T13:02:41.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:36:35.730Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="JS">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201214170043.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JavaScript/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-技术笔记/Web前端/JavaScript" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JavaScript/index.html" class="article-date">
+	  <time datetime="2020-12-13T13:02:41.000Z" itemprop="datePublished">2020-12-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/JS/" rel="tag">JS</a>, <a class="article-tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JavaScript/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="javascript概述"><a class="markdownIt-Anchor" href="#javascript概述"></a> JavaScript概述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/js/index.asp">参考资料</a></p>
+<ul>
+<li>概念：一门客户端脚本语言
+<ul>
+<li>运行在客户端浏览器中。每一个浏览器都有JavaScript的解析引擎。</li>
+<li><strong>脚本语言</strong>；不需要编译，直接就可以被浏览器解析执行。</li>
+</ul>
+</li>
+<li>功能：可以用来<strong>增强用户与html页面的交互过程</strong>，可以控制html元素，让页面有一些动态效果。</li>
+<li>JavaScript发展史：
+<ol>
+<li>1992年，Nombase公司，开发出第一门客户端脚本语言，专门用于表单的校验。命名为：c–，后来更名为ScriptEase。</li>
+<li>1995年，Netbase（网景）公司，开发出一门客户端脚本语言：LiveScript；之后，该公司请来Sun公司的专家，修改LiveScript，命名为JavaScript。</li>
+<li>1996年，微软抄袭了JavaScript开发出了JScript语言；</li>
+<li>1997年，ECMA（欧洲计算机制造商协会），制定了ECMAScript，就是所有客户端脚本语言的标准。</li>
+</ol>
+</li>
+<li>JavaScript=ECMAScript + JavaScript自己特有的东西(BOM+DOM)。</li>
+</ul>
+<h1 id="ecmascript"><a class="markdownIt-Anchor" href="#ecmascript"></a> ECMAScript</h1>
+<h2 id="基本语法"><a class="markdownIt-Anchor" href="#基本语法"></a> 基本语法</h2>
+<h3 id="与html结合的方式"><a class="markdownIt-Anchor" href="#与html结合的方式"></a> 与html结合的方式</h3>
+<ol>
+<li>内部JS
+<ol>
+<li>定义一个<code>&lt;script&gt;&lt;/script&gt;</code>标签，标签体内容就是js代码。</li>
+<li>示例：</li>
+</ol>
+</li>
+</ol>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;script&gt;
+    alert(&quot;hello world&quot;);
+&lt;&#x2F;script&gt;</code></pre>
+<ol start="2">
+<li>外部JS
+<ol>
+<li>定义一个<code>&lt;script&gt;&lt;/script&gt;</code>标签，通过src属性引入外部的js文件。</li>
+<li>示例：</li>
+</ol>
+</li>
+</ol>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;script src&#x3D;&quot;js&#x2F;a.js&quot;&gt;&lt;&#x2F;script&gt;</code></pre>
+<ul>
+<li><code>&lt;script&gt;</code>标签可以写在html页面的任何位置，但是定义的位置的先后会<strong>影响执行顺序</strong>。</li>
+<li>同一个html页面<strong>可以定义多个<code>&lt;script&gt;</code>标签</strong>。</li>
+</ul>
+<h3 id="注释"><a class="markdownIt-Anchor" href="#注释"></a> 注释</h3>
+<ul>
+<li>单行注释：//注释内容</li>
+<li>多行注释：/* 注释内容 */</li>
+</ul>
+<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
+<ul>
+<li>原始数据类型（类似java中的基本数据类型）
+<ul>
+<li>number:数字。
+<ul>
+<li>整数</li>
+<li>小数</li>
+<li>NaN(not a number 一个不是数字的数字类型)</li>
+</ul>
+</li>
+<li>string:字符串
+<ul>
+<li>“abc”,“a”,'a’都是字符串，没有字符类型。</li>
+</ul>
+</li>
+<li>null:一个对象为空的占位符。</li>
+<li>undefined:未定义。如果一个变量没有给初始化值，则会被默认赋值为undefined。</li>
+<li>boolean：布尔值类型，值为true或者false。</li>
+</ul>
+</li>
+<li>引用数据类型：对象。</li>
+</ul>
+<h3 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h3>
+<ul>
+<li>变量定义：一小块存储数据的内存空间</li>
+<li>java是强类型语言，JavaScript是弱类型语言
+<ul>
+<li>强类型：在开辟变量存储空间时，定义了空间将来存储的数据类型。<strong>只能存储固定类型的数据</strong>。</li>
+<li>弱类型：在开辟变量存储空间时，不定义空间将来的存储数据类型，<strong>可以存放任意类型的数据</strong>。</li>
+</ul>
+</li>
+<li>语法:<code>var 变量名;</code>或者<code>var 变量名 = 初始化值;</code></li>
+<li>查看数据类型：<code>typeof(变量名);</code>,会返回变量的类型。</li>
+<li>输出数据到页面中<code>document.write(输出的数据);</code>,如：<code>document.write(a+&quot;我是a&quot;+&quot;&lt;br&gt;&quot;);</code></li>
+</ul>
+<h3 id="运算符"><a class="markdownIt-Anchor" href="#运算符"></a> 运算符</h3>
+<ul>
+<li>一元运算符：
+<ul>
+<li><code>++</code>:自增</li>
+<li><code>--</code>:自减（同java一样，也有放在前后的问题）</li>
+<li><code>+/-</code>:正负号。</li>
+</ul>
+</li>
+<li>算数运算符：
+<ul>
+<li><code>+</code>:加法</li>
+<li><code>-</code>:减法</li>
+<li><code>*</code>:乘法</li>
+<li><code>/</code>:除法，与java不同的是，除法的结果<strong>可以为小数</strong>.</li>
+<li><code>%</code>:取余运算。</li>
+</ul>
+</li>
+<li>赋值运算符：
+<ul>
+<li><code>=</code>；赋值</li>
+<li><code>+=</code></li>
+<li><code>-=</code>:与java相同。</li>
+</ul>
+</li>
+<li>比较运算符：
+<ul>
+<li>类型相同，直接比较，如果是字符串则按照字典顺序<strong>按位逐个比较</strong>，直到得出大小。</li>
+<li>类型不同，<strong>转换后再相比</strong>。</li>
+<li><code>&gt;,&lt;，&gt;=，&lt;=</code>:大于、小于,大于等于，小于等于</li>
+<li><code>===</code>:比较之前先判断类型，如果<strong>类型不相同则直接返回false</strong>。</li>
+</ul>
+</li>
+<li>逻辑运算符：
+<ul>
+<li><code>&amp;&amp;</code>:与，有短路效果(如果左边能够确定表达式的值，那么右边就不会再运算)</li>
+<li><code>||</code>:或，也有短路效果。</li>
+<li><code>!</code>:非，该运算符要求变量类型是boolean。</li>
+</ul>
+</li>
+<li>三元运算符：
+<ul>
+<li><code>?:</code>:
+<ul>
+<li>语法：<code>表达式?值1:值2</code></li>
+<li>判断表达式的值，如果是true则取值1，否则取值2；</li>
+<li>示例：<code>a &gt; b ? 1:0;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在JavaScript中如果运算数不是运算符所要求的类型，那么js引擎会自动地将运算数进行类型转换。
+<ul>
+<li>其它类型转number：
+<ul>
+<li>String转number：会按照字面值转换，如果<strong>字面值不是数字，那么转换为NaN</strong>.（NaN与任何数运算的结果还是NaN）</li>
+<li>boolean转number：true转为1，false转为0。</li>
+<li>其它类型转换为number就是<strong>NaN</strong>。</li>
+</ul>
+</li>
+<li>其它类型转boolean：
+<ul>
+<li>number转为boolean：<strong>0或NaN</strong>为false，其它为true。</li>
+<li>string转为boolean：<strong>空字符串</strong>为false，其它都为true。空字符串：<code>string str=&quot;&quot;;</code></li>
+<li>null和undefined转为boolean：<strong>都是false</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="特殊语法"><a class="markdownIt-Anchor" href="#特殊语法"></a> 特殊语法</h3>
+<ul>
+<li>语句以分号结尾，如果一行只有一条语句，则分号可以省略（但是一般不建议）；</li>
+<li>变量的定义使用var关键字，也可以不使用：（不建议使用）
+<ul>
+<li>使用var定义的局部变量</li>
+<li>不使用var定义的是全局变量</li>
+</ul>
+</li>
+</ul>
+<h3 id="流程控制语句"><a class="markdownIt-Anchor" href="#流程控制语句"></a> 流程控制语句</h3>
+<ul>
+<li><code>if...else</code>:与java中相同</li>
+<li><code>switch</code>:
+<ul>
+<li>在java中，switch可以接收的数据类型：byte，int,short ,char ,枚举(1.5之后)，string(1.7之后)；</li>
+<li>在JavaScript中，switch可以接收任意类型的变量。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+var a &#x3D; &quot;hello&quot;;
+switch(a) &#123;
+  case 1:
+      alert(&quot;number&quot;);
+      break;
+  case &quot;hello&quot;:
+      alert(&quot;string&quot;);
+      break;
+  case undefined:
+      alert(&quot;undefined&quot;);
+      break;
+&#125;</code></pre>
+<ul>
+<li><code>while</code>:与java一样。</li>
+<li><code>for</code>:与java一样</li>
+<li><code>do...while</code>:与java一样。</li>
+</ul>
+<h3 id="示例99乘法表"><a class="markdownIt-Anchor" href="#示例99乘法表"></a> 示例：99乘法表</h3>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;99乘法表&lt;&#x2F;title&gt;
+
+    &lt;style&gt;
+        td&#123;
+            border: 1px solid ;
+        &#125;
+    &lt;&#x2F;style&gt;
+    
+    &lt;script&gt;
+        document.write(&quot;&lt;table align&#x3D;&#39;center&#39;&gt;&quot;); &#x2F;&#x2F;在JavaScript的字符串中嵌套html的语句中如果含有双引号，则全部使用单引号，防止和字符串的双引号起冲突
+
+        for(var i &#x3D; 1; i &lt;&#x3D; 9; i++) &#123;
+            document.write(&quot;&lt;tr&gt;&quot;);
+            for(var j &#x3D; 1; j &lt;&#x3D; i; j++) &#123;
+                document.write(&quot;&lt;td&gt;&quot;);
+                document.write(i + &quot;*&quot; + j + &quot;&#x3D;&quot; + i * j + &quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;);&#x2F;&#x2F;&amp;nbsp
+                document.write(&quot;&lt;&#x2F;td&gt;&quot;);
+            &#125;
+            document.write(&quot;&lt;&#x2F;tr&gt;&quot;);
+        &#125;
+
+        document.write(&quot;&lt;&#x2F;table&gt;&quot;);
+    &lt;&#x2F;script&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<ul>
+<li>效果：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201214170043.jpg" alt="" /></li>
+<li>在html代码中，使用转义字符<code>&amp;nbsp</code>表示1个空格,在html代码中每输入一个转义字符<code>&amp;nbsp</code>就表示一个空格，输入十个<code>&amp;nbsp</code>，页面中就显示10个空格位置。而在html代码中输入空格，<strong>不管输入多少个空格，最终在页面中显示的空格位置只有一个</strong>。</li>
+<li>在JavaScript的字符串中嵌套html的语句中如果含有双引号，则全部<strong>使用单引号</strong>，防止和字符串的双引号起冲突。</li>
+</ul>
+<h2 id="基本对象"><a class="markdownIt-Anchor" href="#基本对象"></a> 基本对象</h2>
+<h3 id="function对象"><a class="markdownIt-Anchor" href="#function对象"></a> Function对象</h3>
+<ul>
+<li>Function对象：函数（方法）对象</li>
+<li>创建：
+<ol>
+<li>不常用：<code>var fun = new Function(形式参数列表，方法体);</code></li>
+<li>常用1：<code>function 函数名(形式参数列表) &#123;方法体&#125;</code>示例：</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">function fun1(a,b) &#123;
+  alert(a + b);
+&#125;</code></pre>
+<ol start="3">
+<li>常用2：<code>var 方法名 = function(形式参数列表) &#123;方法体&#125;</code>示例：</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var fun2 &#x3D; function(a, b) &#123;
+  alert(a + b);
+&#125;</code></pre>
+<ul>
+<li>特点：
+<ul>
+<li>方法定义时，<strong>不用写形参的类型</strong>，也不用写<strong>返回值类型</strong>。</li>
+<li><strong>方法是一个对象</strong>，如果定义名称相同的方法，会覆盖而不会报错。</li>
+<li>在js中，方法的调用只与方法名有关，和<strong>形参列表无关</strong>（即使传入的参数不符合形参列表，也没有问题，如果传少了，则默认传了undefined，如果传多了，则不管多的）。</li>
+<li>在方法声明中有一个隐藏的内置对象（数组对象）<code>arguments</code>,封装了所有传进函数的<strong>参数</strong>。</li>
+</ul>
+</li>
+<li>属性：
+<ul>
+<li>length:方法对象中<strong>形参</strong>的个数。</li>
+</ul>
+</li>
+<li>调用：
+<ul>
+<li><code>方法名(实际参数列表);</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="array对象"><a class="markdownIt-Anchor" href="#array对象"></a> Array对象</h3>
+<ul>
+<li>Array:数组对象</li>
+<li>创建：
+<ol>
+<li><code>var arr = new Array(元素列表);</code></li>
+<li><code>var arr = new Array(默认长度);</code></li>
+<li><code>var arr = [元素列表];</code></li>
+<li><code>var arr = new Array();</code></li>
+</ol>
+</li>
+<li>特点：
+<ul>
+<li>JS中，数组中元素类型是可变的，如：<code>var arr = [1, &quot;hello&quot;,true];</code></li>
+<li>JS中，数组的长度是可变的，定义时写的只是默认的长度。</li>
+</ul>
+</li>
+<li>方法；
+<ul>
+<li><code>join(参数)</code>:将数组中的元素按照**指定的分隔符（参数）**拼接为字符串。直接打印数组，会默认按照<code>,</code>为分隔符的方式拼接字符为字符串:<code>document.write(arr);</code>或者没有给join指定参数也是默认为<code>,</code>。返回一个字符串。
+<ul>
+<li>示例：<code>document.write(arr.join(&quot;--&quot;));</code></li>
+</ul>
+</li>
+<li><code>push();</code>:向数组末尾添加一个或者更多元素，并返回<strong>新的长度</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="boolean对象"><a class="markdownIt-Anchor" href="#boolean对象"></a> Boolean对象</h3>
+<ul>
+<li>基本类型boolean的包装类。</li>
+</ul>
+<h3 id="date对象"><a class="markdownIt-Anchor" href="#date对象"></a> Date对象</h3>
+<ul>
+<li>Date：日期对象；</li>
+<li>创建：
+<ol>
+<li><code>var date = new Date();</code></li>
+</ol>
+</li>
+<li>方法：
+<ul>
+<li><code>toLocalString();</code>:返回当前Date对象对应的时间本地字符串格式。</li>
+<li><code>getTime();</code>:获取毫秒值，返回当前日期对象描述的时间到1970年1月1日零点的毫秒值差。</li>
+</ul>
+</li>
+</ul>
+<h3 id="math对象"><a class="markdownIt-Anchor" href="#math对象"></a> Math对象</h3>
+<ul>
+<li>Math:数学对象</li>
+<li>创建：
+<ol>
+<li>不用创建，直接使用，<code>Math.方法名();</code></li>
+</ol>
+</li>
+<li>方法：
+<ul>
+<li><code>random();</code>:返回0~1之间的随机数（包含0，不包含1）</li>
+<li><code>round(x);</code>:对数字进行四舍五入取整；</li>
+<li><code>ceil(x)</code>:对数进行上舍入取整；</li>
+<li><code>floor(x);</code>对数进行下舍入取整。</li>
+</ul>
+</li>
+</ul>
+<h3 id="regexp对象"><a class="markdownIt-Anchor" href="#regexp对象"></a> RegExp对象</h3>
+<ul>
+<li>正则表达式对象；</li>
+<li>正则表达式：定义字符串的组成规则；
+<ul>
+<li>单个字符：<code>[]</code>
+<ul>
+<li>如:<code>[a]</code>:该字符为需要为a；<code>[ab]</code>:该字符可以为a或者b；<code>[a-zA-Z0-9]</code>:该字符可以为大写字母或者小写字母或者0到9的数字。</li>
+<li><strong>特殊符号</strong>代表特殊含义的单个字符
+<ul>
+<li><code>\d</code>:单个数字字符<code>[0-9]</code></li>
+<li><code>\w</code>:单个字符：<code>[a-zA-Z0-9]</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>量词符号：
+<ul>
+<li><code>?</code>:出现0次或者1次；</li>
+<li><code>*</code>:表示0次或者多次；</li>
+<li><code>+</code>:出现1次或者多次；</li>
+<li><code>&#123;m,n&#125;</code>:表示<code>m&lt;=次数 &lt;=n</code>
+<ul>
+<li>m如果缺省，<code>&#123;:n&#125;</code>表示最多n次；</li>
+<li>n如果缺省：<code>&#123;m:&#125;</code>表示最少m次。</li>
+<li>{m}:表示只能出现m次。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>开始结束符号：
+<ul>
+<li><code>^</code>:开始</li>
+<li><code>$</code>:结束</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>创建：
+<ol>
+<li><code>var reg = new RegExp(&quot;正则表达式&quot;);</code>
+<ol>
+<li>该种类型要注意字符串内部的特殊符号需要<strong>转义</strong></li>
+<li>如：<code>\</code>在字符串内需要表达为<code>\\</code>,所以：<code>var reg - new RegExp(&quot;^\\w(6,12)$);</code></li>
+</ol>
+</li>
+<li><code>var reg = /正则表达式/;</code></li>
+<li>示例：<code>var reg = /^\w(6,12)$/;</code></li>
+</ol>
+</li>
+<li>方法：
+<ul>
+<li><code>test(参数);</code>:验证指定的字符串是否符合正则定义的规范,返回true或者false。</li>
+<li>示例：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var reg &#x3D; &#x2F;^\w(6,13)$&#x2F;;
+var username &#x3D; &quot;zhanngsanlijskjdlfkajl&quot;;
+var flag &#x3D; reg.test(username);</code></pre>
+<h3 id="global对象"><a class="markdownIt-Anchor" href="#global对象"></a> Global对象</h3>
+<ul>
+<li>是一个<strong>全局对象</strong>，这个对象中封装的方法<strong>不需要任何对象</strong>就可以直接调用，如：<code>方法名();</code></li>
+<li>方法：
+<ul>
+<li>URL码：因为网络协议中不支持中文，所以需要将汉字转为URL码来传输。</li>
+<li><code>encodeURI()</code>:url编码</li>
+<li><code>decodeURI()</code>:URL解码，与encodeURI配套使用。</li>
+<li><code>encodeURICompoent()</code>:也是进行URL编码，但是编码的字符更多（对有些符号也会进行编码）。</li>
+<li><code>decodeURICompoent()</code>:也是进行URL解码，配套使用。</li>
+<li>示例：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var str &#x3D; &quot;张杰&quot;;
+var encode &#x3D; encodeURI(str);</code></pre>
+<ul>
+<li><code>parseInt()</code>:将字符串转为数字
+<ul>
+<li>逐一判断每一个字符是否为数字，直到不是数字为止，将前边的数字部分转为number。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var str &#x3D; &quot;123abc&quot;;
+var number &#x3D; paseInt(str);&#x2F;&#x2F;结果是123</code></pre>
+<ul>
+<li><code>isNaN()</code>:判断一个值是否为NaN
+<ul>
+<li>NaN六亲不认，连自己都不认，NaN参与的所有<code>==</code>比较，结果都是false。</li>
+<li>因为<code>NaN == NaN</code>结果也是false，所以设计这个方法来判断一个值是否为NaN。</li>
+</ul>
+</li>
+<li><code>eval()</code>:将Javascript的字符串转换为脚本代码来执行。示例：</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">var jscode&#x3D;&quot;alert(123)&quot;;
+eval(jscode);&#x2F;&#x2F;等效于直接写alert（123）；</code></pre>
+<h1 id="bom"><a class="markdownIt-Anchor" href="#bom"></a> BOM</h1>
+<ul>
+<li>概念：Browser Object Model 浏览器对象模型</li>
+<li>功能：将浏览器各个组成部分封装成对象</li>
+<li>组成：
+<ul>
+<li><strong>Window</strong>：浏览器窗口对象</li>
+<li><strong>History</strong>:历史记录对象</li>
+<li><strong>Location</strong>：地址栏对象</li>
+<li>Screen：显示器屏幕对象</li>
+<li>Navigator:浏览器对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="window对象"><a class="markdownIt-Anchor" href="#window对象"></a> Window对象</h2>
+<ul>
+<li>window<strong>不需要创建</strong>，可以直接使用。也可以不用对象，直接使用方法名来调用。即<code>window.方法名();</code>和<code>方法名()</code>等效。</li>
+<li>方法：
+<ol>
+<li>与<strong>弹出框</strong>有关的方法：
+<ol>
+<li><code>alert();</code>:显示一段消息和一个确认按钮的警告框。</li>
+<li><code>confirm();</code>:显示带有一段消息以及确认按钮和取消按钮的对话框；
+<ol>
+<li>如果用户点击确认按钮，则方法返回true；</li>
+<li>如果用户点击取消按钮，则方法返回false。</li>
+</ol>
+</li>
+<li><code>prompt();</code>:显示可提示用户输入的对话框
+<ol>
+<li>参数是提示信息</li>
+<li>返回值是获取的用户输入的值。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>与<strong>打开关闭窗口</strong>有关的方法：
+<ol>
+<li><code>open();</code>:打开一个新的浏览器窗口
+<ol>
+<li>参数是新窗口要加载页面的地址；</li>
+<li>返回值是新的窗口的window对象；</li>
+</ol>
+</li>
+<li><code>close();</code>:关闭调用该方法的窗口对象的浏览器窗口
+<ol>
+<li>谁调用我，我关谁。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>与<strong>定时器</strong>有关的方式
+<ol>
+<li><code>setTimeout();</code>：在指定的毫秒数后调用函数或计算表达式；
+<ol>
+<li>参数：
+<ol>
+<li><strong>js代码</strong>或者<strong>方法对象</strong></li>
+<li>毫秒值</li>
+</ol>
+</li>
+<li>返回值：唯一标识，用于作为取消定时器的参数</li>
+</ol>
+</li>
+<li><code>clearTimeout()</code>:取消由<code>setTimeout()</code>设置的定时器
+<ol>
+<li>参数：调用<code>setTimeout()</code>产生的返回值</li>
+</ol>
+</li>
+<li><code>setInterval()</code>:按照指定的<strong>周期</strong>(以毫秒记来调用函数或计算表达式；
+<ol>
+<li>参数：
+<ol>
+<li><strong>js代码</strong>或者<strong>方法对象</strong></li>
+<li>毫秒值</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>clearInertval()</code>:取消由<code>setInterval()</code>设置的定时器；
+<ol>
+<li>参数：调用<code>setInterval()</code>产生的返回值</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;script&gt;
+    var id &#x3D; setInterval(&quot;fun()&quot;, 2000);
+    clearInterval(id);
+    var id2 &#x3D; setInterval(fun, 2000);
+    function fun()&#123;
+        alert(&quot;boom&quot;);
+    &#125;
+&lt;&#x2F;script&gt;</code></pre>
+<ul>
+<li>属性：
+<ul>
+<li>获取其它BOM对象
+<ul>
+<li>history;</li>
+<li>location;</li>
+<li>navigation;</li>
+<li>screen;</li>
+<li>示例：</li>
+<li><code>var h1 = window.history;</code>与<code>var h2 = history;</code>等效。</li>
+</ul>
+</li>
+<li>获取DOM对象
+<ul>
+<li>document等</li>
+<li>示例：<code>document.getElementById()</code>与<code>window.document.getElementById();</code>等效。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="location对象"><a class="markdownIt-Anchor" href="#location对象"></a> Location对象</h2>
+<ul>
+<li>创建（获取）
+<ul>
+<li>通过window对象的属性来获取。<code>var l1 = window.location;</code>与<code>var l2 = location;</code>等效。</li>
+</ul>
+</li>
+<li>方法：
+<ul>
+<li><code>reload();</code>:重新加载当前文档</li>
+</ul>
+</li>
+<li>属性：
+<ul>
+<li><code>herf</code>:设置或者返回完整的URL。
+<ul>
+<li>获取：<code>var href = location.href;</code></li>
+<li>设置：<code>location.herf = &quot;http://baidu.com&quot;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="dom"><a class="markdownIt-Anchor" href="#dom"></a> DOM</h1>
+<ul>
+<li>概念：Document Object Model 文档对象模型</li>
+<li>功能：将标记语言文档的各个组成部分，封装为对象。可以使用这些对象，对<strong>标记语言文档进行CRUD的动态操作</strong>。</li>
+<li>DOM将HTMl表达为一个<strong>树</strong>型结构<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/img/20201220211801.jpg" alt="" /></li>
+<li>W3C DOM标准被分为3个不同的部分：
+<ul>
+<li>核心DOM：针对<strong>任何结构化文档</strong>的标准模型。
+<ul>
+<li>Document:文档对象</li>
+<li>Element:元素对象</li>
+<li>Attribute:属性对象</li>
+<li>Text：文本对象</li>
+<li>Comment：注释对象</li>
+<li>Node：节点对象，其余5个对象的父对象。</li>
+</ul>
+</li>
+<li>XML DOM：针对<strong>XML文档</strong>的标准模型；</li>
+<li>HTML DOM：针对<strong>HTML文档</strong>的标准模型。</li>
+</ul>
+</li>
+</ul>
+<h2 id="核心dom"><a class="markdownIt-Anchor" href="#核心dom"></a> 核心DOM</h2>
+<h3 id="document对象"><a class="markdownIt-Anchor" href="#document对象"></a> Document对象</h3>
+<ul>
+<li>创建（获取）：在<strong>HTML DOM模型</strong>中可以使用<strong>window对象</strong>来获取
+<ul>
+<li><code>window.document;</code></li>
+<li><code>document</code>;</li>
+</ul>
+</li>
+<li>获取页面的**元素（标签）**对象
+<ul>
+<li><code>getElementByID(&quot;id值&quot;);</code>:通过元素的ID获取元素对象，返回<strong>一个</strong>Element对象。因为id值一般是唯一的。</li>
+<li><code>getElementsByTagName(&quot;标签名&quot;);</code>:根据元素名称（即html标签名）获取元素对象们。返回值是一个<strong>数组</strong>。</li>
+<li><code>getElementsByClassName(&quot;class属性值);</code>:根据class属性值来获取元素对象们。返回值是一个数组。</li>
+<li><code>getElmentsByName(&quot;name属性值&quot;);</code>:根据name属性值来获取元素对象们。返回值是一个数组。</li>
+<li>示例：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;div&gt;div&lt;&#x2F;div&gt;
+&lt;script&gt;
+var div &#x3D; document.getElementsByTagName(&quot;div&quot;);
+alert(div.length);
+&lt;&#x2F;script&gt;</code></pre>
+<ul>
+<li><strong>创建</strong>其它<strong>DOM对象</strong>
+<ul>
+<li><code>createAttribute(name);</code>：创建具有指定名称的属性节点，并返回新的Attr对象。</li>
+<li><code>createComment();</code>：创建注释节点。</li>
+<li><code>creatElement();</code>：创建<strong>元素节点</strong></li>
+<li><code>createTextNode();</code>:创建文本节点</li>
+<li>示例：<code>var table = document.createElement(&quot;table&quot;);</code></li>
+</ul>
+</li>
+<li>操作Element对象：
+<ol>
+<li>修改属性值：</li>
+</ol>
+<ul>
+<li>明确获取的对象是什么元素类型；</li>
+<li>通过API查看对象里有哪些属性；</li>
+<li>通过<code>element.属性 = ...</code>的方式修改属性值。</li>
+</ul>
+<ol start="2">
+<li>修改标签内容：<br />
+1.获取元素对象<br />
+2.使用innerHTML属性修改标签体内容</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;h1 id&#x3D;&quot;title&quot;&gt;悔创阿里杰克马&lt;&#x2F;h1&gt;
+&lt;img id&#x3D;&quot;light&quot; src&#x3D;&quot;img&#x2F;off.jpg&quot;&gt;
+&lt;script&gt;
+    var light &#x3D; document.getElementById(&quot;light&quot;);
+    alert(&quot;我要换图片&quot;)；
+    light.src&#x3D;&quot;img&#x2F;on.jpg&quot;;
+    var title &#x3D; document.getElementById(&quot;title&quot;);
+    alert(&quot;我要换标题&quot;);
+    title.innerHTML&#x3D;&quot;不识妻美刘强东&quot;;
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;
+&#96;&#96;&#96;   
+
+### Elment对象
+
+* 获取（创建）：通过**doucument**来获取和创建。
+* 方法：
+  * &#96;removeAttribute();&#96;:删除属性
+  * &#96;setAttribute();&#96;:设置属性
+  * 示例：
+&#96;&#96;&#96;html
+&lt;a&gt;试一试&lt;&#x2F;a&gt;
+
+&lt;script&gt;
+var element_a &#x3D; document.getElmentsByTagName(&quot;a&quot;)[0];
+element_a.setAttribute(&quot;href&quot;, &quot;https:&#x2F;&#x2F;www.baidu.com&quot;);
+element_a.removeAttribute(&quot;href&quot;);
+&lt;&#x2F;script&gt;</code></pre>
+<h3 id="node对象"><a class="markdownIt-Anchor" href="#node对象"></a> Node对象</h3>
+<ul>
+<li>节点可以是元素节点，属性节点，文本节点等。</li>
+<li>所有DOM对象都可以被认为是一个节点。</li>
+<li>方法：
+<ul>
+<li>CRUD DOM树：
+<ul>
+<li><code>appendChild();</code>:向节点的子节点列表的结尾添加新的子节点。</li>
+<li><code>removeChild();</code>:删除（并返回）当前节点的子节点。</li>
+<li><code>replaceChild();</code>:用新节点替换一个子节点。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性：
+<ul>
+<li><code>parentNode</code>:返回节点的父节点。</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+
+    &lt;style&gt;
+    &lt;!--设置div的样式--&gt;
+        div &#123;
+            border : 1px solid red;
+        &#125;
+        #div1 &#123;
+            width: 200px;
+            height: 200px;
+        &#125;
+
+        #div2 &#123;
+            width:50px;
+            height: 20px;
+        &#125;
+
+        #div3 &#123;
+            width:50px;
+            height: 20px;
+        &#125;
+    &lt;&#x2F;style&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;!--div1的子节点为div2--&gt;
+&lt;div id&#x3D;&quot;div1&quot;&gt;
+    &lt;div id&#x3D;&quot;div2&quot;&gt;div2&lt;&#x2F;div&gt;
+    div1
+&lt;&#x2F;div&gt;
+
+&lt;div id&#x3D;&quot;div3&quot;&gt;div3&lt;&#x2F;div&gt;
+
+&lt;!--用超链接来实现按钮的功能--&gt;
+
+&lt;!--删除子节点的链接--&gt;
+&lt;!--将href设置为javascript:void(0);可以去除href跳转的功能，而保留接收点击的功能--&gt;
+&lt;a href&#x3D;&quot;javascript:void(0);&quot; id&#x3D;&quot;del&quot;&gt;删除子节点&lt;&#x2F;a&gt;
+&lt;!--添加子节点的链接--&gt;
+&lt;a href&#x3D;&quot;javascript:void(0);&quot; id&#x3D;&quot;add&quot;&gt; 添加子节点&lt;&#x2F;a&gt;
+
+&lt;script&gt;
+    
+    &#x2F;&#x2F;获取删除字节点的超链接对象
+    var element_a &#x3D; document.getElementById(&quot;del&quot;);
+    &#x2F;&#x2F;绑定点击事件，点击事件绑定删除子节点的函数
+    element_a.onclick &#x3D; function () &#123;
+        var div1 &#x3D; document.getElementById(&quot;div1&quot;);
+        var div2 &#x3D; document.getElementById(&quot;div2&quot;);
+
+        div1.removeChild(div2);
+    &#125;
+
+    var element_a1 &#x3D; document.getElementById(&quot;add&quot;);
+
+    element_a1.onclick &#x3D; function () &#123;
+        var div1 &#x3D; document.getElementById(&quot;div1&quot;);
+        var div3 &#x3D; document.getElementById(&quot;div3&quot;);
+
+        div1.appendChild(div3);
+    &#125;
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h2 id="动态表格示例"><a class="markdownIt-Anchor" href="#动态表格示例"></a> 动态表格示例</h2>
+<ul>
+<li>可以动态添加和删除表格中的数据。</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+    &lt;style&gt;
+        div &#123;
+            text-align:center;
+            margin:50px;
+        &#125;
+
+        table &#123;
+            border:1px solid;
+            margin:auto;
+            width:500px;
+        &#125;
+        td,th&#123;
+            text-align:center;
+            border:1px solid;
+        &#125;
+
+    &lt;&#x2F;style&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;div&gt;
+    &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;id&quot; placeholder&#x3D;&quot;请输入编号&quot;&gt;
+    &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; placeholder&#x3D;&quot;请输入姓名&quot;&gt;
+    &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;gender&quot; placeholder&#x3D;&quot;请输入性别&quot;&gt;
+    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;添加&quot; id&#x3D;&quot;btn_add&quot;&gt;
+&lt;&#x2F;div&gt;
+
+&lt;table&gt;
+    &lt;caption&gt;学生信息表&lt;&#x2F;caption&gt;
+    &lt;tr&gt;
+        &lt;th&gt;编号&lt;&#x2F;th&gt;
+        &lt;th&gt;姓名&lt;&#x2F;th&gt;
+        &lt;th&gt;性别&lt;&#x2F;th&gt;
+        &lt;th&gt;操作&lt;&#x2F;th&gt;
+    &lt;&#x2F;tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;1&lt;&#x2F;td&gt;
+        &lt;td&gt;zhangjie&lt;&#x2F;td&gt;
+        &lt;td&gt;man&lt;&#x2F;td&gt;
+        &lt;td&gt;&lt;a href&#x3D;&quot;javascript:void(0);&quot; onclick&#x3D;&quot;del_tr(this)&quot;&gt;delete&lt;&#x2F;a&gt;&lt;&#x2F;td&gt;
+    &lt;&#x2F;tr&gt;
+&lt;&#x2F;table&gt;
+
+&lt;script&gt;
+    &#x2F;*
+        1.添加
+            1.给添加按钮绑定单击事件
+            2.获取文本框的内容
+            3.创建td，设置td中的文本为文本框的内容
+            4.创建tr
+            5.将td添加到tr中
+            6.获取table，将tr添加到table中
+     *&#x2F;
+    var btn_add &#x3D; document.getElementById(&quot;btn_add&quot;);
+    btn_add.onclick &#x3D; function () &#123;
+
+        &#x2F;&#x2F;获取输入框的内容value
+        var id &#x3D; document.getElementById(&quot;id&quot;).value;
+        var name &#x3D; document.getElementById(&quot;name&quot;).value;
+        var gender &#x3D; document.getElementById(&quot;gender&quot;).value;
+
+        &#x2F;&#x2F;创建td节点
+        var td_id &#x3D; document.createElement(&quot;td&quot;);
+        &#x2F;&#x2F;将文本内容添加到节点中
+        var text_id &#x3D; document.createTextNode(id);
+        td_id.appendChild(text_id);
+
+        var td_name &#x3D; document.createElement(&quot;td&quot;);
+        var text_name &#x3D; document.createTextNode(name);
+        td_name.appendChild(text_name);
+
+
+        var td_gender &#x3D; document.createElement(&quot;td&quot;);
+        var text_gender &#x3D; document.createTextNode(gender);
+        td_gender.appendChild(text_gender);
+
+        var td_a &#x3D; document.createElement(&quot;td&quot;);
+        var ele_a &#x3D; document.createElement(&quot;a&quot;);
+        ele_a.setAttribute(&quot;href&quot;,&quot;javascript:void(0);&quot;)
+        ele_a.setAttribute(&quot;onclick&quot;, &quot;del_tr(this)&quot;);
+        var text_a &#x3D; document.createTextNode(&quot;delete&quot;);
+        ele_a.appendChild(text_a);
+        td_a.appendChild(ele_a);
+
+        &#x2F;&#x2F;将td节点添加到tr节点中
+        var tr &#x3D; document.createElement(&quot;tr&quot;);
+        tr.appendChild(td_id);
+        tr.appendChild(td_name);
+        tr.appendChild(td_gender);
+        tr.appendChild(td_a);
+
+        &#x2F;&#x2F;将tr节点添加到table节点中去。
+        var table &#x3D; document.getElementsByTagName(&quot;table&quot;)[0];
+        table.appendChild(tr);
+    &#125;
+
+    function del_tr(obj) &#123;
+        var table &#x3D; obj.parentNode.parentNode.parentNode;
+        var tr &#x3D; obj.parentNode.parentNode;
+        table.removeChild(tr);
+    &#125;
+
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h2 id="事件"><a class="markdownIt-Anchor" href="#事件"></a> 事件</h2>
+<ul>
+<li>功能：某些组件被执行了某些操作后，触发某些代码的执行。</li>
+<li><strong>事件</strong>：某些操作。如：单击，双击，键盘按下了，鼠标移动了。。。</li>
+<li><strong>事件源</strong>：组件。如：按钮，文本输入框。。。</li>
+<li><strong>监听器</strong>：要执行的代码。
+<ul>
+<li>监听器中的的<code>this</code>指向引发该监听器的<strong>事件源对象</strong>。</li>
+</ul>
+</li>
+<li><strong>注册监听</strong>：将事件，事件源，监听器<strong>结合</strong>在一起。当事件源发生了某个事件，则触发执行某个监听器代码。</li>
+<li>常见事件：
+<ul>
+<li>点击事件：
+<ul>
+<li><code>onclick</code>:单击事件</li>
+<li><code>ondblclick</code>:双击事件</li>
+</ul>
+</li>
+<li>焦点事件：
+<ul>
+<li><code>onblur</code>:失去焦点
+<ul>
+<li>一般用于表单校验。</li>
+</ul>
+</li>
+<li><code>onfocus</code>:元素获得焦点</li>
+</ul>
+</li>
+<li>加载事件：
+<ul>
+<li><code>onload</code>:一张页面或者一幅图像完成加载；
+<ul>
+<li>一般用在window对象或者body对象上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>鼠标事件：
+<ul>
+<li><code>onmousedown</code>:鼠标按钮被按下
+<ul>
+<li>定义方法时定义一个形参，接收event对象，event对象的button属性可以获取鼠标上哪个键被按下了的信息。</li>
+</ul>
+</li>
+<li><code>onmousesup</code>:鼠标按钮被松开</li>
+<li><code>onmousemove</code>:鼠标按钮被移动</li>
+<li><code>onmouseover</code>:鼠标移到某元素之上</li>
+<li><code>onmouseout</code>:鼠标从某元素上移开</li>
+</ul>
+</li>
+<li>键盘事件：
+<ul>
+<li><code>onkeydown</code>:某个键盘按键被按下
+<ul>
+<li>定义方法时定义一个形参，接收event对象，event对象的keycode属性可以获取键盘上哪个键被按下了的信息。</li>
+</ul>
+</li>
+<li><code>onkeyup</code>:某个键盘按键被松开</li>
+<li><code>onkeypress</code>:某个键盘按键被按下并松开</li>
+</ul>
+</li>
+<li>选择和改变
+<ul>
+<li><code>onchange</code>:域的内容被改变</li>
+<li><code>onselect</code>:文本被选中</li>
+</ul>
+</li>
+<li>表单事件：
+<ul>
+<li><code>onsubmit</code>:确认按钮被点击
+<ul>
+<li>可以阻止表单的提交，进行表单校验。
+<ul>
+<li>监听器方法返回false，表单被阻止提交。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>onreset</code>；重置按钮被点击</li>
+<li>示例：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;script&gt;
+document.getElementById(&quot;form&quot;).onsubmit &#x3D; function () &#123;
+  return false;
+&#125;
+
+&#x2F;&#x2F;如果是调用函数
+&lt;form action&#x3D;&quot;#&quot; id&#x3D;&quot;form&quot; onclick &#x3D; &quot;return checkFalse()&quot;&gt;
+&lt;&#x2F;form&gt;
+
+function checkFalse() &#123;
+  return false;
+&#125;
+&lt;&#x2F;script&gt;</code></pre>
+<ul>
+<li>绑定事件：
+<ol>
+<li>直接在html标签上，指定事件的属性（操作），属性值就是<strong>js代码</strong>。
+<ol>
+<li>事件：<code>onclicks</code>– 单击事件</li>
+<li>示例：<code>&lt;img src=&quot;img/on.gif&quot; onclicks=&quot;alert(&quot;我被点了&quot;);&quot;&gt;</code></li>
+</ol>
+</li>
+<li>通过js获取元素对象，指定事件属性，设置一个<strong>函数</strong>。
+<ol>
+<li>示例：</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;img id&#x3D;&quot;light&quot; src&#x3D;&quot;img&#x2F;off.jpg&quot; &gt;
+&lt;script&gt;
+    function fun() &#123;
+      alert(&quot;我被点了&quot;);
+    &#125;
+
+    var light &#x3D; document.getElementById(&quot;light&quot;);
+    light.onclicks&#x3D;fun;
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h2 id="html-dom"><a class="markdownIt-Anchor" href="#html-dom"></a> HTML DOM</h2>
+<ul>
+<li>标签体的设置和获取：innerHTML</li>
+<li>使用html元素对象的属性</li>
+<li>控制样式</li>
+</ul>
+<h3 id="inner-html"><a class="markdownIt-Anchor" href="#inner-html"></a> inner HTML</h3>
+<ul>
+<li>作用：修改标签体内部的内容。</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    div
+&lt;&#x2F;div&gt;
+
+&lt;script&gt;
+  function fun1() &#123;
+      &#x2F;&#x2F;获取div元素
+      var div &#x3D; document.getElementsByTagName(&quot;div&quot;)[0];
+    &#x2F;&#x2F;将标签内的内容更改
+      div.innerHTML &#x3D; &quot;更改&quot;
+      &#x2F;&#x2F;向标签内追加内容
+      div.innerHTML +&#x3D; &quot;&lt;input type&#x3D;&#39;text&#39;&gt;&quot;;
+  &#125;
+fun1();
+
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<h3 id="控制元素的样式"><a class="markdownIt-Anchor" href="#控制元素的样式"></a> 控制元素的样式</h3>
+<ol>
+<li>使用元素的style属性来设置。示例：</li>
+</ol>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;script&gt;
+  var div1 &#x3D; document.getElementById(&quot;div1&quot;);
+  div1.onclick &#x3D; function () &#123;
+      div1.style.border &#x3D; &quot;1px solid red&quot;;
+  &#125;
+&lt;&#x2F;script&gt;</code></pre>
+<ul>
+<li>style后面接的是css的属性，等号后面是css的属性值<br />
+2.提前定义好类选择器的样式，将元素的className与类选择器的类名相对应来设置样式。示例：</li>
+</ul>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;&#x2F;title&gt;
+    &lt;style&gt;
+        .d1 &#123;
+            border: 1px solid red;
+        &#125;
+    &lt;&#x2F;style&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+&lt;div id&#x3D;&quot;div1&quot;&gt;
+    div
+&lt;&#x2F;div&gt;
+
+&lt;script&gt;
+  var div1 &#x3D; document.getElementById(&quot;div1&quot;);
+  div1.onclick &#x3D; function () &#123;
+      div1.className &#x3D; &quot;d1&quot;;
+  &#125;
+&lt;&#x2F;script&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<ul>
+<li>本质是用Js来控制css。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JavaScript/index.html" title="JavaScript" target="_blank" rel="external">http://www.zestaken.top/post/技术笔记/Web前端/JavaScript/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/HDFS/index.html" title="HDFS"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/css/index.html" title="css"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>

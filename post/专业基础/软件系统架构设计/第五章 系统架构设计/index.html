@@ -1,207 +1,1254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>第五章 系统架构设计 | Hexo</title>
+  <meta name="description" content="系统设计概述  系统设计概念与过程  系统设计概念：系统设计是指在系统需求分析的基础上，运用软件工程的思想与方法，设计出能满足系统需求目标的新系统构造方案的活动。 系统设计过程：  需求分析 总体设计（架构设计） 详细设计 实现与测试      系统设计活动  系统架构设计：在系统架构设计中，需要对系统的总体架构、网络拓扑结构、软件架构、数据架构和应用架构等方面进行设计。 基础设施平台设计：在系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章 系统架构设计">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="系统设计概述  系统设计概念与过程  系统设计概念：系统设计是指在系统需求分析的基础上，运用软件工程的思想与方法，设计出能满足系统需求目标的新系统构造方案的活动。 系统设计过程：  需求分析 总体设计（架构设计） 详细设计 实现与测试      系统设计活动  系统架构设计：在系统架构设计中，需要对系统的总体架构、网络拓扑结构、软件架构、数据架构和应用架构等方面进行设计。 基础设施平台设计：在系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/3kX660.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/CnkD9l.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/gNxUnI.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/X0zoMQ.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/2r1fH5.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/j61aYK.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/nXI5wF.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/auQmH1.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/uGB2xN.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/7OSBWp.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/xDmMLJ.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/MVFzzG.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/sQIccC.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Bn4VPB.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/k6tYbW.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101164026.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101170553.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101170624.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101171526.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101171721.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101172009.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173232.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173825.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173856.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/PrYL5L.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/KA2CiU.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tYEMLT.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/x6Yk1O.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/V9jS8l.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/s6TIuJ.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/UsfAnf.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/YXzCQP.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/dRAamt.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/S30qlG.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/5rA8S0.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/3BpNsH.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/47ZJH3.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/hrrGWS.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/E65Zjc.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/T4OJgM.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/iRNFNt.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/zNSTR9.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/LV4NsH.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/XtBLkH.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/UfJcFs.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/OiFnND.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/jm4x5G.png">
+<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tQ42DB.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211102125126.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211102125520.png">
+<meta property="article:published_time" content="2021-11-01T03:23:19.000Z">
+<meta property="article:modified_time" content="2021-11-18T12:13:50.948Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="软件系统架构设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/3kX660.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-专业基础/软件系统架构设计/第五章 系统架构设计" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第五章 系统架构设计
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html" class="article-date">
+	  <time datetime="2021-11-01T03:23:19.000Z" itemprop="datePublished">2021-11-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>►<a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a>, <a class="article-tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="系统设计概述"><a class="markdownIt-Anchor" href="#系统设计概述"></a> 系统设计概述</h1>
+<h2 id="系统设计概念与过程"><a class="markdownIt-Anchor" href="#系统设计概念与过程"></a> 系统设计概念与过程</h2>
+<ul>
+<li>系统设计概念：系统设计是指<em>在系统需求分析的基础上</em>，运用软件工程的思想与方法，设计出能满足系统需求目标的新系统构造方案的活动。</li>
+<li>系统设计过程：
+<ul>
+<li>需求分析</li>
+<li>总体设计（架构设计）</li>
+<li>详细设计</li>
+<li>实现与测试<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/3kX660.png" alt="3kX660" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="系统设计活动"><a class="markdownIt-Anchor" href="#系统设计活动"></a> 系统设计活动</h2>
+<ul>
+<li>系统架构设计：在系统架构设计中，需要对系统的<em>总体架构、网络拓扑结构、软件架构、数据架构和应用架构</em>等方面进行设计。</li>
+<li>基础设施平台设计：在系统总体设计时，还需考虑信息系统的运行环境设计，即基础设施平台设计。在基础设施平台设计中，除了考虑<em>系统的网络结构、网络结点通信关系、硬件计算资源能力、硬件存储资源能力</em>设计外，还需要考虑系统<em>运行软件环境设计</em>，如操作系统软件、数据库系统软件、应用中间件等。</li>
+<li>系统构件设计：系统构件设计是对系统的组成构件进行设计，确定出<em>系统构件功能逻辑、构件接口</em>等。</li>
+<li>系统界面设计：界面设计是对人和外部系统与信息系统之间交互界面设计。它包括操作界面、表单、报表、系统接口等要素设计。</li>
+<li>系统数据库设计：数据库设计是指根据特定的系统应用需求，设计出合理的系统数据库结构。数据库设计需要经过<em>概念设计、逻辑设计和物理设计</em>等步骤。</li>
+<li>程序流程设计：程序流程设计是对构件内部功能逻辑进行设计，确定<em>算法程序流程及其数据结构</em>。</li>
+<li>安全机制设计：安全机制设计是对系统与数据的<em>安全访问、隐私保护等</em>安全措施与手段进行设计。<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/CnkD9l.png" alt="CnkD9l" /></li>
+</ul>
+<h2 id="系统设计思想"><a class="markdownIt-Anchor" href="#系统设计思想"></a> 系统设计思想</h2>
+<ul>
+<li>抽象化：
+<ul>
+<li>抽象是在系统规模大、逻辑复杂的情况下，<em>降低系统设计复杂性</em>的基本策略。</li>
+<li>抽象的过程是从特殊到一般的过程，上层概念是下层概念的抽象。通过抽象<em>实现系统设计建模</em>。</li>
+</ul>
+</li>
+<li>逐步求精：
+<ul>
+<li>把问题的求解过程分解成若干步骤或阶段，每步都比上步更精化，更接近问题的解法。</li>
+<li>抽象使得设计者能在宏观层面描述过程和数据而忽略低层的细节，而求精有助于设计者在<em>微观层面设计低层技术细节</em>。</li>
+</ul>
+</li>
+<li>模块化：
+<ul>
+<li>模块化，即把一个大系统按照特定规则，<em>划分为若干较小的，又相互关联的部件</em>，以便将复杂问题分解为简单问题进行解决。</li>
+<li>模块是<em>数据说明、可执行语句等程序对象的集合</em>。它是单独命名的、可以通过名字来访问的功能部件，如程序的过程、函数、子程序、宏等。</li>
+</ul>
+</li>
+<li>信息隐藏：
+<ul>
+<li>每个模块的实现细节对于其它模块来说应该是隐蔽的，模块之间实现<em>松耦合</em>，以便实现软件构件的<em>可复用性</em>。</li>
+<li>模块中所包含的信息(包括数据和过程)只能通过<em>接口访问</em>，以便支持模块的<em>可维护性</em>。</li>
+</ul>
+</li>
+<li>模块独立：
+<ul>
+<li>模块完成独立的功能，并且与其他模块通过接口关联，符合信息隐蔽和信息局部化原则，模块间<em>关联和依赖程度尽可能小</em>。</li>
+<li>模块独立便于<em>功能被划分</em>，更易于开发和维护。</li>
+<li>模块独立性可以由两项指标来衡量:<em>内聚度与耦合度</em>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统设计原则和方法"><a class="markdownIt-Anchor" href="#系统设计原则和方法"></a> 系统设计原则和方法</h2>
+<ul>
+<li>设计原则：
+<ul>
+<li>建立良好的系统<em>体系架构</em>，以满足系统的可靠性、安全性、可伸缩性、可维护性等非功能特性需求。</li>
+<li>系统设计应采取<em>模型抽象、模块化设计</em>，将复杂系统分解为较简单的子系统及其构件进行开发。</li>
+<li>采用<em>标准建模语言方式</em>直观、明确地表达设计思路，对系统架构、应用架构、软件架构、数据架构、系统构件、用户界面、程序逻辑等设计内容采用<em>可视化模型</em>表示。</li>
+</ul>
+</li>
+<li>设计方法：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/gNxUnI.png" alt="gNxUnI" /></li>
+</ul>
+<h2 id="面向对象系统分析与设计建模过程"><a class="markdownIt-Anchor" href="#面向对象系统分析与设计建模过程"></a> 面向对象系统分析与设计建模过程</h2>
+<ul>
+<li>需求建模</li>
+<li>系统分析建模</li>
+<li>系统总体设计建模</li>
+<li>系统详细设计建模<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/X0zoMQ.png" alt="X0zoMQ" /></li>
+</ul>
+<h1 id="系统架构基础"><a class="markdownIt-Anchor" href="#系统架构基础"></a> 系统架构基础</h1>
+<h2 id="系统架构概述"><a class="markdownIt-Anchor" href="#系统架构概述"></a> 系统架构概述</h2>
+<ul>
+<li>系统架构概念：系统架构(又称系统体系架构)是指系统的组成结构模式，它由反映系统部件的<em>关联性、交互性和约束机制</em>进行描述。</li>
+<li>系统架构设计：系统架构设计根据系统需求，从<em>不同层面、不同视角</em>给出系统总体框架的设计蓝图。</li>
+<li>系统架构作用：
+<ul>
+<li>系统架构反映系统设计总体框架，有利于开发者围绕系统设计进行<em>交流与讨论</em>。</li>
+<li>系统架构体现系统设计<em>策略</em>，它对系统开发工作有深远的影响。</li>
+<li>系统架构决定了系统<em>非功能特性</em>，如系统可靠性、可用性、安全性、可伸缩性，以及系统性能。</li>
+</ul>
+</li>
+<li>系统架构类型：
+<ul>
+<li>总体架构</li>
+<li>应用架构</li>
+<li>软件架构</li>
+<li>数据架构</li>
+<li>拓扑架构<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/2r1fH5.png" alt="2r1fH5" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="系统总体架构"><a class="markdownIt-Anchor" href="#系统总体架构"></a> 系统总体架构</h2>
+<ul>
+<li>总体架构：系统总体架构是从全局层面给出系统各种组成要素之间结构关系。它通常包括<em>基础设施、运行平台、应用软件、业务部门、信息数据以及用户</em>等。</li>
+<li>示例1：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/j61aYK.png" alt="j61aYK" /></li>
+<li>示例2:<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/nXI5wF.png" alt="nXI5wF" /></li>
+</ul>
+<h2 id="系统拓扑架构"><a class="markdownIt-Anchor" href="#系统拓扑架构"></a> 系统拓扑架构</h2>
+<ul>
+<li>系统拓扑结构是指从<em>系统基础设施平台层面描述节点与节点之间的通信连接关系</em>。节点是指系统中处理逻辑相对独立的物理实体，如PC计算机、服务器、外围设备等。</li>
+<li>系统拓扑结构设计是从系统基础设施平台层面，给出<em>系统节点在网络环境中的结构关系</em>，包括节点分布、节点类型节点运行环境以及节点之间的通信联系。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/auQmH1.png" alt="auQmH1" /></li>
+</ul>
+<h2 id="系统数据架构"><a class="markdownIt-Anchor" href="#系统数据架构"></a> 系统数据架构</h2>
+<ul>
+<li>系统数据架构是指从数据管理视角所描述的系统架构，它通常用来反映各类<em>数据资源的组织与存储</em>。</li>
+<li>系统数据架构不仅需要反映机构的<em>数据结点分布关系</em>。还需要考虑数据资源的<em>存储结构与存储方式</em>，如文件存储、数据库存储或数据仓库存储。</li>
+<li>系统数据分层架构设计：在大数据应用系统中，按照数据不同处理要求，可以将它们组织到不同层次的数据管理系统进行计算与分析处理。<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/uGB2xN.png" alt="uGB2xN" /></li>
+<li>系统数据治理架构设计：在信息系统中，数据资源结点一般是按照业务管理的需求，将它们部署到<em>不同业务部门</em>服务器进行数据存储与访问管理。系统数据<em>治理架构与组织机构的数据管理职能</em>有直接关系。<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/7OSBWp.png" alt="7OSBWp" /></li>
+<li>系统数据存储架构设计：在信息系统中，一些数据资源需要采用文件系统存储，另外一些数据资源需要采用数据库系统存储，还有一些数据资源则需要数据仓库系统进行数据存储。每类<em>存储系统</em>在设计上需要满足应用需求，如支持高可用、高性能的存取访问。<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/xDmMLJ.png" alt="xDmMLJ" /></li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/MVFzzG.png" alt="MVFzzG" /></li>
+</ul>
+<h2 id="系统应用架构"><a class="markdownIt-Anchor" href="#系统应用架构"></a> 系统应用架构</h2>
+<ul>
+<li>系统应用架构是指从应用功能视角所描述的系统架构。系统应用架构关注<em>应用功能划分、应用功能配置、服务访问、服务管理</em>等要素。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/sQIccC.png" alt="sQIccC" /></li>
+</ul>
+<h2 id="软件体系架构"><a class="markdownIt-Anchor" href="#软件体系架构"></a> 软件体系架构</h2>
+<ul>
+<li>软件体系架构(简称软件架构)是一种从软件视角所描述的系统架构，它对软件系统的结构、行为进行高层抽象，-般通过<em>构件、连接件、配置、端口、角色</em>等图符元素进行描述。</li>
+<li>基本元素：
+<ul>
+<li>构件(component) :具有特定功能的、可重用的<em>软件模块</em>。</li>
+<li>连接件(connector) :用以表示<em>构件之间的交互</em>，如过程调用、事件广播、交互协议等。</li>
+<li>配置(conf iguration) :用于对构件与连接件的<em>拓扑逻辑、语义约束</em>等说明。</li>
+<li>端口(port) :表示<em>构件接口与外部环境</em>的交互点。</li>
+<li>角色(role) :<em>连接件的参与者</em>，如事件消息的发布者与接受者。</li>
+</ul>
+</li>
+<li>软件架构设计是指基于一定的设计原则和系统需求，从软件角度对组成系统的各部分进行划分和组织，设计系统的构件组成结构及其构件之间的相互关系。</li>
+<li>软件架构设计目标：在软件架构设计中，除了满足系统功能需求外，还应满足系统非功能需求，即达到如下质量目标。
+<ul>
+<li>可靠性(Reliable):软件系统具有可靠运行的能力。</li>
+<li>安全性(Secure):软件系统具有安全运行的能力。</li>
+<li>可伸缩性(Scalable):软件 系统具有在用户访问量、并发用户数发生变化情况下，保持合理运行性能和资源利用率的能力。</li>
+<li>定制化(Customizable):软件系统具有个性化系统功能定制的能力。</li>
+<li>可扩展性(Extensible):具有对系统进行功能和性能扩展的能力。</li>
+<li>可维护性(Ma intainable):具有进行软件修改或 软件进化的能力。</li>
+</ul>
+</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Bn4VPB.png" alt="Bn4VPB" /></li>
+</ul>
+<h1 id="软件架构风格"><a class="markdownIt-Anchor" href="#软件架构风格"></a> 软件架构风格</h1>
+<h2 id="软件架构风格概述"><a class="markdownIt-Anchor" href="#软件架构风格概述"></a> 软件架构风格概述</h2>
+<ul>
+<li>软件架构风格是指针对不同系统共性问题提供一般性可重用的软件架构解决方案，它反映了领域中众多系统所<em>共有的软件结构及其模式</em>。</li>
+<li>软件架构风格应用意义：
+<ul>
+<li>定义了一类软件系统架构的要素和一组指导系统架构设计的规则。可促进<em>软件系统设计的复用</em>，使得一些经过实践验证的软件架构方案能够可靠地解决新问题。</li>
+<li>通过对标准软件架构风格的应用可支持<em>不同系统之间互操作性</em>，以便于实现系统集成。</li>
+<li>在特定设计空间下，便于<em>对软件系统相关设计作出分析</em>。</li>
+</ul>
+</li>
+<li>软件架构风格分类：
+<ul>
+<li>数据流风格: 批处理序列架构、管道/过滤器架构</li>
+<li>调用/返回风格: 主程序/子程序架构、面向对象架构、分层体系架构</li>
+<li>独立构件风格: 进程通讯架构、事件驱动架构</li>
+<li>虚拟机风格: 解释器架构、基于规则的系统架构</li>
+<li>客户/服务器风格: 客户/服务器架构、浏览器/服务器架构</li>
+<li>面向服务风格: 面向服务架构(SOA) 、 微服务架构.</li>
+<li>仓库风格: 数据共享体系架构、黑板系统架构</li>
+</ul>
+</li>
+</ul>
+<h2 id="分层体系架构"><a class="markdownIt-Anchor" href="#分层体系架构"></a> 分层体系架构</h2>
+<ul>
+<li>分层体系架构采用层次化方式组织功能构件，<em>每一层都是为上一层提供服务，并使用下一层提供的功能服务</em>。</li>
+<li>将软件系统分成若干个水平层，每一层都有<em>清晰的功能处理分工</em>，各层不需要知道其他层的细节，<em>层与层之间仅通过接口通信</em>。</li>
+<li>用户对软件系统的访问请求将依次通过各层功能逻辑构件进行处理，<em>不允许跳过其中任何层</em>。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/k6tYbW.png" alt="k6tYbW" /></li>
+<li>优点：
+<ul>
+<li>便于复杂系统设计，使整体设计更加<em>简洁与清晰</em>。</li>
+<li>支持系统<em>功能扩展设计</em>，每层的功能修改最多只影响相邻层。</li>
+<li>只要给相邻层提供标准接口，就可实现<em>功能复用</em>。</li>
+</ul>
+</li>
+<li>缺点:
+<ul>
+<li>并不是每个系统都可以很<em>容易地划分层次</em>，此外，层次的划分还没有统一的方法。</li>
+<li>层次过多，会造成系统<em>性能降低</em>。</li>
+<li>当用户请求大量增加时，必须依次扩展每一层处理能力。如果<em>某层的内部是耦合的，系统扩展较困难</em>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据共享体系架构"><a class="markdownIt-Anchor" href="#数据共享体系架构"></a> 数据共享体系架构</h2>
+<ul>
+<li>数据共享体系架构是一种以<em>数据存储服务器为中心</em>，为客户软件提供数据共享、数据交换访问的软件架构风格。</li>
+<li>在数据共享体系架构中，各个客户软件相互独立，它们<em>通过共享数据存储实现数据交换</em>。</li>
+<li>一个客户软件对共享数据进行了修改，其他客户软件可以获得<em>数据变更</em>信息。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101164026.png" alt="" /></li>
+<li>优点：
+<ul>
+<li>体系<em>架构简单</em>，容易实现软件开发。</li>
+<li>可有效地实现<em>大量数据共享</em>，新客户软件加入系统，无须考虑其他客户软件的存在。</li>
+<li>只要遵循<em>共享数据访问接口，各个客户软件可以独立执行</em>。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>当共享数据结构发生变化，各客户软件都需要进行<em>数据访问调整</em>，通常比较麻烦。</li>
+<li>当客户软件大量增加时，<em>共享数据存储服务器将面临性能压力</em>。</li>
+<li>共享数据存储服务器作为系统的中央单元，若没有考虑高可用性方案，它<em>一旦故障</em>将导致整个系统无法运行。</li>
+<li>共享数据存储难以实现<em>分布式处理</em>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="事件驱动体系架构"><a class="markdownIt-Anchor" href="#事件驱动体系架构"></a> 事件驱动体系架构</h2>
+<ul>
+<li>事件驱动体系架构是一种基于<em>事件与消息机制实现软件构件之间进行通信</em>的软件架构。</li>
+<li>构件(子系统)之间并不直接交互，而是<em>通过触发一个或多个事件，隐式调用另一构件</em>执行。</li>
+<li>系统各构件需要在消息处理器中<em>注册相关事件，一旦事件触发，将隐含调用注册构件</em>进行处理，并将处理结果返回事件发布构件。</li>
+<li>基本模型：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101170553.png" alt="" /></li>
+<li>示例:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101170624.png" alt="" /></li>
+<li>优点：
+<ul>
+<li>具有良好的<em>可扩展性</em>。通过注册可引入新的构件，而不影响现有构件。</li>
+<li>便于<em>软件维护</em>。只要构件名及其接口不变，可以用一个构件代替另一个构件。</li>
+<li>构件之间<em>耦合性低</em>，容易实现软件重用。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>事件驱动<em>削弱了构件对系统的控制能力</em>。一个构件事件触发时，并不能保证其它构件会对其进行事件响应。</li>
+<li>消息传送机制不能很好地解决<em>数据交换问题</em>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="客户机服务器软件架构"><a class="markdownIt-Anchor" href="#客户机服务器软件架构"></a> 客户机/服务器软件架构</h2>
+<ul>
+<li>客户机/服务器软件架构是一种典型的分布系统体系架构，其<em>软件分为客户端构件和服务端构件</em>，客户端构件通常在客户机上运行，服务端构件在服务器上运行。</li>
+<li>客户机/服务器架构采用<em>分布式系统模式</em>，它通常将界面展示、应用逻辑与数据存取构件分布在多个节点机上进行处理。</li>
+<li>客户端构件为完成特定功能，需要<em>向服务端构件发出请求</em>。服务端构件<em>接收客户端构件请求</em>进行处理，并将结果返回请求者。</li>
+<li>模式图：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101171526.png" alt="" /></li>
+<li>C/S架构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101171721.png" alt="" />
+<ul>
+<li>优点：
+<ul>
+<li>可实现分布式计算处理，有利于<em>系统负载分担</em>。</li>
+<li>交互性强、具有安全的存取模式、响应速度快、利于处理大量数据。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>缺少<em>通用性</em>，系统维护、升级需要重新安装部署，增加了维护和管理的难度。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B/S架构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101172009.png" alt="" />
+<ul>
+<li>优点:
+<ul>
+<li>分布性强:服务器可以在任何地点运行。</li>
+<li>访问方便:只要有网络、浏览器，就可以对系统应用进行访问。.</li>
+<li>系统处理负载能力强:可以将负载分布在Web服务器、应用服务器、数据库服务器处理。此外，通过负载均衡、集群技术可以支持更大负载处理。</li>
+<li>系统运维方便:只需要在服务器进行功能修改与发布，即可实现所有用户访问的同步更新。</li>
+<li>用户共享性强:可以支持不同地点用户共享访问系统。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>个性化处理、人机交互性能不如C/S架构软件。</li>
+<li>在系统<em>安全性设计</em>需要考虑更多内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="微核体系架构"><a class="markdownIt-Anchor" href="#微核体系架构"></a> 微核体系架构</h2>
+<ul>
+<li>微核体系架构又称为<em>插件架构</em>，系统基本核心功能在软件内核中实现，其功能较少，系统大部分功能和业务逻辑都通过插件实现。</li>
+<li>微核体系架构将待开发的目标软件分为软件<em>内核和插件</em>两个部分。</li>
+<li>内核实现软件的<em>基本核心功能和插件管理功能</em>。</li>
+<li>插件实现软件功能的运行时扩展与补充它是一种按照<em>统一插件接口规范</em>实现的功能程序。</li>
+<li>基本模式：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173232.png" alt="" /></li>
+<li>优点：
+<ul>
+<li>良好的<em>功能扩展性</em>，需要什么功能，开发一个插件即可。</li>
+<li><em>插件之间是隔离的</em>，可以独立的加载和卸载，使得它比较容易部署。</li>
+<li>可<em>定制性高</em>，适应不同的开发需要。</li>
+<li>可以<em>渐进式</em>地开发，逐步增加功能插件。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li><em>伸缩性差</em>，内核通常是一个独立单元，不容易做成分布式。</li>
+<li>开发<em>难度</em>相对较高，因为涉及到插件与内核的通信，以及内部的插件登记机制。</li>
+</ul>
+</li>
+</ul>
+<h2 id="微服务架构"><a class="markdownIt-Anchor" href="#微服务架构"></a> 微服务架构</h2>
+<ul>
+<li>微服务架构(microservices architecture) 是面向服务架构( service-or i ented archi tecture,<em>SOA</em>)的轻量级实现版本。</li>
+<li>将应用<em>软件划分成一组小型服务</em>，服务之间相互协调与配合，为用户提供功能服务。</li>
+<li>每个<em>服务运行在独立的进程中</em>，服务之间采用轻量级通信机制进行消息交互。</li>
+<li>每个服务都围绕业务进行构建，并且能够独立部署到运行环境。</li>
+<li>这些服务都是<em>分布式的，互相解耦</em>，通过标准通信协议(如REST、 SOAP) 进行交互。</li>
+<li>基本模式：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173825.png" alt="" /></li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211101173856.png" alt="" /></li>
+<li>优点：
+<ul>
+<li><em>扩展性</em>好，各个服务之间低耦合。</li>
+<li>容易<em>部署</em>，软件从整体部署拆分成多个独立功能服务进行部署，可以分别进行服务部署。</li>
+<li>容易开发，每个服务都可以进行<em>持续迭代开发</em>，可以做到实时部署，不间断地升级。</li>
+<li>易于测试，每个服务可以<em>单独测试</em>。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>由于强调互相独立和低耦合，服务可能会拆分得很细。这导致系统<em>依赖大量的微服务，变得凌乱和笨重，性能也会不佳</em>。</li>
+<li>分布式处理使得微服务<em>较难实现原子性操作</em>，交易回滚会比较困难。</li>
+</ul>
+</li>
+</ul>
+<h1 id="软件架构模式"><a class="markdownIt-Anchor" href="#软件架构模式"></a> 软件架构模式</h1>
+<h2 id="软件架构模式概述"><a class="markdownIt-Anchor" href="#软件架构模式概述"></a> 软件架构模式概述</h2>
+<ul>
+<li>软件架构模式就是针对特定需求问题及其环境，所给出通用的软件架构设计解决方案。</li>
+<li>软件架构风格与软件架构模式的对应关系：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/PrYL5L.png" alt="PrYL5L" /></li>
+<li>软件架构模式意义：
+<ul>
+<li>使得软件工程成熟的架构设计方案可以被<em>复用</em>，避免重复“发明车轮”的工作。</li>
+<li>架构模式为软件重构和软件工程<em>复用提供了技术支撑</em>。</li>
+<li>基于架构模式方法设计软件系统，可以<em>节省开发成本，提高软件开发效率</em>。</li>
+<li>在软件系统设计中，使用架构模式方法，还可以提高设计系统<em>质量</em>。</li>
+</ul>
+</li>
+<li>软件架构模式模版：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/KA2CiU.png" alt="KA2CiU" /></li>
+<li>软件架构模式应用方式：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tYEMLT.png" alt="tYEMLT" /></li>
+</ul>
+<h2 id="软件架构结构模式"><a class="markdownIt-Anchor" href="#软件架构结构模式"></a> 软件架构结构模式</h2>
+<ul>
+<li>代理者模式</li>
+<li>集中控制模式</li>
+<li>分布式控制模式</li>
+<li>多层控制模式</li>
+<li>抽象分层模式</li>
+<li>多客户端/单服务模式</li>
+<li>多客户端/多服务模式</li>
+<li>多层客户端/服务模式</li>
+</ul>
+<h3 id="代理者模式"><a class="markdownIt-Anchor" href="#代理者模式"></a> 代理者模式</h3>
+<ul>
+<li>在代理者模式的软件架构中，需要使用代理者扮演客户端和服务端的<em>中介角色</em>。</li>
+<li>代理者使得客户端不再需要知道某个服务在哪里，就可以获得这个服务，从而使得客户端可以方便地<em>定位服务</em>。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/x6Yk1O.png" alt="x6Yk1O" /></li>
+</ul>
+<h3 id="集中式控制模式"><a class="markdownIt-Anchor" href="#集中式控制模式"></a> 集中式控制模式</h3>
+<ul>
+<li>在集中式控制模式的软件架构中，<em>中央控制构件</em>按照特定对象状态机逻辑对系统全局行为进行控制操作。</li>
+<li>中央控制构件<em>接收输入构件或用户界面构件的输入</em>操作。</li>
+<li>中央控制构件根据输入事件引发的<em>系统状态变迁</em>，对相关部件实施操作控制，从而实现系统功能控制。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/V9jS8l.png" alt="V9jS8l" /></li>
+</ul>
+<h3 id="分布式控制模式"><a class="markdownIt-Anchor" href="#分布式控制模式"></a> 分布式控制模式</h3>
+<ul>
+<li>在分布式控制模式的软件架构中，系统控制分布在多个控制构件之中，<em>不存在总控全局</em>的单一构件。</li>
+<li>每个控制构件按照特定对象状态机逻辑<em>对系统特定部分的行为进行控制</em>操作。</li>
+<li>多个控制构件通过<em>消息通信协作</em>完成整个系统的控制处理。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/s6TIuJ.png" alt="s6TIuJ" /></li>
+</ul>
+<h3 id="多层控制模式"><a class="markdownIt-Anchor" href="#多层控制模式"></a> 多层控制模式</h3>
+<ul>
+<li>在多层控制模式的软件架构中系统<em>控制分布在多个控制构件</em>之中，此外，通过<em>协调者构件控制所有控制构件</em>实现整个系统的控制。</li>
+<li>协调者构件提供全局控制，而每个控制构件按照特定对象状态机逻辑对系统特定部分的行为进行控制操作。</li>
+<li>协调者控件发布命令到各个控制构件执行控制操作，同时协调者控件也从控制构件接收状态消息。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/UsfAnf.png" alt="UsfAnf" /></li>
+</ul>
+<h3 id="抽象分层模式"><a class="markdownIt-Anchor" href="#抽象分层模式"></a> 抽象分层模式</h3>
+<ul>
+<li>在抽象分层模式的软件架构中，复杂的软件构件关系被<em>抽象到不同的功能层次</em>。</li>
+<li>每个层次构件只能<em>访问它的相邻下层服务，同时也只对相邻的上层提供服务</em>。</li>
+<li>层次之间通过<em>请求调用、返回响应消息</em>方式进行交互。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/YXzCQP.png" alt="YXzCQP" /></li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/dRAamt.png" alt="dRAamt" /></li>
+</ul>
+<h3 id="多客户单服务模式"><a class="markdownIt-Anchor" href="#多客户单服务模式"></a> 多客户/单服务模式</h3>
+<ul>
+<li>在多客户/单服务模式的软件架构中，软件构件被<em>部署到多个客户端结点和一个服务端结点</em>。</li>
+<li>各客户端结点的软件构件通过<em>网络连接访问服务端</em>结点上运行的服务。</li>
+<li>该模式支持多个客户端构件向一个服务端构件提出服务请求，服务端构件将处理结果返回给请求的客户端构件。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/S30qlG.png" alt="S30qlG" /></li>
+</ul>
+<h3 id="多客户多服务模式"><a class="markdownIt-Anchor" href="#多客户多服务模式"></a> 多客户/多服务模式</h3>
+<ul>
+<li>在多客户/多服务模式的软件架构中，软件构件被部署到多个客户端结点和<em>多个服务端</em>结点上运行。</li>
+<li>客户端构件通过网络连接访问多个服务器结点上运行的服务。</li>
+<li>支持多个客户端构件向多个服务端构件提出服务请求，服务端构件将处理结果返回给请求的客户端构件。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/5rA8S0.png" alt="5rA8S0" /></li>
+</ul>
+<h3 id="多层客户服务模式"><a class="markdownIt-Anchor" href="#多层客户服务模式"></a> 多层客户/服务模式</h3>
+<ul>
+<li>在多层客户/服务模式的软件架构中，除了基本的客户端层次和服务端层次外，还有一个<em>同时扮演客户端角色和服务端角色的中间层</em>。</li>
+<li>中间层对于它的服务层而言是一个客户端但对其他客户端而言又是一个服务端。</li>
+<li>客户端、中间层、服务端的结点<em>通过网络连接到在一起</em>，支持多个客户端构件向服务端构件提出服务请求，服务端构件将处理结果返回给请求的客户端构件。</li>
+<li>模式图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/3BpNsH.png" alt="3BpNsH" /></li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/47ZJH3.png" alt="47ZJH3" /></li>
+</ul>
+<h2 id="软件架构通信模式"><a class="markdownIt-Anchor" href="#软件架构通信模式"></a> 软件架构通信模式</h2>
+<ul>
+<li>调用/返回模式</li>
+<li>异步消息通信模式</li>
+<li>同步消息通信模式</li>
+<li>服务注册、转发、发现模式</li>
+<li>广播/组播模式</li>
+</ul>
+<h3 id="调用返回模式"><a class="markdownIt-Anchor" href="#调用返回模式"></a> 调用/返回模式</h3>
+<ul>
+<li>在软件构件之间的通信交互中，一种常见的交互模式就是调用/返回模式。</li>
+<li>一个<em>客户构件对象的操作方法去调用服务构件对象的操作方法</em>。</li>
+<li>当服务构件对象的操作方法执行后，将<em>处理结果返回</em>客户构件对象。</li>
+</ul>
+<h3 id="异步消息通信模式"><a class="markdownIt-Anchor" href="#异步消息通信模式"></a> 异步消息通信模式</h3>
+<ul>
+<li>在软件构件的对象交互通信中，生产者构件进程可以独立于消费者构件运行。</li>
+<li>一个构件中对象发送一个消息给另一个构件的对象，其<em>发送者不需要等待对方回复可以继续执行其他操作</em>。</li>
+</ul>
+<h3 id="同步消息通信模式"><a class="markdownIt-Anchor" href="#同步消息通信模式"></a> 同步消息通信模式</h3>
+<ul>
+<li>一个构件中对象发送一个消息给另一个构件的对象，<em>需要等待对方回复</em>，才可继续执行其他操作。</li>
+<li>若发送消息的构件对象没有收到接收构件对象的回复消息，其进程将会挂起。</li>
+</ul>
+<h3 id="服务注册-转发-发现通信模式"><a class="markdownIt-Anchor" href="#服务注册-转发-发现通信模式"></a> 服务注册、转发、发现通信模式</h3>
+<ul>
+<li>服务注册、转发、发现通信模式应用于<em>面向服务的软件架构中，各个服务构件能够分布在多个结点</em>上运行。</li>
+<li>这些<em>服务构件在代理构件的协助下能够被客户构件所访问</em>。</li>
+<li><em>代理构件扮演客户构件和服务构件的中介</em>，它使客户构件不需要知道某个服务在哪里提供，而是通过代理构件便能获得服务构件的位置信息。</li>
+<li>服务注册模式：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/hrrGWS.png" alt="hrrGWS" /></li>
+<li>服务代理转发模式：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/E65Zjc.png" alt="E65Zjc" /></li>
+<li>服务发现通信模式：客户端先向代理查询可用的服务，再请求服务<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/T4OJgM.png" alt="T4OJgM" /></li>
+</ul>
+<h3 id="广播组播通信模式"><a class="markdownIt-Anchor" href="#广播组播通信模式"></a> 广播/组播通信模式</h3>
+<ul>
+<li>广播/组播消息通信模式适合于分布式应用。有一些分布式应用需要<em>将一个构件消息同时发送到多个构件处理</em>。</li>
+<li>广播模式：一个构件发其余全部构件接受<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/iRNFNt.png" alt="iRNFNt" /></li>
+<li>组播模式：一个构建发特定的多个构件才能接受<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/zNSTR9.png" alt="zNSTR9" /></li>
+</ul>
+<h2 id="软件架构事务模式"><a class="markdownIt-Anchor" href="#软件架构事务模式"></a> 软件架构事务模式</h2>
+<ul>
+<li>两阶段提交协议模式</li>
+<li>复合事务模式</li>
+<li>长事务模式</li>
+</ul>
+<h3 id="两阶段提交协议模式"><a class="markdownIt-Anchor" href="#两阶段提交协议模式"></a> 两阶段提交协议模式</h3>
+<ul>
+<li>两阶段提交协议模式用于分布式系统中<em>原子事务处理</em>，即确保事务所封装的服务请求操作是不可分割的，它们要么都完成，要么都取消。</li>
+<li>在两阶段提交协议模式中，通过一个<em>提交协调构件</em>(commi tCoordinator )与多个服务构件进行通信协调，实现事务处理。</li>
+<li>概念图：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/LV4NsH.png" alt="LV4NsH" /></li>
+<li>投票为第一阶段:
+<ol>
+<li>协调者（Coordinator，即事务管理器）会向事务的参与者（Cohort，即本地资源管理器）发起执行操作的 CanCommit 请求，并等待参与者的响应.</li>
+<li>参与者接收到请求后，会执行请求中的事务操作，记录日志信息(包含事务执行前的镜像)，同时锁定当前记录。参与者执行成功，则向协调者发送“Yes”消息，表示同意操作；若不成功，则发送“No”消息，表示终止操作。</li>
+<li>当所有的参与者都返回了操作结果（Yes 或 No 消息）后，系统进入了提交阶段。</li>
+</ol>
+</li>
+<li>提交为第二阶段：
+<ul>
+<li>协调者会根据所有参与者返回的信息向参与者发送 DoCommit 或 DoAbort 指令</li>
+<li>若协调者收到的都是“Yes”消息，则向参与者发送“DoCommit”消息，参与者会完成剩余的操作并释放资源，然后向协调者返回“HaveCommitted”消息；</li>
+<li>如果协调者收到的消息中包含“No”消息，则向所有参与者发送“DoAbort”消息，此时发送“Yes”的参与者则会根据之前执行操作时的回滚日志对操作进行回滚，然后所有参与者会向协调者发送“HaveCommitted”消息；</li>
+<li>协调者接收到“HaveCommitted”消息，就意味着整个事务结束了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="复合事务模式"><a class="markdownIt-Anchor" href="#复合事务模式"></a> 复合事务模式</h3>
+<ul>
+<li>在复杂业务处理中，当一个事务可以被分解为若干更小的、独立的处理单元时，这种事务就是复合事务。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/XtBLkH.png" alt="XtBLkH" /></li>
+</ul>
+<h3 id="长事务模式"><a class="markdownIt-Anchor" href="#长事务模式"></a> 长事务模式</h3>
+<ul>
+<li>在业务处理中，若需要<em>用户参与决策操作</em>，则会出现较长时间的数据资源锁定处理，这样的事务称为长事务。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/UfJcFs.png" alt="UfJcFs" /></li>
+</ul>
+<h1 id="软件架构uml建模设计"><a class="markdownIt-Anchor" href="#软件架构uml建模设计"></a> 软件架构UML建模设计</h1>
+<ul>
+<li>软件架构建模分为动态交互模型（通信图），静态结构模型（类图）和物理结构模型（构件图）。</li>
+</ul>
+<h2 id="软件架构静态结构模型"><a class="markdownIt-Anchor" href="#软件架构静态结构模型"></a> 软件架构静态结构模型</h2>
+<ul>
+<li>软件架构的静态结构模型(如UML 类图、UML 包图等)用于描述软件系统的<em>静态逻辑结构</em>。</li>
+<li>类图：在面向对象系统设计中，软件架构采用UML设计类图模型将软件系统的类程序组成结构可视化呈现出来。
+<ul>
+<li>类图(Class Diagram)描述一个系统的类程序静态逻辑组成结构。</li>
+<li>表示系统中类与类之间的关系，以及系统各个类的属性与操作组成。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/OiFnND.png" alt="OiFnND" /></li>
+</ul>
+</li>
+<li>包图：在一个复杂系统的软件设计中，仅采用一个类图来反映系统的软件静态结构是不现实的。需要将复杂系统划分设计为相互联系的若干子系统。针对各个子系统，<em>分别给出它们的类图设计，并在高层设计中采用UML包图对系统的软件静态结构进行抽象设计</em>。
+<ul>
+<li>包图( Package Diagram )是采用<em>类似文件夹的包符号</em>表示模型元素的组织结构模型图。</li>
+<li>包被描述成文件夹，可以应用在任何一种UML图上。</li>
+<li>系统中的<em>每个元素都只能为一个包所有，一个包可嵌套在另一个包中</em>。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/jm4x5G.png" alt="jm4x5G" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="软件架构的动态交互行为模型"><a class="markdownIt-Anchor" href="#软件架构的动态交互行为模型"></a> 软件架构的动态交互行为模型</h2>
+<ul>
+<li>软件架构的动态交互行为模型用于反映软件系统的<em>对象之间交互行为</em>。</li>
+<li>UML通信图：在UML软件建模设计中，可以采用UML通信图描述软件对象之间的协作通信，从而反映对象之间通过动态消息交互行为实现系统功能。
+<ul>
+<li>通信图( Communication Diagram)是表现对象间<em>直接交互关系</em>的模型图。</li>
+<li>它展现了多个对象在协同工作达成共同目标的过程中<em>互相通信</em>的情况。</li>
+<li>通过<em>对象和对象之间的链接、发送的消息</em>来显示对象之间的交互关系。</li>
+<li>示例：<br />
+<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tQ42DB.png" alt="tQ42DB" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="软件架构的物理结构模型"><a class="markdownIt-Anchor" href="#软件架构的物理结构模型"></a> 软件架构的物理结构模型</h2>
+<ul>
+<li>软件架构的物理结构模型用于反映软件系统结构的实现方案。在面向对象系统设计中，软件架构采用UML构件图和UML部署图表示系统物理结构实现方案。</li>
+<li>构件图：
+<ul>
+<li>构件图( Component Diagram )是描述系统的构件结构及其关系的模型图。</li>
+<li>描述软件的物理结构，从而支持基于构件的软件实现。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211102125126.png" alt="" /></li>
+</ul>
+</li>
+<li>部署图：
+<ul>
+<li>部署图(DeploymentDiagram)是表示系统构件<em>在环境结点中</em>的部署方案。</li>
+<li>从部署图还可以获知<em>软件和硬件组件之间</em>的物理拓扑、连接关系以及处理节点的分布情况。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211102125520.png" alt="" /></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html" title="第五章 系统架构设计" target="_blank" rel="external">http://www.zestaken.top/post/专业基础/软件系统架构设计/第五章 系统架构设计/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/index.html" title="Python数据可视化"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/index.html" title="第四章 系统需求分析"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>

@@ -1,207 +1,1478 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>第七章 用户界面设计 | Hexo</title>
+  <meta name="description" content="用户界面设计概述  用户界面  用户界面(User Interface) 泛指用户与系统之间进行交互所采用的方式途径、内容、布局及结构的总称。它是系统和用户之间进行交互和信息交换的媒介。 用户界面作用：  用户界面作为信息系统软件的表示层构件，它们的基本作用是实现系统功能控制操作、数据输入&#x2F;输出。 用户界面使得用户与系统之间实现人机交互，并将信息进行表达与展现。   用户界面类型：  图形用户界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七章 用户界面设计">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="用户界面设计概述  用户界面  用户界面(User Interface) 泛指用户与系统之间进行交互所采用的方式途径、内容、布局及结构的总称。它是系统和用户之间进行交互和信息交换的媒介。 用户界面作用：  用户界面作为信息系统软件的表示层构件，它们的基本作用是实现系统功能控制操作、数据输入&#x2F;输出。 用户界面使得用户与系统之间实现人机交互，并将信息进行表达与展现。   用户界面类型：  图形用户界">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219110446.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219110856.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111038.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111236.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111618.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111724.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113021.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113408.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113557.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113856.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219114106.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219114448.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219150656.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219150925.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219151108.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219151316.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219152446.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219152540.png">
+<meta property="og:image" content="c:%5CUsers%5C12246%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211219152630626.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219153641.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219153840.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219154047.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219154906.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219155202.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219155454.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219194527.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219194735.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219195001.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219201344.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219201817.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202236.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202538.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202911.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203130.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203413.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203816.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203959.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219204507.png">
+<meta property="article:published_time" content="2021-12-18T05:00:19.000Z">
+<meta property="article:modified_time" content="2021-12-20T01:01:22.328Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="软件系统架构设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219110446.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="ZestJourney" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<head><!-- hexo injector head_begin start --><meta name="description" content="吾好梦中读书~"></meta><meta name="keywords" content="生活 学习 技术"></meta><meta name="author" content="ZestJourney"></meta><!-- hexo injector head_begin end -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <link href="/static/css/chunk-libs.eebac533.css" rel="stylesheet">
-    <link href="/static/css/app.0d31776f.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet">
-<!-- hexo injector head_end start --><script rel="prefetch" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/components/prism-core.js" data-manual></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/themes/prism.min.css"/><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css"/><link rel="stylesheet" href="https://fonts.loli.net/css?family=Rubik" /><script rel="preload" src="https://cdn.bootcdn.net/ajax/libs/valine/1.4.9/Valine.min.js"></script><script rel="preload" src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.10.0/dist/av-min.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<body id="body-container"><noscript><strong>We're sorry but Aurora Blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
-    <div id="app"></div>
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-07T12:00:19.000Z" itemprop="datePublished">2021-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-06T14:52:19.000Z" itemprop="datePublished">2021-12-06</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-12-01T06:32:19.000Z" itemprop="datePublished">2021-12-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+              </p>
+              <p class="item-title">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-29T03:29:19.000Z" itemprop="datePublished">2021-11-29</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-专业基础/软件系统架构设计/第七章 用户界面设计" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第七章 用户界面设计
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="article-date">
+	  <time datetime="2021-12-18T05:00:19.000Z" itemprop="datePublished">2021-12-18</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>►<a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a>, <a class="article-tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="用户界面设计概述"><a class="markdownIt-Anchor" href="#用户界面设计概述"></a> 用户界面设计概述</h1>
+<h2 id="用户界面"><a class="markdownIt-Anchor" href="#用户界面"></a> 用户界面</h2>
+<ul>
+<li>用户界面(User Interface) 泛指<em>用户与系统之间进行交互</em>所采用的方式途径、内容、布局及结构的总称。它是系统和用户之间进行<em>交互和信息交换的媒介</em>。</li>
+<li>用户界面作用：
+<ul>
+<li>用户界面作为信息系统软件的表示层构件，它们的基本作用是<em>实现系统功能控制操作、数据输入/输出</em>。</li>
+<li>用户界面使得用户与系统之间实现<em>人机交互，并将信息进行表达与展现</em>。</li>
+</ul>
+</li>
+<li>用户界面类型：
+<ul>
+<li>图形用户界面</li>
+<li>命令行界面</li>
+</ul>
+</li>
+<li>良好用户界面应具有的特性：
+<ul>
+<li>易用性:软件使用简单、操作方便。用户不用查阅帮助就能理解界面功能，并能引导用户完成业务功能操作。</li>
+<li>灵活性:用户可<em>定制</em>界面风格、界面功能、界面信息。支持用户灵活使用功能。</li>
+<li>安全性:可保证<em>用户正确地使用系统，并确保数据安全操作</em>。</li>
+<li>艺术性:软件界面美观、可使用户爽心悦目。</li>
+</ul>
+</li>
+<li>用户界面设计常用工具：<a target="_blank" rel="noopener" href="https://www.axure.com/">Axure RP</a></li>
+</ul>
+<h2 id="用户界面设计"><a class="markdownIt-Anchor" href="#用户界面设计"></a> 用户界面设计</h2>
+<ul>
+<li>
+<p>用户界面设计是指对信息系统的<em>界面组织结构、界面布局、界面视觉、人机交互</em>等方面的整体设计。</p>
+</li>
+<li>
+<p>用户界面设计目标：用户界面不仅需实现信息系统<em>功能</em>操作，还需使信息系统软件操作变得友好舒适、简单、方便，同时使用户获得好的操作<em>体验</em>。</p>
+</li>
+</ul>
+<h3 id="用户界面设计原则"><a class="markdownIt-Anchor" href="#用户界面设计原则"></a> 用户界面设计原则</h3>
+<ol>
+<li>用户能有效控制系统：
+<ul>
+<li>界面应该<em>操作简单</em>，大多数操作从开始到执行不多于3次鼠标点击</li>
+<li>提供<em>灵活</em>的人机交互</li>
+<li>允许交互被<em>中断或撤消</em></li>
+<li>允许有经验的用户以<em>快捷方式</em>操作</li>
+<li>允许用户对出现在<em>屏幕上的对象直接操作</em></li>
+</ul>
+</li>
+<li>减少用户的记忆负担：
+<ul>
+<li>界面设计应<em>记忆过去的动作和结果需求</em></li>
+<li>建立有意义的<em>缺省</em></li>
+<li>定义有意义的<em>捷径</em></li>
+<li>界面的布局应基于现实世界的<em>直观展示</em></li>
+<li>以不断进展的方式<em>提示信息</em></li>
+</ul>
+</li>
+<li>保持界面一致性：
+<ul>
+<li>在应用系列内保持<em>一致性</em></li>
+<li>使用户执行一个功能时，能够<em>预测</em>将会发生什么</li>
+</ul>
+</li>
+<li>界面实用与美观：
+<ul>
+<li>界面不仅应该实用，还要通过精心的布局、色彩、字体和空白来吸引用户</li>
+<li>界面应该爽心悦目和符合用户预期心理</li>
+</ul>
+</li>
+<li>界面客户化与个性化：
+<ul>
+<li>针对不同类型用户，可以进行<em>功能裁剪与流程定义</em>，使信息系统能实现客户化定制需求。</li>
+<li>为用户提供<em>个体偏好</em>的界面风格和布局设置，给用户带来可控性和个性化的体验。</li>
+</ul>
+</li>
+</ol>
+<h3 id="用户界面设计规范"><a class="markdownIt-Anchor" href="#用户界面设计规范"></a> 用户界面设计规范</h3>
+<ol>
+<li>一致性规范：
+<ul>
+<li>系统<em>各个用户界面的风格、界面布局、界面的交互方式应保持前后一致</em>，遵循统一的设计规范。用户不需要太多培训就可以方便使用信息系统。</li>
+<li>系统界面的色彩、文字、图标、图片、空间等<em>视觉设计应保持前后一致</em>，并符合系统领域主题。</li>
+</ul>
+</li>
+<li>准确性规范：
+<ul>
+<li>使用与<em>应用领域相符</em>的界面风格，显示信息的含义应该非常明确，避免给用户产生歧义。</li>
+<li>显示有意义的<em>出错信息</em>，而不是单纯的程序错误代码。</li>
+<li>避免<em>使用文本输入框来放置不可编辑的文字内容</em>。</li>
+<li>使用<em>备注说明</em>来辅助理解。</li>
+</ul>
+</li>
+<li>界面布局规范：
+<ul>
+<li>在进行UI设计时需要充分考虑<em>布局的合理化问题，遵循用户从上而下，从左至右浏览与操作习惯</em>。</li>
+<li>避免将<em>功能按键排列过于分散</em>，以造成用户鼠标移动距离过长的弊端。</li>
+<li>多做“减法”运算，将<em>不常用的功能区块隐藏</em>，以保持界面的简洁，使用户专注于主要业务操作流程，有利于提高软件的易用性及可用性。</li>
+</ul>
+</li>
+<li>系统操作规范：
+<ul>
+<li>在查询条件输入框内<em>按回车应该自动触发查询操作</em>。</li>
+<li>在进行一些<em>不可逆或者删除操作时应该有信息提示用户</em>，并让用户确认是否继续操作，必要时应该把操作造成的后果也告诉用户。</li>
+<li>信息提示窗口的*“确认”及“取消”按钮需要分别映射键盘按键“Enter”和“ESC&quot;*。</li>
+<li><em>避免使用鼠标双击动作</em>，不仅会增加用户操作难度，还可能会引过用户误会，认为功能点击无效。</li>
+<li>表单录入页面，需要把输入焦点定位到第一个输入项。用户<em>通过Tab键可以在输入框或操作按钮间切换</em>，并注意Tab的操作应该遵循从左向右、从上而下的顺序。</li>
+</ul>
+</li>
+<li>系统响应时间规范：
+<ul>
+<li>系统<em>响应时间应该适中</em>，响应时间过长，用户就会感到不安和沮丧，而响应时间过快也会影响到用户的操作节奏，并可能导致错误。</li>
+<li>提交请求处理<em>在3秒内完成，窗口应立即给出处理结果信息</em>。</li>
+<li>提交请求处理<em>在3秒以上完成，需在处理响应窗口中显示进度条</em>。</li>
+<li>当一个<em>长时间的处理完成时应给予完成消息显示</em>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="用户界面设计内容"><a class="markdownIt-Anchor" href="#用户界面设计内容"></a> 用户界面设计内容</h3>
+<ol>
+<li>
+<p>界面结构设计：</p>
+<ul>
+<li>
+<p>界面结构设计是对用户界面系统的<em>组成结构与控制关系</em>进行设计。</p>
+</li>
+<li>
+<p>通过设计的界面结构图可以将系统所有的<em>屏幕界面、表格和报表等组成元素</em>联系起来，展示出系统的界面组织结构。</p>
+</li>
+<li>
+<p>在界面结构设计中，给出信息系统用户界面的层次结构关系和界面控制关系，从而<em>将系统功能结构通过界面结构有效组织与呈现出来</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219110446.png" alt="" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>界面交互设计：</p>
+<ul>
+<li>
+<p>界面交互设计是对用户<em>实现功能操作的交互过程</em>进行设计。</p>
+</li>
+<li>
+<p>信息系统功能服务通常需要用户通过操作来完成。用户在功能操作中需要与系统界面进行交互才能实现功能处理。因此，在设计用户界面时，需要<em>针对每个功能的执行，给出交互逻辑设计</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219110856.png" alt="" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>界面导航设计</p>
+<ul>
+<li>
+<p>一个信息系统通常有大量用户界面组成，这些界面需要有导航机制才能帮助用户操作使用，否则用户将淹没在界面交互的复杂链接关系中。在用户界面导航设计中，需要<em>采用导航机制来帮助用户定位</em>，告诉用户“从哪里来”、“现在在哪里” 、“可以去哪” 。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111038.png" alt="" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>界面视觉设计：</p>
+<ul>
+<li>
+<p>界面视觉设计是指在用户界面中通过使用恰当的<em>视觉要素</em>(如色彩、文字图片、空间)满足用户功能需求和心理需求。一个出色的界面设计，必然是将这些要素做到了淋漓尽致。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111236.png" alt="" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>界面布局设计：</p>
+<ul>
+<li>
+<p>界面布局设计是指对<em>界面内各元素的位置安排与分布</em>。界面布局的目标是提高用户兴趣、方便用户操作。用户界面中布局的因素直接影响着使用者视觉和操作两方面的用户体验。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111618.png" alt="" /></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="用户界面设计流程"><a class="markdownIt-Anchor" href="#用户界面设计流程"></a> 用户界面设计流程</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219111724.png" alt="" /></p>
+<h1 id="web系统gui设计"><a class="markdownIt-Anchor" href="#web系统gui设计"></a> Web系统GUI设计</h1>
+<ul>
+<li>总体页面结构：总体页面结构是指连接Web系统<em>所有页面的整体结构模型</em>，它决定了系统<br />
+功能模块组织、页面导航路径、人机交互关系。</li>
+<li>总体页面结构设计要素：系统总体页面结构设计需<em>考虑系统目标、功能结构、展示内容、导航机制<br />
+、用户体验</em>等因素，并反映系统功能页面组成、信息结构、交互关系，以及页面链接等要素。</li>
+</ul>
+<h2 id="总体页面结构类型"><a class="markdownIt-Anchor" href="#总体页面结构类型"></a> 总体页面结构类型</h2>
+<ul>
+<li>系统总体页面结构包含线性结构、分层结构、网络结构等类型。</li>
+</ul>
+<h3 id="1-线性结构"><a class="markdownIt-Anchor" href="#1-线性结构"></a> 1. 线性结构</h3>
+<ul>
+<li>
+<p>线性结构：Web系统的页面交互采用<em>顺序流程</em>时，页面之间结构便为线性结构。当页面交<br />
+互<em>有分支时，线性结构则为带有选择流的线性结构</em>。</p>
+</li>
+<li>
+<p>优点:页面之间关联结构简单，<em>容易实现导航控制</em>。</p>
+</li>
+<li>
+<p>缺点:页面之间<em>关联单一</em>，实现较复杂的人机交互需耗用更多时间。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113021.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="2-分层结构"><a class="markdownIt-Anchor" href="#2-分层结构"></a> 2. 分层结构</h3>
+<ul>
+<li>
+<p>当Web系统的页面结构<em>除了在垂直方向上支持控制流程外，还可以在水平方向实现控制流程时</em>，页面之间的这种结构便称为分层结构。</p>
+</li>
+<li>
+<p>优点:页面之间<em>关联结构较简单，通过水平关联分支容易实现快速导航</em>。</p>
+</li>
+<li>
+<p>缺点:若用户界面<em>没有明确的导航机制</em>，可能会给用户带来更多寻径时间。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113408.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="3-网络结构"><a class="markdownIt-Anchor" href="#3-网络结构"></a> 3. 网络结构</h3>
+<ul>
+<li>
+<p>在Web系统中，页面之间<em>除了上下左右有关联外，还有跨层连接</em>，则页面之间的关系成为网络结构关系。</p>
+</li>
+<li>
+<p>优点:页面之间<em>关联灵活</em>，通过彼此关联容易实现快速导航。</p>
+</li>
+<li>
+<p>缺点:若用户界面没有明确的导航机制，用户可能会<em>迷失在网络迷宫</em>中。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113557.png" alt="" /></p>
+</li>
+</ul>
+<h2 id="页面布局设计"><a class="markdownIt-Anchor" href="#页面布局设计"></a> 页面布局设计</h2>
+<ul>
+<li>页面布局设计是指<em>页面板块及元素的结构分布</em>。页面布局的目标是规划页面中各版块的内容呈现、方便用户操作。</li>
+</ul>
+<h3 id="1-一栏式页面布局"><a class="markdownIt-Anchor" href="#1-一栏式页面布局"></a> 1. 一栏式页面布局</h3>
+<ul>
+<li>
+<p>优点:</p>
+<ul>
+<li>页面布局结构<em>简单</em>，用户视觉流清晰;</li>
+<li>信息展示<em>集中</em>显示，用户能够迅速找到页面中重点内容。</li>
+</ul>
+</li>
+<li>
+<p>缺点:排版方式受到局限，页面内容可承载的<em>信息量小</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219113856.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="2-两栏式页面布局"><a class="markdownIt-Anchor" href="#2-两栏式页面布局"></a> 2. 两栏式页面布局</h3>
+<ul>
+<li>
+<p>两栏式页面布局是一种除页头和页脚外，将页面分为导航版块和信息展示版块，并进一步细分为<em>左窄右宽式、左宽右窄式</em>。</p>
+</li>
+<li>
+<p>优点:</p>
+<ul>
+<li>相比于一栏式布局，两栏式布局可以<em>容纳更多信息内容</em>;</li>
+<li>用户可通过导航版块链接，<em>切换信息展示版块内容</em>。</li>
+</ul>
+</li>
+<li>
+<p>缺点:</p>
+<ul>
+<li><em>排版方式</em>受到局限</li>
+<li>页面<em>不具备超大内容量呈现和视觉冲击力</em>。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219114106.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="3-三栏式页面布局"><a class="markdownIt-Anchor" href="#3-三栏式页面布局"></a> 3. 三栏式页面布局</h3>
+<ul>
+<li>
+<p>三栏式页面布局也将整个页面分为导航版块和信息展示版块，但它细分为<em>两窄一宽式、两宽一窄式</em>。</p>
+</li>
+<li>
+<p>优点:</p>
+<ul>
+<li>相比于两栏式，三栏式页面布局可以<em>尽量多地展示信息内容</em></li>
+<li>通过导航版块链接可以切换信息展示版块内容。</li>
+</ul>
+</li>
+<li>
+<p>缺点:</p>
+<ul>
+<li>排版方式会造成页面上<em>信息的拥挤</em></li>
+<li>用户<em>查找目标信息花费更多时间</em></li>
+<li>同时页面<em>内容的可控性降低</em>。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219114448.png" alt="" /></p>
+</li>
+</ul>
+<h2 id="页面导航设计"><a class="markdownIt-Anchor" href="#页面导航设计"></a> 页面导航设计</h2>
+<ul>
+<li>当Web系统的页面结构和页面布局确定之后，设计人员便可开始进行页面导航设计，其目标是使用户能够<em>方便地访问Web系统各个功能页面</em>。</li>
+<li>在页面导航设计中，需要定义Web系统的<em>导航结构、导航机制和导航语义</em>。</li>
+</ul>
+<h4 id="导航结构类型"><a class="markdownIt-Anchor" href="#导航结构类型"></a> 导航结构类型</h4>
+<h5 id="水平栏目导航"><a class="markdownIt-Anchor" href="#水平栏目导航"></a> 水平栏目导航</h5>
+<ul>
+<li>
+<p>在页面头部区域版块中，采用<em>水平栏目导航主菜单</em>，实现功能页面一级导航。在一级菜单下，还可以扩展二级菜单。</p>
+</li>
+<li>
+<p>水平栏目导航主菜单的区域长度受限，<em>其一级导航菜单数目有限</em>。</p>
+</li>
+<li>
+<p>适用于<em>业务简单，功能较少</em>的信息系统。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219150656.png" alt="" /></p>
+</li>
+</ul>
+<h5 id="垂直栏目导航"><a class="markdownIt-Anchor" href="#垂直栏目导航"></a> 垂直栏目导航</h5>
+<ul>
+<li>
+<p>在页面的<em>左侧区域垂直给出主菜单栏目</em>，它们实现功能页面一级导航,也可扩展二级导航。</p>
+</li>
+<li>
+<p>垂直方式<em>层级拓展性强，可支持更多栏目数</em>，但<em>减少了信息展示版块宽度，易受客户端显示器影响</em>。</p>
+</li>
+<li>
+<p>适用于<em>系统功能较多，需要频繁切换功能页面的信息系统</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219150925.png" alt="" /></p>
+</li>
+</ul>
+<h5 id="混合栏目导航"><a class="markdownIt-Anchor" href="#混合栏目导航"></a> 混合栏目导航</h5>
+<ul>
+<li>
+<p>混合栏目导航<em>同时在页面的顶部区域和左侧区域给出栏目导航菜单</em>。</p>
+</li>
+<li>
+<p>混合栏目导航方式层级与栏目扩展性强，适用于<em>功能模块多且复杂度较高的信息系统</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219151108.png" alt="" /></p>
+</li>
+</ul>
+<h5 id="页面内容导航"><a class="markdownIt-Anchor" href="#页面内容导航"></a> 页面内容导航</h5>
+<ul>
+<li>
+<p>典型的页面内容导航方式有<em>面包屑导航、超链导航、Tab标签导航等</em>。</p>
+</li>
+<li>
+<p>页面内容导航可提供更灵活的页面导航方式，适用于页面功能较多、交互关系复杂的人机交互。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219151316.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="导航机制"><a class="markdownIt-Anchor" href="#导航机制"></a> 导航机制</h3>
+<ul>
+<li>
+<p>导航机制是指Web系统提供的<em>页面导航元素及使能方式</em>。</p>
+</li>
+<li>
+<p>典型的页面导航元素有<em>NavMenu导航菜单、Breadcrumb ( 面包屑)导航链接、Tab导航标签、超文本导航链接、导航面板</em>等。</p>
+</li>
+<li>
+<p>导航使能方式通常为用户<em>在导航元素上触发的事件，如鼠标点击或快捷按键操作</em>。当事件出现后，<em>根据导航元素关联的链接进行页面跳转</em>。</p>
+</li>
+<li>
+<p>NavMenu导航菜单：</p>
+<p>​	<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219152446.png" alt="" /></p>
+</li>
+<li>
+<p>面包屑导航：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219152540.png" alt="" /></p>
+</li>
+<li>
+<p>Tab标签导航：</p>
+<p><img src="C:%5CUsers%5C12246%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211219152630626.png" alt="image-20211219152630626" /></p>
+</li>
+</ul>
+<h3 id="导航语义"><a class="markdownIt-Anchor" href="#导航语义"></a> 导航语义</h3>
+<ul>
+<li>导航语义是指用户完成系统一个功能操作的<em>页面导航流程</em>。</li>
+<li>示例：在登录页面中，若用户忘记密码，可以通过“密码找回”功能重置用户<br />
+密码。其“密码找回”链接导航语义的流程为:
+<ul>
+<li>“在登录页面中点取密码找回链接-&gt;在密码找回页面中输入用户账户和邮<br />
+箱信息-&gt;系统发送重置密码邮件-&gt;在邮件界面中点取重置页面链接-&gt;打开<br />
+重置密码页面-&gt;在重置密码页面中输入新密码和确认密码-&gt;系统显示密码<br />
+修改成功操作页面”</li>
+</ul>
+</li>
+</ul>
+<h2 id="页面输入设计"><a class="markdownIt-Anchor" href="#页面输入设计"></a> 页面输入设计</h2>
+<ul>
+<li>在Web系统中，数据输入是通过<em>页面表单</em>输入来实现的。页面表单是Web页面中一种用于组织数据输入到服务器的控件容器，它可以包含<em>文本输入框、复选框、单选按钮、列表框、文件域、按钮等控件</em>。</li>
+</ul>
+<h3 id="文本输入框"><a class="markdownIt-Anchor" href="#文本输入框"></a> 文本输入框</h3>
+<ul>
+<li>
+<p>文本输入框是一种用于<em>在表单中输入文本内容的控件</em>。在文本输入框控件属性中，可以定义输入文本为固定长度的字符串，也可不限制文本长度。</p>
+</li>
+<li>
+<p>文本输入框可以有<em>单行文本输入框、密码输入框、多行文本输入框，与数字输入框</em>等类型。</p>
+</li>
+<li>
+<p>在文本框控件属性中，还可<em>限定输入数据格式，这样输入数据可以进行格式校验检查</em>。</p>
+</li>
+<li>
+<p>在表单设计时，需要在<em>文本输入框，添加文本标签，用于提示用户输数据的内容是什么</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219153641.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="复选框"><a class="markdownIt-Anchor" href="#复选框"></a> 复选框</h3>
+<ul>
+<li>
+<p>复选框在表单中用于呈现<em>多个输入选项列表</em>。用户可以在复选框中选择多个选项，作为表单的输入数据。</p>
+</li>
+<li>
+<p>当用户提交表单执行后，选择的<em>复选框选项值被输入到系统</em>进行处理。</p>
+</li>
+<li>
+<p>在Web页面表单设计时，<em>复选框标签按照一定顺序放置</em>。</p>
+</li>
+<li>
+<p>每个特定的选项序列使用<em>不超过20个复选框</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219153840.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="单选按钮"><a class="markdownIt-Anchor" href="#单选按钮"></a> 单选按钮</h3>
+<ul>
+<li>
+<p>在表单中，单选按钮控件用于<em>输入单个选项值</em>。单选按钮呈现一个完整的、互斥的选项列表，每个选项前都有一个小圆圈。</p>
+</li>
+<li>
+<p>在Web表单设计时，单选按钮标签按照<em>一定顺序放置</em>。</p>
+</li>
+<li>
+<p>每个特定的选项序列使用<em>不超过6个单选按钮</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219154047.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="列表框"><a class="markdownIt-Anchor" href="#列表框"></a> 列表框</h3>
+<ul>
+<li>
+<p>列表框在表单中<em>用于列表选项输入</em>。在列表框中可以选择单个选项或多个选项。使用列表数据输入，可以<em>方便用户快速输入，并防止错误数据输入</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219154906.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="文件域"><a class="markdownIt-Anchor" href="#文件域"></a> 文件域</h3>
+<ul>
+<li>
+<p>文件域在表单中用于<em>文件上传输入</em>。文件域控件允许用户<em>从操作系统文件目录中选取文件上传</em>。</p>
+</li>
+<li>
+<p>在文件域控件属性中，可以<em>限定上传文件类型或文件大小</em>，以确保输入系统的文件有效性。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219155202.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="按钮"><a class="markdownIt-Anchor" href="#按钮"></a> 按钮</h3>
+<ul>
+<li>
+<p>在表单中，按钮控件用于<em>产生动作</em>，执行表单的脚本程序，实现数据输入处理。</p>
+</li>
+<li>
+<p>“提交”按钮的点击事件用于<em>触发表单提交脚本程序执行，实现输入数据写入系统</em>。</p>
+</li>
+<li>
+<p>“重置”按钮的点击事件用于<em>触发清除数据脚本程序执行，实现表单输入域数据的清除处理</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219155454.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="表单输入数据校验"><a class="markdownIt-Anchor" href="#表单输入数据校验"></a> 表单输入数据校验</h3>
+<ul>
+<li>
+<p>为了确保表单输入到信息系统中的数据是有效的，通常需要在页面表单中<em>编写脚本程序，对输入数据进行校验检查</em>。</p>
+</li>
+<li>
+<p>完整性校验：</p>
+<ul>
+<li>确保所有需要的数据都被输入</li>
+<li>如果数据输入被遗漏,页面反馈提示</li>
+</ul>
+</li>
+<li>
+<p>格式校验</p>
+<ul>
+<li>确保数据的格式符合要求</li>
+<li>如果数据输入格式不符合要求,页面拒绝输入</li>
+</ul>
+</li>
+<li>
+<p>范围校验</p>
+<ul>
+<li>确保数据在正确的最小值与最大值之间</li>
+<li>如果数据输入值不在范围内,页面拒绝输入</li>
+</ul>
+</li>
+<li>
+<p>数字校验</p>
+<ul>
+<li>确保数据为数值</li>
+<li>如果数据为非数字符号,页面拒绝输入</li>
+</ul>
+</li>
+<li>
+<p>一致性校验</p>
+<ul>
+<li>确保数据之间组合为有效</li>
+<li>如果数据输入的相关性不合理,页面拒绝输入</li>
+</ul>
+</li>
+<li>
+<p>数据库校验</p>
+<ul>
+<li>确保数据输入与系统数据库中数据匹配</li>
+<li>如果数据输入与数据库中数据不匹配,页面拒绝匹配输入</li>
+</ul>
+</li>
+</ul>
+<h2 id="页面输出设计"><a class="markdownIt-Anchor" href="#页面输出设计"></a> 页面输出设计</h2>
+<ul>
+<li>在任何信息系统中，结果数据输出都是信息系统应提供的基本功能。无论是在屏幕显示、报告打印、音视频呈现，还是数据文件输出，它们均可为用户提供结果数据输出服务。在Web系统中，实现<em>数据输出主要是以页面方式</em>来处理的。</li>
+<li>在Web系统中，页面数据输出有多种实现形式，它可以是<em>数据列表输出、数据统计图输出、数据报表输出</em>等形式。</li>
+</ul>
+<h3 id="数据列表输出"><a class="markdownIt-Anchor" href="#数据列表输出"></a> 数据列表输出</h3>
+<ul>
+<li>
+<p>在Web系统中，数据列表输出是一种<em>最基本</em>的页面输出实现形式，它可以将数据直接在页面中以列表方式输出。</p>
+</li>
+<li>
+<p>Web数据列表输出具有<em>结构简单、分隔明确</em>、易于用户快速扫描浏览并获取所需信息等特点。</p>
+</li>
+<li>
+<p>在数据列表交互层面，Web数据列表可以为用户提供<em>数据信息排序、搜索\筛选</em>，以及相关业务功能处理等操作。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219194527.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="数据统计图输出"><a class="markdownIt-Anchor" href="#数据统计图输出"></a> 数据统计图输出</h3>
+<ul>
+<li>
+<p>数据统计图输出是一种对用户直观的<em>数据可视化</em>呈现方式。在页面输出数据时，可以采多种图形(饼图、直方图、条形图、曲线图、散点图、雷达图、面积图等)方式给出数据统计信息。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219194735.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="数据报表输出"><a class="markdownIt-Anchor" href="#数据报表输出"></a> 数据报表输出</h3>
+<ul>
+<li>
+<p>数据报表也是一种以表格形式呈现结果数据的输出形式，但它与数据列表相比，可以提供更复杂的<em>数据统计处理</em>，其表格形式多样化，并可支持<em>打印或文档输出</em>。在信息系统中，数据报表使用非常普遍，它们为用户提供各类数据统计结果信息，可以<em>支持业务管理与决策服务</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219195001.png" alt="" /></p>
+</li>
+</ul>
+<h1 id="移动app软件gui设计"><a class="markdownIt-Anchor" href="#移动app软件gui设计"></a> 移动APP软件GUI设计</h1>
+<ul>
+<li>移动App是指基于移动终端设备(如智能手机、平板电脑、可穿戴设备等)的应用软件。移动App已广泛应用在信息系统中，成为用户普遍使用的应用软件。</li>
+<li>移动App软件与传统的电脑软件有较大不同，它基于有限软硬件资源的移动终端运行，并且需要面对<em>多种终端屏幕、多种终端操作系统、多种使用场景、移动通信网络、大量用户访问</em>的复杂应用情况。</li>
+<li>问题：
+<ul>
+<li>设计一个<em>适应多种屏幕尺寸、不同操作系统环境、不同嵌入式硬核技术、不同像素分辨率</em>的移动App应用界面具有一定难度。</li>
+<li>充分利用<em>移动终端传感器</em>为用户界面提供大量灵活交互是有难度的，并且在设计阶段进行处理可能是一个挑战。</li>
+<li>移动终端设备的<em>运行资源(CPU、 内存)是有限</em>的，针对一个需要较多数据处理的App应用来说，设计一个<em>快速运行的App用户界面</em>具有较大挑战性。</li>
+<li>移动应用市场正在<em>快速变化</em>。创新性和创造力使这个生态系统高度活跃。因此，移动App用户界面设计需要不断创新。</li>
+</ul>
+</li>
+</ul>
+<h2 id="移动app软件界面设计原则"><a class="markdownIt-Anchor" href="#移动app软件界面设计原则"></a> 移动APP软件界面设计原则</h2>
+<ul>
+<li>环境贴切原则：信息的表达需要<em>符合真实世界场景、用户心理预期和使用习惯</em>等。</li>
+<li>易取原则：移动App的系统<em>信息内容与操作控件可视化展示</em>，可降低用户的记忆负担。</li>
+<li>优美简约原则：为了让用户<em>快速获取有用信息</em>，可以采用简约设计原则。</li>
+<li>人性化帮助原则：适当的<em>信息提示</em>，为用户提供导引帮助。</li>
+<li>用户可控原则：用户对系统的<em>页面操作与使用自主可控</em>，<em>以用户为中心</em>组织功能界面。</li>
+<li>灵活高效原则：支持用户<em>快速高效达成目标</em>。</li>
+<li>防错原则：适当的<em>风险提示</em>可以防止用户错误操作，<em>重要操作需要二次确认</em>。</li>
+<li>容错原则：用户可<em>撤销、重做，恢复至原样</em>。</li>
+<li>系统状态可见原则：用户知道<em>当前所在位置可操作性和系统反馈均有视觉提示</em>。</li>
+<li>界面一致性原则：<em>界面风格、视觉语言与反馈效果</em>前后具有一致性。</li>
+</ul>
+<h2 id="总体界面结构"><a class="markdownIt-Anchor" href="#总体界面结构"></a> 总体界面结构</h2>
+<ul>
+<li>
+<p>在移动App软件GUI开发中，首先需要设计系统总体界面结构，将系统各个界面按照一定结构组织起来，让用户了解系统功能界面结构。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219201344.png" alt="" /></p>
+</li>
+</ul>
+<h2 id="界面布局设计"><a class="markdownIt-Anchor" href="#界面布局设计"></a> 界面布局设计</h2>
+<ul>
+<li>
+<p>移动App界面布局设计是指在App界面中<em>对内容文字、表格、图形、图像、视频等元素进行版面排布设计</em>。它需要对界面信息展示、界面主题内容、用户行为心理、用户功能操作等方面进行整体考虑。</p>
+</li>
+<li>
+<p>App界面的内容版块布局通常<em>采用垂直分布，从上到下依次进行排列</em>。</p>
+</li>
+<li>
+<p>不同内容版块的界面内容需要<em>以间隙进行区分</em>( 如20px间距)。</p>
+</li>
+<li>
+<p>若某些<em>界面元素本身带有效果</em>，可以有效区分不同内容，内容版块之间则无需间隙。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219201817.png" alt="" /></p>
+</li>
+</ul>
+<h2 id="界面导航设计"><a class="markdownIt-Anchor" href="#界面导航设计"></a> 界面导航设计</h2>
+<ul>
+<li>界面导航是移动App用户界面中不可缺少的组成部分，它们引导用户抵达目标界面。移动App用户界面导航主要有<em>标签导航、宫格导航、列表导航抽屉式导航、轮播导航</em>等多种形式。</li>
+</ul>
+<h3 id="底部标签导航"><a class="markdownIt-Anchor" href="#底部标签导航"></a> 底部标签导航</h3>
+<ul>
+<li>
+<p>底部标签导航位于界面底部，采用<em>文字加图标</em>的方式展现，一般有<em>3-5个标签</em>。它适合在相关的几类<em>核心功能模块中频繁地切换使用</em>。</p>
+</li>
+<li>
+<p>优点:使用户清楚当前所在的<em>入口位置</em>;直接展现最重要入口的内容信息。</p>
+</li>
+<li>
+<p>缺点:标签不宜超过5个，否则容易<em>分散注意力增加用户选择难度</em>。标签图标会占用一定的显示面积。如果用户使用<em>小屏幕手机，用户体验不是太好</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202236.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="顶部底部双标签导航"><a class="markdownIt-Anchor" href="#顶部底部双标签导航"></a> 顶部+底部双标签导航</h3>
+<ul>
+<li>
+<p>如果界面内容<em>分类与维度较多</em>，可采用顶部和底部结合的标签导航形式。</p>
+</li>
+<li>
+<p>例如腾讯新闻和网易新闻这种新闻类App，采用了顶部导航+底部导航结构，且加入手势切换的操作，<em>方便用户在高频的标签中快速切换，能带来更好地阅读体验</em>。</p>
+</li>
+<li>
+<p>优点:使用户清楚当前所在的<em>入口位置</em>;直接展现最重要入口的内容信息。</p>
+</li>
+<li>
+<p>缺点:最多5个标签。占用一定的高度，一般是图标加文字，如果用户使用<em>小屏幕手机，用户体验不是太好</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202538.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="舵式标签导航"><a class="markdownIt-Anchor" href="#舵式标签导航"></a> 舵式标签导航</h3>
+<ul>
+<li>
+<p>当界面有处于同一层级的几大部分内容，同时又需要一个非常重要且频繁操作的入口时，可以采用舵式标签导航。舵式标签导航可以看为底部标签式导航的一种变体。 它在后者的基础上，<em>强调了一个高频核心功能，并且放在中间</em>。</p>
+</li>
+<li>
+<p>优点:需要<em>突出</em>重要且频繁操作的入口。</p>
+</li>
+<li>
+<p>缺点:同标签导航，最多5个，<em>功能入口过多时，该模式显得笨重不实用</em>。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219202911.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="宫格导航"><a class="markdownIt-Anchor" href="#宫格导航"></a> 宫格导航</h3>
+<ul>
+<li>
+<p>宫格导航<em>将主要入口全部聚合在页面内</em>，让用户整体了解App的服务，从而选择自己需要的服务。<em>各个入口之间相互独立，没有太多的交集，无法跳转互通</em>。</p>
+</li>
+<li>
+<p>优点:导航<em>类目清晰,页面可容纳多种类目</em>，方便快速查找。</p>
+</li>
+<li>
+<p>缺点:</p>
+<ul>
+<li>信息<em>独立</em>，无法相互通达;</li>
+<li>不能直接展现入口内容，只能点击进去才能获知，容易形成<em>更深的路径</em>。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203130.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="列表导航"><a class="markdownIt-Anchor" href="#列表导航"></a> 列表导航</h3>
+<ul>
+<li>
+<p>列表导航主要用于<em>级别不多，标题内容较长的入口</em>。它通常用于<em>二级界面</em>，不会默认展示任何实质内容。这种导航<em>结构清晰</em>，易于理解，能够帮助用户快速定位相应界面。</p>
+</li>
+<li>
+<p>优点:<em>层次展现清晰</em>，可<em>展现内容较长</em>的标题，可展示<em>标题的次级内容</em>。</p>
+</li>
+<li>
+<p>缺点:</p>
+<ul>
+<li><em>同级过多</em>时，容易产生疲劳;</li>
+<li><em>排版灵活性不高</em>，只能通过排列顺序、颜色来区分各入口重要程度。</li>
+<li>一屏承载不下，用户需要<em>下拉</em>才能操作。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203413.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="抽屉式导航"><a class="markdownIt-Anchor" href="#抽屉式导航"></a> 抽屉式导航</h3>
+<ul>
+<li>
+<p>抽屉式导航与常用主导航搭配，<em>作于次级导航</em>。因为抽屉式导航的核心就是“藏”，隐藏低频操作的功能，如设置、关于、会员等功能，使用频率少，让核心功能更加突出。</p>
+</li>
+<li>
+<p>抽屉式菜单<em>隐藏在当前界面后，只要侧面滑动或者点击入口就能将其拉出来</em>，减少了主界面中导航控件的数量，让主界面更加干净利落。</p>
+</li>
+<li>
+<p>优点:</p>
+<ul>
+<li>节省界面展示<em>空间</em>;</li>
+<li>让用户<em>注意力聚焦</em>到当前界面;</li>
+<li>扩展性好;<em>不用担心小屏</em>手机用户体验问题。</li>
+</ul>
+</li>
+<li>
+<p>缺点:</p>
+<ul>
+<li><em>不适合频繁切换</em>的应用。</li>
+<li>次级功能入口比较隐藏，用户<em>不容易发现</em>，同时次级功能需要二次点击，增加用户<em>操作时间</em>。</li>
+</ul>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203816.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="轮播导航"><a class="markdownIt-Anchor" href="#轮播导航"></a> 轮播导航</h3>
+<ul>
+<li>
+<p>轮播导航也是一种常见的导航方式，使用者可以<em>向左或者向右滑动进行快速切换界面</em>，比较适合<em>界面层级较低的交互，几乎不需要进一步的交互</em>。</p>
+</li>
+<li>
+<p>优点:一般<em>不需要用户更多的点击操作，适合层级简单的应用</em>，一个界面基本就能满足需求。</p>
+</li>
+<li>
+<p>缺点:<em>不适合交互复杂</em>的App。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219203959.png" alt="" /></p>
+</li>
+</ul>
+<h2 id="交互设计"><a class="markdownIt-Anchor" href="#交互设计"></a> 交互设计</h2>
+<ul>
+<li>
+<p>在App应用中，交互是指用户与App应用之间发生的一系列<em>操作与信息反馈</em>App应用交互设计是定义用户与App应用之间交流的内容和结构，使之互相配合，共同达成某种目的。</p>
+</li>
+<li>
+<p>移动App交互设计与Web应用交互设计区别：</p>
+<ul>
+<li>用户与界面<em>交互方式</em>不同</li>
+<li>设备<em>尺寸</em>不同</li>
+<li>使用环境不同</li>
+<li>网络环境不同</li>
+<li><em>通知方式</em>不同</li>
+<li>基于<em>位置服务的精细度</em>不同</li>
+</ul>
+</li>
+<li>
+<p>移动App交互流程设计:交互流程设计是对用户完成<em>任务的交互点梳理</em>，并设计<em>交互操作流程</em>，以达到让用户顺利地完成相关任务功能。</p>
+</li>
+<li>
+<p>示例：</p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20211219204507.png" alt="" /></p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" title="第七章 用户界面设计" target="_blank" rel="external">http://www.zestaken.top/post/专业基础/软件系统架构设计/第七章 用户界面设计/index.html</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" title="第六章之二 设计模式"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
     <script>
-        (function(e) {
-            function t(t) {
-                for (var a, n, u = t[0], i = t[1], c = t[2], l = 0, p = []; l < u.length; l++) n = u[l], Object.prototype.hasOwnProperty.call(o, n) && o[n] && p.push(o[n][0]), o[n] = 0;
-                for (a in i) Object.prototype.hasOwnProperty.call(i, a) && (e[a] = i[a]);
-                f && f(t);
-                while (p.length) p.shift()();
-                return s.push.apply(s, c || []), r()
-            }
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
 
-            function r() {
-                for (var e, t = 0; t < s.length; t++) {
-                    for (var r = s[t], a = !0, n = 1; n < r.length; n++) {
-                        var u = r[n];
-                        0 !== o[u] && (a = !1)
-                    }
-                    a && (s.splice(t--, 1), e = i(i.s = r[0]))
-                }
-                return e
-            }
-            var a = {},
-                n = {
-                    runtime: 0
-                },
-                o = {
-                    runtime: 0
-                },
-                s = [];
+<script src="/js/insight.js"></script>
 
-            function u(e) {
-                return i.p + "static/js/" + ({
-                    404: "404",
-                    about: "about",
-                    archives: "archives",
-                    categories: "categories",
-                    page: "page",
-                    post: "post",
-                    result: "result",
-                    tags: "tags"
-                }[e] || e) + "." + {
-                    404: "00d640a8",
-                    about: "024aacd1",
-                    archives: "574ac664",
-                    categories: "90aa5475",
-                    page: "a02618ad",
-                    post: "cebfbaa4",
-                    result: "39470350",
-                    tags: "2ad613f5"
-                }[e] + ".js"
-            }
 
-            function i(t) {
-                if (a[t]) return a[t].exports;
-                var r = a[t] = {
-                    i: t,
-                    l: !1,
-                    exports: {}
-                };
-                return e[t].call(r.exports, r, r.exports, i), r.l = !0, r.exports
-            }
-            i.e = function(e) {
-                var t = [],
-                    r = {
-                        404: 1,
-                        about: 1,
-                        archives: 1,
-                        categories: 1,
-                        page: 1,
-                        post: 1,
-                        result: 1,
-                        tags: 1
-                    };
-                n[e] ? t.push(n[e]) : 0 !== n[e] && r[e] && t.push(n[e] = new Promise((function(t, r) {
-                    for (var a = "static/css/" + ({
-                            404: "404",
-                            about: "about",
-                            archives: "archives",
-                            categories: "categories",
-                            page: "page",
-                            post: "post",
-                            result: "result",
-                            tags: "tags"
-                        }[e] || e) + "." + {
-                            404: "1a6cd5bd",
-                            about: "32dfa3b0",
-                            archives: "c0d49bd5",
-                            categories: "10e2be12",
-                            page: "749ad047",
-                            post: "9f951a60",
-                            result: "10e2be12",
-                            tags: "10e2be12"
-                        }[e] + ".css", o = i.p + a, s = document.getElementsByTagName("link"), u = 0; u < s.length; u++) {
-                        var c = s[u],
-                            l = c.getAttribute("data-href") || c.getAttribute("href");
-                        if ("stylesheet" === c.rel && (l === a || l === o)) return t()
-                    }
-                    var p = document.getElementsByTagName("style");
-                    for (u = 0; u < p.length; u++) {
-                        c = p[u], l = c.getAttribute("data-href");
-                        if (l === a || l === o) return t()
-                    }
-                    var f = document.createElement("link");
-                    f.rel = "stylesheet", f.type = "text/css", f.onload = t, f.onerror = function(t) {
-                        var a = t && t.target && t.target.src || o,
-                            s = new Error("Loading CSS chunk " + e + " failed.\n(" + a + ")");
-                        s.code = "CSS_CHUNK_LOAD_FAILED", s.request = a, delete n[e], f.parentNode.removeChild(f), r(s)
-                    }, f.href = o;
-                    var d = document.getElementsByTagName("head")[0];
-                    d.appendChild(f)
-                })).then((function() {
-                    n[e] = 0
-                })));
-                var a = o[e];
-                if (0 !== a)
-                    if (a) t.push(a[2]);
-                    else {
-                        var s = new Promise((function(t, r) {
-                            a = o[e] = [t, r]
-                        }));
-                        t.push(a[2] = s);
-                        var c, l = document.createElement("script");
-                        l.charset = "utf-8", l.timeout = 120, i.nc && l.setAttribute("nonce", i.nc), l.src = u(e);
-                        var p = new Error;
-                        c = function(t) {
-                            l.onerror = l.onload = null, clearTimeout(f);
-                            var r = o[e];
-                            if (0 !== r) {
-                                if (r) {
-                                    var a = t && ("load" === t.type ? "missing" : t.type),
-                                        n = t && t.target && t.target.src;
-                                    p.message = "Loading chunk " + e + " failed.\n(" + a + ": " + n + ")", p.name = "ChunkLoadError", p.type = a, p.request = n, r[1](p)
-                                }
-                                o[e] = void 0
-                            }
-                        };
-                        var f = setTimeout((function() {
-                            c({
-                                type: "timeout",
-                                target: l
-                            })
-                        }), 12e4);
-                        l.onerror = l.onload = c, document.head.appendChild(l)
-                    }
-                return Promise.all(t)
-            }, i.m = e, i.c = a, i.d = function(e, t, r) {
-                i.o(e, t) || Object.defineProperty(e, t, {
-                    enumerable: !0,
-                    get: r
-                })
-            }, i.r = function(e) {
-                "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-                    value: "Module"
-                }), Object.defineProperty(e, "__esModule", {
-                    value: !0
-                })
-            }, i.t = function(e, t) {
-                if (1 & t && (e = i(e)), 8 & t) return e;
-                if (4 & t && "object" === typeof e && e && e.__esModule) return e;
-                var r = Object.create(null);
-                if (i.r(r), Object.defineProperty(r, "default", {
-                        enumerable: !0,
-                        value: e
-                    }), 2 & t && "string" != typeof e)
-                    for (var a in e) i.d(r, a, function(t) {
-                        return e[t]
-                    }.bind(null, a));
-                return r
-            }, i.n = function(e) {
-                var t = e && e.__esModule ? function() {
-                    return e["default"]
-                } : function() {
-                    return e
-                };
-                return i.d(t, "a", t), t
-            }, i.o = function(e, t) {
-                return Object.prototype.hasOwnProperty.call(e, t)
-            }, i.p = "/", i.oe = function(e) {
-                throw console.error(e), e
-            };
-            var c = window["webpackJsonp"] = window["webpackJsonp"] || [],
-                l = c.push.bind(c);
-            c.push = t, c = c.slice();
-            for (var p = 0; p < c.length; p++) t(c[p]);
-            var f = l;
-            r()
-        })([]);
-    </script>
-    <script src="/static/js/chunk-libs.dc6146cd.js"></script>
-    <script src="/static/js/app.6d2c358d.js"></script>
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
+    appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
 </body>
-
 </html>
