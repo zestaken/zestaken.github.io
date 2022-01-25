@@ -18,12 +18,12 @@
   
   
   <title>C语言-指针 | Hexo</title>
-  <meta name="description" content="指针的基本概念  指针就是地址，而指针变量就是存储地址的变量。 指针变量的声明：在普通变量声明的基础上加上*:  如指向int类型对象的指针变量：int *p;   取地址运算符：用于获取变量的地址，来给指针变量赋值。  示例：  int i, *p; p &#x3D; &amp;i;  间接寻址运算符：用于访问指针变量指向的对象的内容。  示例：  int i, *p; p &#x3D; &amp;a">
+  <meta name="description" content="指针的基本概念  &#x3D;&#x3D;指针就是地址，而指针变量就是存储地址的变量&#x3D;&#x3D;。 指针变量的声明：在普通变量声明的基础上加上*:  如指向int类型对象的指针变量：int *p;   取地址运算符：用于获取变量的地址，来给指针变量赋值。  示例：  int i, *p; p &#x3D; &amp;i;  间接寻址运算符：用于访问指针变量指向的对象的内容。  示例：  int i, *p; p &amp;#x3D">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言-指针">
 <meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E6%8C%87%E9%92%88/index.html">
 <meta property="og:site_name" content="ZestJourney">
-<meta property="og:description" content="指针的基本概念  指针就是地址，而指针变量就是存储地址的变量。 指针变量的声明：在普通变量声明的基础上加上*:  如指向int类型对象的指针变量：int *p;   取地址运算符：用于获取变量的地址，来给指针变量赋值。  示例：  int i, *p; p &#x3D; &amp;i;  间接寻址运算符：用于访问指针变量指向的对象的内容。  示例：  int i, *p; p &#x3D; &amp;a">
+<meta property="og:description" content="指针的基本概念  &#x3D;&#x3D;指针就是地址，而指针变量就是存储地址的变量&#x3D;&#x3D;。 指针变量的声明：在普通变量声明的基础上加上*:  如指向int类型对象的指针变量：int *p;   取地址运算符：用于获取变量的地址，来给指针变量赋值。  示例：  int i, *p; p &#x3D; &amp;i;  间接寻址运算符：用于访问指针变量指向的对象的内容。  示例：  int i, *p; p &amp;#x3D">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-25T09:05:47.000Z">
 <meta property="article:modified_time" content="2021-05-29T09:49:50.584Z">
@@ -45,22 +45,22 @@
   
   
   
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.1"></head>
 
 
-<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
       
       
       <div class="profile-block text-center">
-        <a id="avatar" href="https://github.com/cofess" target="_blank">
+        <a id="avatar" href="https://github.com/zestaken" target="_blank">
           <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
-        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h2 id="name" class="hidden-xs hidden-sm">Zestaken</h2>
         <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 成都, 中国</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -96,7 +96,7 @@
       </button>
     </div>
     <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
-      <ul class="nav navbar-nav main-nav ">
+      <ul class="nav navbar-nav main-nav menu-highlight">
         
         
         <li class="menu-item menu-item-home">
@@ -183,7 +183,7 @@
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        <li><a href="https://github.com/zestaken" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
         <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
         
@@ -227,16 +227,6 @@
     
       
   <div class="widget">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/" rel="tag">AJAX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arch/" rel="tag">Arch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BeanUtils/" rel="tag">BeanUtils</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BootStrap/" rel="tag">BootStrap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Druid/" rel="tag">Druid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">EL表达式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/" rel="tag">Filter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCC/" rel="tag">GCC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDB/" rel="tag">GDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDFS/" rel="tag">HDFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDBC/" rel="tag">JDBC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JQuery/" rel="tag">JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/" rel="tag">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSP/" rel="tag">JSP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSTL/" rel="tag">JSTL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Junit/" rel="tag">Junit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Listener/" rel="tag">Listener</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/" rel="tag">MVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MakeFile/" rel="tag">MakeFile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis/" rel="tag">Mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Numpy/" rel="tag">Numpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pandas/" rel="tag">Pandas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scikit-Learn/" rel="tag">Scikit-Learn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMVC/" rel="tag">SpringMVC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TF-IDF/" rel="tag">TF-IDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM/" rel="tag">VIM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/" rel="tag">XML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%B1%8D/" rel="tag">书籍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag">会话技术</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" rel="tag">余弦相似度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" rel="tag">机器学习算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag">杂技术</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" rel="tag">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" rel="tag">编译原理</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91/" rel="tag">视频</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">软件系统架构设计</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" rel="tag">黄金矿工</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-    
-      
-  <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
       <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
@@ -246,21 +236,21 @@
     
       
   <div class="widget">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">二月 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">4</span></li></ul>
-    </div>
-  </div>
-
-
-    
-      
-  <div class="widget">
     <h3 class="widget-title">最新文章</h3>
     <div class="widget-body">
-      <ul class="recent-post-list list-unstyled no-thumbnail">
+      <ul class="recent-post-list list-unstyled ">
         
           <li>
+            
+            <div class="item-thumb">
+              <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
             
             <div class="item-inner">
               <p class="item-category">
@@ -277,6 +267,16 @@
           
           <li>
             
+            <div class="item-thumb">
+              <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
             <div class="item-inner">
               <p class="item-category">
                 <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
@@ -291,6 +291,16 @@
           </li>
           
           <li>
+            
+            <div class="item-thumb">
+              <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
             
             <div class="item-inner">
               <p class="item-category">
@@ -307,6 +317,16 @@
           
           <li>
             
+            <div class="item-thumb">
+              <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
             <div class="item-inner">
               <p class="item-category">
                 <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
@@ -321,6 +341,16 @@
           </li>
           
           <li>
+            
+            <div class="item-thumb">
+              <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
             
             <div class="item-inner">
               <p class="item-category">
@@ -384,13 +414,20 @@
 
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E6%8C%87%E9%92%88/index.html#comments" class="article-comment-link">评论</a></span>
         
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2.9k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 11(分)</span>
+	
+
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <h1 id="指针的基本概念"><a class="markdownIt-Anchor" href="#指针的基本概念"></a> 指针的基本概念</h1>
 <ul>
-<li><mark>指针就是地址，而指针变量就是存储地址的变量</mark>。</li>
+<li>==指针就是地址，而指针变量就是存储地址的变量==。</li>
 <li>指针变量的声明：在普通变量声明的基础上加上<code>*</code>:
 <ul>
 <li>如指向int类型对象的指针变量：<code>int *p;</code></li>
@@ -412,7 +449,7 @@ p &#x3D; &amp;i;
 i &#x3D; *p;</code></pre>
 <ul>
 <li>不要混淆间接寻址运算符和指针变量的声明时的<code>*</code>的功能。</li>
-<li><code>*p</code>相当于<code>i</code>的<mark>别名</mark>，对<code>*p</code>执行的任何操作，与直接对<code>i</code>做操作的效果一样。</li>
+<li><code>*p</code>相当于<code>i</code>的==别名==，对<code>*p</code>执行的任何操作，与直接对<code>i</code>做操作的效果一样。</li>
 </ul>
 </li>
 </ul>
@@ -426,7 +463,7 @@ i &#x3D; *p;</code></pre>
 p &#x3D; &amp;a[0];
 *p &#x3D; 5;</code></pre>
 <ul>
-<li>如果<mark>指针指向数组元素，那么对该指针进行算运算</mark>就是有意义的：
+<li>如果==指针指向数组元素，那么对该指针进行算运算==就是有意义的：
 <ol>
 <li><strong>指针加上整数</strong>：指针加上整数，代表该指针指向更右边数组的元素，如<code>int *p = &amp;a[0]</code>，给p加上2之后，p指向<code>a[2]</code></li>
 <li><strong>指针减去整数</strong>：指针减去整数，代表该指针指向更左边数组的元素，如<code>int *p = a[2]</code>，给p减去2之后，p指向<code>a[0]</code></li>
@@ -439,22 +476,22 @@ p &#x3D; &amp;a[0];
 <ul>
 <li>如：<code>int a[2] = &#123;0, 1, 2&#125;; int *p = a;</code></li>
 <li>实质是p指向该数组的第一个元素<code>a[0]</code></li>
-<li><mark>数组的名字实质上是指向数组第一个元素的指针</mark></li>
+<li>==数组的名字实质上是指向数组第一个元素的指针==</li>
 <li>不能给数组名赋值。</li>
 </ul>
 </li>
 <li><strong>数组型形式参数</strong>：
 <ul>
-<li>在将数组作为形式参数传递给函数的时候，实际传递的是<mark>指向该数组的第一个元素的指针（或者说是数组名）</mark>。</li>
-<li><mark>声明形式参数为指针就相当于声明变量为数组</mark>(但是普通变量不可以这样理解），可以<mark>将数组型形式参数声明为指针</mark>，如：<code>int function(int a[], int n)</code>与<code>int function(int *a, int n)</code>等价。</li>
-<li>可以给函数传递<mark>数组的片段</mark>，如：<code>function(&amp;a[6], 10)</code></li>
+<li>在将数组作为形式参数传递给函数的时候，实际传递的是==指向该数组的第一个元素的指针（或者说是数组名）==。</li>
+<li>==声明形式参数为指针就相当于声明变量为数组==(但是普通变量不可以这样理解），可以==将数组型形式参数声明为指针==，如：<code>int function(int a[], int n)</code>与<code>int function(int *a, int n)</code>等价。</li>
+<li>可以给函数传递==数组的片段==，如：<code>function(&amp;a[6], 10)</code></li>
 </ul>
 </li>
 <li><strong>用指针作为数组名</strong>：
 <ul>
-<li>可以将指针看做数组名进行<mark>取下标操作</mark>。</li>
+<li>可以将指针看做数组名进行==取下标操作==。</li>
 <li>编译器将<code>p[i]</code>看做`*(p+i)。</li>
-<li>对指针进行取下标操作的前提是:<mark>该指针是指向了一个数组的首元素</mark>。</li>
+<li>对指针进行取下标操作的前提是:==该指针是指向了一个数组的首元素==。</li>
 <li>示例：</li>
 </ul>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">int a[10], *p;
@@ -498,10 +535,10 @@ p &#x3D; a[2];</code></pre>
 </li>
 <li><strong>指向一维数组的指针</strong>：
 <ul>
-<li>对一维数组，我们常用的指针是指向<mark>数组的第一个元素的</mark>；</li>
-<li>可以定义<mark>指向一个一维数组的指针</mark>：<code>int (*p)[10]</code>,这是声明了一个指向长度为10的整型数组的指针p；</li>
-<li>对于二维数组，可以看做是<mark>一个每个元素都是一维数组的一维数组</mark>；</li>
-<li>使用指向数组的指针来<mark>按行遍历二维数组</mark>：</li>
+<li>对一维数组，我们常用的指针是指向==数组的第一个元素的==；</li>
+<li>可以定义==指向一个一维数组的指针==：<code>int (*p)[10]</code>,这是声明了一个指向长度为10的整型数组的指针p；</li>
+<li>对于二维数组，可以看做是==一个每个元素都是一维数组的一维数组==；</li>
+<li>使用指向数组的指针来==按行遍历二维数组==：</li>
 </ul>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">int a[10][11], (*p)[10];
 &#x2F;&#x2F;省去数组赋值等
@@ -516,13 +553,13 @@ for(p &#x3D; &amp;a[0]; p &lt; &amp;a[10]; p++) &#123;
 </li>
 <li><strong>用多维数组名作为指针</strong>：
 <ul>
-<li>二维数组的<mark>数组名是一个指向一维数组的指针</mark>，例如<code>int a[10][10]</code>的数组名<code>a</code>代表的意思是<code>&amp;a[0]</code>。</li>
+<li>二维数组的==数组名是一个指向一维数组的指针==，例如<code>int a[10][10]</code>的数组名<code>a</code>代表的意思是<code>&amp;a[0]</code>。</li>
 </ul>
 </li>
 <li><strong>多维数组的长度</strong>：
 <ul>
-<li>对于<mark>一维数组在声明时就赋值的情况下，可以省略数组的长度</mark>，如：<code>int a[] = &#123;1, 2&#125;</code></li>
-<li><mark>二维数组在声明时就赋值可以省略第一维的长度</mark>,最后的二维数组的每一维的长度都是每一行的数组的长度是<mark>根据最长的数组的长度来确定</mark>的。如果有一些行的数据不够填满整行，那么C语言<mark>会用空字符<code>\0</code>来填补</mark>。</li>
+<li>对于==一维数组在声明时就赋值的情况下，可以省略数组的长度==，如：<code>int a[] = &#123;1, 2&#125;</code></li>
+<li>==二维数组在声明时就赋值可以省略第一维的长度==,最后的二维数组的每一维的长度都是每一行的数组的长度是==根据最长的数组的长度来确定==的。如果有一些行的数据不够填满整行，那么C语言==会用空字符<code>\0</code>来填补==。</li>
 </ul>
 </li>
 </ul>
@@ -531,12 +568,12 @@ for(p &#x3D; &amp;a[0]; p &lt; &amp;a[10]; p++) &#123;
 <ul>
 <li><strong>字符串字面量</strong>：
 <ul>
-<li>字符串是一个<mark>字符数组</mark>；</li>
-<li>字符串字面量就是这个数组的数组名，<mark>是一个<code>char *</code>类型的指针</mark>。</li>
-<li>字符串字面量是<mark>不能被修改的</mark></li>
+<li>字符串是一个==字符数组==；</li>
+<li>字符串字面量就是这个数组的数组名，==是一个<code>char *</code>类型的指针==。</li>
+<li>字符串字面量是==不能被修改的==</li>
 </ul>
 </li>
-<li>创建一个二维数组，按照每行一个字符串(<mark>一维字符数组</mark>)的方式，将一系列字符串存入一个数组中。</li>
+<li>创建一个二维数组，按照每行一个字符串(==一维字符数组==)的方式，将一系列字符串存入一个数组中。</li>
 <li>示例：</li>
 </ul>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">char planets[][8] &#x3D; &#123; &quot;Mercury&quot;, &quot;Venus&quot;, &quot;Earth&quot;,
@@ -599,7 +636,7 @@ int main(int argc, char* argv[]) &#123;
 &#125;</code></pre>
 <h1 id="动态存储分配"><a class="markdownIt-Anchor" href="#动态存储分配"></a> 动态存储分配</h1>
 <ul>
-<li><strong>动态存储分配</strong>：在程序<mark>运行期间</mark>分配内存单元的能力</li>
+<li><strong>动态存储分配</strong>：在程序==运行期间==分配内存单元的能力</li>
 <li>内存分配函数所获得的内存块都来自一个称为**堆（heap）**的存储池。</li>
 <li><strong>内存分配函数</strong>有三种，都是声明在<code>&lt;stdlib.h&gt;</code>头中的：
 <ol>
@@ -612,23 +649,23 @@ int main(int argc, char* argv[]) &#123;
 <li><strong><code>calloc</code>函数</strong>：分配内存块，并且对内存块进行清零。
 <ul>
 <li>原型：<code>void *calloc(size_t nmemb, size_t size);</code>,calloc函数为nmemb个元素的数组分配内存空间，其中每个元素的长度都是size个字节。</li>
-<li>在分配了内存之后，calloc函数会<mark>通过把所有位设置为0的方式进行初始化</mark>。</li>
-<li>将nemeb设为1，可以为<mark>任何类型的数据项分配内存</mark>。</li>
+<li>在分配了内存之后，calloc函数会==通过把所有位设置为0的方式进行初始化==。</li>
+<li>将nemeb设为1，可以为==任何类型的数据项分配内存==。</li>
 <li>示例：<code>int *a = calloc(n, sizeof(int))</code>，为长度为n的int型数组分配空间。</li>
 </ul>
 </li>
 <li><strong><code>realloc</code>函数</strong>：调整先前分配的内存块大小。
 <ul>
-<li>原型：<code>void *realloc(void *ptr, size_t size);</code>,调用realloc函数时，<mark>ptr必须指向先前通过malloc，calloc或realloc的调用获得的内存块</mark>。size表示内存块的新尺寸。</li>
-<li>如果realloc<mark>以空指针作为第一个实际参数，那么它的行为就行malloc函数一样</mark>。</li>
-<li>如果realloc<mark>以0作为第二个实际参数，那么它会释放掉内存块</mark>。</li>
+<li>原型：<code>void *realloc(void *ptr, size_t size);</code>,调用realloc函数时，==ptr必须指向先前通过malloc，calloc或realloc的调用获得的内存块==。size表示内存块的新尺寸。</li>
+<li>如果realloc==以空指针作为第一个实际参数，那么它的行为就行malloc函数一样==。</li>
+<li>如果realloc==以0作为第二个实际参数，那么它会释放掉内存块==。</li>
 </ul>
 </li>
 </ol>
 </li>
 <li><strong>内存分配函数的返回值</strong>：
 <ul>
-<li><strong><code>void *</code></strong>:内存分配函数会返回<code>void *</code>类型的值，该类型的指针是<mark>通用指针</mark>，指向分配的内存。
+<li><strong><code>void *</code></strong>:内存分配函数会返回<code>void *</code>类型的值，该类型的指针是==通用指针==，指向分配的内存。
 <ul>
 <li>可以将==<code>void *</code>类型的变量赋给任意类型的指针变量。</li>
 </ul>
@@ -637,9 +674,9 @@ int main(int argc, char* argv[]) &#123;
 </li>
 <li><strong>空指针</strong>：
 <ul>
-<li>当找不到需要的足够大的内存块时，内存分配函数会返回<mark>空指针</mark>；</li>
-<li>空指针是<mark>不指向任何地方的指针</mark>，这是一个用于区别于所有有效指针的特殊值。</li>
-<li>测试内存分配函数的返回值是否是空指针，用来<mark>判断内存分配是否成功</mark>。</li>
+<li>当找不到需要的足够大的内存块时，内存分配函数会返回==空指针==；</li>
+<li>空指针是==不指向任何地方的指针==，这是一个用于区别于所有有效指针的特殊值。</li>
+<li>测试内存分配函数的返回值是否是空指针，用来==判断内存分配是否成功==。</li>
 <li><strong>NULL</strong>宏：空指针用NULL宏来表示。NULL宏在多个头（包括<code>&lt;stido.h&gt;</code>和<code>&lt;stdlib.h&gt;</code>）中都有定义。</li>
 </ul>
 </li>
@@ -648,8 +685,8 @@ int main(int argc, char* argv[]) &#123;
 <li><strong><code>free()</code>函数</strong>：
 <ul>
 <li>原型：<code>void free(void *ptr)</code></li>
-<li><mark>调用free函数会释放掉ptr指针指向的内存块</mark></li>
-<li>free函数的实际参数必须是<mark>先前由内存分配函数返回的指针</mark>。</li>
+<li>==调用free函数会释放掉ptr指针指向的内存块==</li>
+<li>free函数的实际参数必须是==先前由内存分配函数返回的指针==。</li>
 </ul>
 </li>
 </ul>
@@ -657,7 +694,7 @@ int main(int argc, char* argv[]) &#123;
 </ul>
 <h1 id="指向函数的指针"><a class="markdownIt-Anchor" href="#指向函数的指针"></a> 指向函数的指针</h1>
 <ul>
-<li>如果在程序中定义了一个函数，那么在编译时系统就会为这个函数代码分配一段存储空间，这段<mark>存储空间的首地址</mark>称为这个函数的地址,而且<mark>函数名表示的就是这个地址</mark>。</li>
+<li>如果在程序中定义了一个函数，那么在编译时系统就会为这个函数代码分配一段存储空间，这段==存储空间的首地址==称为这个函数的地址,而且==函数名表示的就是这个地址==。</li>
 <li><strong>函数指针</strong>；用一个指针变量来存储函数的地址。</li>
 <li><strong>函数指针的声明</strong>：
 <ul>
@@ -706,13 +743,13 @@ int result &#x3D; p(5);</code></pre>
   <div class="panel-body">
     <figure class="media">
       <div class="media-left">
-        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+        <a href="https://github.com/zestaken" target="_blank" class="img-burn thumb-sm visible-lg">
           <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
-        <div>个人简介。</div>
+        <h3 class="media-heading"><a href="https://github.com/zestaken" target="_blank"><span class="text-dark">Zestaken</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>吾好梦中读书~</div>
       </div>
     </figure>
   </div>
@@ -751,12 +788,6 @@ int result &#x3D; p(5);</code></pre>
   </ul>
   
   
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
-  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
-    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
-  </div> -->
-  
   
   <div class="bar-right">
     
@@ -766,48 +797,6 @@ int result &#x3D; p(5);</code></pre>
   </div>
 </nav>
   
-<!-- Modal -->
-<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content donate">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div class="modal-body">
-        <div class="donate-box">
-          <div class="donate-head">
-            <p>感谢您的支持，我会继续努力的!</p>
-          </div>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
-              <div class="donate-payimg">
-                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
-              <div class="donate-payimg">
-                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
-            </div>
-          </div>
-          <div class="donate-footer">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
-              </li>
-              <li role="presentation" class="">
-                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
 </main>
@@ -817,7 +806,7 @@ int result &#x3D; p(5);</code></pre>
 	
     <ul class="social-links">
     	
-        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        <li><a href="https://github.com/zestaken" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
         <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
         
@@ -889,7 +878,7 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
   new Valine({
     el: '#vcomments',
     verify: false,
-    notify: false,
+    notify: true,
     appId: 'h98mBawWMGWDX2pRbqR76Uam-MdYXbMMI',
     appKey: '6uLeU9pPM9hLQGnXmmQ2KNby',
     placeholder: 'Just go go',
