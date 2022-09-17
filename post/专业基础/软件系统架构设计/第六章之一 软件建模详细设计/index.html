@@ -18,71 +18,71 @@
   
   
   <title>第六章之一 软件建模详细设计 | Zestaken</title>
-  <meta name="description" content="软件建模详细设计概述  软件详细建模设计目标  软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细 化设计，给出软件程序实现的设计方案。   软件建模详细设计原则  1. 开闭原则  软件实体(对象、类、模块等)应该对扩展开放性，对修改具有封闭性。 当应用的需求改变时，在不修改软件实体源代码的前提下，就可以扩展模块的功能，使其满足新的需求。 示例：环境监测器设计   2. 里氏(">
+  <meta name="description" content="软件建模详细设计概述  软件详细建模设计目标  软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细 &#x2F;化设计，给出软件程序实现的设计方案。   软件建模详细设计原则  1. 开闭原则  软件实体(对象、类、模块等)应该对扩展开放性，对修改具有封闭性。 当应用的需求改变时，在不修改软件实体源代码的前提下，就可以扩展模块的功能，使其满足新的需求。 示例：环境监测器设计   2. 里氏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第六章之一 软件建模详细设计">
 <meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="ZestJourney">
-<meta property="og:description" content="软件建模详细设计概述  软件详细建模设计目标  软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细 化设计，给出软件程序实现的设计方案。   软件建模详细设计原则  1. 开闭原则  软件实体(对象、类、模块等)应该对扩展开放性，对修改具有封闭性。 当应用的需求改变时，在不修改软件实体源代码的前提下，就可以扩展模块的功能，使其满足新的需求。 示例：环境监测器设计   2. 里氏(">
+<meta property="og:description" content="软件建模详细设计概述  软件详细建模设计目标  软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细 &#x2F;化设计，给出软件程序实现的设计方案。   软件建模详细设计原则  1. 开闭原则  软件实体(对象、类、模块等)应该对扩展开放性，对修改具有封闭性。 当应用的需求改变时，在不修改软件实体源代码的前提下，就可以扩展模块的功能，使其满足新的需求。 示例：环境监测器设计   2. 里氏">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/wPgX4w.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/KwT7Rl.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/m8X9ps.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/XPxjzA.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/6pzJGO.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oLAOlV.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/djPc0j.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/rBiKnV.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oFdBtc.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ZQSWvS.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/VZp5wA.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oZc1Fu.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/48HEDl.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/nzvwKp.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/d2RvL0.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/77h9UX.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/k3rzch.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/I0UhnY.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/X2MMgm.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/j6u5ek.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/emMMbZ.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/SHSLoP.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/lJfSEy.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/iHlDxd.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Xyz2vI.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/SbbRXD.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/MiqH8z.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Vx0RzE.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/DrfvCq.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/d2RZkk.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/dqdpn9.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/h5UlbG.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/gnnnaf.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/qTMnO1.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/it3FXA.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/WfFExZ.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/EJr4kH.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/lGLv58.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/owESJg.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/yw6sbQ.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/YNKbaS.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/hvyUOP.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/USbggw.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ZiwPMG.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tglWvq.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/NaCoRt.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/9XSY6g.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/vpGhq4.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/sM5Kkx.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ntfitw.png">
-<meta property="og:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Wk8bUo.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/wPgX4w.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/KwT7Rl.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/m8X9ps.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/XPxjzA.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/6pzJGO.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oLAOlV.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/djPc0j.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/rBiKnV.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oFdBtc.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZQSWvS.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/VZp5wA.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oZc1Fu.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/48HEDl.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/nzvwKp.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/d2RvL0.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/77h9UX.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/k3rzch.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/I0UhnY.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/X2MMgm.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/j6u5ek.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/emMMbZ.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SHSLoP.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/lJfSEy.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/iHlDxd.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Xyz2vI.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SbbRXD.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/MiqH8z.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Vx0RzE.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/DrfvCq.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/d2RZkk.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/dqdpn9.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/h5UlbG.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/gnnnaf.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/qTMnO1.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/it3FXA.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/WfFExZ.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/EJr4kH.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/lGLv58.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/owESJg.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/yw6sbQ.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/YNKbaS.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/hvyUOP.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/USbggw.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZiwPMG.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tglWvq.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/NaCoRt.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/9XSY6g.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/vpGhq4.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/sM5Kkx.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ntfitw.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Wk8bUo.png">
 <meta property="article:published_time" content="2021-11-29T03:29:19.000Z">
-<meta property="article:modified_time" content="2021-12-17T09:41:46.720Z">
+<meta property="article:modified_time" content="2022-09-17T11:29:23.905Z">
 <meta property="article:author" content="Zestaken">
 <meta property="article:tag" content="软件工程">
 <meta property="article:tag" content="软件系统架构设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/wPgX4w.png">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/wPgX4w.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html">
   
@@ -252,7 +252,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">77</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/">LeetCode</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">15</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><span class="category-list-count">83</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/">Linux</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/">Python</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/">Web前端</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/">Web后端</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/">杂技术</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87/">文</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -262,7 +262,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.55px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.18px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.18px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.82px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.45px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.45px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.09px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.73px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.09px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.55px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.64px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.27px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.82px;">数据结构</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.09px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.36px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.91px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.18px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.64px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.64px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
+      <a href="/tags/AJAX/" style="font-size: 13px;">AJAX</a> <a href="/tags/Arch/" style="font-size: 13px;">Arch</a> <a href="/tags/BeanUtils/" style="font-size: 13px;">BeanUtils</a> <a href="/tags/BootStrap/" style="font-size: 13px;">BootStrap</a> <a href="/tags/C/" style="font-size: 13.5px;">C</a> <a href="/tags/CSS/" style="font-size: 13px;">CSS</a> <a href="/tags/Docker/" style="font-size: 13px;">Docker</a> <a href="/tags/Druid/" style="font-size: 13px;">Druid</a> <a href="/tags/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 13px;">EL表达式</a> <a href="/tags/Filter/" style="font-size: 13px;">Filter</a> <a href="/tags/GCC/" style="font-size: 13px;">GCC</a> <a href="/tags/GDB/" style="font-size: 13px;">GDB</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HDFS/" style="font-size: 13px;">HDFS</a> <a href="/tags/HTML/" style="font-size: 13px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 13px;">HTTP</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/JDBC/" style="font-size: 13px;">JDBC</a> <a href="/tags/JQuery/" style="font-size: 13px;">JQuery</a> <a href="/tags/JS/" style="font-size: 13.17px;">JS</a> <a href="/tags/JSON/" style="font-size: 13px;">JSON</a> <a href="/tags/JSP/" style="font-size: 13.17px;">JSP</a> <a href="/tags/JSTL/" style="font-size: 13px;">JSTL</a> <a href="/tags/Java/" style="font-size: 13.83px;">Java</a> <a href="/tags/Junit/" style="font-size: 13px;">Junit</a> <a href="/tags/LeetCode/" style="font-size: 13.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.42px;">Linux</a> <a href="/tags/Listener/" style="font-size: 13px;">Listener</a> <a href="/tags/MVC/" style="font-size: 13px;">MVC</a> <a href="/tags/MakeFile/" style="font-size: 13px;">MakeFile</a> <a href="/tags/Markdown/" style="font-size: 13px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/Mybatis/" style="font-size: 13px;">Mybatis</a> <a href="/tags/Mysql/" style="font-size: 13.08px;">Mysql</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Numpy/" style="font-size: 13px;">Numpy</a> <a href="/tags/Pandas/" style="font-size: 13px;">Pandas</a> <a href="/tags/Python/" style="font-size: 13.75px;">Python</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/SSH/" style="font-size: 13px;">SSH</a> <a href="/tags/Scikit-Learn/" style="font-size: 13px;">Scikit-Learn</a> <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 13px;">SpringMVC</a> <a href="/tags/TF-IDF/" style="font-size: 13px;">TF-IDF</a> <a href="/tags/Tensorflow/" style="font-size: 13px;">Tensorflow</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VIM/" style="font-size: 13px;">VIM</a> <a href="/tags/XML/" style="font-size: 13px;">XML</a> <a href="/tags/%E4%B9%A6%E7%B1%8D/" style="font-size: 13px;">书籍</a> <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" style="font-size: 13.08px;">会话技术</a> <a href="/tags/%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6/" style="font-size: 13px;">余弦相似度</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.5px;">前端</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 13px;">区块链</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 14px;">后端</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 13.67px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.25px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.83px;">数据结构</a> <a href="/tags/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8/" style="font-size: 13px;">朴素贝叶斯分类器</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13px;">机器学习</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" style="font-size: 13.17px;">机器学习算法</a> <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" style="font-size: 13.33px;">杂技术</a> <a href="/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" style="font-size: 13px;">比特币</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 13.92px;">深度学习</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 13.25px;">编译原理</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 13px;">视频</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13.08px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 13.58px;">软件工程</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 13.58px;">软件系统架构设计</a> <a href="/tags/%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" style="font-size: 13px;">黄金矿工</a>
     </div>
   </div>
 
@@ -287,7 +287,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>
               </p>
               <p class="item-title">
                 <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E8%AE%BE%E8%AE%A1/index.html" class="title">第七章 用户界面设计</a>
@@ -312,7 +312,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>
               </p>
               <p class="item-title">
                 <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%BA%8C%20%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html" class="title">第六章之二 设计模式</a>
@@ -337,7 +337,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
               </p>
               <p class="item-title">
                 <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%9B%9B%E2%80%94%E2%80%94%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十四——循环神经网络</a>
@@ -362,7 +362,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a>
               </p>
               <p class="item-title">
                 <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%8D%81%E4%B8%89%E2%80%94%E2%80%94%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html" class="title">深度学习十三——卷积神经网络</a>
@@ -387,7 +387,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+                <a class="category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>
               </p>
               <p class="item-title">
                 <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E7%AC%AC%E5%85%AD%E7%AB%A0%E4%B9%8B%E4%B8%80%20%E8%BD%AF%E4%BB%B6%E5%BB%BA%E6%A8%A1%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html" class="title">第六章之一 软件建模详细设计</a>
@@ -433,7 +433,7 @@
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>►<a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">软件系统架构设计</a>
+    <a class="article-category-link" href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/">专业基础</a>
   </span>
 
         
@@ -468,15 +468,14 @@
         <h1 id="软件建模详细设计概述"><a class="markdownIt-Anchor" href="#软件建模详细设计概述"></a> 软件建模详细设计概述</h1>
 <h2 id="软件详细建模设计目标"><a class="markdownIt-Anchor" href="#软件详细建模设计目标"></a> 软件详细建模设计目标</h2>
 <ul>
-<li>软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细<br />
-化设计，给出软件程序<em>实现的设计方案</em>。</li>
+<li>软件详细建模设计是在软件架构模型设计基础上，对系统中各模型进一步细 /化设计，给出软件程序<em>实现的设计方案</em>。</li>
 </ul>
 <h2 id="软件建模详细设计原则"><a class="markdownIt-Anchor" href="#软件建模详细设计原则"></a> 软件建模详细设计原则</h2>
 <h3 id="1-开闭原则"><a class="markdownIt-Anchor" href="#1-开闭原则"></a> 1. 开闭原则</h3>
 <ul>
 <li>软件实体(对象、类、模块等)应该<em>对扩展开放性，对修改具有封闭性</em>。</li>
 <li>当应用的需求改变时，在<em>不修改软件实体源代码的前提</em>下，就可以扩展模块的功能，使其满足新的需求。</li>
-<li>示例：环境监测器设计<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/wPgX4w.png" alt="wPgX4w" /></li>
+<li>示例：环境监测器设计<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/wPgX4w.png" alt="wPgX4w" /></li>
 </ul>
 <h3 id="2-里氏liskov替换原则"><a class="markdownIt-Anchor" href="#2-里氏liskov替换原则"></a> 2. 里氏(Liskov)替换原则</h3>
 <ul>
@@ -495,14 +494,14 @@
 <ul>
 <li>
 <p>初始设计：</p>
-<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/KwT7Rl.png" alt="KwT7Rl"  />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/KwT7Rl.png" alt="KwT7Rl"  />
 <ul>
 <li>几维鸟没有飞行速度（飞行速度为0），计算几维鸟的飞行时间就会变成无限；</li>
 </ul>
 </li>
 <li>
 <p>按照里氏替换原则设计：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/m8X9ps.png" alt="m8X9ps" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/m8X9ps.png" alt="m8X9ps" /></p>
 <ul>
 <li>先设计一个动物类，然后鸟类继承这个动物类，只需增加设置飞行速度和获取飞行时间的方法，不用重写原来的方法。而几维鸟没有飞行速度，直接继承动物类就可以实现功能。</li>
 </ul>
@@ -526,11 +525,11 @@
 <ul>
 <li>
 <p>一般设计：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/XPxjzA.png" alt="XPxjzA" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/XPxjzA.png" alt="XPxjzA" /></p>
 </li>
 <li>
 <p>面向接口编程：不用直接修改源代码即可增加功能</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/6pzJGO.png" alt="6pzJGO" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/6pzJGO.png" alt="6pzJGO" /></p>
 </li>
 </ul>
 </li>
@@ -545,7 +544,7 @@
 </li>
 <li>
 <p>示例：学生成绩管理系统</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oLAOlV.png" alt="oLAOlV" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oLAOlV.png" alt="oLAOlV" /></p>
 </li>
 </ul>
 <h3 id="5-单一职责原则"><a class="markdownIt-Anchor" href="#5-单一职责原则"></a> 5. 单一职责原则</h3>
@@ -559,15 +558,14 @@
 <li>
 <p>作用：</p>
 <ul>
-<li>降低类的<em>复杂度</em>。一个类只负责一项职责，其逻辑肯定要比负责多项职责<br />
-简单得多。</li>
-<li>提高类的<em>可读性</em>。复杂性降低，自然其可读性会提高。.</li>
+<li>降低类的<em>复杂度</em>。一个类只负责一项职责，其逻辑肯定要比负责多项职责简单得多。</li>
+<li>提高类的<em>可读性</em>。复杂性降低，自然其可读性会提高。</li>
 <li>提高系统的<em>可维护性</em>。可读性提高，那自然更容易维护了。</li>
 </ul>
 </li>
 <li>
 <p>示例：学生工作管理</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/djPc0j.png" alt="djPc0j" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/djPc0j.png" alt="djPc0j" /></p>
 </li>
 </ul>
 <h3 id="6-最少知识原则迪米特法则"><a class="markdownIt-Anchor" href="#6-最少知识原则迪米特法则"></a> 6. 最少知识原则（迪米特法则）</h3>
@@ -581,7 +579,7 @@
 </li>
 <li>示例：明星与经纪人</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/rBiKnV.png" alt="rBiKnV" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/rBiKnV.png" alt="rBiKnV" /></p>
 <h3 id="7-高内聚原则"><a class="markdownIt-Anchor" href="#7-高内聚原则"></a> 7. 高内聚原则</h3>
 <ul>
 <li>内聚性意味着构件或者类<em>只封装那些密切关联的属性和操作</em>。</li>
@@ -640,7 +638,7 @@
 </li>
 <li>
 <p>表示：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oFdBtc.png" alt="oFdBtc" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oFdBtc.png" alt="oFdBtc" /></p>
 </li>
 </ul>
 <h3 id="2-从属聚合owns"><a class="markdownIt-Anchor" href="#2-从属聚合owns"></a> 2. 从属聚合（Owns)</h3>
@@ -654,7 +652,7 @@
 </li>
 <li>表示：</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ZQSWvS.png" alt="ZQSWvS" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZQSWvS.png" alt="ZQSWvS" /></p>
 <h3 id="3-拥有聚合has"><a class="markdownIt-Anchor" href="#3-拥有聚合has"></a> 3. 拥有聚合（Has)</h3>
 <ul>
 <li>
@@ -668,7 +666,7 @@
 <p>表示：</p>
 </li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/VZp5wA.png" alt="VZp5wA" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/VZp5wA.png" alt="VZp5wA" /></p>
 <h3 id="4成员聚合member"><a class="markdownIt-Anchor" href="#4成员聚合member"></a> 4.成员聚合(Member)</h3>
 <ul>
 <li>
@@ -684,7 +682,7 @@
 <p>表示：</p>
 </li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/oZc1Fu.png" alt="oZc1Fu" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/oZc1Fu.png" alt="oZc1Fu" /></p>
 <h2 id="泛化与继承概念"><a class="markdownIt-Anchor" href="#泛化与继承概念"></a> 泛化与继承概念</h2>
 <ul>
 <li><strong>泛化</strong>是指多个类的公共特征<em>抽象</em>到一个更一般化的类中，它描述类之间的一般与具体关系。</li>
@@ -699,7 +697,7 @@
 <li>在扩展继承中，子类<em>组合来自超类的特征，并增加新的特征</em>。这是实现继承的恰当方式。</li>
 <li>示例：</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/48HEDl.png" alt="48HEDl" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/48HEDl.png" alt="48HEDl" /></p>
 <h3 id="2-限制继承"><a class="markdownIt-Anchor" href="#2-限制继承"></a> 2. 限制继承</h3>
 <ul>
 <li>
@@ -710,7 +708,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/nzvwKp.png" alt="nzvwKp" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/nzvwKp.png" alt="nzvwKp" /></p>
 </li>
 </ul>
 <h3 id="3-方便继承"><a class="markdownIt-Anchor" href="#3-方便继承"></a> 3. 方便继承</h3>
@@ -719,7 +717,7 @@
 <li>问题:子类没有包括超类的所有特征，<em>子类与超类之间没有泛化关系，可替换性原则无效</em>。尽量避免采用这种方式实现继承。</li>
 <li>示例：</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/d2RvL0.png" alt="d2RvL0" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/d2RvL0.png" alt="d2RvL0" /></p>
 <h2 id="类图建模高级特性"><a class="markdownIt-Anchor" href="#类图建模高级特性"></a> 类图建模高级特性</h2>
 <ul>
 <li>类图建模的高级特性包括以下四条：
@@ -750,7 +748,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/77h9UX.png" alt="77h9UX" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/77h9UX.png" alt="77h9UX" /></p>
 </li>
 </ul>
 <h3 id="导出信息"><a class="markdownIt-Anchor" href="#导出信息"></a> 导出信息</h3>
@@ -767,7 +765,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/k3rzch.png" alt="k3rzch" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/k3rzch.png" alt="k3rzch" /></p>
 </li>
 </ul>
 <h3 id="限定关联"><a class="markdownIt-Anchor" href="#限定关联"></a> 限定关联</h3>
@@ -777,7 +775,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/I0UhnY.png" alt="I0UhnY" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/I0UhnY.png" alt="I0UhnY" /></p>
 </li>
 </ul>
 <h3 id="关联类与具体化类"><a class="markdownIt-Anchor" href="#关联类与具体化类"></a> 关联类与具体化类</h3>
@@ -790,7 +788,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/X2MMgm.png" alt="X2MMgm" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/X2MMgm.png" alt="X2MMgm" /></p>
 </li>
 </ul>
 <h2 id="接口与抽象类"><a class="markdownIt-Anchor" href="#接口与抽象类"></a> 接口与抽象类</h2>
@@ -810,7 +808,7 @@
 </li>
 <li>
 <p>在UML 中接口的表示方式有三种:第一种是接口的图标表示，第二种是接口的修饰表示,第三种是接口的构造型标签表示：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/j6u5ek.png" alt="j6u5ek" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/j6u5ek.png" alt="j6u5ek" /></p>
 </li>
 <li>
 <p>接口实现线的表示：</p>
@@ -821,13 +819,13 @@
 <ul>
 <li>
 <p>一个类使用接口，表明该类依赖该接口，用指向接口的一条虚线箭头表示箭头上可以加上构造型关键字<code>&lt;&lt;use&gt;&gt;</code></p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/emMMbZ.png" alt="emMMbZ" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/emMMbZ.png" alt="emMMbZ" /></p>
 </li>
 </ul>
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/SHSLoP.png" alt="SHSLoP" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SHSLoP.png" alt="SHSLoP" /></p>
 </li>
 </ul>
 <h3 id="抽象类"><a class="markdownIt-Anchor" href="#抽象类"></a> 抽象类</h3>
@@ -841,7 +839,7 @@
 <li>UML采用斜体表示抽象类的名称，也可以可使用<code>&#123;abstract&#125;</code>约束来表示。</li>
 <li>示例：</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/lJfSEy.png" alt="lJfSEy" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/lJfSEy.png" alt="lJfSEy" /></p>
 <h3 id="接口与抽象类的区别"><a class="markdownIt-Anchor" href="#接口与抽象类的区别"></a> 接口与抽象类的区别</h3>
 <ul>
 <li>抽象类是对一组具有相同属性和方法的<em>逻辑上有关系的类抽象</em>。</li>
@@ -876,27 +874,27 @@
 <ol>
 <li>
 <p>X包含Y，或者X有一个属性指向Y的一个实例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/iHlDxd.png" alt="iHlDxd" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/iHlDxd.png" alt="iHlDxd" /></p>
 </li>
 <li>
 <p>X有<em>一个方法引用了Y的一个实例</em>，如: X使用一个Y类型的局部变量;或者返回Y类型的对象</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Xyz2vI.png" alt="Xyz2vI" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Xyz2vI.png" alt="Xyz2vI" /></p>
 </li>
 <li>
 <p>X调用Y的服务(发送消息):</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/SbbRXD.png" alt="SbbRXD" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SbbRXD.png" alt="SbbRXD" /></p>
 </li>
 <li>
 <p>X是Y的直接或间接子类:</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/MiqH8z.png" alt="MiqH8z" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/MiqH8z.png" alt="MiqH8z" /></p>
 </li>
 <li>
 <p>X类具有一个输入参数为Y类的实例的方法:</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Vx0RzE.png" alt="Vx0RzE" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Vx0RzE.png" alt="Vx0RzE" /></p>
 </li>
 <li>
 <p>Y类是一个接口，而X类实现了该接口:</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/DrfvCq.png" alt="DrfvCq" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/DrfvCq.png" alt="DrfvCq" /></p>
 </li>
 </ol>
 </li>
@@ -918,7 +916,7 @@
 </ul>
 <h2 id="设计类图实践"><a class="markdownIt-Anchor" href="#设计类图实践"></a> 设计类图实践</h2>
 <ul>
-<li>设计类图建模是<em>在分析类图基础之上</em>对系统分析类图进行细化与完善设计，从而在设计层面描述系统的静态结构。</li>
+<li>设计类图建模是<em>在分析类图基础之上</em>对系统分析类图进行细化与完善设计，从而在设计层面描述系统的静态结 构。（只能用英文定义类）</li>
 <li>在设计类图中除了<em>详细定义各种类属性与方法外，还需定义类之间关系的设计约束</em>。</li>
 </ul>
 <h1 id="uml软件动态交互视图建模"><a class="markdownIt-Anchor" href="#uml软件动态交互视图建模"></a> UML软件动态交互视图建模</h1>
@@ -939,7 +937,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/d2RZkk.png" alt="d2RZkk" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/d2RZkk.png" alt="d2RZkk" /></p>
 </li>
 </ul>
 <h3 id="顺序图交互技术"><a class="markdownIt-Anchor" href="#顺序图交互技术"></a> 顺序图交互技术</h3>
@@ -957,14 +955,14 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/dqdpn9.png" alt="dqdpn9" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/dqdpn9.png" alt="dqdpn9" /></p>
 </li>
 </ul>
 <h3 id="片段"><a class="markdownIt-Anchor" href="#片段"></a> 片段</h3>
 <ul>
 <li><strong>loop循环片段</strong>：每次迭代之前如果守护条件成立，则重复执行该片段。</li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/h5UlbG.png" alt="h5UlbG" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/h5UlbG.png" alt="h5UlbG" /></p>
 <ul>
 <li>
 <p><strong>para并行片段</strong>：</p>
@@ -977,7 +975,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/gnnnaf.png" alt="gnnnaf" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/gnnnaf.png" alt="gnnnaf" /></p>
 </li>
 </ul>
 </li>
@@ -989,12 +987,12 @@
 <p><strong>alt条件片段</strong>：条件片段表达<code>if-then-else</code>逻辑。如下图：if 满足<code>x=1</code>执行B，if满足<code>x = 2</code>执行C，else情况执行D。最后在可选片段中，满足<code>y&lt;=0</code>则执行E。</p>
 </li>
 </ul>
-<p>​		<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/qTMnO1.png" alt="qTMnO1" /></p>
+<p>​		<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/qTMnO1.png" alt="qTMnO1" /></p>
 <h3 id="交互引用"><a class="markdownIt-Anchor" href="#交互引用"></a> 交互引用</h3>
 <ul>
 <li>
 <p>为了复用交互逻辑，可以采用交互引用，即一个交互可以引用另一个交互（一个顺序图中引用另一个顺序图）。外围交互用标签<code>sd</code>标注，被引用的交互用标签<code>ref</code>标注。</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/it3FXA.png" alt="it3FXA" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/it3FXA.png" alt="it3FXA" /></p>
 </li>
 </ul>
 <h2 id="通信图"><a class="markdownIt-Anchor" href="#通信图"></a> 通信图</h2>
@@ -1007,7 +1005,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/WfFExZ.png" alt="WfFExZ" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/WfFExZ.png" alt="WfFExZ" /></p>
 </li>
 </ul>
 <h2 id="类操作"><a class="markdownIt-Anchor" href="#类操作"></a> 类操作</h2>
@@ -1027,7 +1025,7 @@
 </li>
 <li>
 <p>示例：根据顺序图确定操作</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/EJr4kH.png" alt="EJr4kH" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/EJr4kH.png" alt="EJr4kH" /></p>
 </li>
 </ul>
 <h3 id="说明操作的属性"><a class="markdownIt-Anchor" href="#说明操作的属性"></a> 说明操作的属性</h3>
@@ -1054,7 +1052,7 @@
 </li>
 <li>
 <p>示例：电梯系统运行状态机图</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/lGLv58.png" alt="lGLv58" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/lGLv58.png" alt="lGLv58" /></p>
 </li>
 </ul>
 <h1 id="uml软件实现视图建模"><a class="markdownIt-Anchor" href="#uml软件实现视图建模"></a> UML软件实现视图建模</h1>
@@ -1074,7 +1072,7 @@
 <li>构件图从<em>软件架构</em>的角度来描述系统的分成几个子系统，子系统包括哪些类和构件，它们之间的关系。</li>
 </ul>
 <h3 id="构件与构件之间的依赖关系"><a class="markdownIt-Anchor" href="#构件与构件之间的依赖关系"></a> 构件与构件之间的依赖关系</h3>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/owESJg.png" alt="owESJg" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/owESJg.png" alt="owESJg" /></p>
 <h3 id="构件与接口之间关系"><a class="markdownIt-Anchor" href="#构件与接口之间关系"></a> 构件与接口之间关系</h3>
 <ul>
 <li>
@@ -1091,7 +1089,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/yw6sbQ.png" alt="yw6sbQ" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/yw6sbQ.png" alt="yw6sbQ" /></p>
 </li>
 </ul>
 <h3 id="端口"><a class="markdownIt-Anchor" href="#端口"></a> 端口</h3>
@@ -1101,7 +1099,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/YNKbaS.png" alt="YNKbaS" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/YNKbaS.png" alt="YNKbaS" /></p>
 </li>
 </ul>
 <h3 id="端口连接"><a class="markdownIt-Anchor" href="#端口连接"></a> 端口连接</h3>
@@ -1123,7 +1121,7 @@
 </li>
 <li>
 <p>订单构件(:Orders) 访问账户接口( Account )</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/hvyUOP.png" alt="hvyUOP" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/hvyUOP.png" alt="hvyUOP" /></p>
 </li>
 </ul>
 </li>
@@ -1135,8 +1133,8 @@
 </ul>
 </li>
 </ul>
-<p>​	<img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/USbggw.png" alt="USbggw" /></p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ZiwPMG.png" alt="ZiwPMG" /></p>
+<p>​	<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/USbggw.png" alt="USbggw" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZiwPMG.png" alt="ZiwPMG" /></p>
 <ul>
 <li>若有多个构件使用相同接口访问另一构件接口，UML允许将连接器按如下方案连接构件端口。</li>
 </ul>
@@ -1165,7 +1163,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/tglWvq.png" alt="tglWvq" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tglWvq.png" alt="tglWvq" /></p>
 </li>
 </ul>
 </li>
@@ -1183,7 +1181,7 @@
 </li>
 <li>
 <p>部署图示例：电子商务系统部署图</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/NaCoRt.png" alt="NaCoRt" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/NaCoRt.png" alt="NaCoRt" /></p>
 </li>
 </ul>
 <h2 id="包图"><a class="markdownIt-Anchor" href="#包图"></a> 包图</h2>
@@ -1201,7 +1199,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/9XSY6g.png" alt="9XSY6g" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/9XSY6g.png" alt="9XSY6g" /></p>
 </li>
 </ul>
 <h3 id="包的可见性"><a class="markdownIt-Anchor" href="#包的可见性"></a> 包的可见性</h3>
@@ -1216,7 +1214,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/vpGhq4.png" alt="vpGhq4" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/vpGhq4.png" alt="vpGhq4" /></p>
 </li>
 </ul>
 <h3 id="包的嵌套"><a class="markdownIt-Anchor" href="#包的嵌套"></a> 包的嵌套</h3>
@@ -1230,7 +1228,7 @@
 </li>
 <li>
 <p>示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/sM5Kkx.png" alt="sM5Kkx" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/sM5Kkx.png" alt="sM5Kkx" /></p>
 </li>
 </ul>
 <h3 id="包图-2"><a class="markdownIt-Anchor" href="#包图-2"></a> 包图</h3>
@@ -1246,11 +1244,11 @@
 </li>
 <li>
 <p>依赖关系示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/ntfitw.png" alt="ntfitw" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ntfitw.png" alt="ntfitw" /></p>
 </li>
 <li>
 <p>包图示例：</p>
-<p><img src="https://gitee.com/zhangjie0524/picgo/raw/master/uPic/Wk8bUo.png" alt="Wk8bUo" /></p>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Wk8bUo.png" alt="Wk8bUo" /></p>
 </li>
 </ul>
 
