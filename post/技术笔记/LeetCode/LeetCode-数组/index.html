@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="代码地址 github  1. 一维数组的动态和 1480  题目：   给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] &#x3D; sum(nums[0]…nums[i]) 。 请返回 nums 的动态和。 示例 1： 输入：nums &#x3D; [1,2,3,4] 输出：[1,3,6,10] 解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。  J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-数组">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="代码地址 github  1. 一维数组的动态和 1480  题目：   给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] &#x3D; sum(nums[0]…nums[i]) 。 请返回 nums 的动态和。 示例 1： 输入：nums &#x3D; [1,2,3,4] 输出：[1,3,6,10] 解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。  J">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210714205354.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/EEorl6.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/XfqEaq.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210719214209.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210719232725.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZYfn0h.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/1293N6.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/n4dUJm.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210906220738.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/sT7AHQ.png">
+<meta property="article:published_time" content="2020-09-20T02:01:51.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.983Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210714205354.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E6%95%B0%E7%BB%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E6%95%B0%E7%BB%84/index.html","path":"/post/技术笔记/LeetCode/LeetCode-数组/index.html","title":"LeetCode-数组"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeetCode-数组 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text"> 代码地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%92%8C-1480"><span class="nav-number">2.</span> <span class="nav-text"> 1. 一维数组的动态和 1480</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%8B%A5%E6%9C%89%E7%B3%96%E6%9E%9C%E6%9C%80%E5%A4%9A%E7%9A%84%E5%AD%A9%E5%AD%90-1431"><span class="nav-number">3.</span> <span class="nav-text"> 2. 拥有糖果最多的孩子 1431</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E9%87%8D%E6%96%B0%E6%8E%92%E5%88%97%E6%95%B0%E7%BB%84-1470"><span class="nav-number">4.</span> <span class="nav-text"> 3. 重新排列数组 1470</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%89%91%E6%8C%87offer-58-ii"><span class="nav-number">5.</span> <span class="nav-text"> 4. 左旋转字符串 剑指offer 58-II</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE-1512"><span class="nav-number">6.</span> <span class="nav-text"> 5. 好数对的数目 1512</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86-ii-350"><span class="nav-number">7.</span> <span class="nav-text"> 6. 两个数组的交集 II 350</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E9%A2%98%E8%A7%A3"><span class="nav-number">7.1.</span> <span class="nav-text"> Java题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E6%89%BE%E5%88%B0%E6%89%80%E6%9C%89%E6%95%B0%E7%BB%84%E4%B8%AD%E6%B6%88%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97-448"><span class="nav-number">8.</span> <span class="nav-text"> 7. 找到所有数组中消失的数字 448</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-2"><span class="nav-number">8.1.</span> <span class="nav-text"> java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F-48"><span class="nav-number">9.</span> <span class="nav-text"> 8. 旋转图像 48</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-3"><span class="nav-number">9.1.</span> <span class="nav-text"> java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5-ii-240"><span class="nav-number">10.</span> <span class="nav-text"> 9. 搜索二维矩阵 II 240</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-4"><span class="nav-number">10.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AE%8C%E6%88%90%E6%8E%92%E5%BA%8F%E7%9A%84%E5%9D%97-769"><span class="nav-number">11.</span> <span class="nav-text"> 10. 最多能完成排序的块 769</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-5"><span class="nav-number">11.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E6%95%B0%E7%BB%84%E4%B8%8D%E5%8F%AF%E5%8F%98-303"><span class="nav-number">12.</span> <span class="nav-text"> 11. 区域和检索 - 数组不可变 303</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-6"><span class="nav-number">12.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E4%BA%8C%E7%BB%B4%E5%8C%BA%E5%9F%9F%E5%92%8C%E6%A3%80%E7%B4%A2-%E7%9F%A9%E9%98%B5%E4%B8%8D%E5%8F%AF%E5%8F%98-304"><span class="nav-number">13.</span> <span class="nav-text"> 12. 二维区域和检索 - 矩阵不可变 304</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-7"><span class="nav-number">13.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-%E5%92%8C%E4%B8%BAk%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84-560"><span class="nav-number">14.</span> <span class="nav-text"> 13. 和为K的子数组 560</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-8"><span class="nav-number">14.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E6%95%B0%E7%BB%84/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeetCode-数组 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-数组
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-20 10:01:51" itemprop="dateCreated datePublished" datetime="2020-09-20T10:01:51+08:00">2020-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>16k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>15 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="代码地址"><a class="markdownIt-Anchor" href="#代码地址"></a> 代码地址</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/zestaken/newblog/tree/master/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/Code/src/main/java/array">github</a></p>
+<h1 id="1-一维数组的动态和-1480"><a class="markdownIt-Anchor" href="#1-一维数组的动态和-1480"></a> 1. 一维数组的动态和 1480</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>给你一个数组 nums 。数组「动态和」的计算公式为：runningSum[i] = sum(nums[0]…nums[i]) 。</p>
+<p>请返回 nums 的动态和。</p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,3,4]<br />
+输出：[1,3,6,10]<br />
+解释：动态和计算过程为 [1, 1+2, 1+2+3, 1+2+3+4] 。</p>
+<h2 id="java解法"><a class="markdownIt-Anchor" href="#java解法"></a> Java解法</h2>
+<ul>
+<li>法一：
+<ul>
+<li>设置一个新数组，每一项为前面所有项之和；</li>
+<li>通过双重循环实现。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Sums &#123;
+
+    public static int[] runningSums(int nums[]) &#123;
+        int[] sums &#x3D; new int[nums.length];
+        for(int i &#x3D; 0 ; i &lt; nums.length; i++) &#123;
+            for(int j &#x3D; 0; j &lt;&#x3D; i; j++) &#123;
+                sums[i] +&#x3D; nums[j];
+            &#125;
+        &#125;
+        return sums;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        int[] nums &#x3D; &#123;1, 2, 3, 4,5&#125;;
+
+        int[] sums &#x3D; Sums.runningSums(nums);
+
+       for(int i : sums) &#123;
+           System.out.println(i);
+       &#125;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：
+<ul>
+<li>动态求和过程中，每一项都是前一项与自身之和。</li>
+<li>第一个元素没有前一个元素，对它没有操作，所以直接从第二个元素开始遍历求和。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Sums &#123;
+
+    public static int[] runningSums (int[] nums) &#123;
+
+        for(int i &#x3D; 1; i &lt; nums.length; i++) &#123;
+&#x2F;&#x2F;            if(i &#x3D;&#x3D; 0) &#123;
+&#x2F;&#x2F;                continue;
+&#x2F;&#x2F;            &#125;因为0是无需操作的，所以直接从1开始就好了
+            nums[i] +&#x3D; nums[i-1] ;
+        &#125;
+        return nums;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        int[] nums &#x3D; &#123;1, 2, 3,4&#125;;
+
+        int[] sums &#x3D; Sums.runningSums(nums);
+        for (int i : sums) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h1 id="2-拥有糖果最多的孩子-1431"><a class="markdownIt-Anchor" href="#2-拥有糖果最多的孩子-1431"></a> 2. 拥有糖果最多的孩子 1431</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>给你一个数组 candies 和一个整数 extraCandies ，其中 candies[i] 代表第 i 个孩子拥有的糖果数目。</p>
+<p>对每一个孩子，检查是否存在一种方案，将额外的 extraCandies 个糖果分配给孩子们之后，此孩子有 最多 的糖果。注意，允许有多个孩子同时拥有 最多 的糖果数目。</p>
+<p></p>
+<p>示例 1：</p>
+<p>输入：candies = [2,3,5,1,3], extraCandies = 3<br />
+输出：[true,true,true,false,true]<br />
+解释：<br />
+孩子 1 有 2 个糖果，如果他得到所有额外的糖果（3个），那么他总共有 5 个糖果，他将成为拥有最多糖果的孩子。<br />
+孩子 2 有 3 个糖果，如果他得到至少 2 个额外糖果，那么他将成为拥有最多糖果的孩子。<br />
+孩子 3 有 5 个糖果，他已经是拥有最多糖果的孩子。<br />
+孩子 4 有 1 个糖果，即使他得到所有额外的糖果，他也只有 4 个糖果，无法成为拥有糖果最多的孩子。<br />
+孩子 5 有 3 个糖果，如果他得到至少 2 个额外糖果，那么他将成为拥有最多糖果的孩子。</p>
+<ul>
+<li>java解法</li>
+</ul>
+<hr />
+<ul>
+<li>先找到拥有糖果数量最多的孩子，将加上补充的糖果数后的与这个最大比较</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Candy &#123;
+    public static boolean[] isMax(int kids[], int extraCandies) &#123;
+        &#x2F;&#x2F;找出原有最多的数
+        int max &#x3D; 0;
+        for(int i &#x3D; 0; i &lt; kids.length; i++) &#123;
+            if(max &lt; kids[i]) &#123;
+                max &#x3D; kids[i];
+            &#125;
+        &#125;
+        &#x2F;&#x2F;设置判别数组
+        boolean[] isMax &#x3D; new boolean[kids.length];
+        for(int i &#x3D; 0; i &lt; kids.length; i++) &#123;
+            if(kids[i] + extraCandies &gt;&#x3D; max) &#123;
+                isMax[i] &#x3D; true;
+            &#125; else&#123;
+                isMax[i] &#x3D; false;
+            &#125;
+        &#125;
+        return isMax;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        int[] kids &#x3D; &#123;2, 3, 5, 1, 3&#125;;
+        int extraCandies &#x3D; 3;
+        boolean[] isMax &#x3D; Candy.isMax(kids, extraCandies);
+        for(boolean i : isMax) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h1 id="3-重新排列数组-1470"><a class="markdownIt-Anchor" href="#3-重新排列数组-1470"></a> 3. 重新排列数组 1470</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<ol start="1470">
+<li>重新排列数组<br />
+给你一个数组 nums ，数组中有 2n 个元素，按 [x1,x2,…,xn,y1,y2,…,yn] 的格式排列。</li>
+</ol>
+<p>请你将数组按 [x1,y1,x2,y2,…,xn,yn] 格式重新排列，返回重排后的数组。</p>
+<p>示例 1：</p>
+<p>输入：nums = [2,5,1,3,4,7], n = 3<br />
+输出：[2,3,5,4,1,7]<br />
+解释：由于 x1=2, x2=5, x3=1, y1=3, y2=4, y3=7 ，所以答案为 [2,3,5,4,1,7]</p>
+<ul>
+<li>Java解法：</li>
+</ul>
+<hr />
+<ul>
+<li>法一：设置一个额外的数组，用来将重排后的数据记录；</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Resort1470 &#123;
+    public static int[] resort(int[] nums1)&#123;
+        int n &#x3D; nums1.length &#x2F; 2;
+        int[] nums2 &#x3D; new int[nums1.length];
+
+        for(int i &#x3D; 0 ,j &#x3D; 0; j &lt; n;  i++, j++) &#123;
+            nums2[i] &#x3D; nums1[j];
+            nums2[++i] &#x3D; nums1[n + j];
+        &#125;
+    
+        return nums2;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        int[] nums1 &#x3D; &#123;2,5,1,3,4,7&#125;;
+        int[] nums2 &#x3D; Resort1470.resort(nums1);
+        for(int i : nums2) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h1 id="4-左旋转字符串-剑指offer-58-ii"><a class="markdownIt-Anchor" href="#4-左旋转字符串-剑指offer-58-ii"></a> 4. 左旋转字符串 剑指offer 58-II</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串&quot;abcdefg&quot;和数字2，该函数将返回左旋转两位得到的结果&quot;cdefgab&quot;。</p>
+<p></p>
+<p>示例 1：</p>
+<p>输入: s = “abcdefg”, k = 2<br />
+输出: “cdefgab”</p>
+<ul>
+<li>Java解法：</li>
+</ul>
+<hr />
+<ul>
+<li>将该字符串分为两个子串，然后再反向连接起来</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">import java.util.Scanner;
+
+public class ReverseLeftWords &#123;
+
+    public String reverseLeftWords(String s, int n) &#123;
+         String str1 &#x3D; s.substring(0, n); &#x2F;&#x2F;读入从0到n（但是不包括下标为n的）
+         String str2 &#x3D; s.substring(n); &#x2F;&#x2F;从n开始到最后（包括下标为n的）
+         String  s1 &#x3D; str2 + str1;&#x2F;&#x2F;反向连接，达到左旋转的效果
+
+         return s1;
+&#x2F;&#x2F; return s.substring(n) + s.substring(o, n);
+
+    &#125;
+
+    public static void main(String[] args) &#123;
+        String s &#x3D; &quot; &quot;;
+        int n;
+        Scanner in &#x3D; new Scanner(System.in);
+
+        System.out.println(&quot;请输入字符：&quot;);
+        s &#x3D; in.nextLine();
+
+        System.out.println(&quot;请输入从哪里开始转：&quot;);
+        n &#x3D; in.nextInt();
+
+        var reverse &#x3D; new ReverseLeftWords();
+        s &#x3D; reverse.reverseLeftWords(s, n);
+
+        for(int i &#x3D; 0; i &lt; s.length(); i++) &#123;
+            System.out.print(s.charAt(i) + &quot; &quot;);
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>数组形式解法：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ReverseLeftWords &#123;
+    public static char[] reverseLeftWords(char[] nums, int n) &#123;
+        char[] nums1 &#x3D; new char[n];
+        char[] nums2 &#x3D; new char[nums.length];
+
+        for(int i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            if(i &lt; n) &#123;
+                nums1[i] &#x3D; nums[i];
+            &#125;else &#123;
+                nums2[i - n] &#x3D; nums[i];
+            &#125;
+        &#125;
+        for(int i &#x3D; 0; i &lt; n; i++) &#123;
+            nums2[nums.length - n + i] &#x3D; nums1[i];
+        &#125;
+
+        return nums2;
+    &#125;
+
+    public static void main(String[] args) &#123;
+       char[] nums &#x3D; &#123;&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;&#125;;
+
+       char[] nums2 &#x3D; ReverseLeftWords.reverseLeftWords(nums, 2);
+
+       for(char i : nums2) &#123;
+           System.out.println(i);
+       &#125;
+    &#125;
+&#125;</code></pre>
+<h1 id="5-好数对的数目-1512"><a class="markdownIt-Anchor" href="#5-好数对的数目-1512"></a> 5. 好数对的数目 1512</h1>
+<ul>
+<li>题目</li>
+</ul>
+<hr />
+<p>给你一个整数数组 nums 。</p>
+<p>如果一组数字 (i,j) 满足 nums[i] == nums[j] 且 i &lt; j ，就可以认为这是一组 好数对 。</p>
+<p>返回好数对的数目。</p>
+<p></p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,3,1,1,3]<br />
+输出：4<br />
+解释：有 4 组好数对，分别是 (0,3), (0,4), (3,4), (2,5) ，下标从 0 开始.</p>
+<ul>
+<li>java解法</li>
+</ul>
+<hr />
+<ul>
+<li>法一：双重循环遍历数组，外层为数组这个计数循环，内层取寻找与当前元素相同的元素（但是只找当前位置之后的，避免重复计算）</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">import java.util.Scanner;
+
+public class NumPairs1512 &#123;
+
+    public static int numIdenticalPairs(int[] nums) &#123;
+        int ans &#x3D; 0;
+
+        for(int i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            for(int j &#x3D; 1; j &lt; nums.length; j++) &#123; &#x2F;&#x2F;每次统计相同的元素都是从当前位置向后遍历，这样就不会有重复的情况
+                if(nums[i] &#x3D;&#x3D; nums[i+j]) &#123;
+                    ans++;
+                &#125;
+            &#125;
+        &#125;
+        return ans;
+    &#125;
+    public static void main(String[] args) &#123;
+        int[] nums &#x3D; &#123;1,2,3,1,1,3&#125;;
+        System.out.println(Solution.numIdenticalPairs(nums));
+    &#125;
+&#125;</code></pre>
+<h1 id="6-两个数组的交集-ii-350"><a class="markdownIt-Anchor" href="#6-两个数组的交集-ii-350"></a> 6. 两个数组的交集 II 350</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/">题目</a>：</li>
+</ul>
+<hr />
+<p>给定两个数组，编写一个函数来计算它们的交集。</p>
+<p>示例 1：</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：nums1 &#x3D; [1,2,2,1], nums2 &#x3D; [2,2]
+输出：[2,2]</code></pre>
+<p>示例 2:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：nums1 &#x3D; [4,9,5], nums2 &#x3D; [9,4,9,8,4]
+输出：[4,9]</code></pre>
+<p>说明：</p>
+<p>输出结果中每个元素出现的次数，应与元素在两个数组中出现次数的最小值一致。<br />
+我们可以不考虑输出结果的顺序。<br />
+进阶：</p>
+<p>如果给定的数组已经排好序呢？你将如何优化你的算法？<br />
+如果 nums1 的大小比 nums2 小很多，哪种方法更优？<br />
+如果 nums2 的元素存储在磁盘上，内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？</p>
+<h2 id="java题解"><a class="markdownIt-Anchor" href="#java题解"></a> Java题解</h2>
+<ul>
+<li>法一：遍历一个数组，将每个数出现的次数存入哈希表中，之后再遍历另一个数组并查找哈希表
+<ul>
+<li>代码：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Intersect350 &#123;
+
+public int[] intersect(int[] nums1, int[] nums2) &#123;
+    &#x2F;&#x2F;用哈希表存次数
+    HashMap&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;Integer, Integer&gt;();
+
+    &#x2F;&#x2F;遍历一个数组，获取每个元素值以及出现次数
+    for(int i : nums1) &#123;
+        if(!map.containsKey(i)) &#123;
+            &#x2F;&#x2F;初始计数为1
+            map.put(i, 1);
+        &#125; else &#123;
+            int count &#x3D; map.get(i);
+            &#x2F;&#x2F;第二次出现计数加一
+            count++;
+            map.put(i, count);
+        &#125;
+    &#125;
+
+    int[] res &#x3D; new int[(nums1.length &gt; nums2.length)?nums2.length:nums1.length];
+    int index &#x3D; 0;
+    for(int i : nums2) &#123;
+        if(map.containsKey(i)) &#123;
+            int count &#x3D; map.get(i);
+            &#x2F;&#x2F;每出现一次计数减一，只在计数大于0时存入结果中，以保证出现次数与最少的数组相同
+            count--;
+            map.put(i, count);
+            if(count &gt;&#x3D; 0) &#123;
+                res[index] &#x3D; i;
+                index++;
+            &#125;
+        &#125;
+    &#125;
+    return Arrays.copyOfRange(res, 0, index);
+&#125;</code></pre>
+</li>
+<li>法二：先对两个数组进行排序，然后设置两个指针指向数组元素，每次相等的时候两个指针同时移动，不相等的时候较小的移动
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210714205354.png" alt="" /></li>
+<li>代码：<pre class="line-numbers language-java" data-language="java"><code class="language-java">    &#x2F;&#x2F;先排序（升序）
+Arrays.sort(nums1);
+Arrays.sort(nums2);
+&#x2F;&#x2F;存储结果数组
+int[] res &#x3D; new int[(nums1.length &gt; nums2.length)?nums2.length:nums1.length];
+int count1 &#x3D; 0;
+int count2 &#x3D; 0;
+int index &#x3D; 0;
+while (true) &#123;
+    if(nums1[count1] &#x3D;&#x3D; nums2[count2]) &#123;
+        &#x2F;&#x2F;如果相等则双指针均前移
+        res[index] &#x3D; nums1[count1];
+        index++;
+        count1++;
+        count2++;
+    &#125; else if(nums1[count1] &lt; nums2[count2]) &#123;
+        count1++;
+    &#125; else &#123;
+        count2++;
+    &#125;
+    if(count1 &gt;&#x3D; nums1.length || count2 &gt;&#x3D; nums2.length) &#123;
+        break;
+    &#125;
+&#125;
+
+return Arrays.copyOfRange(res, 0, index);</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="7-找到所有数组中消失的数字-448"><a class="markdownIt-Anchor" href="#7-找到所有数组中消失的数字-448"></a> 7. 找到所有数组中消失的数字 448</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/">题目</a></li>
+</ul>
+<hr />
+<p>给你一个含 n 个整数的数组 nums ，其中 nums[i] 在区间 [1, n] 内。请你找出所有在 [1, n] 范围内但没有出现在 nums 中的数字，并以数组的形式返回结果。</p>
+<pre class="line-numbers language-none"><code class="language-none">示例 1：
+输入：nums &#x3D; [4,3,2,7,8,2,3,1]
+输出：[5,6]
+
+示例 2：
+输入：nums &#x3D; [1,1]
+输出：[2]</code></pre>
+<p>提示：</p>
+<p>n == nums.length<br />
+1 &lt;= n &lt;= 105<br />
+1 &lt;= nums[i] &lt;= n</p>
+<p>进阶：你能在不使用额外空间且时间复杂度为 O(n) 的情况下解决这个问题吗? 你可以假定返回的数组不算在额外空间内。</p>
+<h2 id="java解法-2"><a class="markdownIt-Anchor" href="#java解法-2"></a> java解法</h2>
+<ul>
+<li>法一：排序后双指针扫描确定
+<ul>
+<li>结果：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/EEorl6.png" alt="EEorl6" /></li>
+<li>代码：</li>
+</ul>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java">public List&lt;Integer&gt; findDisappearedNumbers(int[] nums) &#123;
+    &#x2F;&#x2F;用于存储所有数字
+    ArrayList&lt;Integer&gt; all &#x3D; new ArrayList&lt;&gt;();
+    &#x2F;&#x2F;存储消失的数字
+    ArrayList&lt;Integer&gt; disappear &#x3D; new ArrayList&lt;&gt;();
+    int length &#x3D; nums.length;
+    &#x2F;&#x2F;将范围内所有数字存入all集合
+    for(int i &#x3D; 1; i &lt;&#x3D; length; i++) &#123;
+        all.add(i);
+    &#125;
+    &#x2F;&#x2F;对数组进行排序后，通过双指针扫描两个数组确定消失的数字
+    Arrays.sort(nums);
+
+    &#x2F;&#x2F;双指针扫描两个数组&#x2F;集合
+    for(int j &#x3D; 0, i &#x3D; 0; j &lt; length &amp;&amp; i &lt; length; ) &#123;
+        &#x2F;&#x2F;all指针数字大于原数组指针数字，则原数组指针前移，all不变
+        if(all.get(j) &gt; nums[i]) &#123;
+            i++;
+            &#x2F;&#x2F;判断边界，防止原数组扫描结束后all中剩余元素未被扫描
+            if(i &gt;&#x3D; length) &#123;
+                for(int t &#x3D; j; t &lt; length; t++) &#123;
+                    disappear.add(all.get(t));
+                &#125;
+            &#125;
+        &#125; else if(all.get(j) &#x3D;&#x3D; nums[i]) &#123;&#x2F;&#x2F; 两个指针同时迁移
+            j++;
+            i++;
+            &#x2F;&#x2F;判断边界，防止原数组扫描结束后all中剩余元素未被扫描（all数组不可能在原数组之前扫描完）
+            if(i &gt;&#x3D; length) &#123;
+                for(int t &#x3D; j; t &lt; length; t++) &#123;
+                    disappear.add(all.get(t));
+                &#125;
+            &#125;
+        &#125; else if(all.get(j) &lt; nums[i]) &#123; &#x2F;&#x2F;all指针小于原数组指针数字则前移all指针，原数组不变
+            disappear.add(all.get(j));
+            j++;
+        &#125;
+    &#125;
+
+    return disappear;
+&#125;</code></pre>
+</li>
+<li>法二：利用数组脚标可对应连续整数，通过修改原数组指定位置的值来筛选没有出现过的数。不用排序，所以时间复杂度减少
+<ul>
+<li>结果：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/XfqEaq.png" alt="XfqEaq" /></li>
+<li>代码：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public List&lt;Integer&gt; findDisappearedNumbers(int[] nums) &#123;
+    ArrayList&lt;Integer&gt; ans &#x3D; new ArrayList&lt;&gt;();
+    int length &#x3D; nums.length;
+
+    for(int n : nums) &#123;
+        int index &#x3D; (n - 1) % length;&#x2F;&#x2F;因为会加长度，导致有些位置上的数超过length，所以需要取模
+        &#x2F;&#x2F;出现了的数字对应的位置的值加上长度
+        nums[index] +&#x3D; length;
+    &#125;
+    
+    &#x2F;&#x2F;再次遍历数组，如果值不大于长度length，则说明该位置脚标对应的值没有出现过
+    for(int i &#x3D; 0; i &lt; length; i++) &#123;
+        if(nums[i] &lt;&#x3D; length) &#123;
+            ans.add(i + 1);
+        &#125;
+    &#125;
+
+    return ans;
+&#125;</code></pre>
+</li>
+</ul>
+<h1 id="8-旋转图像-48"><a class="markdownIt-Anchor" href="#8-旋转图像-48"></a> 8. 旋转图像 48</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-image/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。<br />
+你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：matrix &#x3D; [[1,2,3],[4,5,6],[7,8,9]]
+输出：[[7,4,1],[8,5,2],[9,6,3]]
+
+输入：matrix &#x3D; [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+输出：[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+
+输入：matrix &#x3D; [[1]]
+输出：[[1]]
+
+输入：matrix &#x3D; [[1,2],[3,4]]
+输出：[[3,1],[4,2]]</code></pre>
+<p>提示：</p>
+<p>matrix.length == n<br />
+matrix[i].length == n<br />
+1 &lt;= n &lt;= 20<br />
+-1000 &lt;= matrix[i][j] &lt;= 1000</p>
+<h2 id="java解法-3"><a class="markdownIt-Anchor" href="#java解法-3"></a> java解法</h2>
+<ul>
+<li>法一：通过一圈一圈找到四个依次换位置的元素，来依次移动这些元素的值，来达到借助一个中间值变量实现原地旋转的效果。关键在于如何确定这些元素的下标的变化规律。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210719214209.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class Rotate48 &#123;
+    public void rotate(int[][] matrix) &#123;
+        &#x2F;&#x2F;从外向内一圈圈找，用times表示在第几圈
+        int times &#x3D; 0;
+        &#x2F;&#x2F;nums表示矩阵的列数（行数）
+        int nums &#x3D; matrix.length;
+
+        while(times &lt;&#x3D; (nums &#x2F; 2)) &#123; &#x2F;&#x2F;比如4x4矩阵就是两圈，3x3也是两圈
+            &#x2F;&#x2F;在每一圈中再确定依次交换值的四个元素
+            int len &#x3D; nums - times * 2; &#x2F;&#x2F;len是圈的范围，每缩小一圈减少两个
+            for(int i &#x3D; 0; i &lt; len - 1; i++) &#123;
+                &#x2F;&#x2F;确定每一圈第一个元素的位置并用临时变量存储其值
+                &#x2F;&#x2F;通过i来将第一个元素右移一位，其它三个元素顺势右移，遇到边界就贴着边界转换方向接着移
+                int temp &#x3D; matrix[times][times + i];
+                &#x2F;&#x2F;将上一个元素的值由其下一位元素的值来替代
+                matrix[times][times + i] &#x3D; matrix[times + len - 1 - i][times];
+                matrix[times + len - 1 - i][times] &#x3D; matrix[times + len - 1][times + len - 1 - i];
+                matrix[times + len - 1][times + len - 1 - i] &#x3D; matrix[times + i][times + len - 1];
+                matrix[times + i][times + len - 1] &#x3D; temp;
+                &#x2F;&#x2F;虽然看起来复杂，但是每一个元素又一个坐标都是不随i的变化而变化，只要关注i对其有影响的坐标，顺势移动即可
+            &#125;
+            &#x2F;&#x2F;进入下一圈
+            times++;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h1 id="9-搜索二维矩阵-ii-240"><a class="markdownIt-Anchor" href="#9-搜索二维矩阵-ii-240"></a> 9. 搜索二维矩阵 II 240</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix-ii/">题目</a></li>
+</ul>
+<hr />
+<p>编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：</p>
+<p>每行的元素从左到右升序排列。<br />
+每列的元素从上到下升序排列。</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：matrix &#x3D; [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target &#x3D; 5
+输出：true
+
+输入：matrix &#x3D; [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target &#x3D; 20
+输出：false
+</code></pre>
+<p>提示：</p>
+<p>m == matrix.length<br />
+n == matrix[i].length<br />
+1 &lt;= n, m &lt;= 300<br />
+-109 &lt;= matix[i][j] &lt;= 109<br />
+每行的所有元素从左到右升序排列<br />
+每列的所有元素从上到下升序排列<br />
+-109 &lt;= target &lt;= 109</p>
+<h2 id="java解法-4"><a class="markdownIt-Anchor" href="#java解法-4"></a> Java解法</h2>
+<ul>
+<li>法一：从矩阵右上角开始寻找，直到超出矩阵边界，则目标不存在。当前元素比目标小，则下移，当前元素比目标大则左移。用一个元素的眼光来看，这个元素的左侧的元素的较小，下方的元素比自己小，从递归的观点来看，对每一个元素都这样处理。如果开始从左上角开始，没有选择较小元素的余地，一旦遇见比目标的元素，只能回退
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210719232725.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public boolean searchMatrix(int[][] matrix, int target) &#123;
+    &#x2F;&#x2F;从右上角开始搜索
+    int lines &#x3D; matrix.length;
+    int rows &#x3D; matrix[0].length;
+
+    for(int i &#x3D; 0, j &#x3D; rows - 1; i &lt; lines &amp;&amp; 0 &lt;&#x3D; j; ) &#123;
+        if(matrix[i][j] &gt; target) &#123;
+            &#x2F;&#x2F;比目标大，向左横向移动
+            j--;
+            if(j &lt; 0) &#123;
+                return false;
+            &#125;
+        &#125;else if(matrix[i][j] &lt; target) &#123;
+            &#x2F;&#x2F;比目标小，向下移动
+            i++;
+            if(i &gt;&#x3D; lines) &#123;
+                return false;
+            &#125;
+        &#125; else if (matrix[i][j] &#x3D;&#x3D; target) &#123;
+            return true;
+        &#125;
+    &#125;
+    return false;
+&#125;</code></pre>
+<h1 id="10-最多能完成排序的块-769"><a class="markdownIt-Anchor" href="#10-最多能完成排序的块-769"></a> 10. 最多能完成排序的块 769</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-chunks-to-make-sorted/">题目</a></li>
+</ul>
+<hr />
+<p>数组arr是[0, 1, …, arr.length - 1]的一种排列，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。</p>
+<p>我们最多能将数组分成多少块？</p>
+<pre class="line-numbers language-none"><code class="language-none">示例 1:
+
+输入: arr &#x3D; [4,3,2,1,0]
+输出: 1
+解释:
+将数组分成2块或者更多块，都无法得到所需的结果。
+例如，分成 [4, 3], [2, 1, 0] 的结果是 [3, 4, 0, 1, 2]，这不是有序的数组。
+示例 2:
+
+输入: arr &#x3D; [1,0,2,3,4]
+输出: 4
+解释:
+我们可以把它分成两块，例如 [1, 0], [2, 3, 4]。
+然而，分成 [1, 0], [2], [3], [4] 可以得到最多的块数。</code></pre>
+<p>注意:</p>
+<p>arr 的长度在 [1, 10] 之间。<br />
+arr[i]是 [0, 1, …, arr.length - 1]的一种排列。</p>
+<h2 id="java解法-5"><a class="markdownIt-Anchor" href="#java解法-5"></a> Java解法</h2>
+<ul>
+<li>法一：值为连续整数，将值与下标对应，当目前最大值与下标对应时，将数组分为左边一定比目前最大值都小，右边一定比当前最大值都大，可以划分
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/ZYfn0h.png" alt="ZYfn0h" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;连续整数的一个排列，用下标与值对应
+  public int maxChunksToSorted(int[] arr) &#123;
+      int max &#x3D; arr[0];
+      int count &#x3D; 0;
+      int length &#x3D; arr.length;
+      for(int i &#x3D; 0; i &lt; length; i++) &#123;
+          if(arr[i] &gt;&#x3D; max) &#123;
+              max &#x3D; arr[i];
+          &#125;
+          &#x2F;&#x2F;每当最大值与下标相等则说明前面的数据全是比最大值小的而之后全是比最大值大的
+          &#x2F;&#x2F;如果只能分为一块，说明最大值在最前面出现，最后总能遇到自己的下标，而使count加一
+          if(max &#x3D;&#x3D; i) &#123;
+              count++;
+          &#125;
+      &#125;
+      return count;
+  &#125;</code></pre>
+<h1 id="11-区域和检索-数组不可变-303"><a class="markdownIt-Anchor" href="#11-区域和检索-数组不可变-303"></a> 11. 区域和检索 - 数组不可变 303</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-immutable/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个整数数组 nums，求出数组从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点。<br />
+实现 NumArray 类：</p>
+<pre class="line-numbers language-none"><code class="language-none">NumArray(int[] nums) 使用数组 nums 初始化对象
+int sumRange(int i, int j) 返回数组 nums 从索引 i 到 j（i ≤ j）范围内元素的总和，包含 i、j 两点（也就是 sum(nums[i], nums[i + 1], ... , nums[j])）</code></pre>
+<p>示例：</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：
+[&quot;NumArray&quot;, &quot;sumRange&quot;, &quot;sumRange&quot;, &quot;sumRange&quot;]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+输出：
+[null, 1, -1, -3]
+
+解释：
+NumArray numArray &#x3D; new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); &#x2F;&#x2F; return 1 ((-2) + 0 + 3)
+numArray.sumRange(2, 5); &#x2F;&#x2F; return -1 (3 + (-5) + 2 + (-1)) 
+numArray.sumRange(0, 5); &#x2F;&#x2F; return -3 ((-2) + 0 + 3 + (-5) + 2 + (-1))</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">0 &lt;&#x3D; nums.length &lt;&#x3D; 104
+-105 &lt;&#x3D; nums[i] &lt;&#x3D; 105
+0 &lt;&#x3D; i &lt;&#x3D; j &lt; nums.length
+最多调用 104 次 sumRange 方法</code></pre>
+<h2 id="java解法-6"><a class="markdownIt-Anchor" href="#java解法-6"></a> Java解法</h2>
+<ul>
+<li>法一：构造一个前缀和数组，存储每个位置对应的前缀之后，以后计算中间的和，只需要使用两个前缀和相减即可。虽然感觉构造一个前缀和数组时间复杂度很大，但是可以一次计算，永久使用。（既然他要用一个数组来构造一个对象，想必也是为了这个目的）注意，为了防止越界而使前缀和数组和源数组向后错一位。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/1293N6.png" alt="1293N6" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class NumArray &#123;
+
+    private int[] partialSum;
+    public NumArray(int[] nums) &#123;
+        &#x2F;&#x2F;初始默认值为0
+        partialSum &#x3D; new int[nums.length + 1];
+        &#x2F;&#x2F;构造前缀和数组
+        for(int i &#x3D; 0; i &lt; nums.length;i++) &#123;
+            &#x2F;&#x2F;向后推一位存储
+            partialSum[i + 1] &#x3D; partialSum[i] + nums[i];
+        &#125;
+    &#125;
+
+    public int sumRange(int left, int right) &#123;
+        &#x2F;&#x2F;两边相减得到中间的和，因为前缀和数组向后推了一位，所以下标也要向后推一位
+        &#x2F;&#x2F;正常是right - (left - 1)
+        &#x2F;&#x2F;向后推一位的目的是防止计算第一位的前缀时超出边界
+        return partialSum[right + 1] - partialSum[left];
+    &#125;
+&#125;</code></pre>
+<h1 id="12-二维区域和检索-矩阵不可变-304"><a class="markdownIt-Anchor" href="#12-二维区域和检索-矩阵不可变-304"></a> 12. 二维区域和检索 - 矩阵不可变 304</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-2d-immutable/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个二维矩阵 matrix，以下类型的多个请求：</p>
+<p>计算其子矩形范围内元素的总和，该子矩阵的左上角为<code>(row1, col1)</code> ，右下角为 <code>(row2, col2)</code> 。<br />
+实现 NumMatrix 类：<br />
+<code>NumMatrix(int[][] matrix)</code> 给定整数矩阵 matrix 进行初始化<br />
+<code>int sumRegion(int row1, int col1, int row2, int col2)</code> 返回左上角<code>(row1, col1)</code> 、右下角 <code>(row2, col2)</code>的子矩阵的元素总和。</p>
+<p>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/n4dUJm.jpg" alt="n4dUJm" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入: 
+[&quot;NumMatrix&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;,&quot;sumRegion&quot;]
+[[[[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]],[2,1,4,3],[1,1,2,2],[1,2,2,4]]
+输出: 
+[null, 8, 11, 12]
+
+解释:
+NumMatrix numMatrix &#x3D; new NumMatrix([[3,0,1,4,2],[5,6,3,2,1],[1,2,0,1,5],[4,1,0,1,7],[1,0,3,0,5]]]);
+numMatrix.sumRegion(2, 1, 4, 3); &#x2F;&#x2F; return 8 (红色矩形框的元素总和)
+numMatrix.sumRegion(1, 1, 2, 2); &#x2F;&#x2F; return 11 (绿色矩形框的元素总和)
+numMatrix.sumRegion(1, 2, 2, 4); &#x2F;&#x2F; return 12 (蓝色矩形框的元素总和)</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">m &#x3D;&#x3D; matrix.length
+n &#x3D;&#x3D; matrix[i].length
+1 &lt;&#x3D; m, n &lt;&#x3D; 200
+-105 &lt;&#x3D; matrix[i][j] &lt;&#x3D; 105
+0 &lt;&#x3D; row1 &lt;&#x3D; row2 &lt; m
+0 &lt;&#x3D; col1 &lt;&#x3D; col2 &lt; n
+最多调用 104 次 sumRegion 方法</code></pre>
+<h2 id="java解法-7"><a class="markdownIt-Anchor" href="#java解法-7"></a> Java解法</h2>
+<ul>
+<li>法一：一维前缀和叠加，设置一个二维的前缀和数组，前缀和数组的每一行，都是当行数组的一维前缀和数组。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210906220738.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">private int[][] partialSum;
+public NumMatrix(int[][] matrix) &#123;
+    &#x2F;&#x2F;初始化前缀和数组
+    partialSum &#x3D; new int[matrix.length][matrix[0].length + 1];
+    &#x2F;&#x2F;计算前缀和
+    for(int i &#x3D; 0; i &lt; matrix.length; i++) &#123;
+        for(int j &#x3D; 0; j &lt; matrix[0].length; j++) &#123;
+            partialSum[i][j+1] &#x3D; partialSum[i][j] + matrix[i][j];
+        &#125;
+    &#125;
+
+&#125;
+
+public int sumRegion(int row1, int col1, int row2, int col2) &#123;
+    int sum &#x3D; 0;
+    &#x2F;&#x2F;逐行扫描，每一行依次用前缀和相减计算中间和
+    for(int i &#x3D; row1; i &lt;&#x3D; row2; i++) &#123;
+        sum +&#x3D; (partialSum[i][col2 + 1] - partialSum[i][col1]);
+    &#125;
+    return sum;
+&#125;</code></pre>
+<ul>
+<li>法二：二维前缀和（积分图）
+<ul>
+<li>结果：</li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<h1 id="13-和为k的子数组-560"><a class="markdownIt-Anchor" href="#13-和为k的子数组-560"></a> 13. 和为K的子数组 560</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subarray-sum-equals-k/">题目</a></li>
+</ul>
+<hr />
+<p>给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的连续子数组的个数。<br />
+示例1:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：nums &#x3D; [1,1,1], k &#x3D; 2
+输出：2</code></pre>
+<p>示例2:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：nums &#x3D; [1,2,3], k &#x3D; 3
+输出：2</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">1 &lt;&#x3D; nums.length &lt;&#x3D; 2 * 104
+-1000 &lt;&#x3D; nums[i] &lt;&#x3D; 1000
+-107 &lt;&#x3D; k &lt;&#x3D; 107</code></pre>
+<h2 id="java解法-8"><a class="markdownIt-Anchor" href="#java解法-8"></a> Java解法</h2>
+<ul>
+<li>法一：一边计算当前元素的前缀和，一边查找与当前前缀和差值为0的前面的前缀和。将每次计算得到的前缀和存入哈希表中，哈希表的键为前缀和，值为前缀和目前出现的次数。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/sT7AHQ.png" alt="sT7AHQ" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class SubarraySumEqualsK560 &#123;
+
+    public int subarraySum(int[] nums, int k) &#123;
+        &#x2F;&#x2F;存储子数组计数结果
+        int res &#x3D; 0;
+        &#x2F;&#x2F;创建前缀和数组
+        Map&lt;Integer, Integer&gt; hashPartialSums &#x3D; new HashMap&lt;&gt;();
+        &#x2F;&#x2F;添加一个0的和，保证从0到当前位置的连续数组和为k能被统计
+        hashPartialSums.put(0, 1);
+        &#x2F;&#x2F;存储当前前缀和
+        int partialSum &#x3D; 0;
+        &#x2F;&#x2F;初始化前缀和数组
+        for(int i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            &#x2F;&#x2F;计算当前前缀和
+            partialSum &#x3D; partialSum + nums[i];
+            &#x2F;&#x2F;将当前前缀和及其所出现的次数存入哈希表中
+            int count &#x3D; hashPartialSums.getOrDefault(partialSum, 0);
+            &#x2F;&#x2F;查看哈希表中是否存在与当前前缀和差为k的值（这个值肯定是由这个数组前面的元素产生的，只用考虑差值为k），如果有则记录次数
+            if(hashPartialSums.containsKey(partialSum - k)) &#123;
+                res +&#x3D; hashPartialSums.get(partialSum - k);
+            &#125;
+            &#x2F;&#x2F;当前前缀和次数加一，之所以在检索之后再增加计数
+            &#x2F;&#x2F; 是因为计算差值不能将自己与自己的差值算上，次数不加，说明只查找当前元素之前
+            count++;
+            hashPartialSums.put(partialSum, count);
+        &#125;
+
+        return res;
+    &#125;
+&#125;</code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/java/index.html" rel="prev" title="java">
+                  <i class="fa fa-angle-left"></i> java
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Maven/index.html" rel="next" title="Maven">
+                  Maven <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

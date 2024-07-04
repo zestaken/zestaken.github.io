@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="session概述  概念：服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象（HTTPSession)中。 session的特点：  session用于存储一次会话的多次请求数据，存在服务器端; session可以存储任意类型，任意大小的数据。   session与cookie的区别：  session存储在服务器端，cookie存储在客户端; session没有数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="会话技术-session">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF-session/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="session概述  概念：服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象（HTTPSession)中。 session的特点：  session用于存储一次会话的多次请求数据，存在服务器端; session可以存储任意类型，任意大小的数据。   session与cookie的区别：  session存储在服务器端，cookie存储在客户端; session没有数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-18T02:04:36.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:40:32.098Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="会话技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF-session/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF-session/index.html","path":"/post/技术笔记/Web后端/会话技术-session/index.html","title":"会话技术-session"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>会话技术-session | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#session%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> session概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text"> session快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text"> session的基本原理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF-session/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="会话技术-session | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          会话技术-session
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-18 10:04:36" itemprop="dateCreated datePublished" datetime="2021-01-18T10:04:36+08:00">2021-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:40:32" itemprop="dateModified" datetime="2021-09-26T21:40:32+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="session概述"><a class="markdownIt-Anchor" href="#session概述"></a> session概述</h1>
+<ul>
+<li>概念：服务器端会话技术，在一次会话的多次请求间共享数据，将数据保存在服务器端的对象（HTTPSession)中。</li>
+<li>session的特点：
+<ul>
+<li>session用于存储一次会话的多次请求数据，存在<strong>服务器端</strong>;</li>
+<li>session可以存储<strong>任意类型，任意大小</strong>的数据。</li>
+</ul>
+</li>
+<li>session与cookie的区别：
+<ul>
+<li>session存储在服务器端，cookie存储在客户端;</li>
+<li>session没有数据大小限制，而cookie有;</li>
+<li>session数据存储在服务器端相对安全。</li>
+</ul>
+</li>
+</ul>
+<h1 id="session快速入门"><a class="markdownIt-Anchor" href="#session快速入门"></a> session快速入门</h1>
+<ol>
+<li>获取HttpSession对象：<code>HttpSession session = request.getSession();</code></li>
+<li>使用HttpSession对象：
+<ol>
+<li>获取属性：<code>Object getAttribute(String name)</code></li>
+<li>设置属性：<code>void setAttribute(String name, String value);</code></li>
+<li>删除属性：<code>void removeAttribute(Strin name)</code></li>
+</ol>
+</li>
+</ol>
+<h1 id="session的基本原理"><a class="markdownIt-Anchor" href="#session的基本原理"></a> session的基本原理</h1>
+<ul>
+<li>在一次会话范围内多次获取的Session对象是同一个Session对象。</li>
+<li>Session的实现是依赖于Cookie的：
+<ol>
+<li>在第一次请求创建了Session对象之后，服务器的<code>set-cookie</code>响应头之中会携带Session的id信息;</li>
+<li>在客户端进行第二次请求时，会自动发送一个cookie头，在这个头中包含有<code>set-cookie</code>中携带回来的Session对象的Id信息;</li>
+<li>服务器接受到Session的id信息后，或检查服务器中有无该session对象，如果有，则继续使用。</li>
+</ol>
+</li>
+<li>当客户端关闭后，服务器不关闭，两次获取的session：
+<ul>
+<li>默认情况下，不相同;</li>
+<li>客户端关闭后，session也能相同方法：
+<ul>
+<li>将携带JSESSIONID信息的cookie持久化存储到本地：
+<ol>
+<li>创建cookie;</li>
+<li>键设置为JESSIONID;</li>
+<li>设置最大存活时间;</li>
+<li>将cookie在响应消息中发回客户端。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Cookie c &#x3D; new Cookie(&quot;JESSIONID&quot;, session.getId());
+c.setMaxAge(60*60);&#x2F;&#x2F;持久化到磁盘1个小时
+response.addCookie(c);</code></pre>
+<ul>
+<li>客户端不关闭，服务器关闭后，两次读取的session：
+<ul>
+<li>两次获取的session不是同一个，但是要确保数据不丢失。</li>
+<li>seession的钝化：在服务器正常关闭之前，将session对象序列化到硬盘上;</li>
+<li>session的活化：在服务器启动之后，将session文件转化为内存中的session对象，实现数据的继续使用。</li>
+<li>tomcat服务器会自动完成session的钝化和活化，但是IDEA不会。</li>
+</ul>
+</li>
+<li>session的失效时间：
+<ol>
+<li>服务器关闭时自动销session对象;</li>
+<li>session对象调用invalidate()方法进行自毁;</li>
+<li>session的默认失效时间（在这段时间内，session没有任何操作或这变化，则被销毁）：
+<ol>
+<li>修改默认失效时间：在服务器的<code>web.xml</code>配置文件中找到：</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;&#x2F;session-timeout&gt;
+&lt;&#x2F;session-config&gt;</code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/%E4%BC%9A%E8%AF%9D%E6%8A%80%E6%9C%AF/" rel="tag"># 会话技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSP/index.html" rel="prev" title="JSP">
+                  <i class="fa fa-angle-left"></i> JSP
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/MVC%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E4%B8%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84/index.html" rel="next" title="MVC开发模式与三层架构">
+                  MVC开发模式与三层架构 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

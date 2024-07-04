@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="搜索引擎命令  双引号  把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。 bd和Google 都支持这个指令。 例如搜索： “seo方法图片”   减号  减号代表搜索不包含减号后面的词的页面。 使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。 Google 和bd都支持这个指令。 例如：搜索 -引擎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索引擎命令">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="搜索引擎命令  双引号  把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。 bd和Google 都支持这个指令。 例如搜索： “seo方法图片”   减号  减号代表搜索不包含减号后面的词的页面。 使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。 Google 和bd都支持这个指令。 例如：搜索 -引擎">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-25T00:02:19.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.947Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="杂技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/index.html","path":"/post/技术笔记/杂技术/搜索引擎命令/index.html","title":"搜索引擎命令"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搜索引擎命令 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text"> 搜索引擎命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E5%BC%95%E5%8F%B7"><span class="nav-number">1.1.</span> <span class="nav-text"> 双引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%8F%E5%8F%B7"><span class="nav-number">1.2.</span> <span class="nav-text"> 减号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%9F%E5%8F%B7"><span class="nav-number">1.3.</span> <span class="nav-text"> 星号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inurl"><span class="nav-number">1.4.</span> <span class="nav-text"> inurl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inanchor"><span class="nav-number">1.5.</span> <span class="nav-text"> inanchor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intitle"><span class="nav-number">1.6.</span> <span class="nav-text"> intitle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#allintitle"><span class="nav-number">1.7.</span> <span class="nav-text"> allintitle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#allinurl"><span class="nav-number">1.8.</span> <span class="nav-text"> allinurl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filetype"><span class="nav-number">1.9.</span> <span class="nav-text"> filetype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#site"><span class="nav-number">1.10.</span> <span class="nav-text"> site</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linkdomain"><span class="nav-number">1.11.</span> <span class="nav-text"> linkdomain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#related"><span class="nav-number">1.12.</span> <span class="nav-text"> related</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%91%BD%E4%BB%A4/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搜索引擎命令 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搜索引擎命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-25 08:02:19" itemprop="dateCreated datePublished" datetime="2021-05-25T08:02:19+08:00">2021-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">杂技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="搜索引擎命令"><a class="markdownIt-Anchor" href="#搜索引擎命令"></a> 搜索引擎命令</h1>
+<h2 id="双引号"><a class="markdownIt-Anchor" href="#双引号"></a> 双引号</h2>
+<ul>
+<li>把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。</li>
+<li>bd和Google 都支持这个指令。</li>
+<li>例如搜索： “seo方法图片”</li>
+</ul>
+<h2 id="减号"><a class="markdownIt-Anchor" href="#减号"></a> 减号</h2>
+<ul>
+<li>减号代表搜索不包含减号后面的词的页面。</li>
+<li>使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。</li>
+<li>Google 和bd都支持这个指令。</li>
+<li>例如：搜索 -引擎</li>
+<li>返回的则是包含“搜索”这个词，却不包含“引擎”这个词的结果</li>
+</ul>
+<h2 id="星号"><a class="markdownIt-Anchor" href="#星号"></a> 星号</h2>
+<ul>
+<li>星号*是常用的通配符，也可以用在搜索中。</li>
+<li>百度不支持<code>*</code>号搜索指令。</li>
+<li>比如在Google 中搜索：搜索*擎</li>
+<li>其中的<code>*</code>号代表任何文字。返回的结果就不仅包含“搜索引擎”，还包含了“搜索收擎”，“搜索巨擎”等内容。</li>
+</ul>
+<h2 id="inurl"><a class="markdownIt-Anchor" href="#inurl"></a> inurl</h2>
+<ul>
+<li>指令用于搜索查询词出现在url 中的页面。</li>
+<li>bd和Google 都支持inurl 指令。</li>
+<li>inurl 指令支持中文和英文。</li>
+<li>比如搜索：inurl:搜索引擎优化</li>
+<li>返回的结果都是网址url 中包含“搜索引擎优化”的页面。由于关键词出现在url 中对排名有一定影响，使用inurl:搜索可以更准确地找到竞争对手。</li>
+</ul>
+<h2 id="inanchor"><a class="markdownIt-Anchor" href="#inanchor"></a> inanchor</h2>
+<ul>
+<li>指令返回的结果是导入链接锚文字中包含搜索词的页面。</li>
+<li>百度不支持inanchor。</li>
+<li>比如在Google 搜索 ：inanchor:点击这里返回的结果页面本身并不一定包含“点击这里”这四个字，而是指向这些页面的链接锚文字中出现了“点击这里”这四个字。</li>
+<li>可以用来找到某个关键词的竞争对手，而且这些竞争对手往往是做过SEO 的。</li>
+<li>研究竞争对手页面有哪些外部链接，就可以找到很多链接资源。</li>
+</ul>
+<h2 id="intitle"><a class="markdownIt-Anchor" href="#intitle"></a> intitle</h2>
+<ul>
+<li>指令返回的是页面title 中包含关键词的页面。</li>
+<li>Google 和bd都支持intitle 指令。</li>
+<li>使用intitle 指令找到的文件是更准确的竞争页面。</li>
+<li>如果关键词只出现在页面可见文字中，而没有出现在title 中，大部分情况是并没有针对关键词进行优化，所以也不是有力的竞争对手。</li>
+</ul>
+<h2 id="allintitle"><a class="markdownIt-Anchor" href="#allintitle"></a> allintitle</h2>
+<ul>
+<li>搜索返回的是页面标题中包含多组关键词的文件。</li>
+<li>例如 ：allintitle:SEO 搜索引擎优化</li>
+<li>就相当于：intitle:SEO intitle:搜索引擎优化</li>
+<li>返回的是标题中中既包含“SEO”，也包含“搜索引擎优化”的页面</li>
+</ul>
+<h2 id="allinurl"><a class="markdownIt-Anchor" href="#allinurl"></a> allinurl</h2>
+<ul>
+<li>与allintitle: 类似。</li>
+<li>allinurl:SEO 搜索引擎优化</li>
+<li>就相当于 ：inurl:SEO inurl:搜索引擎优化</li>
+</ul>
+<h2 id="filetype"><a class="markdownIt-Anchor" href="#filetype"></a> filetype</h2>
+<ul>
+<li>用于搜索特定文件格式。</li>
+<li>Google 和bd都支持filetype 指令。</li>
+<li>比如搜索filetype:pdf SEO</li>
+<li>返回的就是包含SEO 这个关键词的所有pdf 文件。</li>
+</ul>
+<h2 id="site"><a class="markdownIt-Anchor" href="#site"></a> site</h2>
+<ul>
+<li>是SEO 最熟悉的高级搜索指令，用来搜索某个域名下的所有文件。</li>
+<li>注意事项：
+<ul>
+<li>site:后边跟的冒号必须是英文的“:”，中文的全角冒号“：”无用</li>
+<li>网址前不能带“http://”</li>
+<li>网址后边不能带斜杠“/”，其实是哪里都不能带“/”</li>
+<li>网址中不要用“www”，除非你有特别目的，用“www”会导致错过网站内的内容，因为很多网站的频道是没有“www”的</li>
+</ul>
+</li>
+</ul>
+<h2 id="linkdomain"><a class="markdownIt-Anchor" href="#linkdomain"></a> linkdomain</h2>
+<ul>
+<li>指令只适用于雅虎，返回的是某个域名的反向链接。雅虎的反向链接数据还比较准确，是SEO 人员研究竞争对手外部链接情况的重要工具之一。</li>
+<li>比如搜索linkdomain:<a target="_blank" rel="noopener" href="http://cnseotool.com">http://cnseotool.com</a> -site:<a target="_blank" rel="noopener" href="http://cnseotool.xn--com-bk2ek92ajye73gm3id1f4u4a9doda488b2umj0qvm0ecso">http://cnseotool.com得到的就是点石网站的外部链接</a>，因为-site:<a target="_blank" rel="noopener" href="http://cnseotool.com">http://cnseotool.com</a> 已经排除了点石本身的页面，也就是内部链接，剩下的就都是外部链接了。</li>
+</ul>
+<h2 id="related"><a class="markdownIt-Anchor" href="#related"></a> related</h2>
+<ul>
+<li>指令只适用于Google，返回的结果是与某个网站有关联的页面。比如搜索related:<a target="_blank" rel="noopener" href="http://cnseotool.com">http://cnseotool.com</a>,我们就可以得到Google 所认为的与点石网站有关联的其他页面。</li>
+<li>这种关联到底指的是什么，Google 并没有明确说明，一般认为指的是有共同外部链接的网站。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag"># 杂技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Arch/index.html" rel="prev" title="Arch">
+                  <i class="fa fa-angle-left"></i> Arch
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%93%E6%9D%9F%E6%A0%87%E5%BF%97%E5%88%B0Linux%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/index.html" rel="next" title="C语言-从字符串结束标志到Linux进程的内存分配">
+                  C语言-从字符串结束标志到Linux进程的内存分配 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

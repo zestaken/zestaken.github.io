@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="MarkdownLearn  一、Markdown简介  Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。 Markdown具有一系列衍生版本，用于扩展Markdown的功能（如表格、脚注、内嵌HTML等等），这些功能原初的Markdown尚不具备，它们能让Markdown转换成更多的格式，例如LaTeX，Docbook。Mar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MarkdownLearn">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="MarkdownLearn  一、Markdown简介  Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。 Markdown具有一系列衍生版本，用于扩展Markdown的功能（如表格、脚注、内嵌HTML等等），这些功能原初的Markdown尚不具备，它们能让Markdown转换成更多的格式，例如LaTeX，Docbook。Mar">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/MarkdownLearn/back.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200619184526.jpg">
+<meta property="article:published_time" content="2020-06-19T03:58:46.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.248Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="杂技术">
+<meta property="article:tag" content="Markdown">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/MarkdownLearn/back.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/index.html","path":"/post/技术笔记/杂技术/MarkdownLearn/index.html","title":"MarkdownLearn"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MarkdownLearn | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#markdownlearn"><span class="nav-number">1.</span> <span class="nav-text"> MarkdownLearn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-markdown%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text"> 一、Markdown简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E7%BC%96%E8%BE%91markdown%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text"> 二、 编辑Markdown的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E8%AF%AD%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text"> 三、文本编辑语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%A9%E8%BF%9B%E6%8D%A2%E8%A1%8C%E7%A9%BA%E8%A1%8C%E5%8F%8A%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.2.</span> <span class="nav-text"> 缩进，换行，空行及对齐方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E8%A1%8C%E7%BC%A9%E8%BF%9B%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">1.3.2.1.</span> <span class="nav-text"> 首行缩进(使用占位符)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E8%A1%8C"><span class="nav-number">1.3.2.2.</span> <span class="nav-text"> 换行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E8%A1%8C"><span class="nav-number">1.3.2.3.</span> <span class="nav-text"> 空行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.2.4.</span> <span class="nav-text"> 对齐方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%9C%E4%BD%93%E7%B2%97%E4%BD%93%E5%88%A0%E9%99%A4%E7%BA%BF%E4%B8%8B%E5%88%92%E7%BA%BF%E9%AB%98%E4%BA%AE"><span class="nav-number">1.3.3.</span> <span class="nav-text"> 斜体，粗体，删除线，下划线,&#x3D;&#x3D;高亮&#x3D;&#x3D;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-%E9%93%BE%E6%8E%A5"><span class="nav-number">1.4.</span> <span class="nav-text"> 四、链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%BC%8F%E6%99%AE%E9%80%9A%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">1.4.1.</span> <span class="nav-text"> 行内式（普通超链接）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%9A%E7%82%B9%E9%A1%B5%E5%86%85%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">1.4.2.</span> <span class="nav-text"> 锚点（页内超链接）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94-%E5%88%97%E8%A1%A8"><span class="nav-number">1.5.</span> <span class="nav-text"> 五、列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">1.5.1.</span> <span class="nav-text"> 无序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text"> 有序列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD-%E5%9B%BE%E5%83%8F%E6%8F%92%E5%85%A5"><span class="nav-number">1.6.</span> <span class="nav-text"> 六、图像插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87"><span class="nav-number">1.6.1.</span> <span class="nav-text"> 插入本地图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%B3%95"><span class="nav-number">1.6.1.1.</span> <span class="nav-text"> 相对路径法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87"><span class="nav-number">1.6.2.</span> <span class="nav-text"> 插入网络图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%9B%BE%E5%BA%8A"><span class="nav-number">1.6.2.1.</span> <span class="nav-text"> 建立图床</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E8%87%B3%E5%9B%BE%E5%BA%8A%E7%94%9F%E6%88%90%E9%93%BE%E6%8E%A5"><span class="nav-number">1.6.2.2.</span> <span class="nav-text"> 将图片上传至图床，生成链接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83-%E5%BC%95%E7%94%A8"><span class="nav-number">1.7.</span> <span class="nav-text"> 七、引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB-%E5%AD%97%E7%AC%A6%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.8.</span> <span class="nav-text"> 八、字符设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="nav-number">1.8.1.</span> <span class="nav-text"> 转义字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93-%E5%AD%97%E5%8F%B7-%E9%A2%9C%E8%89%B2"><span class="nav-number">1.8.2.</span> <span class="nav-text"> 字体、字号、颜色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D-%E5%86%85%E5%AE%B9%E7%9B%AE%E5%BD%95"><span class="nav-number">1.9.</span> <span class="nav-text"> 九、内容目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81-%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">1.10.</span> <span class="nav-text"> 十、代码块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%BC%8F"><span class="nav-number">1.10.1.</span> <span class="nav-text"> 行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%A9%E8%BF%9B%E5%BC%8F%E5%A4%9A%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">1.10.2.</span> <span class="nav-text"> 缩进式多行代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E8%A3%B9%E5%BC%8F%E5%A4%9A%E8%A1%8C%E4%BB%A3%E7%A0%81"><span class="nav-number">1.10.3.</span> <span class="nav-text"> 包裹式多行代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">1.11.</span> <span class="nav-text"> 十一、流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C-%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.12.</span> <span class="nav-text"> 十二、表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%89-latex%E5%85%AC%E5%BC%8F"><span class="nav-number">1.13.</span> <span class="nav-text"> 十三、Latex公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E5%85%AC%E5%BC%8F"><span class="nav-number">1.13.1.</span> <span class="nav-text"> 行内公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E8%A1%8C%E5%85%AC%E5%BC%8F"><span class="nav-number">1.13.2.</span> <span class="nav-text"> 整行公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%97%E7%BA%A7%E5%85%AC%E5%BC%8F"><span class="nav-number">1.13.3.</span> <span class="nav-text"> 块级公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B-%E5%88%86%E9%9A%94%E7%BA%BF"><span class="nav-number">1.14.</span> <span class="nav-text"> 十四、分隔线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%94-html%E8%AF%AD%E6%B3%95"><span class="nav-number">1.15.</span> <span class="nav-text"> 十五、HTML语法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/MarkdownLearn/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MarkdownLearn | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MarkdownLearn
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-19 11:58:46" itemprop="dateCreated datePublished" datetime="2020-06-19T11:58:46+08:00">2020-06-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">杂技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="markdownlearn"><a class="markdownIt-Anchor" href="#markdownlearn"></a> MarkdownLearn</h1>
+<h2 id="一-markdown简介"><a class="markdownIt-Anchor" href="#一-markdown简介"></a> 一、Markdown简介</h2>
+<blockquote>
+<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。<br />
+Markdown具有一系列衍生版本，用于扩展Markdown的功能（如表格、脚注、内嵌HTML等等），这些功能原初的Markdown尚不具备，它们能让Markdown转换成更多的格式，例如LaTeX，Docbook。Markdown增强版中比较有名的有Markdown Extra、MultiMarkdown、 Maruku等。这些衍生版本要么基于工具，如Pandoc；要么基于网站，如GitHub和Wikipedia，在语法上基本兼容，但在一些语法和渲染效果上有改动。</p>
+</blockquote>
+<h2 id="二-编辑markdown的工具"><a class="markdownIt-Anchor" href="#二-编辑markdown的工具"></a> 二、 编辑Markdown的工具</h2>
+<p>1.vscode</p>
+<ul>
+<li>需要安装插件
+<ul>
+<li>Markdown All in One -&gt; 各种优化一股脑装上</li>
+<li>Markdown Preview GitHub styling -&gt; 使预览格式与GitHub pages中一样</li>
+<li>Markdown preview ehenced -&gt; 快捷键：英文输入状态下，同时按下ctrl,k 然后同时放开再按v可唤出预览窗口。</li>
+<li>Markdownlint -&gt;  markdown语法检查纠正器</li>
+<li>Markdown PDF -&gt; 将.md文件转换成pdf,jpeg,png,html格式</li>
+</ul>
+</li>
+</ul>
+<p>2.typora</p>
+<ul>
+<li>专业Markdown编辑器，可去<a target="_blank" rel="noopener" href="https://www.typora.io/">官网</a>下载。</li>
+<li>界面简约美观，专用于写Markdown文件，功能强劲。</li>
+</ul>
+<h2 id="三-文本编辑语法"><a class="markdownIt-Anchor" href="#三-文本编辑语法"></a> 三、文本编辑语法</h2>
+<h3 id="标题"><a class="markdownIt-Anchor" href="#标题"></a> 标题</h3>
+<pre class="line-numbers language-none"><code class="language-none"># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+<p>标题一般支持六级。注意： # 与文字之间有一个空格</p>
+<h3 id="缩进换行空行及对齐方式"><a class="markdownIt-Anchor" href="#缩进换行空行及对齐方式"></a> 缩进，换行，空行及对齐方式</h3>
+<h4 id="首行缩进使用占位符"><a class="markdownIt-Anchor" href="#首行缩进使用占位符"></a> 首行缩进(使用占位符)</h4>
+<p> 空四位</p>
+<p> 空两位<br />
+ 空一位</p>
+<pre class="line-numbers language-none"><code class="language-none">&amp;emsp;空四位  
+&amp;ensp;空两位
+&amp;nbsp;空一位
+</code></pre>
+<p>注意：占位符后的 ； 不可少</p>
+<h4 id="换行"><a class="markdownIt-Anchor" href="#换行"></a> 换行</h4>
+<p>在一行字后面加了两个空格（space）再回车</p>
+<h4 id="空行"><a class="markdownIt-Anchor" href="#空行"></a> 空行</h4>
+<p>在一行中只有空格（space)或回车则为空行，但无论空了多少行，最终在预览中都只显示一行空格。</p>
+<h4 id="对齐方式"><a class="markdownIt-Anchor" href="#对齐方式"></a> 对齐方式</h4>
+<center>行中心对齐</center>
+ <p align="left">行左对齐</p>  
+ <p align="right">行右对齐</p>
+<pre class="line-numbers language-none"><code class="language-none">
+&lt;center&gt; 行中心对齐&lt;&#x2F;center&gt; &#x2F;&#x2F;后面的&lt;&#x2F;center&gt;可省略
+&lt;p align&#x3D;&quot;left&quot;&gt;行左对齐&lt;&#x2F;p&gt;  &#x2F;&#x2F;后面的&lt;&#x2F;p&gt;可省略
+&lt;p align&#x3D;&quot;right&quot;&gt;行右对齐&lt;&#x2F;p&gt;
+</code></pre>
+<h3 id="斜体粗体删除线下划线高亮"><a class="markdownIt-Anchor" href="#斜体粗体删除线下划线高亮"></a> 斜体，粗体，删除线，下划线,==高亮==</h3>
+<p><em>斜体</em><br />
+<strong>粗体</strong><br />
+<em><strong>加粗斜体</strong></em><br />
+<s>删除线</s><br />
+<u>下划线</u><br />
+==高亮== (只有一些预览才支持)</p>
+<pre class="line-numbers language-none"><code class="language-none">
+*斜体*  
+**粗体**  
+***加粗斜体***  
+~~删除线~~   
+&lt;u&gt;下划线&lt;&#x2F;u&gt;
+&#x3D;&#x3D;高亮&#x3D;&#x3D;
+</code></pre>
+<h2 id="四-链接"><a class="markdownIt-Anchor" href="#四-链接"></a> 四、链接</h2>
+<h3 id="行内式普通超链接"><a class="markdownIt-Anchor" href="#行内式普通超链接"></a> 行内式（普通超链接）</h3>
+<p>GitHub欢迎你<a href="www.github.com">github</a></p>
+<pre class="line-numbers language-none"><code class="language-none">
+GitHub欢迎你[github](www.github.com)   
+[]方括号内放链接名字，（）圆括号内放链接地址</code></pre>
+<h3 id="锚点页内超链接"><a class="markdownIt-Anchor" href="#锚点页内超链接"></a> 锚点（页内超链接）</h3>
+<p><a href="#markdown%E7%AE%80%E4%BB%8B">跳转到markdown简介</a></p>
+<pre class="line-numbers language-none"><code class="language-none">[跳转到markdown简介](#markdown简介)
+[]方括号中放显示的链接文字，（）圆括号中放要跳转的标题。  </code></pre>
+<p>注意：锚点仅支持跳转到标题，且不管是几级的标题，（）圆括号中都只放一个#</p>
+<h2 id="五-列表"><a class="markdownIt-Anchor" href="#五-列表"></a> 五、列表</h2>
+<h3 id="无序列表"><a class="markdownIt-Anchor" href="#无序列表"></a> 无序列表</h3>
+<ul>
+<li>无序列表项一</li>
+<li>无序列表项二
+<ul>
+<li>无序列表五
+<ul>
+<li>无序列表六</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>无序列表项三</li>
+</ul>
+<ul>
+<li>无序列表项四</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">
+* 无序列表项一
+* 无序列表项二
+  * 无序列表五
+    * 无序列表六
+  
++ 无序列表项三
+- 无序列表项四</code></pre>
+<p>注意：</p>
+<ul>
+<li><code>*</code>,<code>-</code>,<code>+</code>三种符号任意一个都可创建无序列表</li>
+<li>无序列表每一行之后回车会自动新建一个空无序列表行</li>
+<li>符号<code>* ，-, +</code>与字符之间要有空格</li>
+<li>利用tab对<code>*、+、-</code>缩进，可以形成层级列表</li>
+</ul>
+<h3 id="有序列表"><a class="markdownIt-Anchor" href="#有序列表"></a> 有序列表</h3>
+<ol>
+<li>有序列表项一</li>
+<li>有序列表项二</li>
+<li>有序列表项三</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>数字加英文句点之后空格再加字符创建有序列表</li>
+<li>每行之后回车会自动创建新的一行并且序号加一</li>
+<li>结束有序列表需要在最后加空行（连按两次回车，或空格两次再回车）</li>
+</ol>
+<h2 id="六-图像插入"><a class="markdownIt-Anchor" href="#六-图像插入"></a> 六、图像插入</h2>
+<h3 id="插入本地图片"><a class="markdownIt-Anchor" href="#插入本地图片"></a> 插入本地图片</h3>
+<h4 id="相对路径法"><a class="markdownIt-Anchor" href="#相对路径法"></a> 相对路径法</h4>
+<p><img src="./MarkdownLearn/back.jpg" alt="loading" /></p>
+<pre class="line-numbers language-none"><code class="language-none">![loading](.&#x2F;MarkdownLearn&#x2F;back.jpg)
+[]方括号中放入当图片加载不出来时显示的文字
+（）圆括号中放入图片对.md文件的相对路径</code></pre>
+<p>注意：</p>
+<ol>
+<li>需要再.md文件的同级目录下建立储存图片的文件夹</li>
+<li>在vscode中需要打开包含.md和对应储存文件夹的文件夹</li>
+<li>注意相对路径的格式</li>
+<li>由于未知原因，在githubpages中不能显示</li>
+</ol>
+<h3 id="插入网络图片"><a class="markdownIt-Anchor" href="#插入网络图片"></a> 插入网络图片</h3>
+<h4 id="建立图床"><a class="markdownIt-Anchor" href="#建立图床"></a> 建立图床</h4>
+<p>利用picgo和gitee建立图床</p>
+<h4 id="将图片上传至图床生成链接"><a class="markdownIt-Anchor" href="#将图片上传至图床生成链接"></a> 将图片上传至图床，生成链接</h4>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200619184526.jpg" alt="" /></p>
+<pre class="line-numbers language-none"><code class="language-none">![](https:&#x2F;&#x2F;zjpicture.oss-cn-beijing.aliyuncs.com&#x2F;giteePic&#x2F;picgo-master&#x2F;img&#x2F;20200619184526.jpg)
+圆括号内放图片链接，其余一样</code></pre>
+<h2 id="七-引用"><a class="markdownIt-Anchor" href="#七-引用"></a> 七、引用</h2>
+<blockquote>
+<p>我是周树人</p>
+<blockquote>
+<p>你找鲁迅</p>
+<blockquote>
+<p>和我周树人有什么关系</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&gt;我是周树人
+&gt;&gt;你找鲁迅
+&gt;&gt;&gt;和我周树人有什么关系  
+要终止引用，同结束列表一样，需要在引用之后空一行</code></pre>
+<h2 id="八-字符设置"><a class="markdownIt-Anchor" href="#八-字符设置"></a> 八、字符设置</h2>
+<h3 id="转义字符"><a class="markdownIt-Anchor" href="#转义字符"></a> 转义字符</h3>
+<ul>
+<li>*, \, \\</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">* \*, \\, \\\
+转义字符为&#39;\&#39;,对于特殊字符如&#39;*&#39;等，需要在其前面加入&#39;\&#39;才能显示其原本的字符（类似c语言）</code></pre>
+<h3 id="字体-字号-颜色"><a class="markdownIt-Anchor" href="#字体-字号-颜色"></a> 字体、字号、颜色</h3>
+<p><font face="黑体">我是黑体字</font><br />
+<font face="微软雅黑">我是微软雅黑</font><br />
+<font face="黑体" size=12 color=red>我是12号红色黑体</font></p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;font face&#x3D;&quot;黑体&quot;&gt;我是黑体字&lt;&#x2F;font&gt;
+&lt;font face&#x3D;&quot;微软雅黑&quot;&gt;我是微软雅黑&lt;&#x2F;font&gt;
+&lt;font face&#x3D;&quot;黑体&quot; size&#x3D;12 color&#x3D;red&gt;我是12号红色黑体&lt;&#x2F;font&gt;
+欲要解锁更多字体，请自行查电脑的字体库，找到字体的名字</code></pre>
+<h2 id="九-内容目录"><a class="markdownIt-Anchor" href="#九-内容目录"></a> 九、内容目录</h2>
+<ul>
+<li>支持[TOC]的编辑器上，直接在文前输入[TOC]</li>
+<li>用hexo搭建的GitHubPages会自动生成目录</li>
+<li>vscode安上markdown preview enhenced 之后会自动生成目录</li>
+</ul>
+<h2 id="十-代码块"><a class="markdownIt-Anchor" href="#十-代码块"></a> 十、代码块</h2>
+<h3 id="行内式"><a class="markdownIt-Anchor" href="#行内式"></a> 行内式</h3>
+<p>c语言的<code>scanf()</code>怎么用？</p>
+<pre class="line-numbers language-none"><code class="language-none">c语言的&#96;scanf()&#96;怎么用？
+用&quot;&#96;&quot;符号包裹代码</code></pre>
+<h3 id="缩进式多行代码"><a class="markdownIt-Anchor" href="#缩进式多行代码"></a> 缩进式多行代码</h3>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main()
+&#123;
+  printf(&quot;hello world!&quot;);
+  return 0;
+&#125;
+</code></pre>
+<p>缩进4个空格则自动成为代码块，会一直持续到没有缩进的一行。（个人认为适用于不是任何编程语言但需要原封不动显示字符的地方）</p>
+<h3 id="包裹式多行代码"><a class="markdownIt-Anchor" href="#包裹式多行代码"></a> 包裹式多行代码</h3>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">#include &lt;stdio.h&gt;
+
+    int main()
+    &#123;
+      printf(&quot;hello world!&quot;);
+      return 0;
+    &#125;</code></pre>
+<ul>
+<li>代码开始前输入```,之后加入语言类型以实现语法高亮，如```c</li>
+<li>代码结束后输入```,之后代码块结束</li>
+</ul>
+<h2 id="十一-流程图"><a class="markdownIt-Anchor" href="#十一-流程图"></a> 十一、流程图</h2>
+<pre class="line-numbers language-flow" data-language="flow"><code class="language-flow">st&#x3D;&gt;start: 开始
+e&#x3D;&gt;end: 结束
+op1&#x3D;&gt;operation: 新品开发流程
+op2&#x3D;&gt;operation: 产品需求提出
+op3&#x3D;&gt;operation: 产品试用 负责人：吴xx
+op4&#x3D;&gt;operation: 包装
+op5&#x3D;&gt;parallel: 继续讨论
+op6&#x3D;&gt;operation: 讨论
+cond&#x3D;&gt;condition: 确认？
+
+st-&gt;op1-&gt;op2-&gt;op3-&gt;cond
+cond(yes)-&gt;op4-&gt;e
+cond(no)-&gt;op6-&gt;e</code></pre>
+<pre class="line-numbers language-none"><code class="language-none">st&#x3D;&gt;start: 开始
+e&#x3D;&gt;end: 结束
+op1&#x3D;&gt;operation: 新品开发流程
+op2&#x3D;&gt;operation: 产品需求提出
+op3&#x3D;&gt;operation: 产品试用 负责人：吴xx
+op4&#x3D;&gt;operation: 包装
+op5&#x3D;&gt;parallel: 继续讨论
+op6&#x3D;&gt;operation: 讨论
+cond&#x3D;&gt;condition: 确认？
+
+st-&gt;op1-&gt;op2-&gt;op3-&gt;cond
+cond(yes)-&gt;op4-&gt;e
+cond(no)-&gt;op6-&gt;e</code></pre>
+<ol>
+<li>通过三个`+flow进入流程图的代码块,再用三个`结束</li>
+<li>编写流程图中的变量：变量=&gt;操作块: 备注名(注意：冒号为英文的冒号，冒号与备注名之间有一个空格)</li>
+<li>构建变量之间的流程图关系</li>
+<li>格式一旦有一点差错，流程图无法显示</li>
+</ol>
+<p>注意：生成流程图，有很多版本，如mermaid,flowchart,此处用flowchart示范</p>
+<h2 id="十二-表格"><a class="markdownIt-Anchor" href="#十二-表格"></a> 十二、表格</h2>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>姓名</th>
+<th>学号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>张杰</td>
+<td>2233</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">序号</th>
+<th style="text-align:left">姓名</th>
+<th style="text-align:center">学号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">杰</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+<pre class="line-numbers language-none"><code class="language-none">|序号|姓名|学号|
+|-|-|-|
+|1|张杰|2233|
+
+|序号|姓名|学号|
+|-:|:-|:-:|
+|1|杰|2|</code></pre>
+<ol>
+<li>第一行为表头</li>
+<li>第二行分隔表头和主体部分（还可以为不同的列指定对齐方向：默认为左对齐，:-为左对齐，-:为右对齐，:-为居中对齐，其中，冒号为英文冒号）</li>
+<li>从第三行起每一行为一个表格行</li>
+<li>列与列之间用管道符“|”隔开</li>
+</ol>
+<h2 id="十三-latex公式"><a class="markdownIt-Anchor" href="#十三-latex公式"></a> 十三、Latex公式</h2>
+<h3 id="行内公式"><a class="markdownIt-Anchor" href="#行内公式"></a> 行内公式</h3>
+<p>质能守恒方程可以用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E = m c^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>表示</p>
+<pre class="line-numbers language-none"><code class="language-none">质能守恒方程可以用$E &#x3D; m c^2$表示</code></pre>
+<h3 id="整行公式"><a class="markdownIt-Anchor" href="#整行公式"></a> 整行公式</h3>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E = m c^2 
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord mathdefault">m</span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<pre class="line-numbers language-none"><code class="language-none">$$E &#x3D; m c^2$$</code></pre>
+<h3 id="块级公式"><a class="markdownIt-Anchor" href="#块级公式"></a> 块级公式</h3>
+<pre class="line-numbers language-math" data-language="math"><code class="language-math">E &#x3D;m c^2  </code></pre>
+<p>```math<br />
+E =m c^2<br />
+```</p>
+<p>注意：块级公式，需要特定支持</p>
+<ul>
+<li>一块只能写一个公式，换行没有意义（行内公式，整行公式也一样，一个包裹内只能写一个公式）</li>
+</ul>
+<h2 id="十四-分隔线"><a class="markdownIt-Anchor" href="#十四-分隔线"></a> 十四、分隔线</h2>
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">***
+
+* * *
+
+***
+
+---
+
+--------------
+
+- - -
+
+___
+
+_ _ _
+
+__________
+</code></pre>
+<ul>
+<li>三个及以上*,-,_(星号，减号，底线)，即可形成分隔线（中间有空格也可以），但是同一行不能出现其它字符。</li>
+</ul>
+<h2 id="十五-html语法"><a class="markdownIt-Anchor" href="#十五-html语法"></a> 十五、HTML语法</h2>
+<p>可用HTML的语法编辑markdown</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag"># 杂技术</a>
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Linux%E5%9F%BA%E7%A1%80/index.html" rel="next" title="Linux基础">
+                  Linux基础 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

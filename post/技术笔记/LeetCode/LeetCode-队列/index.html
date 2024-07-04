@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="代码地址 github  1. 合并k个升序链表 23  题目   给你一个链表数组，每个链表都已经按升序排列。 请你将所有链表合并到一个升序链表中，返回合并后的链表。  示例 1： 输入：lists &#x3D; [[1,4,5],[1,3,4],[2,6]] 输出：[1,1,2,3,4,4,5,6] 解释：链表数组如下： [   1-&gt;4-&gt;5,   1-&gt;3-&gt;4,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-队列">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="代码地址 github  1. 合并k个升序链表 23  题目   给你一个链表数组，每个链表都已经按升序排列。 请你将所有链表合并到一个升序链表中，返回合并后的链表。  示例 1： 输入：lists &#x3D; [[1,4,5],[1,3,4],[2,6]] 输出：[1,1,2,3,4,4,5,6] 解释：链表数组如下： [   1-&gt;4-&gt;5,   1-&gt;3-&gt;4,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/KM82lW.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/AIl1gT.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210830084011.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/M6GE8z.png">
+<meta property="article:published_time" content="2021-07-31T03:20:59.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.945Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/KM82lW.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%98%9F%E5%88%97/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%98%9F%E5%88%97/index.html","path":"/post/技术笔记/LeetCode/LeetCode-队列/index.html","title":"LeetCode-队列"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeetCode-队列 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text"> 代码地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%90%88%E5%B9%B6k%E4%B8%AA%E5%8D%87%E5%BA%8F%E9%93%BE%E8%A1%A8-23"><span class="nav-number">2.</span> <span class="nav-text"> 1. 合并k个升序链表 23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%A4%A9%E9%99%85%E7%BA%BF%E9%97%AE%E9%A2%98-218"><span class="nav-number">3.</span> <span class="nav-text"> 2. 天际线问题 218</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-2"><span class="nav-number">3.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC-239"><span class="nav-number">4.</span> <span class="nav-text"> 3. 滑动窗口最大值 239</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">4.1.</span> <span class="nav-text"> *题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-3"><span class="nav-number">4.2.</span> <span class="nav-text"> Java解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%98%9F%E5%88%97/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeetCode-队列 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-队列
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-31 11:20:59" itemprop="dateCreated datePublished" datetime="2021-07-31T11:20:59+08:00">2021-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="代码地址"><a class="markdownIt-Anchor" href="#代码地址"></a> 代码地址</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/zestaken/newblog/tree/master/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/Code/src/main/java/queue">github</a></p>
+<h1 id="1-合并k个升序链表-23"><a class="markdownIt-Anchor" href="#1-合并k个升序链表-23"></a> 1. 合并k个升序链表 23</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">题目</a></li>
+</ul>
+<hr />
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<p></p>
+<p>示例 1：</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：lists &#x3D; [[1,4,5],[1,3,4],[2,6]]
+输出：[1,1,2,3,4,4,5,6]
+解释：链表数组如下：
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+将它们合并到一个有序链表中得到。
+1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+示例 2：
+
+输入：lists &#x3D; []
+输出：[]
+示例 3：
+
+输入：lists &#x3D; [[]]
+输出：[]</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">k &#x3D;&#x3D; lists.length
+0 &lt;&#x3D; k &lt;&#x3D; 10^4
+0 &lt;&#x3D; lists[i].length &lt;&#x3D; 500
+-10^4 &lt;&#x3D; lists[i][j] &lt;&#x3D; 10^4
+lists[i] 按 升序 排列
+lists[i].length 的总和不超过 10^4</code></pre>
+<h2 id="java解法"><a class="markdownIt-Anchor" href="#java解法"></a> Java解法</h2>
+<ul>
+<li>法一：使用<a target="_blank" rel="noopener" href="https://www.apiref.com/java11-zh/java.base/java/util/PriorityQueue.html">优先队列</a>，开始将各个链表的头节点加入优先队列中，优先队列会自动按值大小顺序添加到队列中，之后弹出队列元素，因为链表自身是有序的，弹出的一定是当前最小的元素，之后将弹出元素的下一节点添加到优先队列中，则又会自动排序，直到队列为空时，所有链表的元素都已经添加完了。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/KM82lW.png" alt="KM82lW" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MergeKLists23 &#123;
+    &#x2F;**
+     * 创建一个实现Comparable接口的ListNode，作为优先队列的元素
+     * 使用优先队列PriorityQueue需要实现Comparable接口
+     *&#x2F;
+    class Status implements Comparable&lt;Status&gt;&#123;
+        int val;
+        ListNode node;
+
+        Status(int val, ListNode node) &#123;
+            this.val &#x3D; val;
+            this.node &#x3D; node;
+        &#125;
+
+        &#x2F;**
+         * 新添加进优先队列的元素通过这个方法获得优先级，较小的元素优先级高放在队列前面
+         * @param status2
+         * @return
+         *&#x2F;
+        @Override
+        public int compareTo(Status status2) &#123;
+            return this.val - status2.val;
+        &#125;
+    &#125;
+
+    public ListNode mergeKLists(ListNode[] lists) &#123;
+
+        &#x2F;&#x2F;创建以Status作为元素的优先队列
+        PriorityQueue&lt;Status&gt; queue &#x3D; new PriorityQueue&lt;&gt;();
+
+        &#x2F;&#x2F;首先将每个链表的头节点放入优先队列中
+        for(ListNode node : lists) &#123;
+            if(node !&#x3D; null) &#123;
+                queue.offer(new Status(node.val, node));
+            &#125;
+        &#125;
+
+        &#x2F;&#x2F;创建一个不存值的头节点便于返回结果
+        ListNode head &#x3D; new ListNode();
+        &#x2F;&#x2F;使用tail指针便于尾插法
+        ListNode tail &#x3D; head;
+
+        &#x2F;&#x2F;逐步弹出优先队列中元素，直到队列为空
+        while(!queue.isEmpty()) &#123;
+            &#x2F;&#x2F;弹出队列头部节点并插入结果链表尾部
+            Status temp &#x3D; queue.poll();
+            tail.next &#x3D; temp.node;
+            tail &#x3D; temp.node;
+            &#x2F;&#x2F;将当前被弹出节点的下一节点加入优先队列中
+            if(temp.node.next !&#x3D; null) &#123;
+                queue.offer(new Status(temp.node.next.val, temp.node.next));
+            &#125;
+        &#125;
+        tail.next &#x3D; null;
+
+        return head.next;
+    &#125;
+
+&#125;</code></pre>
+<h1 id="2-天际线问题-218"><a class="markdownIt-Anchor" href="#2-天际线问题-218"></a> 2. 天际线问题 218</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/">题目</a></li>
+</ul>
+<hr />
+<p>城市的天际线是从远处观看该城市中所有建筑物形成的轮廓的外部轮廓。给你所有建筑物的位置和高度，请返回由这些建筑物形成的 天际线 。</p>
+<p>每个建筑物的几何信息由数组 buildings 表示，其中三元组 buildings[i] = [lefti, righti, heighti] 表示：</p>
+<p>lefti 是第 i 座建筑物左边缘的 x 坐标。<br />
+righti 是第 i 座建筑物右边缘的 x 坐标。<br />
+heighti 是第 i 座建筑物的高度。<br />
+天际线 应该表示为由 “关键点” 组成的列表，格式 [[x1,y1],[x2,y2],…] ，并按 x 坐标 进行 排序 。关键点是水平线段的左端点。列表中最后一个点是最右侧建筑物的终点，y 坐标始终为 0 ，仅用于标记天际线的终点。此外，任何两个相邻建筑物之间的地面都应被视为天际线轮廓的一部分。</p>
+<p>注意：输出天际线中不得有连续的相同高度的水平线。例如 […[2 3], [4 5], [7 5], [11 5], [12 7]…] 是不正确的答案；三条高度为 5 的线应该在最终输出中合并为一个：[…[2 3], [4 5], [12 7], …]</p>
+<p>示例1:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/AIl1gT.jpg" alt="AIl1gT" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：buildings &#x3D; [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]
+输出：[[2,10],[3,15],[7,12],[12,0],[15,10],[20,8],[24,0]]
+解释：
+图 A 显示输入的所有建筑物的位置和高度，
+图 B 显示由这些建筑物形成的天际线。图 B 中的红点表示输出列表中的关键点。
+示例 2：
+
+输入：buildings &#x3D; [[0,2,3],[2,5,3]]
+输出：[[0,3],[5,0]]
+ 
+
+提示：
+
+1 &lt;&#x3D; buildings.length &lt;&#x3D; 104
+0 &lt;&#x3D; lefti &lt; righti &lt;&#x3D; 231 - 1
+1 &lt;&#x3D; heighti &lt;&#x3D; 231 - 1
+buildings 按 lefti 非递减排序</code></pre>
+<h2 id="java解法-2"><a class="markdownIt-Anchor" href="#java解法-2"></a> Java解法</h2>
+<ul>
+<li>法一：首先先要观察出关键点出现的规律：1 关键点的横坐标必然在建筑物的左右边界上 2 处于建筑物左边界上的关键点的高度就是该建筑的高度，右边界上的则不然，得出建筑包含关键点的概念：大于等于建筑左坐标，小于建筑右坐标；之后使用<strong>扫描线法</strong>，逐个遍历所有的建筑的边界横坐标，并找出包含该边界的建筑物，将该建筑物信息存储。然后在所有包含该边界的建筑物中（遍历）选出最高的高度就是关键点的坐标。在基本思路清晰后，使用<strong>优先队列</strong>减少遍历包含边界的建筑物信息得出最大高度的过程：以高度为比较变量，高度最高的放在队列最前，每次只要确保队列最前的建筑包含边界即可使用其高度作为关键点高度（如果不包含，说明边界已经超过了该建筑所在区域，因为边界是从左到右遍历的，所以该建筑在确定关键点上已经失效（之后的边界它必然也不会包含），可以从队列中移除）。最后要注意每次得到新的关键点时都要确定是否<strong>与以前的关键点高度相同</strong>，如果相同则丢弃这个关键点。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210830084011.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class SkyLine218 &#123;
+
+    public List&lt;List&lt;Integer&gt;&gt; getSkyline(int[][] buildings) &#123;
+        &#x2F;&#x2F;创建优先队列，
+        PriorityQueue&lt;int[]&gt; priorityQueue &#x3D; new PriorityQueue&lt;int[]&gt;((a, b)-&gt;b[1] - a[1]);
+
+        &#x2F;&#x2F;存储建筑物的边界的集合(建筑物的左右横坐标)
+        List&lt;Integer&gt; boundaries &#x3D; new ArrayList&lt;&gt;();
+        for(int[] building : buildings) &#123;
+            boundaries.add(building[0]);
+            boundaries.add(building[1]);
+        &#125;
+        &#x2F;&#x2F;对边界进行排序(从小到大)
+        Collections.sort(boundaries);
+
+        &#x2F;&#x2F;存储结果天际线的集合
+        List&lt;List&lt;Integer&gt;&gt; result &#x3D; new ArrayList&lt;&gt;();
+
+        int n &#x3D; buildings.length;
+        int index &#x3D; 0;
+        &#x2F;&#x2F;遍历边界一个个地找到天际线关键点
+        for(int boundary : boundaries) &#123;
+            &#x2F;&#x2F;从左到右遍历并找到包含该边界的建筑物，并添加到优先队列中去
+            &#x2F;&#x2F;已经添加了的建筑不会再遍历
+            while(index &lt; n &amp;&amp; buildings[index][0] &lt;&#x3D; boundary) &#123;
+                &#x2F;&#x2F;将建筑物的右边界和高度整体存入优先队列中
+                priorityQueue.offer(new int[] &#123;buildings[index][1], buildings[index][2]&#125;);
+                index++;
+            &#125;
+            &#x2F;&#x2F;确保优先队列首部的元素包含该边界（即右横坐标大于边界坐标）
+            while(!priorityQueue.isEmpty() &amp;&amp; priorityQueue.peek()[0] &lt;&#x3D; boundary) &#123;
+                priorityQueue.poll();
+            &#125;
+
+            &#x2F;&#x2F;获取优先队列首部的元素（建筑物）的高度，即最大高度（同时这个高度对应的建筑包含该边界）
+            int maxHeight &#x3D; priorityQueue.isEmpty() ? 0 : priorityQueue.peek()[1];
+            &#x2F;&#x2F;如果这个高度没有与前面的高度相同，则和边界一起存入结果集合中
+            if(result.size() &#x3D;&#x3D; 0 || maxHeight !&#x3D; result.get(result.size() - 1).get(1)) &#123;
+                result.add(Arrays.asList(boundary, maxHeight));
+            &#125;
+        &#125;
+        return result;
+    &#125;
+&#125;</code></pre>
+<h1 id="3-滑动窗口最大值-239"><a class="markdownIt-Anchor" href="#3-滑动窗口最大值-239"></a> 3. 滑动窗口最大值 239</h1>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> *<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum/">题目</a></h2>
+<p>给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。</p>
+<p>返回滑动窗口中的最大值。</p>
+<pre class="line-numbers language-none"><code class="language-none">示例 1：
+
+输入：nums &#x3D; [1,3,-1,-3,5,3,6,7], k &#x3D; 3
+输出：[3,3,5,5,6,7]
+解释：
+滑动窗口的位置                最大值
+---------------               -----
+[1  3  -1] -3  5  3  6  7       3
+ 1 [3  -1  -3] 5  3  6  7       3
+ 1  3 [-1  -3  5] 3  6  7       5
+ 1  3  -1 [-3  5  3] 6  7       5
+ 1  3  -1  -3 [5  3  6] 7       6
+ 1  3  -1  -3  5 [3  6  7]      7
+示例 2：
+
+输入：nums &#x3D; [1], k &#x3D; 1
+输出：[1]
+示例 3：
+
+输入：nums &#x3D; [1,-1], k &#x3D; 1
+输出：[1,-1]
+示例 4：
+
+输入：nums &#x3D; [9,11], k &#x3D; 2
+输出：[11]
+示例 5：
+
+输入：nums &#x3D; [4,-2], k &#x3D; 2
+输出：[4]
+
+提示：
+
+1 &lt;&#x3D; nums.length &lt;&#x3D; 105
+-104 &lt;&#x3D; nums[i] &lt;&#x3D; 104
+1 &lt;&#x3D; k &lt;&#x3D; nums.length</code></pre>
+<h2 id="java解法-3"><a class="markdownIt-Anchor" href="#java解法-3"></a> Java解法</h2>
+<ul>
+<li>法一：使用双端队列存储窗口内容，每次移动窗口就是将双端队列的最前面去掉在尾部加入新元素。将双端队列中的新元素加入优先队列中去，并且记录每个元素对应的下标。每次移动窗口后，获取优先队列的顶部元素，并根据下标判断他是否是窗口中的元素，如果不是则弹出，再取出新的顶部元素，直到属于窗口中为止，这个顶部元素就是当前窗口最大的元素，将其加入结果数组中。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/M6GE8z.png" alt="M6GE8z" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class SlidingWindowMaximum239 &#123;
+
+    public int[] maxSlidingWindow(int[] nums, int k) &#123;
+
+        &#x2F;&#x2F;创建存储结果的数组
+        int length  &#x3D; nums.length;
+        int[] res &#x3D; new int[length - k + 1];
+        &#x2F;&#x2F;创建双端队列
+        Deque deque &#x3D; new LinkedList();
+        &#x2F;&#x2F;初始化队列，将数组最前面的k位数装入队列
+        for(int i &#x3D; 0; i &lt; k; i++) &#123;
+            deque.offerLast(nums[i]);
+        &#125;
+
+        &#x2F;&#x2F;用于比较的栈
+        Stack stack &#x3D; new Stack();
+        &#x2F;&#x2F;用优先队列来比较大小,优先队列元素：&#123;num, index&#125;,数以及它对应的下标来感知最大值是否已经超出窗口
+        PriorityQueue&lt;int[]&gt; priorityQueue &#x3D; new PriorityQueue&lt;int[]&gt;((a, b)-&gt;b[0] - a[0]);
+        &#x2F;&#x2F;先计算出队列中的最大值
+        for(int j &#x3D; 0; j &lt; k; j++) &#123;
+            int temp &#x3D; (int) deque.pollLast();
+            priorityQueue.offer(new int[]&#123;temp, k - j - 1&#125;);
+            &#x2F;&#x2F;用栈来保存，以便复原双端队列
+            stack.push(temp);
+        &#125;
+        &#x2F;&#x2F;复原双端队列
+        while (!stack.isEmpty()) &#123;
+            int temp &#x3D; (int) stack.pop();
+            deque.offerLast(temp);
+        &#125;
+
+        for(int i &#x3D; 0; k + i &lt;&#x3D; length; i++) &#123;
+
+            &#x2F;&#x2F;获取在当前窗口的最大值
+            boolean flag &#x3D; false; &#x2F;&#x2F;是否获取到当前窗口最大值的标志
+            while(!flag) &#123;
+                if(i &lt;&#x3D; priorityQueue.peek()[1] &amp;&amp; priorityQueue.peek()[1]  &lt; k + i) &#123;
+                    res[i] &#x3D; priorityQueue.peek()[0];
+                    flag &#x3D; true;
+                &#125; else &#123;
+                    priorityQueue.poll();
+                &#125;
+            &#125;
+            &#x2F;&#x2F;移动窗口
+            if(k + i &lt; length) &#123;
+                deque.pollFirst();
+                deque.offerLast(nums[k + i]);
+            &#125;
+            &#x2F;&#x2F;将最新加入窗口的元素加入优先队列
+            int temp &#x3D; (int) deque.getLast();
+            priorityQueue.offer(new int[]&#123;temp, k + i&#125;);
+        &#125;
+
+        return res;
+    &#125;
+&#125;</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E9%A1%B9%E7%9B%AE/Java%E5%AE%9E%E7%8E%B0%E5%8C%BA%E5%9D%97%E9%93%BEDemo/index.html" rel="prev" title="Java实现区块链Demo">
+                  <i class="fa fa-angle-left"></i> Java实现区块链Demo
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/index.html" rel="next" title="LeetCode-哈希表">
+                  LeetCode-哈希表 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

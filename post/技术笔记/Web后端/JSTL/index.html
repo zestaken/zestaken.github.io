@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JSTL概述  JSTL:JavaServer Pages Tag Library,JSP标准标签库。 JSTL是由Apache组织提供的开源的免费的JSP标签; 作用：用于简化和替换JSP页面上的java代码; 使用步骤：  导入JSTL相关的jar包; 引入标签库：taglib指令：&lt;%@ taglib %&gt;  一般将JSTL标签库，将前缀设为c。   使用标签。   示例：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSTL">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSTL/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="JSTL概述  JSTL:JavaServer Pages Tag Library,JSP标准标签库。 JSTL是由Apache组织提供的开源的免费的JSP标签; 作用：用于简化和替换JSP页面上的java代码; 使用步骤：  导入JSTL相关的jar包; 引入标签库：taglib指令：&lt;%@ taglib %&gt;  一般将JSTL标签库，将前缀设为c。   使用标签。   示例：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T09:09:49.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:40:51.122Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="JSP">
+<meta property="article:tag" content="JSTL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSTL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSTL/index.html","path":"/post/技术笔记/Web后端/JSTL/index.html","title":"JSTL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JSTL | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jstl%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> JSTL概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84jstl%E6%A0%87%E7%AD%BE"><span class="nav-number">2.</span> <span class="nav-text"> 常用的JSTL标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if%E6%A0%87%E7%AD%BE"><span class="nav-number">2.1.</span> <span class="nav-text"> if标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#choose"><span class="nav-number">2.2.</span> <span class="nav-text"> choose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foreach"><span class="nav-number">2.3.</span> <span class="nav-text"> forEach</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSTL/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JSTL | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JSTL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-19 17:09:49" itemprop="dateCreated datePublished" datetime="2021-01-19T17:09:49+08:00">2021-01-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:40:51" itemprop="dateModified" datetime="2021-09-26T21:40:51+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="jstl概述"><a class="markdownIt-Anchor" href="#jstl概述"></a> JSTL概述</h1>
+<ul>
+<li>JSTL:JavaServer Pages Tag Library,JSP标准标签库。</li>
+<li>JSTL是由Apache组织提供的开源的免费的JSP标签;</li>
+<li>作用：用于简化和替换JSP页面上的<strong>java代码</strong>;</li>
+<li>使用步骤：
+<ol>
+<li>导入JSTL相关的jar包;</li>
+<li>引入标签库：taglib指令：<code>&lt;%@ taglib %&gt;</code>
+<ul>
+<li>一般将JSTL标签库，将前缀设为<code>c</code>。</li>
+</ul>
+</li>
+<li>使用标签。</li>
+</ol>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;%@ taglib prefix&#x3D;&quot;c&quot; uri&#x3D;&quot;http:&#x2F;&#x2F;java.sun.com&#x2F;jsp&#x2F;jstl&#x2F;core&quot; %&gt;</code></pre>
+<h1 id="常用的jstl标签"><a class="markdownIt-Anchor" href="#常用的jstl标签"></a> 常用的JSTL标签</h1>
+<h2 id="if标签"><a class="markdownIt-Anchor" href="#if标签"></a> if标签</h2>
+<ul>
+<li>if：相当于java代码的if语句</li>
+<li>属性：
+<ul>
+<li>test:必须的属性，接受boolean表达式，相当于原来if语句的条件;
+<ul>
+<li>如果表达式为true，则显示if标签体内容，如果为false，则不显示标签体内容;</li>
+<li>一般情况下，test属性值会结合EL表达式一起使用,如：</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;c:if test&#x3D;&quot;$&#123;not empty list&#125;&quot;&gt;
+    遍历集合;
+&lt;&#x2F;c:if&gt;</code></pre>
+<ul>
+<li>if标签没有else情况，要想实现else情况，则可以再定义一个if标签。</li>
+</ul>
+<h2 id="choose"><a class="markdownIt-Anchor" href="#choose"></a> choose</h2>
+<ul>
+<li>choose:相当于java代码的switch语句</li>
+<li>使用choose标签声明：相当于switch声明;</li>
+<li>使用when标签判断：相当于case;</li>
+<li>使用otherwise标签做其他情况的声明：相当于default</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;c:choose&gt;
+    &lt;c:when test&#x3D;&quot;$&#123;number &#x3D;&#x3D; 1&#125;&quot;&gt; 1&lt;&#x2F;c:when&gt;
+    &lt;c:when test&#x3D;&quot;$&#123;number &#x3D;&#x3D; 2&#125;&quot;&gt; 2&lt;&#x2F;c:when&gt;
+    &lt;c:otherwise&gt;默认数字&lt;&#x2F;c:otherwise&gt;
+&lt;&#x2F;c:choose&gt;</code></pre>
+<h2 id="foreach"><a class="markdownIt-Anchor" href="#foreach"></a> forEach</h2>
+<ul>
+<li>forEach:相当于java的for语句</li>
+<li>作用：
+<ol>
+<li>完成重复的操作;</li>
+<li>遍历容器。</li>
+</ol>
+</li>
+<li>完成重复的操作：相当于<code>for(int i = 0; i &lt; 10; i++)</code>
+<ul>
+<li>属性：
+<ul>
+<li>begin:开始值，相当于i = 0;</li>
+<li>end:结束值;</li>
+<li>var：临时变量，相当于i;</li>
+<li>step:步长，为1时相当于++;</li>
+<li>varStatus:循环状态对象
+<ul>
+<li>index属性：容器中的元素的索引，从0开始;</li>
+<li>count属性：循环次数，从1开始。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>遍历容器：相当于<code>for(int i ： numbers)</code>
+<ul>
+<li>属性：
+<ul>
+<li>items:容器对象;</li>
+<li>var:容器中元素的临时变量;</li>
+<li>varStatus:循环状态对象
+<ul>
+<li>index属性：容器中的元素的索引，从0开始;</li>
+<li>count属性：循环次数，从1开始。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;c:forEach items&#x3D;“$&#123;list&#125;&quot; var&#x3D;&quot;str&quot; varStatus&#x3D;&quot;s&quot;&gt;
+    $&#123;s.index&#125; $&#123;s.count&#125; $&#123;str&#125;&lt;br&gt;
+&lt;&#x2F;c:forEach&gt;</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/JSP/" rel="tag"># JSP</a>
+              <a href="/tags/JSTL/" rel="tag"># JSTL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html" rel="prev" title="EL表达式">
+                  <i class="fa fa-angle-left"></i> EL表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Filter/index.html" rel="next" title="Filter">
+                  Filter <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

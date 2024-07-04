@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="代码地址 Github  1. 两数之和 1  题目   给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。 示例 1：  输入：nums &#x3D; [2,7,11,15], targe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-哈希表">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="代码地址 Github  1. 两数之和 1  题目   给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。 示例 1：  输入：nums &#x3D; [2,7,11,15], targe">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831215434.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831231239.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831232314.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831232354.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210901134149.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/pz0dhe.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SIHzdm.jpg">
+<meta property="article:published_time" content="2021-08-31T11:20:59.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.921Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831215434.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/index.html","path":"/post/技术笔记/LeetCode/LeetCode-哈希表/index.html","title":"LeetCode-哈希表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeetCode-哈希表 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text"> 代码地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C-1"><span class="nav-number">2.</span> <span class="nav-text"> 1. 两数之和 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%BA%8F%E5%88%97-128"><span class="nav-number">3.</span> <span class="nav-text"> 2. 最长连续序列 128</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-2"><span class="nav-number">3.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%9B%B4%E7%BA%BF%E4%B8%8A%E6%9C%80%E5%A4%9A%E7%9A%84%E7%82%B9%E6%95%B0-149"><span class="nav-number">4.</span> <span class="nav-text"> 3. 直线上最多的点数 149</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-3"><span class="nav-number">4.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B-332"><span class="nav-number">5.</span> <span class="nav-text"> 4. 重新安排行程 332</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-4"><span class="nav-number">5.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E5%93%88%E5%B8%8C%E8%A1%A8/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeetCode-哈希表 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-哈希表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-31 19:20:59" itemprop="dateCreated datePublished" datetime="2021-08-31T19:20:59+08:00">2021-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="代码地址"><a class="markdownIt-Anchor" href="#代码地址"></a> 代码地址</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/zestaken/newblog/tree/master/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/Code/src/main/java/hashTable">Github</a></p>
+<h1 id="1-两数之和-1"><a class="markdownIt-Anchor" href="#1-两数之和-1"></a> 1. 两数之和 1</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。<br />
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。<br />
+你可以按任意顺序返回答案。</p>
+<pre class="line-numbers language-none"><code class="language-none">示例 1：
+
+输入：nums &#x3D; [2,7,11,15], target &#x3D; 9
+输出：[0,1]
+解释：因为 nums[0] + nums[1] &#x3D;&#x3D; 9 ，返回 [0, 1] 。
+示例 2：
+
+输入：nums &#x3D; [3,2,4], target &#x3D; 6
+输出：[1,2]
+示例 3：
+
+输入：nums &#x3D; [3,3], target &#x3D; 6
+输出：[0,1]
+ 
+
+提示：
+
+2 &lt;&#x3D; nums.length &lt;&#x3D; 104
+-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109
+-109 &lt;&#x3D; target &lt;&#x3D; 109
+只会存在一个有效答案
+进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？</code></pre>
+<h2 id="java解法"><a class="markdownIt-Anchor" href="#java解法"></a> Java解法</h2>
+<ul>
+<li>法一: 首先遍历一次数组，将数组每个元素的值和下标以键值对的形式存入哈希表中，然后再次遍历数组，将目标值减去当前数组元素值得到一个结果，然后查询这个结果是否在哈希表中存在（注意避免查到自身的情况，如3 + 3 = 6）
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831215434.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class TwoSum1 &#123;
+
+    public int[] twoSum(int[] nums, int target) &#123;
+
+        &#x2F;&#x2F;创建哈希表，键为数组元素值，值为数组元素下标
+        Map&lt;Integer, Integer&gt; hashtable &#x3D; new HashMap&lt;Integer, Integer&gt;();
+
+        &#x2F;&#x2F;将数组元素的值和下标存入哈希表中
+        for(int i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            hashtable.put(nums[i], i);
+        &#125;
+
+        &#x2F;&#x2F;存储结果的数组
+        int[] res &#x3D; new int[2];
+        &#x2F;&#x2F;遍历数组，将目标值减去数组元素值得到结果，然后查找哈希表中是否存在这个结果
+        for(int i &#x3D; 0; i &lt; nums.length; i++) &#123;
+            int temp &#x3D; target - nums[i];
+            &#x2F;&#x2F;当在哈希表中查找到不是自身的数时，确认结果返回
+            if(hashtable.containsKey(temp) &amp;&amp; hashtable.get(temp) !&#x3D; i) &#123;
+                res[0] &#x3D; i;
+                res[1] &#x3D; hashtable.get(temp);
+                return res;
+            &#125;
+        &#125;
+
+        return res;
+    &#125;
+&#125;</code></pre>
+<h1 id="2-最长连续序列-128"><a class="markdownIt-Anchor" href="#2-最长连续序列-128"></a> 2. 最长连续序列 128</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。<br />
+请你设计并实现时间复杂度为 O(n) 的算法解决此问题。</p>
+<pre class="line-numbers language-none"><code class="language-none">示例 1：
+
+输入：nums &#x3D; [100,4,200,1,3,2]
+输出：4
+解释：最长数字连续序列是 [1, 2, 3, 4]。它的长度为 4。
+示例 2：
+
+输入：nums &#x3D; [0,3,7,2,5,8,4,6,0,1]
+输出：9
+ 
+
+提示：
+
+0 &lt;&#x3D; nums.length &lt;&#x3D; 105
+-109 &lt;&#x3D; nums[i] &lt;&#x3D; 109</code></pre>
+<h2 id="java解法-2"><a class="markdownIt-Anchor" href="#java解法-2"></a> Java解法</h2>
+<ul>
+<li>法一：用一个哈希集合存储数组元素（方便查找，同时去除重复的元素），然后遍历数组元素，已当前数组元素为中心向前和向后枚举与其连续的整数并在集合中查找，如果找到则在集合中删除该元素并且计数，如果没有找到则中断该方向的查找。每一次查找都能将一堆连续的数找到并清除出集合，在集合被清空时则确认得到了最长的连续整数长度。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831231239.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class LongestConsecutiveSequence128 &#123;
+
+    public int longestConsecutive(int[] nums) &#123;
+
+        &#x2F;&#x2F;创建一个集合
+        &#x2F;&#x2F;使用集合便于直接查找元素,并且利用集合的唯一性去除重复出现的元素
+        Set&lt;Integer&gt; hashTable &#x3D; new HashSet&lt;&gt;();
+        &#x2F;&#x2F;将数组中的值全部存入集合
+        for(int i : nums) &#123;
+            hashTable.add(i);
+        &#125;
+
+        &#x2F;&#x2F;最长长度
+        int longestLength &#x3D; 0;
+
+        &#x2F;&#x2F;遍历数组，在集合中找每一个数组元素的前后连续元素，然后将这些元素都删除并记录数量
+        for(int num : nums) &#123;
+            &#x2F;&#x2F;当集合已空则停止寻找连续元素
+            if(!hashTable.isEmpty()) &#123;
+                &#x2F;&#x2F;临时存储连续元素个数
+                int tempRes &#x3D; 0;
+                &#x2F;&#x2F;向左寻找当前元素的连续元素
+                for(int i &#x3D; 0;  hashTable.contains(num - i); i++) &#123;
+                    hashTable.contains(num - i);
+                    hashTable.remove(num - i);
+                    tempRes++;
+                &#125;
+                &#x2F;&#x2F;向右寻找当前元素的连续元素（不包含自身)
+                for(int i &#x3D; 1; hashTable.contains(num + i); i++) &#123;
+                    hashTable.contains(num + i);
+                    hashTable.remove(num + i);
+                    tempRes++;
+                &#125;
+                &#x2F;&#x2F;比较长短
+                if(tempRes &gt; longestLength) &#123;
+                    longestLength &#x3D; tempRes;
+                &#125;
+            &#125; else &#123;
+                break;
+            &#125;
+        &#125;
+        return longestLength;
+    &#125;
+&#125;</code></pre>
+<h1 id="3-直线上最多的点数-149"><a class="markdownIt-Anchor" href="#3-直线上最多的点数-149"></a> 3. 直线上最多的点数 149</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-points-on-a-line/">题目</a></li>
+</ul>
+<hr />
+<p>给你一个数组 points ，其中 points[i] = [xi, yi] 表示 X-Y 平面上的一个点。求最多有多少个点在同一条直线上。<br />
+示例1：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831232314.png" alt="" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：points &#x3D; [[1,1],[2,2],[3,3]]
+输出：3</code></pre>
+<p>示例2：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210831232354.png" alt="" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：points &#x3D; [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+输出：4</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">1 &lt;&#x3D; points.length &lt;&#x3D; 300
+points[i].length &#x3D;&#x3D; 2
+-104 &lt;&#x3D; xi, yi &lt;&#x3D; 104
+points 中的所有点 互不相同</code></pre>
+<h2 id="java解法-3"><a class="markdownIt-Anchor" href="#java解法-3"></a> Java解法</h2>
+<ul>
+<li>法一：因为一条直线有一个点和斜率确定，所以我们遍历数组取出点，然后计算这个点与其它点的斜率，将这个斜率和其出现的次数存入哈希表中，在一个点与其它点的关系计算结束后，取出哈希表中出现次数最多的斜率，然后清空哈希表，进行下一轮的计算。因为一旦与前面的点能构成直线，在前面点计算时已经包含，所以只用计算当前点之后的点（按照在数组中出现的次序而言）。这个解法虽然通过了，但是有缺陷：如果计算的斜率超出了double的小数范围，就有可能不准确。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210901134149.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MaxPointsOnALine149 &#123;
+
+    public int maxPoints(int[][] points) &#123;
+
+        &#x2F;&#x2F;如果少于三个点则无需计算
+        if(points.length &lt; 2) &#123;
+            return points.length;
+        &#125;
+        &#x2F;&#x2F;创建哈希表，键为斜率，值为斜率出现的次数
+        Map&lt;Double, Integer&gt; hashMap &#x3D; new HashMap&lt;&gt;();
+        &#x2F;&#x2F;记录构成直线的最多点数
+        int res &#x3D; 0;
+
+        &#x2F;&#x2F;遍历点数组，计算之后的点与自己构成直线的次数（因为一旦与前面的点能构成直线，在前面点计算时已经包含，所以只用计算当前点之后的点）
+        for(int i &#x3D; 0; i &lt; points.length; i++) &#123;
+                &#x2F;&#x2F;斜率不存在的情况单独存储
+                int sameX &#x3D; 1;
+                &#x2F;&#x2F;遍历当前点之后的数组，将与当前点的斜率以及出现次数存入哈希表 
+                for(int j &#x3D; i + 1; j &lt; points.length; j++) &#123;
+                    &#x2F;&#x2F;当斜率存在时才计算
+                    if((points[i][0] - points[j][0]) !&#x3D; 0) &#123;
+                        &#x2F;&#x2F;计算斜率
+                        double k &#x3D; ((double)(points[i][1] - points[j][1]))&#x2F;((double)(points[i][0] - points[j][0]));
+                        &#x2F;&#x2F;因为哈希表判断键时将0 和 -0看作两个不同的数，所以需要处理一下
+                        if(k &#x3D;&#x3D; -0) &#123;
+                            k &#x3D; 0;
+                        &#125;
+                        &#x2F;&#x2F;查询哈希表中是否存在该斜率，如果存在则取出，如果不存在则初始为1（因为要包含自身，一旦构成直线就是两个点）
+                        int count &#x3D; hashMap.getOrDefault(k, 1);
+                        &#x2F;&#x2F;将该斜率的计数加一再存入哈希表中
+                        count++;
+                        hashMap.remove(k);
+                        hashMap.put(k, count);
+                    &#125; else &#123;
+                        sameX++;
+                    &#125;
+                &#125;
+                &#x2F;&#x2F;获取经过当前点构成直线的最多点数
+                int temp &#x3D; 0;
+                for(int count : hashMap.values()) &#123;
+                    if(count &gt; temp) &#123;
+                        temp &#x3D; count;
+                    &#125;
+                &#125;
+                if(temp &lt; sameX) &#123;
+                    temp &#x3D; sameX;
+                &#125;
+                &#x2F;&#x2F;如果经过当前点的构成直线的最多点数比以及统计的要多则赋给最后的结果
+                if(temp &gt; res) &#123;
+                    res &#x3D; temp;
+                &#125;
+                &#x2F;&#x2F;清空当前点构成的哈希表，进入下一个点的统计
+                hashMap.clear();
+        &#125;
+
+        return res;
+    &#125;
+&#125;</code></pre>
+<h1 id="4-重新安排行程-332"><a class="markdownIt-Anchor" href="#4-重新安排行程-332"></a> 4. 重新安排行程 332</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reconstruct-itinerary/">题目</a></li>
+</ul>
+<hr />
+<p>给你一份航线列表 tickets ，其中 tickets[i] = [fromi, toi] 表示飞机出发和降落的机场地点。请你对该行程进行重新规划排序。<br />
+所有这些机票都属于一个从 JFK（肯尼迪国际机场）出发的先生，所以该行程必须从 JFK 开始。如果存在多种有效的行程，请你按字典排序返回最小的行程组合。<br />
+例如，行程 <code>[&quot;JFK&quot;, &quot;LGA&quot;] 与 [&quot;JFK&quot;, &quot;LGB&quot;]</code> 相比就更小，排序更靠前。<br />
+假定所有机票至少存在一种合理的行程。且所有的机票 必须都用一次 且 只能用一次。<br />
+示例1:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/pz0dhe.jpg" alt="pz0dhe" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：tickets &#x3D; [[&quot;MUC&quot;,&quot;LHR&quot;],[&quot;JFK&quot;,&quot;MUC&quot;],[&quot;SFO&quot;,&quot;SJC&quot;],[&quot;LHR&quot;,&quot;SFO&quot;]]
+输出：[&quot;JFK&quot;,&quot;MUC&quot;,&quot;LHR&quot;,&quot;SFO&quot;,&quot;SJC&quot;]</code></pre>
+<p>示例2:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SIHzdm.jpg" alt="SIHzdm" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：tickets &#x3D; [[&quot;JFK&quot;,&quot;SFO&quot;],[&quot;JFK&quot;,&quot;ATL&quot;],[&quot;SFO&quot;,&quot;ATL&quot;],[&quot;ATL&quot;,&quot;JFK&quot;],[&quot;ATL&quot;,&quot;SFO&quot;]]
+输出：[&quot;JFK&quot;,&quot;ATL&quot;,&quot;JFK&quot;,&quot;SFO&quot;,&quot;ATL&quot;,&quot;SFO&quot;]
+解释：另一种有效的行程是 [&quot;JFK&quot;,&quot;SFO&quot;,&quot;ATL&quot;,&quot;JFK&quot;,&quot;ATL&quot;,&quot;SFO&quot;] ，但是它字典排序更大更靠后。</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">1 &lt;&#x3D; tickets.length &lt;&#x3D; 300
+tickets[i].length &#x3D;&#x3D; 2
+fromi.length &#x3D;&#x3D; 3
+toi.length &#x3D;&#x3D; 3
+fromi 和 toi 由大写英文字母组成
+fromi !&#x3D; toi</code></pre>
+<h2 id="java解法-4"><a class="markdownIt-Anchor" href="#java解法-4"></a> Java解法</h2>
+<ul>
+<li>法一：
+<ul>
+<li>结果：</li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%98%9F%E5%88%97/index.html" rel="prev" title="LeetCode-队列">
+                  <i class="fa fa-angle-left"></i> LeetCode-队列
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E9%A1%B9%E7%9B%AE/Java%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/index.html" rel="next" title="Java实现简易黄金矿工">
+                  Java实现简易黄金矿工 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

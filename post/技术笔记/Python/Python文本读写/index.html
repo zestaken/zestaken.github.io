@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="读取文本文件  读取文本文件的基本函数  以只读模式打开文件：r代表读取模式，若文件不存在则会报错。  fp &#x3D; open(&quot;iris.txt&quot;, &quot;r&quot;) print(file) out: &lt;_io.TextIOWrapper name&#x3D;&#39;iris.txt&#39; mode&#x3D;&#39;r&#39; encoding&#x3D;&#39;UTF-8&#39;&gt;   一次读入文件的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python文件读写">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%96%87%E6%9C%AC%E8%AF%BB%E5%86%99/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="读取文本文件  读取文本文件的基本函数  以只读模式打开文件：r代表读取模式，若文件不存在则会报错。  fp &#x3D; open(&quot;iris.txt&quot;, &quot;r&quot;) print(file) out: &lt;_io.TextIOWrapper name&#x3D;&#39;iris.txt&#39; mode&#x3D;&#39;r&#39; encoding&#x3D;&#39;UTF-8&#39;&gt;   一次读入文件的一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-12T07:01:19.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.947Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%96%87%E6%9C%AC%E8%AF%BB%E5%86%99/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%96%87%E6%9C%AC%E8%AF%BB%E5%86%99/index.html","path":"/post/技术笔记/Python/Python文本读写/index.html","title":"Python文件读写"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python文件读写 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text"> 读取文本文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text"> 读取文本文件的基本函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text"> 三种读取文本文件全部数据的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96csv%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text"> 读取CSV文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96csv%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text"> 读取CSV文件的基本函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%90%E5%9D%97%E7%9A%84%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E4%B8%80%E6%AC%A1%E8%AF%BB%E5%8F%96%E5%85%B6%E4%B8%AD%E5%87%A0%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text"> 逐块的读取文件（一次读取其中几行):</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text"> 写入文本文件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%96%87%E6%9C%AC%E8%AF%BB%E5%86%99/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python文件读写 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python文件读写
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-12 15:01:19" itemprop="dateCreated datePublished" datetime="2021-10-12T15:01:19+08:00">2021-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="读取文本文件"><a class="markdownIt-Anchor" href="#读取文本文件"></a> 读取文本文件</h1>
+<h2 id="读取文本文件的基本函数"><a class="markdownIt-Anchor" href="#读取文本文件的基本函数"></a> 读取文本文件的基本函数</h2>
+<ul>
+<li>以只读模式打开文件：r代表读取模式，若文件不存在则会报错。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp &#x3D; open(&quot;iris.txt&quot;, &quot;r&quot;)
+print(file)</code></pre>
+<pre><code>out: &lt;_io.TextIOWrapper name='iris.txt' mode='r' encoding='UTF-8'&gt;
+</code></pre>
+<ul>
+<li>一次读入文件的一行，然后“游标&quot;自动转到文件的下一行首</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp.readline() # 读取一行</code></pre>
+<pre><code>'150\t4\tsetosa\tversicolor\tvirginica\n'
+</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp.readline() #再一次调用，则已经读到下一行</code></pre>
+<pre><code>'5.1\t3.5\t1.4\t0.2\t0\n'
+</code></pre>
+<ul>
+<li>一次读取到文件末尾</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp.readlines()</code></pre>
+<pre><code>['4.9\t3\t1.4\t0.2\t0\n',
+ '4.7\t3.2\t1.3\t0.2\t0\n',
+ '4.6\t3.1\t1.5\t0.2\t0\n',
+	......
+ '6.5\t3\t5.2\t2\t2\n',
+ '6.2\t3.4\t5.4\t2.3\t2\n',
+ '5.9\t3\t5.1\t1.8\t2\n']
+</code></pre>
+<ul>
+<li>将游标跳到文件开始位置</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp.seek(0) # 将游标跳到第一行再读取一行，则又读到了文件的第一行
+fp.readline()</code></pre>
+<pre><code>'150\t4\tsetosa\tversicolor\tvirginica\n' 
+</code></pre>
+<ul>
+<li>close关闭文件</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp.close() # 关闭文件后再次读取就会报错：在关闭的文件上进行IO操作
+fp.readline()</code></pre>
+<pre><code>---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-9-f83b4d936024&gt; in &lt;module&gt;
+      1 fp.close()
+----&gt; 2 fp.readline()
+
+
+ValueError: I/O operation on closed file.
+</code></pre>
+<h2 id="三种读取文本文件全部数据的方法"><a class="markdownIt-Anchor" href="#三种读取文本文件全部数据的方法"></a> 三种读取文本文件全部数据的方法</h2>
+<ul>
+<li>
+<ol>
+<li>打开文件，利用while循环，一行行的readline</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp &#x3D; open(&quot;iris.txt&quot;, &quot;r&quot;)
+line &#x3D; fp.readline()
+while line:
+    print(line) #因为是使用print打印输出，\n等转义符号都已转义后输出，不再保持原样
+    line &#x3D; fp.readline()
+fp.close()</code></pre>
+<pre><code>150	4	setosa	versicolor	virginica
+
+5.1	3.5	1.4	0.2	0
+
+4.9	3	1.4	0.2	0
+
+......
+
+5.9	3	5.1	1.8	2
+</code></pre>
+<ul>
+<li>
+<ol start="2">
+<li>打开文件，通过for in循环来遍历文件指针来获取文件的每一行</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp &#x3D; open(&quot;iris.txt&quot;)
+for line2 in fp: # 遍历的是文件指针，能够自动获得每一行的内容
+    print(line2)
+fp.close()</code></pre>
+<pre><code>150	4	setosa	versicolor	virginica
+
+5.1	3.5	1.4	0.2	0
+
+4.9	3	1.4	0.2	0
+
+4.7	3.2	1.3	0.2	0
+
+.......
+
+5.9	3	5.1	1.8	2
+</code></pre>
+<ul>
+<li>
+<ol start="3">
+<li>打开文件，先读取文件的全部内容（readlines）存入一个对象中，然后通过for in循环遍历这个对象，获取每一行的内容</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">fp &#x3D; open(&quot;iris.txt&quot;)
+lines &#x3D; fp.readlines()
+for line in lines: #遍历的是存储所有文件内容的对象
+    print(line)
+fp.close()</code></pre>
+<pre><code>150	4	setosa	versicolor	virginica
+
+5.1	3.5	1.4	0.2	0
+
+4.9	3	1.4	0.2	0
+
+.......
+
+5.9	3	5.1	1.8	2
+</code></pre>
+<h1 id="读取csv文件"><a class="markdownIt-Anchor" href="#读取csv文件"></a> 读取CSV文件</h1>
+<h2 id="读取csv文件的基本函数"><a class="markdownIt-Anchor" href="#读取csv文件的基本函数"></a> 读取CSV文件的基本函数</h2>
+<ul>
+<li>导入Pandas包（需要提前安装好，我是使用Anaconda管理这些包）</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd</code></pre>
+<ul>
+<li>采用pandas中的函数将csv表格形式文件直接读取到一个Pyhton的<strong>DataFrame</strong>对象中，常用的函数有read_csv和read_table函数</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df &#x3D; pd.read_csv(&#39;iris.csv&#39;) # 结果存储在DataFrame对象中
+df # 直接查看DataFrame对象中内容</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>150</th>
+      <th>4</th>
+      <th>setosa</th>
+      <th>versicolor</th>
+      <th>virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div>
+<ul>
+<li>
+<p>最左列为自动生成的索引</p>
+</li>
+<li>
+<p>DataFrame对象非常适合处理表格数据</p>
+</li>
+<li>
+<p><code>read_table</code>不仅可以读取csv文件（以,分隔的表格型文件),还可以读取以其它方式分隔的表格，所以需要设置分隔符</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df &#x3D; pd.read_table(&quot;iris.csv&quot;, sep &#x3D; &#39;,&#39;) # 设置分隔符为,，才能处理csv文件
+df</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>150</th>
+      <th>4</th>
+      <th>setosa</th>
+      <th>versicolor</th>
+      <th>virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div>
+<h2 id="逐块的读取文件一次读取其中几行"><a class="markdownIt-Anchor" href="#逐块的读取文件一次读取其中几行"></a> 逐块的读取文件（一次读取其中几行):</h2>
+<ul>
+<li>逐块读取文件的两种方法
+<ul>
+<li>设置nrows参数</li>
+<li>或者chunksize参数,但是将文件按块存储在一个TextParser对象中</li>
+</ul>
+</li>
+<li><code>read_table</code>设置nrows参数</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df5 &#x3D; pd.read_table(&#39;iris.csv&#39;, sep &#x3D; &#39;,&#39;, nrows&#x3D;5)
+df5</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>150</th>
+      <th>4</th>
+      <th>setosa</th>
+      <th>versicolor</th>
+      <th>virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li><code>read-_csv</code>设置nrows参数</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df5 &#x3D; pd.read_csv(&quot;iris.csv&quot;, nrows&#x3D;5)
+df5</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>150</th>
+      <th>4</th>
+      <th>setosa</th>
+      <th>versicolor</th>
+      <th>virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li><code>read_csv</code>函数设置chunksize参数</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">chunk &#x3D; pd.read_csv(&quot;iris.csv&quot;, chunksize&#x3D;5)
+chunk</code></pre>
+<pre><code>&lt;pandas.io.parsers.TextFileReader at 0x7f824f359cd0&gt;
+</code></pre>
+<ul>
+<li>使用设置chuncksize参数生成的textparser对象对文件进行逐块迭代</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tot &#x3D; 0
+for piece in chunk:
+    tot &#x3D; tot + 1
+    print(piece)
+    print(&quot;-------&quot;)
+print(tot) # 总共有150行，每5行一块有30块，存储在这些块存储在chunk对象中</code></pre>
+<pre><code>   150    4  setosa  versicolor  virginica
+0  5.1  3.5     1.4         0.2          0
+1  4.9  3.0     1.4         0.2          0
+2  4.7  3.2     1.3         0.2          0
+3  4.6  3.1     1.5         0.2          0
+4  5.0  3.6     1.4         0.2          0
+-------
+   150    4  setosa  versicolor  virginica
+5  5.4  3.9     1.7         0.4          0
+6  4.6  3.4     1.4         0.3          0
+7  5.0  3.4     1.5         0.2          0
+8  4.4  2.9     1.4         0.2          0
+9  4.9  3.1     1.5         0.1          0
+-------
+
+.......
+
+     150    4  setosa  versicolor  virginica
+145  6.7  3.0     5.2         2.3          2
+146  6.3  2.5     5.0         1.9          2
+147  6.5  3.0     5.2         2.0          2
+148  6.2  3.4     5.4         2.3          2
+149  5.9  3.0     5.1         1.8          2
+-------
+30
+</code></pre>
+<h1 id="写入文本文件"><a class="markdownIt-Anchor" href="#写入文本文件"></a> 写入文本文件</h1>
+<ul>
+<li>创建文件对象，使用w模式写入,w模式是覆盖式写入，一旦用w模式打开文件，文件中之前的内容全都删除了，若文件不存在则会先创建再写入。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">myData &#x3D; [&#39;Date&#39;, &#39;Time&#39;] #创建测试的数据</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">myfile &#x3D; open(&quot;test.txt&quot;,&#39;w&#39;) #用w模式打开文件
+for line in myData:
+    myfile.write(line+&#39;\n&#39;)
+myfile.close()</code></pre>
+<ul>
+<li>以r模式打开文件，检查写入文件是否成功</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">myfile &#x3D; open(&quot;test.txt&quot;, &#39;r&#39;)
+print(myfile.read())</code></pre>
+<pre><code>Date
+Time
+</code></pre>
+<ul>
+<li>使用a模式可以追加写</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">print(&quot;写之前输出：&quot;)
+myfile1 &#x3D; open(&quot;test.txt&quot;, &#39;r&#39;)
+print(myfile1.read())
+
+myfile2 &#x3D; open(&quot;test.txt&quot;, &#39;a&#39;)
+myfile2.write(&quot;a&quot;)
+
+print(&quot;写之后输出：&quot;)
+myfile3 &#x3D; open(&quot;test.txt&quot;, &#39;r&#39;)
+print(myfile3.read())</code></pre>
+<pre><code>写之前输出：
+Date
+Time
+
+写之后输出：
+Date
+Time
+a
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E6%A0%91/index.html" rel="prev" title="LeetCode-树">
+                  <i class="fa fa-angle-left"></i> LeetCode-树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%93%8D%E4%BD%9C/index.html" rel="next" title="Python数据库连接与操作">
+                  Python数据库连接与操作 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

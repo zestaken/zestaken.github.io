@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Redis概念  redis是一款高性能的NOSQL系列的非关系型数据库。  Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。 Redis支持的键值数据类型：  String:字符串类型; hash:哈希类型; list：列表类型; s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Redis/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="Redis概念  redis是一款高性能的NOSQL系列的非关系型数据库。  Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。 Redis支持的键值数据类型：  String:字符串类型; hash:哈希类型; list：列表类型; s">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-30T03:09:31.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:39:41.494Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Redis/index.html","path":"/post/技术笔记/Web后端/Redis/index.html","title":"Redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text"> Redis概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text"> Redis的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text"> Redis的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E7%9A%84%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text"> Redis的命令操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text"> 持久化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%AE%A2%E6%88%B7%E7%AB%AF-jedis"><span class="nav-number">6.</span> <span class="nav-text"> Java客户端-Jedis</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jedis%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">7.</span> <span class="nav-text"> Jedis连接池</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Redis/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-30 11:09:31" itemprop="dateCreated datePublished" datetime="2021-01-30T11:09:31+08:00">2021-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:39:41" itemprop="dateModified" datetime="2021-09-26T21:39:41+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="redis概念"><a class="markdownIt-Anchor" href="#redis概念"></a> Redis概念</h1>
+<ul>
+<li>redis是一款高性能的NOSQL系列的非关系型数据库。
+<ul>
+<li>Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</li>
+<li>Redis支持的键值数据类型：
+<ol>
+<li>String:字符串类型;</li>
+<li>hash:哈希类型;</li>
+<li>list：列表类型;</li>
+<li>set：集合类型;</li>
+<li>sortedset:有序集合类型。</li>
+</ol>
+</li>
+<li>Redis的应用场景：
+<ol>
+<li>数据缓存（数据查询，短链接，新闻内容，商品内容等）</li>
+<li>聊天室的在线好友列表;</li>
+<li>任务队列（秒杀，抢购，12306的高并发等）</li>
+<li>应用排行榜;</li>
+<li>数据过期处理;</li>
+<li>分布式集群架构中的session分离</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>NOSQL:Not Only SQL ,泛指非关系型数据库。
+<ul>
+<li>为了应对大规模数据的挑战。</li>
+</ul>
+</li>
+<li>关系型数据库：
+<ul>
+<li>数据之间有关联关系。</li>
+<li>数据存储在硬盘的文件中。</li>
+<li>数据以表的形式存储。</li>
+</ul>
+</li>
+<li>非关系型数据库，
+<ul>
+<li>数据之间没有关系;</li>
+<li>数据存储在内存中;</li>
+<li>存储格式有key:value形式，文档形式，图片形式等。</li>
+</ul>
+</li>
+<li>主流NOSQL产品：
+<ul>
+<li>键值（key:value)数据库：
+<ul>
+<li>Tokyo Cabinet/Tyrant， Redis， Voldemort， Oracle BDB</li>
+<li>应用场景：内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等。</li>
+<li>数据模型：Key 指向 Value 的键值对，通常用hashtable来实现</li>
+</ul>
+</li>
+<li>列存储数据库：
+<ul>
+<li>Cassandra， HBase， Riak</li>
+<li>应用场景：分布式的文件系统</li>
+<li>数据模型：以列簇式存储，将同一列数据存在一起</li>
+</ul>
+</li>
+<li>文档型数据库：
+<ul>
+<li>CouchDB， MongoDb</li>
+<li>应用场景：Web应用（与Key-Value类似，Value是结构化的，不同的是数据库能够了解Value的内容）</li>
+<li>数据模型：Key-Value对应的键值对，Value为结构化数据</li>
+</ul>
+</li>
+<li>图形(Graph)数据库：
+<ul>
+<li>Neo4J， InfoGrid， Infinite Graph</li>
+<li>应用场景：社交网络，推荐系统等。专注于构建关系图谱</li>
+<li>数据模型：图结构。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="redis的安装"><a class="markdownIt-Anchor" href="#redis的安装"></a> Redis的安装</h1>
+<ul>
+<li>下载：<a target="_blank" rel="noopener" href="https://redis.io">官网</a>,<a target="_blank" rel="noopener" href="https://www.redis.net.cn">中文网</a></li>
+<li>为linux系统下载的<code>.tar.gz</code>文件，通过<code>tar -xzf</code>命令解压缩;</li>
+<li>进入解压缩文件目录下，执行<code>make</code>编译该文件</li>
+<li>二进制文件保存在src目录下：
+<ul>
+<li><code>src/redis-cli</code>是客户端的启动文件;</li>
+<li><code>src/redis-serve</code>是服务端的启动文件。</li>
+</ul>
+</li>
+<li><code>redis.conf</code>是redis的配置文件。</li>
+</ul>
+<h1 id="redis的数据结构"><a class="markdownIt-Anchor" href="#redis的数据结构"></a> Redis的数据结构</h1>
+<ul>
+<li>redis存储的都是key:value格式的数据，其中<strong>key都是字符串类型</strong>,而value有五种数据结构。</li>
+<li>value的五种数据结构：
+<ol>
+<li>String:字符串类型, 如：zhangjie</li>
+<li>hash:哈希类型,还是键值对，理解为套娃。如：name zhangjie</li>
+<li>list：列表类型,理解为双向队列，如：zhangsan lisi wangwu zhangsan</li>
+<li>set：集合类型,与list类似，只是<strong>不允许重复元素</strong></li>
+<li>sortedset:有序集合类型,在set的基础上，对集合中的元素进行排序。</li>
+</ol>
+</li>
+</ul>
+<h1 id="redis的命令操作"><a class="markdownIt-Anchor" href="#redis的命令操作"></a> Redis的命令操作</h1>
+<p><a target="_blank" rel="noopener" href="https://www.redis.net.cn/tutorial/3501.html">官方文档</a></p>
+<ul>
+<li>字符串类型：
+<ul>
+<li>存储：<code>set key value</code>,如：<code>set username zhangjie</code></li>
+<li>获取：<code>get key</code>,如：<code>get username</code></li>
+<li>删除：<code>del key</code>,如: <code>del username</code></li>
+</ul>
+</li>
+<li>哈希类型：
+<ul>
+<li>存储:<code>hset key field value</code>,如：<code>hset usernames username1 zhangjie</code></li>
+<li>获取:<code>hget key field</code>,如：<code>hget usernames username1</code></li>
+<li>获取所有的field和value：<code>hgetall key</code>,如：<code>hgetall usernames</code></li>
+<li>删除：<code>hdel key field</code>,如：<code>hdel usernames username1</code></li>
+</ul>
+</li>
+<li>列表类型：
+<ul>
+<li>可以添加一个元素到列表的头部或者尾部</li>
+<li>存储：
+<ul>
+<li><code>lpush key value</code>:将元素加入列表左边,如：<code>lpush usernames zhangjie</code></li>
+<li><code>rpush key value</code>:将元素加入列表右边</li>
+</ul>
+</li>
+<li>获取：
+<ul>
+<li><code>lrange key start end</code>:获取指定范围内的元素，如：<code>lrange usernames 0 -1</code>，代表获取列表中的所有元素。</li>
+</ul>
+</li>
+<li>删除：
+<ul>
+<li><code>lpop key</code>:代表删除列表最左边的元素，并将该元素返回，如:<code>lpop usernames</code></li>
+<li><code>rpop key</code>:代表删除列表最右边的元素，并将该元素返回。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>集合类型：不允许重复元素
+<ul>
+<li>存储：<code>sadd key value</code>,如：<code>sadd key a</code>,还可以一次存入多个元素，如：<code>sadd key b c</code></li>
+<li>获取：<code>smembers key</code>，获取set集合中的所有元素，但是<strong>不保证和存入的顺序一样</strong>。如：<code>smembers key</code></li>
+<li>删除：<code>srem key value</code>,删除集合中的某个元素，如：<code>srem key a</code></li>
+</ul>
+</li>
+<li>有序集合类型：不允许重复元素，且元素有顺序
+<ul>
+<li>存储：<code>zadd key score value</code>,其中score是value对应的分数，用来作为排序的依据（score小的元素在前），如：<code>zadd key 80 zhangjie</code></li>
+<li>获取：
+<ul>
+<li><code>zrange key start end</code>,获取指定范围内的元素，如：<code>zrange key 0 -1</code>,获取集合中所有的元素。</li>
+<li><code>zrange key start end withscores</code>，或获取指定范围内的元素以及对应的socre。</li>
+</ul>
+</li>
+<li>删除：<code>zrem key value</code></li>
+</ul>
+</li>
+<li>通用的命令：
+<ul>
+<li><code>keys *</code>:获取所有的键（<code>*</code>的位置可以换为正则表达式，获取符合指定规则的键）</li>
+<li><code>type key</code>:获取指定键对应的value的类型;</li>
+<li><code>del key</code>:删除指定的key value（不止适用于String类型，也适用于所有类型，直接删除指定键）</li>
+</ul>
+</li>
+</ul>
+<h1 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> 持久化</h1>
+<ul>
+<li>Redis的持久化：将Redis内存中的文件存储到硬盘文件中去。</li>
+<li>Redis持久化的两种机制：
+<ul>
+<li>RDB：默认方式，不需要配置，默认使用这种方式。
+<ul>
+<li>在一定的间隔时间中，检测key的变化情况，然后持久化数据。</li>
+<li>linux操作系统的关于RDB的配置在<code>redis.conf</code>文件中。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># after 900 sec(15 min) if at least 1 key changed
+save 900 1
+# after 300 sec(5 min) if at least 10 key changed
+save 300 10
+# after 60 sec(1 min) if at least 10000 key changed
+save 60 10000</code></pre>
+<ul>
+<li>AOF：日志记录的方式，可以记录每一条命令的操作。可以在每一条命令操作后，持久化数据
+<ul>
+<li>编辑<code>redis.conf</code>文件</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># no是指AOF方式关闭，yes是打开
+appendonly no
+# appendfsync always：每一次操作都进行持久化，如果需要启动则取消注释
+appendfsync everysec #每隔一秒进行一次持久化操作
+# appendfsync no：不进行持久化操作</code></pre>
+<h1 id="java客户端-jedis"><a class="markdownIt-Anchor" href="#java客户端-jedis"></a> Java客户端-Jedis</h1>
+<ul>
+<li>Jedis:一款Java操作Redis数据库的工具</li>
+<li>使用步骤：
+<ol>
+<li>下载并导入相关jar包到工程中：
+<ol>
+<li><a target="_blank" rel="noopener" href="https://commons.apache.org/proper/commons-pool/download_pool.cgi">common-pool2</a></li>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/redis.clients/jedis?__cf_chl_captcha_tk__=d41db408314d60fb331623deabd9a15fe36abc20-1612082289-0-AVlmsRyd0pFMVLysGHAjfOhsUPRBHl6zROFnuHmysV6K7TigdSA1uvSeNmDDWTGalFggBbwRBai91Temzk2O6Jrst1jxpXIFZQib8pQTTtT6QmgsW0hE7HLfbz22RleXBOGwJrTEIHP5OipDQnpaYmvWNWosSJ8HkrWh5MPyB8ypP3Kp9zRONNgpzqY2jeTrRSixucDR7JbxJsCYeu7iRe0z2aC2TCcDS8nYy3XWJbjwVbAu8CedWeWxBWjra0azGe-L1K8uLq7W9SeT-pZbA6d8pbTcj4qsm7WKSZH94RvWgh_UfDzCD9RPOKGrq7taDoO9hM2jk12X7v1jqTkPoTCd8x0Me0tdHsGCSOGtKe_6Fub13BJBQS1xWXIeQT95yjdgRs_eXdUom5d7MIrErcKAuGTJkdGnzJG--LIjrhdKrlvioSKGg4UvToUYkV1Oc1SmjoicGh1vitlE8OT6p5m_Jbu2Bc9zybE7IfgRoBGuPZeZWS3oqJlEKJeM6D6TMWOM09WLhdgZkurzOzKDnwUN1CYnciZFlyoDrvzkHfkVdZl-Z0vhWM42cOWIANBLtpPKOnMFoWfH56jIJGGjrUF7VOee4isrl3_fFwg7zPsDcggPgIlwGrxV-VKXy_6oCQ">Jedis</a></li>
+</ol>
+</li>
+<li>获取数据库连接：</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">Jedis jedis &#x3D; new Jedis(&quot;localhost&quot;,6379);
+&#x2F;&#x2F;localhost是主机ip地址，因为是本机，所以直接用localhost
+&#x2F;&#x2F;6379是Redis的端口号，Redis服务器启动时会显示端口号，默认是6379
+&#x2F;&#x2F;如果空参则默认是localhost和6379参数</code></pre>
+<ol start="3">
+<li>操作数据库,如：<code>jedis.set(&quot;username&quot;,&quot;zhanjie&quot;);</code>,与命令行操作基本类似</li>
+<li>关闭连接：<code>jedis.close();</code></li>
+</ol>
+<h1 id="jedis连接池"><a class="markdownIt-Anchor" href="#jedis连接池"></a> Jedis连接池</h1>
+<ol>
+<li>创建Jedis连接池对象：<code>JedisPool jedisPool = new JedisPool();</code></li>
+<li>获取Jedis对象：<code>Jedis jedis = jedisPool.getResource();</code></li>
+<li>使用Jedis对象：，如：<code>jedis.set(&quot;username&quot;,&quot;zhangjie&quot;);</code></li>
+<li>关闭对象，归还到连接池中：<code>jedis.close();</code></li>
+</ol>
+<ul>
+<li>JedisPoolConfig对象，可以作为参数传给JedisPool构造器，配置连接池。如：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">JedisPoolConfig config &#x3D; new JedisPoolConfig();
+config.setMaxTotal(50);
+config.setMaxIdel(10);
+
+JedisPool jedisPool &#x3D; new JedisPool(config,&quot;localhost&quot;,6379);</code></pre>
+<ul>
+<li>可以类似JDBC写Jedis连接池的工具类，来简化代码的书写。</li>
+<li>注：使用Jedis的连接池还需要额外导入两个包：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;slf4j-log4j12&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;1.7.9&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;slf4j-api&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;1.7.22&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JSON/index.html" rel="prev" title="JSON">
+                  <i class="fa fa-angle-left"></i> JSON
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/Leetcode-%E6%A0%88/index.html" rel="next" title="Leetcode-栈">
+                  Leetcode-栈 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

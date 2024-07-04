@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="SpringMVC简介 官方文档  SpringMVC是一个web框架，围绕DispatcherServlet设计； DispacherServelt的作用是将请求分发到不同的处理器。  DispatcherServlet是一个实际的Servlet，它继承自HttpServlet类。   SpringMVC和许多其他的MVC框架一样，以请求为驱动，围绕一个中心servlet分派请求及提供其他功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/SpringMVC/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="SpringMVC简介 官方文档  SpringMVC是一个web框架，围绕DispatcherServlet设计； DispacherServelt的作用是将请求分发到不同的处理器。  DispatcherServlet是一个实际的Servlet，它继承自HttpServlet类。   SpringMVC和许多其他的MVC框架一样，以请求为驱动，围绕一个中心servlet分派请求及提供其他功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307210022.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307210107.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307221352.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210312104652.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210311225308.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210312110729.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313164643.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313164431.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313220441.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313220644.png">
+<meta property="article:published_time" content="2021-03-04T01:35:32.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.249Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307210022.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/SpringMVC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/SpringMVC/index.html","path":"/post/技术笔记/Web后端/SpringMVC/index.html","title":"SpringMVC"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringMVC | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springmvc%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text"> SpringMVC简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#springmvc%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> SpringMVC执行原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">3.</span> <span class="nav-text"> 快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#restful%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.</span> <span class="nav-text"> Restful风格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%BD%AC%E5%8F%91"><span class="nav-number">5.</span> <span class="nav-text"> 重定向和转发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%92%8C%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE"><span class="nav-number">6.</span> <span class="nav-text"> 接收请求参数和数据回显</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text"> 后台乱码问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ssm%E6%95%B4%E5%90%88"><span class="nav-number">8.</span> <span class="nav-text"> SSM整合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80mybaits%E5%B1%82%E7%BC%96%E5%86%99"><span class="nav-number">8.1.</span> <span class="nav-text"> 一：mybaits层编写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring%E5%B1%82"><span class="nav-number">8.2.</span> <span class="nav-text"> Spring层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E6%95%B4%E5%90%88dao%E5%B1%82"><span class="nav-number">8.2.1.</span> <span class="nav-text"> Spring整合dao层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring%E6%95%B4%E5%90%88service%E5%B1%82"><span class="nav-number">8.2.2.</span> <span class="nav-text"> Spring整合service层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springmvc%E5%B1%82"><span class="nav-number">8.3.</span> <span class="nav-text"> SpringMVC层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE"><span class="nav-number">8.4.</span> <span class="nav-text"> 编写实际项目</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/SpringMVC/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringMVC | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringMVC
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-04 09:35:32" itemprop="dateCreated datePublished" datetime="2021-03-04T09:35:32+08:00">2021-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>36k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>33 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="springmvc简介"><a class="markdownIt-Anchor" href="#springmvc简介"></a> SpringMVC简介</h1>
+<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web">官方文档</a></p>
+<ul>
+<li>SpringMVC是一个web框架，围绕<code>DispatcherServlet</code>设计；</li>
+<li>DispacherServelt的作用是将请求分发到不同的处理器。
+<ul>
+<li>DispatcherServlet是一个实际的Servlet，它继承自HttpServlet类。</li>
+</ul>
+</li>
+<li>SpringMVC和许多其他的MVC框架一样，以请求为驱动，围绕一个中心servlet分派请求及提供其他功能。</li>
+<li>传统MVC架构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307210022.png" alt="" /></li>
+</ul>
+<h1 id="springmvc执行原理"><a class="markdownIt-Anchor" href="#springmvc执行原理"></a> SpringMVC执行原理</h1>
+<ul>
+<li>SpringMVC核心架构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307210107.png" alt="" /></li>
+</ul>
+<h1 id="快速入门"><a class="markdownIt-Anchor" href="#快速入门"></a> 快速入门</h1>
+<ol>
+<li>建立一个web支持的项目；</li>
+<li>配置maven的资源过滤问题：</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;build&gt;
+    &lt;resources&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;directory&gt;
+            &lt;includes&gt;
+                &lt;include&gt;**&#x2F;*.properties&lt;&#x2F;include&gt;
+                &lt;include&gt;**&#x2F;*.xml&lt;&#x2F;include&gt;
+            &lt;&#x2F;includes&gt;
+            &lt;filtering&gt;false&lt;&#x2F;filtering&gt;
+        &lt;&#x2F;resource&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src&#x2F;main&#x2F;resources&lt;&#x2F;directory&gt;
+            &lt;includes&gt;
+                &lt;include&gt;**&#x2F;*.properties&lt;&#x2F;include&gt;
+                &lt;include&gt;**&#x2F;*.xml&lt;&#x2F;include&gt;
+            &lt;&#x2F;includes&gt;
+            &lt;filtering&gt;false&lt;&#x2F;filtering&gt;
+        &lt;&#x2F;resource&gt;
+    &lt;&#x2F;resources&gt;
+&lt;&#x2F;build&gt;</code></pre>
+<ol start="3">
+<li>导入相关依赖，主要是<code>spring-webmvc</code></li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;spring-webmvc&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;5.3.3&lt;&#x2F;version&gt;
+&lt;&#x2F;dependency&gt;</code></pre>
+<ol start="4">
+<li>配置web.xml
+<ul>
+<li>web.xml的版本要4.0及以上；</li>
+<li>在项目结构中，将maven导入的依赖，全部导入到artifacts的依赖中去。</li>
+<li>注册DispatchServlet,管理SpringMVC配置文件，设置启动级别为1，映射路径为<code>/</code></li>
+</ul>
+</li>
+</ol>
+  <pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+  &lt;web-app xmlns&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&quot;
+          xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+          xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&#x2F;web-app_4_0.xsd&quot;
+          version&#x3D;&quot;4.0&quot;&gt;
+
+      &lt;!-- 注册servlet --&gt;
+      &lt;servlet&gt;
+          &lt;servlet-name&gt;SpringMVC&lt;&#x2F;servlet-name&gt;
+          &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;&#x2F;servlet-class&gt;、
+          &lt;!-- 通过初始化参数指定SpringMVC配置文件的位置，进行关联 --&gt;
+          &lt;init-param&gt;
+              &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;
+              &lt;param-value&gt;classpath:springmvc-servlet.xml&lt;&#x2F;param-value&gt;
+          &lt;&#x2F;init-param&gt;
+          &lt;!-- 启动顺序，数字越小，启动越早 --&gt;
+          &lt;load-on-startup&gt;1&lt;&#x2F;load-on-startup&gt;
+      &lt;&#x2F;servlet&gt;
+
+      &lt;!-- 所有请求都会被springmvc拦截 --&gt;
+      &lt;servlet-mapping&gt;
+          &lt;servlet-name&gt;SpringMVC&lt;&#x2F;servlet-name&gt;
+          &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;
+      &lt;&#x2F;servlet-mapping&gt;
+  &lt;&#x2F;web-app&gt;</code></pre>
+<ol start="5">
+<li>配置Springmvc-servlet.xml(web.xml关联的springmvc配置文件，放在resouce目录下)</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;
+       xmlns:mvc&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&quot;
+       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&#x2F;spring-mvc.xsd&quot;&gt;
+
+
+    &lt;context:annotation-config&#x2F;&gt;
+    &lt;!--    自动扫描包，让指定包下的注解生效，由IOC容器统一管理--&gt;
+    &lt;context:component-scan base-package&#x3D;&quot;com.zestaken.controller&quot;&#x2F;&gt;
+    &lt;!--    让springmvc不处理静态资源，如.css .js .html .mp3 .mp4--&gt;
+        &lt;mvc:default-servlet-handler&#x2F;&gt;
+
+    &lt;!--    支持mvc注解驱动--&gt;
+        &lt;mvc:annotation-driven&#x2F;&gt;
+
+    &lt;!--    配置视图解析器--&gt;
+        &lt;bean class&#x3D;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;
+            id&#x3D;&quot;internalResourceViewResolver&quot;&gt;
+    &lt;!--        前缀--&gt;
+            &lt;property name&#x3D;&quot;prefix&quot; value&#x3D;&quot;&#x2F;WEB-INF&#x2F;jsp&#x2F;&quot;&#x2F;&gt;
+    &lt;!--        后缀--&gt;
+            &lt;property name&#x3D;&quot;suffix&quot; value&#x3D;&quot;.jsp&quot;&#x2F;&gt;
+        &lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;</code></pre>
+<ul>
+<li>在视图解析器中，将所有的视图都放在**/WEB-INF/**目录下，这样可以保证视图安全，因为这个目录下的文件，客户端不能直接访问。</li>
+</ul>
+<ol start="6">
+<li>创建controller：</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(&quot;&#x2F;HelloController&quot;)
+public class HelloController &#123;
+    
+    &#x2F;&#x2F;真实访问地址就是：项目名&#x2F;HelloController&#x2F;hello1
+    @RequestMapping(&quot;&#x2F;hello1&quot;)
+    public String sayHello(Model model) &#123;
+        &#x2F;&#x2F;向模型中添加属性msg与值，可以在jsp页面中取出并渲染
+        model.addAttribute(&quot;msg&quot;, &quot;hello, springmvc&quot;);
+        &#x2F;&#x2F;返回值代表视图：WEB-INF&#x2F;jsp&#x2F;hello.jsp
+        return &quot;hello&quot;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li><code>@Controller</code>是为了让Spring IOC容器自动扫描到；被这个注解的类中的所有方法，如果返回值是String，并且有具体的页面可以操作，那么就会被视图解析器解析。#</li>
+<li><code>@ResquestMapping</code>是为了映射请求路径，这里因为类与方法上都有映射，所以访问时应该是<code>HelloController/hello</code>(类上的映射可以不写)</li>
+<li>方法中声明的Model类型的参数是为了把Action中的数据带到视图层中；</li>
+<li>方法返回的结果是视图的名称hello，加上==配置文件中的前后缀==变成WEB-INF/jsp/hello.jsp</li>
+</ul>
+<ol start="7">
+<li>创建视图层：<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot; language&#x3D;&quot;java&quot; %&gt;
+ &lt;html&gt;
+ &lt;head&gt;
+     &lt;title&gt;Title&lt;&#x2F;title&gt;
+ &lt;&#x2F;head&gt;
+ &lt;body&gt;
+ &lt;h1&gt;$&#123;msg&#125;&lt;&#x2F;h1&gt;
+ &lt;&#x2F;body&gt;
+ &lt;&#x2F;html&gt;</code></pre>
+</li>
+<li>启动tomcat，访问/HelloController/hello1。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210307221352.png" alt="" /></li>
+</ol>
+<h1 id="restful风格"><a class="markdownIt-Anchor" href="#restful风格"></a> Restful风格</h1>
+<ul>
+<li>Restful风格：一种软件架构风格、设计风格，而不是标准，只是提供了一组设计原则和约束条件。它主要用于客户端和服务器交互类的软件。基于这个风格设计的软件可以更简洁，更有层次，更易于实现缓存等机制。</li>
+<li>REST即Representational State Transfer的缩写，可译为&quot;表现层状态转化”。REST最大的几个特点为：资源、统一接口、URI和无状态。</li>
+<li>资源：互联网所有的事物都可以被抽象为资源 。</li>
+<li>资源操作：使用POST、DELETE、PUT、GET，使用不同方法对资源进行操作。 <br />
+分别对应 添加、 删除、修改、查询。</li>
+<li>传统方式操作资源：通过不同的参数来实现不同的效果，方法单一，都是GET或者POST。</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;127.0.0.1&#x2F;item&#x2F;queryUser.action?id&#x3D;1   查询,GET 
+http:&#x2F;&#x2F;127.0.0.1&#x2F;item&#x2F;saveUser.action             新增,POST 
+http:&#x2F;&#x2F;127.0.0.1&#x2F;item&#x2F;updateUser.action          更新,POST 
+http:&#x2F;&#x2F;127.0.0.1&#x2F;item&#x2F;deleteUser.action?id&#x3D;1  删除,GET或POST</code></pre>
+<ul>
+<li>使用RESTful操作资源 :
+<ul>
+<li>通过不同的请求方法来实现不同的效果。请求的地址一样，但是因为请求的方式不同，实现的功能不同。
+<ul>
+<li>可以通过 GET、 POST、 PUT、 PATCH、 DELETE 等方式对服务端的资源进行操作。其中，GET 用于查询资源，POST 用于创建资源，PUT 用于更新服务端的资源的全部信息，PATCH 用于更新服务端的资源的部分信息，DELETE 用于删除服务端的资源。</li>
+</ul>
+</li>
+<li>同时隐藏了参数的传递，直接将参数写入到地址中，隐藏了参数名。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">【GET】 &#x2F;users # 查询用户信息列表
+
+【GET】 &#x2F;users&#x2F;1001 # 查看某个用户信息（其中1001就是要用到方法中的参数）
+
+【POST】 &#x2F;users # 新建用户信息
+
+【PUT】 &#x2F;users&#x2F;1001 # 更新用户信息(全部字段)
+
+【PATCH】 &#x2F;users&#x2F;1001 # 更新用户信息(部分字段)
+
+【DELETE】 &#x2F;users&#x2F;1001 # 删除用户信息</code></pre>
+<ul>
+<li>传统方法实现示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HelloController &#123;
+
+    @RequestMapping(&quot;&#x2F;hello1&quot;)
+    public String sayHello(int a, int b,Model model) &#123;
+        int res &#x3D; a + b;
+        model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+        return &quot;hello&quot;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>请求这个方法的路径：<code>http://localhost:8080/SpringMVC_war_exploded/hello1?a=1&amp;b=2</code></li>
+<li>Restful风格实现示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class HelloController &#123;
+
+&#x2F;&#x2F;    @RequestMapping(value &#x3D; &quot;&#x2F;hello1&#x2F;&#123;a&#125;&#x2F;&#123;b&#125;&quot;,method &#x3D; RequestMethod.GET)
+    @GetMapping(&quot;&#x2F;hello&#x2F;&#123;a&#125;&#x2F;&#123;b&#125;&quot;)
+    public String GETHello(@PathVariable int a, @PathVariable int b, Model model) &#123;
+        int res &#x3D; a - b;
+        model.addAttribute(&quot;msg&quot;, &quot;GET输出结果为：&quot;+res);
+        return &quot;hello&quot;;
+    &#125;
+
+    @PostMapping(&quot;&#x2F;hello&#x2F;&#123;b&#125;&#x2F;&#123;a&#125;&quot;)
+    public String POSTHello(@PathVariable int a, @PathVariable int b, Model model) &#123;
+        int res &#x3D; a - b;
+        model.addAttribute(&quot;msg&quot;, &quot;POST输出结果为：&quot;+res);
+        return &quot;hello&quot;;
+    &#125;
+&#125;
+&#125;</code></pre>
+<ul>
+<li>将参数的传递放到路径中去：
+<ul>
+<li>方法的参数必须加上<code>@PathVariable</code>注解</li>
+<li>方法的路径中，必须对应方法的参数(名称相同，<code>&#123;a&#125;</code>对应参数<code>int a</code>)，并且用花括号括起来。</li>
+</ul>
+</li>
+<li>限制不同的请求方法，只能使用不同的方法
+<ul>
+<li>一种方法是给<code>@RequestMapping</code>注解加上method参数</li>
+<li>一种方法是使用对应请求方法特有的map注解,如，GEI方法对应的<code>@GETMapping</code>注解。</li>
+</ul>
+</li>
+<li>请求GETHello的请求路径：<code>http://localhost:8080/SpringMVC_war_exploded/hello/1/2</code>
+<ul>
+<li>路径中的参数必须与参数的类型对应。</li>
+<li>请求生效必须采用GET方法。</li>
+</ul>
+</li>
+</ul>
+<h1 id="重定向和转发"><a class="markdownIt-Anchor" href="#重定向和转发"></a> 重定向和转发</h1>
+<ul>
+<li>法一： ModelAndView对象：设置该对象，根据view的名称，和视图解析器跳转到指定的页面。
+<ul>
+<li>视图解析器配置示例：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;!--    配置视图解析器--&gt;
+     &lt;bean class&#x3D;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;
+         id&#x3D;&quot;internalResourceViewResolver&quot;&gt;
+ &lt;!--        前缀--&gt;
+         &lt;property name&#x3D;&quot;prefix&quot; value&#x3D;&quot;&#x2F;WEB-INF&#x2F;jsp&#x2F;&quot;&#x2F;&gt;
+ &lt;!--        后缀--&gt;
+         &lt;property name&#x3D;&quot;suffix&quot; value&#x3D;&quot;.jsp&quot;&#x2F;&gt;
+     &lt;&#x2F;bean&gt;
+ &lt;&#x2F;beans&gt;</code></pre>
+<ul>
+<li>页面位置：视图解析器的前缀 + viewName + 视图解析器后缀。</li>
+<li>高级写法中，ModelAndView对象简化为了Model对象：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">  @RequestMapping(&quot;&#x2F;hello1&quot;)
+public String sayHello(int a, int b,Model model) &#123;
+    int res &#x3D; a + b;
+    model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+    return &quot;hello&quot;;
+&#125;</code></pre>
+<ul>
+<li>在路径前面加上转发或者重定向的前缀，可以实现转发或者重定向（如果不加，==默认是转发==）：</li>
+</ul>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java">      @RequestMapping(&quot;&#x2F;hello1&quot;)
+public String sayHello(int a, int b,Model model) &#123;
+    int res &#x3D; a + b;
+    model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+    &#x2F;&#x2F;重定向
+    return &quot;redirect:hello&quot;;
+&#125;</code></pre>
+</li>
+<li>法二：==不使用视图解析器==，直接使用SpringMvc实现
+<ul>
+<li>这种情况下，需要将页面的位置具体出来。</li>
+</ul>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java">      @RequestMapping(&quot;&#x2F;hello1&quot;)
+public String sayHello(int a, int b,Model model) &#123;
+    int res &#x3D; a + b;
+    model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+    return &quot;&#x2F;WEB-INF&#x2F;jsp&#x2F;hello.jsp&quot;;
+&#125;</code></pre>
+<pre><code>  * 默认是转发；
+  * 可以在路径前面加前缀，来分别实现转发和重定向。
+  * 如：
+</code></pre>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java">      @RequestMapping(&quot;&#x2F;hello1&quot;)
+public String sayHello(int a, int b,Model model) &#123;
+    int res &#x3D; a + b;
+    model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+    &#x2F;&#x2F;转发
+     return &quot;forward:&#x2F;WEB-INF&#x2F;jsp&#x2F;hello.jsp&quot;;
+&#125;
+      @RequestMapping(&quot;&#x2F;hello1&quot;)
+public String sayHello(int a, int b,Model model) &#123;
+    int res &#x3D; a + b;
+    model.addAttribute(&quot;msg&quot;, &quot;输出结果为：&quot;+res);
+    &#x2F;&#x2F;重定向(重定向好像不能访问WEB-INF文件夹下的内容)
+     return &quot;redirect:&#x2F;index.jsp&quot;;
+&#125;</code></pre>
+</li>
+</ul>
+<h1 id="接收请求参数和数据回显"><a class="markdownIt-Anchor" href="#接收请求参数和数据回显"></a> 接收请求参数和数据回显</h1>
+<ul>
+<li>基本接收参数方式：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(&quot;&#x2F;user&quot;)
+public class UserController &#123;
+
+    &#x2F;&#x2F;请求示例：localhost:8080&#x2F;user&#x2F;t1 ? name &#x3D; zhangjie
+    @GetMapping(&quot;&#x2F;t1&quot;)
+    public String test1(String name, Model model) &#123;
+
+        &#x2F;&#x2F;name接收到前端传进来的参数name
+        System.out.println(name);
+
+        &#x2F;&#x2F;将要传给前端的结果封装到Model对象中，返回给前端
+        model.addAttribute(name);
+
+        &#x2F;&#x2F;视图跳转
+        return &quot;test&quot;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>前端请求的参数必须与函数的形参名相同才行。</li>
+<li>可以在需要从前端接收的参数名前加上<code>@RequestParam(&quot;前端传递的参数名&quot;)</code>来限定参数的性质。示例：</li>
+</ul>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java">public String test1(@RequestParam(&quot;username&quot;) String name, Model model) 
+&#x2F;&#x2F;请求示例：localhost:8080&#x2F;user&#x2F;t1 ? username &#x3D; zhangjie</code></pre>
+<ul>
+<li>接收前端的参数：前端传递的参数可以==封装为一个对象==：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;实体类
+package com.zestaken.pojo;
+
+public class User &#123;
+    public void setId(int id) &#123;
+        this.id &#x3D; id;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+
+    public int getId() &#123;
+        return id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    private int id;
+    private String name;
+
+    @Override
+    public String toString() &#123;
+        return &quot;User&#123;&quot; +
+                &quot;id&#x3D;&quot; + id +
+                &quot;, name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;
+
+&#x2F;&#x2F;controller类
+@Controller
+@RequestMapping(&quot;&#x2F;user&quot;)
+public class UserController &#123;
+
+    &#x2F;&#x2F;请求示例：localhost:8080&#x2F;user&#x2F;t1 ? id &#x3D; 1 &amp;&amp; name &#x3D; zhangjie 
+    @GetMapping(&quot;&#x2F;t1&quot;)
+    public String test1(User user, Model model) &#123;
+
+        &#x2F;&#x2F;name接收到前端传进来的参数user
+        System.out.println(user.toString());
+
+        &#x2F;&#x2F;将要传给前端的结果封装到Model对象中，返回给前端
+        model.addAttribute(user.toString());
+
+        &#x2F;&#x2F;视图跳转
+        return &quot;test&quot;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>接收前端用户传递的参数，判断参数的名字，==假设参数名字直接在方法的形参中定义了，可以直接使用==</li>
+<li>假设方法中定义的形参是一个对象，则将前端传递的参数与对象中的属性名进行匹配，如果名字一致则将参数写到对象的属性中去，如果不一致匹配不到则该对象的该属性值为空。</li>
+<li>回显结果到前端：通过ModelAndView对象实现</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.lang.annotation.Annotation;
+
+public class Controller2 implements Controller &#123;
+    public ModelAndView test1(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) &#123;
+        ModelAndView modelAndView &#x3D; new ModelAndView();
+        &#x2F;&#x2F;设置返回给前端的内容
+        modelAndView.addObject(&quot;msg&quot;, &quot;controllertest&quot;);
+        &#x2F;&#x2F;设置要响应的前端页面
+        modelAndView.setViewName(&quot;test&quot;);
+        return modelAndView;
+    &#125;
+
+    @Override
+    public String value() &#123;
+        return null;
+    &#125;
+
+    @Override
+    public Class&lt;? extends Annotation&gt; annotationType() &#123;
+        return null;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>需要实现Controller接口；</li>
+<li>可以获取请求和响应的参数；</li>
+<li>通过ModelAndView对象来设置响应给前端的结果，和具体的的前端页面。</li>
+<li>回显结果到前端：通过Model对象来实现。</li>
+<li>回显结果到前端：通过ModelMap来实现。</li>
+<li>三种回显数据的方法的对比：
+<ul>
+<li>Model：只有几种方法，只适用于储存数据，是ModelMap的精简版；</li>
+<li>ModelMap:继承了LinkedMap,除了实现了自身的一些方法，同样的继承LinkedMap方法和特性。功能更齐全。</li>
+<li>ModelAndView:可以在储存数据的同时，进行设置返回的逻辑视图，进行控制展示层的跳转。</li>
+</ul>
+</li>
+</ul>
+<h1 id="后台乱码问题"><a class="markdownIt-Anchor" href="#后台乱码问题"></a> 后台乱码问题</h1>
+<ul>
+<li>在前端编码方式为utf-8的情况下，因为服务端的编码问题导致经由后台代码的中文输出为乱码。</li>
+<li>解决方案：使用SpringMVC的乱码过滤器过滤器。</li>
+<li>在<code>web.xml</code>中配置SpringMVC的乱码过滤器：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;filter&gt;
+    &lt;filter-name&gt;encoding&lt;&#x2F;filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;&#x2F;filter-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;
+        &lt;param-name&gt;utf-8&gt;&lt;&#x2F;param-name&gt;
+    &lt;&#x2F;init-param&gt;
+&lt;&#x2F;filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;encoding&lt;&#x2F;filter-name&gt;
+    &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;
+&lt;&#x2F;filter-mapping&gt;</code></pre>
+<h1 id="ssm整合"><a class="markdownIt-Anchor" href="#ssm整合"></a> SSM整合</h1>
+<ol>
+<li>maven的pom.xml配置，导入相关依赖包</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot;
+         xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;
+
+    &lt;groupId&gt;com.example&lt;&#x2F;groupId&gt;
+    &lt;artifactId&gt;ssm&lt;&#x2F;artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;
+    &lt;name&gt;ssm&lt;&#x2F;name&gt;
+    &lt;packaging&gt;war&lt;&#x2F;packaging&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;&#x2F;maven.compiler.target&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;&#x2F;maven.compiler.source&gt;
+        &lt;junit.version&gt;5.6.2&lt;&#x2F;junit.version&gt;
+    &lt;&#x2F;properties&gt;
+
+&lt;!--    依赖：junit，数据库驱动，连接池，servlet，jsp，mybatis，mybatis-spring，spring servlet jsp jstl--&gt;
+    &lt;dependencies&gt;
+&lt;!--        web包--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;javaee-web-api&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;8.0.1&lt;&#x2F;version&gt;
+            &lt;scope&gt;provided&lt;&#x2F;scope&gt;
+        &lt;&#x2F;dependency&gt;
+&lt;!--        junit--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;junit-jupiter-api&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;$&#123;junit.version&#125;&lt;&#x2F;version&gt;
+            &lt;scope&gt;test&lt;&#x2F;scope&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;junit-jupiter-engine&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;$&#123;junit.version&#125;&lt;&#x2F;version&gt;
+            &lt;scope&gt;test&lt;&#x2F;scope&gt;
+        &lt;&#x2F;dependency&gt;
+
+&lt;!--        mysql数据库驱动包， 数据库连接池c3p0--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;8.0.23&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.mchange&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;c3p0&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;0.9.5.2&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+
+&lt;!--        servlet jsp--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;servlet-api&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;2.5&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;jsp-api&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;2.2&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;1.2&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+
+&lt;!--        mybatis mybatis-spring--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;3.5.6&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;2.0.6&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+
+&lt;!--        spring依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;5.3.3&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;&#x2F;artifactId&gt;
+            &lt;version&gt;5.3.4&lt;&#x2F;version&gt;
+        &lt;&#x2F;dependency&gt;
+    &lt;&#x2F;dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;&#x2F;groupId&gt;
+                &lt;artifactId&gt;maven-war-plugin&lt;&#x2F;artifactId&gt;
+                &lt;version&gt;3.3.0&lt;&#x2F;version&gt;
+            &lt;&#x2F;plugin&gt;
+        &lt;&#x2F;plugins&gt;
+&lt;!--        配置静态资源导出问题--&gt;
+            &lt;resources&gt;
+                &lt;resource&gt;
+                    &lt;directory&gt;src&#x2F;main&#x2F;java&lt;&#x2F;directory&gt;
+                    &lt;includes&gt;
+                        &lt;include&gt;**&#x2F;*.properties&lt;&#x2F;include&gt;
+                        &lt;include&gt;**&#x2F;*.xml&lt;&#x2F;include&gt;
+                    &lt;&#x2F;includes&gt;
+                    &lt;filtering&gt;false&lt;&#x2F;filtering&gt;
+                &lt;&#x2F;resource&gt;
+                &lt;resource&gt;
+                    &lt;directory&gt;src&#x2F;main&#x2F;resources&lt;&#x2F;directory&gt;
+                    &lt;includes&gt;
+                        &lt;include&gt;**&#x2F;*.properties&lt;&#x2F;include&gt;
+                        &lt;include&gt;**&#x2F;*.xml&lt;&#x2F;include&gt;
+                    &lt;&#x2F;includes&gt;
+                    &lt;filtering&gt;false&lt;&#x2F;filtering&gt;
+                &lt;&#x2F;resource&gt;
+            &lt;&#x2F;resources&gt;
+    &lt;&#x2F;build&gt;
+&lt;&#x2F;project&gt;</code></pre>
+<ol start="2">
+<li>编写基本目录结构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210312104652.png" alt="" /></li>
+</ol>
+<h2 id="一mybaits层编写"><a class="markdownIt-Anchor" href="#一mybaits层编写"></a> 一：mybaits层编写</h2>
+<ol>
+<li>
+<p>连接数据库<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210311225308.png" alt="" /></p>
+</li>
+<li>
+<p>编写mybatis层配置：</p>
+<ol>
+<li>mybatis-config.xml，并管理</li>
+</ol>
+</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot;
+        &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-config.dtd&quot;&gt;
+&lt;!-- 核心配置文件 --&gt;
+&lt;configuration&gt;
+
+&lt;!--    配置数据源的工作交给spring去做--&gt;
+&lt;!--    &lt;properties resource&#x3D;&quot;db.properties&quot;&gt;--&gt;
+&lt;!--        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;root&quot;&#x2F;&gt;--&gt;
+&lt;!--    &lt;&#x2F;properties&gt;--&gt;
+
+&lt;!--    &lt;environments default&#x3D;&quot;development&quot;&gt;--&gt;
+&lt;!--        &lt;environment id&#x3D;&quot;development&quot;&gt;--&gt;
+&lt;!--            &lt;transactionManager type&#x3D;&quot;JDBC&quot;&#x2F;&gt;--&gt;
+&lt;!--            &lt;!&amp;ndash;配置数据源&amp;ndash;&gt;--&gt;
+&lt;!--            &lt;dataSource type&#x3D;&quot;POOLED&quot;&gt;--&gt;
+&lt;!--                &lt;!&amp;ndash;注册驱动，同jdbc&amp;ndash;&gt;--&gt;
+&lt;!--                &lt;property name&#x3D;&quot;driver&quot; value&#x3D;&quot;$&#123;driver&#125;&quot;&#x2F;&gt;--&gt;
+&lt;!--                &lt;!&amp;ndash;数据库连接路径&amp;ndash;&gt;--&gt;
+&lt;!--                &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;$&#123;url&#125;&quot;&#x2F;&gt;--&gt;
+&lt;!--                &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;$&#123;username&#125;&quot;&#x2F;&gt;--&gt;
+&lt;!--                &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;password&#125;&quot;&#x2F;&gt;--&gt;
+&lt;!--            &lt;&#x2F;dataSource&gt;--&gt;
+&lt;!--        &lt;&#x2F;environment&gt;--&gt;
+&lt;!--    &lt;&#x2F;environments&gt;--&gt;
+
+&lt;!--    mybatis的配置文件中可以做配置别名等工作--&gt;
+&lt;typeAliases&gt;
+    &lt;package name&#x3D;&quot;com.zestaken.pojo&quot;&#x2F;&gt;
+&lt;&#x2F;typeAliases&gt;
+&lt;!--每一个Mapper.xml文件都需要在这个mybatis核心配置文件中注册--&gt;
+&lt;mappers&gt;
+    &lt;mapper resource&#x3D;&quot;com&#x2F;zestaken&#x2F;dao&#x2F;T_collegeMapper.xml&quot;&#x2F;&gt;
+&lt;&#x2F;mappers&gt;
+&lt;&#x2F;configuration&gt;</code></pre>
+<ol start="3">
+<li>编写数据库配置文件：database.properties</li>
+</ol>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties">jdbc.driver &#x3D; com.mysql.cj.Driver
+# 如果使用的是MySQL8.0以上版本，需要加上一个时区配置:serverTimezone&#x3D;Asia&#x2F;Shanghai
+jdbc.url &#x3D; jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;youth_study?serverTimezone&#x3D;Asia&#x2F;Shanghai
+jdbc.usrname &#x3D; root
+jdbc.password &#x3D; root</code></pre>
+<ol start="4">
+<li>编写实体类pojo：</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.pojo;
+
+import java.sql.Date;
+
+public class T_college &#123;
+    private int id;
+    private String name;
+    private Date gmt_create;
+    private Date gmt_modified;
+
+    public int getId() &#123;
+        return id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public Date getGmt_create() &#123;
+        return gmt_create;
+    &#125;
+
+    public Date getGmt_modified() &#123;
+        return gmt_modified;
+    &#125;
+
+    public void setId(int id) &#123;
+        this.id &#x3D; id;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name &#x3D; name;
+    &#125;
+
+    public void setGmt_create(Date gmt_create) &#123;
+        this.gmt_create &#x3D; gmt_create;
+    &#125;
+
+    public void setGmt_modified(Date gmt_modified) &#123;
+        this.gmt_modified &#x3D; gmt_modified;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;T_college&#123;&quot; +
+                &quot;id&#x3D;&quot; + id +
+                &quot;, name&#x3D;&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, gmt_create&#x3D;&quot; + gmt_create +
+                &quot;, gmt_modified&#x3D;&quot; + gmt_modified +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>属性名与数据库字段名相同；</li>
+<li>并编写每个属性的getter和setter方法</li>
+<li>编写toString方法</li>
+<li><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210312110729.png" alt="" /></li>
+<li>类名就是表名配合首字母大写</li>
+</ul>
+<ol start="5">
+<li>编写操作数据库的方法（dao层）接口，命名为pojo实体类加Mapper，如：T_collegeMapper</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.dao;
+
+import com.zestaken.pojo.T_college;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface T_collegeMapper &#123;
+
+    &#x2F;&#x2F;    增加一个学院
+    int addCollege(T_college college);
+
+    &#x2F;&#x2F;删除一个指定的学院
+    int deleteCollege(@Param(&quot;collegeID&quot;) int id);
+
+    &#x2F;&#x2F;更新一个学院的信息
+    int updateCollege(T_college college);
+
+    &#x2F;&#x2F;查询一个学院
+    T_college queryCollege(@Param(&quot;collegeID&quot;) int id);
+
+    &#x2F;&#x2F;查询全部的学院
+    List&lt;T_college&gt; queryAllCollege();
+&#125;
+</code></pre>
+<p>6.编写对应dao层接口的mapper配置文件：T_collegeMapper.xml</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot;
+        &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace&#x3D;&quot;com.zestaken.dao.T_collegeMapper&quot;&gt;
+
+    &lt;insert id&#x3D;&quot;addCollege&quot; parameterType&#x3D;&quot;T_college&quot;&gt;
+    insert into youth_study.t_college(id,name)
+    value (#&#123;id&#125;,#&#123;name&#125;);
+    &lt;&#x2F;insert&gt;
+
+    &lt;delete id&#x3D;&quot;deleteCollege&quot; parameterType&#x3D;&quot;int&quot;&gt;
+    delete from youth_study.t_college
+    where id &#x3D; #&#123;collegeID&#125;;
+    &lt;&#x2F;delete&gt;
+    
+    &lt;update id&#x3D;&quot;updateCollege&quot; parameterType&#x3D;&quot;T_college&quot;&gt;
+    update youth_study.t_college
+    set name&#x3D;#&#123;name&#125;
+    where id &#x3D; #&#123;id&#125;;
+    &lt;&#x2F;update&gt;
+
+    &lt;select id&#x3D;&quot;queryCollege&quot; resultType&#x3D;&quot;T_college&quot;&gt;
+    select * form youth_study.t_college
+    where id &#x3D; #&#123;collegeID&#125;;
+    &lt;&#x2F;select&gt;
+
+    &lt;select id&#x3D;&quot;queryAllCollege&quot; resultType&#x3D;&quot;T_college&quot;&gt;
+    select * from youth_study.t_college;
+    &lt;&#x2F;select&gt;
+
+&lt;&#x2F;mapper&gt;</code></pre>
+<ol start="7">
+<li>绑定mapper，在mybatis-config.xml中配置：</li>
+</ol>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;mappers&gt;
+    &lt;mapper resource&#x3D;&quot;com&#x2F;zestaken&#x2F;dao&#x2F;T_collegeMapper.xml&quot;&#x2F;&gt;
+&lt;&#x2F;mappers&gt;</code></pre>
+<p>8.编写业务层的接口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.service;
+
+import com.zestaken.pojo.T_college;
+
+import java.util.List;
+
+public interface T_collegeService &#123;
+
+    &#x2F;&#x2F;    增加一个学院
+    int addCollege(T_college college);
+
+    &#x2F;&#x2F;删除一个指定的学院
+    int deleteCollege(int id);
+
+    &#x2F;&#x2F;更新一个学院的信息
+    int updateCollege(T_college college);
+
+    &#x2F;&#x2F;查询一个学院
+    T_college queryCollege(int id);
+
+    &#x2F;&#x2F;查询全部的学院
+    List&lt;T_college&gt; queryAllCollege();
+&#125;</code></pre>
+<p>9.实现业务层的接口:</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.service;
+
+import com.zestaken.dao.T_collegeMapper;
+import com.zestaken.pojo.T_college;
+
+import java.util.List;
+
+public class T_collegeServiceImpl implements T_collegeService&#123;
+
+    &#x2F;&#x2F;service层调dao层实现功能
+    private T_collegeMapper t_collegeMapper;
+
+    &#x2F;&#x2F;方便之后用Spring托管这个对象
+    public void setT_collegeMapper(T_collegeMapper t_collegeMapper) &#123;
+        this.t_collegeMapper &#x3D; t_collegeMapper;
+    &#125;
+
+    @Override
+    public int addCollege(T_college college) &#123;
+        return t_collegeMapper.addCollege(college);
+    &#125;
+
+    @Override
+    public int deleteCollege(int id) &#123;
+        return t_collegeMapper.deleteCollege(id);
+    &#125;
+
+    @Override
+    public int updateCollege(T_college college) &#123;
+        return t_collegeMapper.updateCollege(college);
+    &#125;
+
+    @Override
+    public T_college queryCollege(int id) &#123;
+        return t_collegeMapper.queryCollege(id);
+    &#125;
+
+    @Override
+    public List&lt;T_college&gt; queryAllCollege() &#123;
+        return t_collegeMapper.queryAllCollege();
+    &#125;
+&#125;</code></pre>
+<h2 id="spring层"><a class="markdownIt-Anchor" href="#spring层"></a> Spring层</h2>
+<ul>
+<li>要将Spring相关的所有配置文件整合在到一起（本质上写一个spring的配置文件就足够了，分开写只是为了思路更清晰）
+<ul>
+<li>可以通过用import配置文件的方法实现:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313164643.png" alt="" /></li>
+<li>也可以利用idea配置实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313164431.png" alt="" /></li>
+</ul>
+</li>
+</ul>
+<h3 id="spring整合dao层"><a class="markdownIt-Anchor" href="#spring整合dao层"></a> Spring整合dao层</h3>
+<ul>
+<li>编写spring-dao.xml配置文件：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;
+       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd&quot;&gt;
+
+&lt;!--    关联数据库配置文件--&gt;
+    &lt;context:property-placeholder location&#x3D;&quot;classpath:database.properties&quot;&#x2F;&gt;
+
+&lt;!--    配置连接池，此处使用c3p0--&gt;
+    &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name&#x3D;&quot;driverClass&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;jdbcUrl&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;user&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&quot;&#x2F;&gt;
+
+    &lt;!--        c3p0配置--&gt;
+        &lt;property name&#x3D;&quot;maxPoolSize&quot; value&#x3D;&quot;30&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;minPoolSize&quot; value&#x3D;&quot;10&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;autoCommitOnClose&quot; value&#x3D;&quot;false&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;checkoutTimeout&quot; value&#x3D;&quot;10000&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;acquireRetryAttempts&quot; value&#x3D;&quot;2&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+
+&lt;!--    sqlSessionFactory配置--&gt;
+    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;!--        绑定数据源--&gt;
+        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;
+    &lt;!--        绑定mybatis的配置文件--&gt;
+        &lt;property name&#x3D;&quot;configLocation&quot; value&#x3D;&quot;classpath:mybatis-config.xml&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+
+&lt;!--    配置dao接口的扫描包 动态实现Dao接口注入到Spring容器中（不用写接口实现类了）--&gt;
+    &lt;bean class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;property name&#x3D;&quot;sqlSessionFactoryBeanName&quot; value&#x3D;&quot;sqlSessionFactory&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;com.zestaken.dao&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;</code></pre>
+<h3 id="spring整合service层"><a class="markdownIt-Anchor" href="#spring整合service层"></a> Spring整合service层</h3>
+<ul>
+<li>写一个spring-sevice.xml配置文件：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;
+       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd&quot;&gt;
+
+&lt;!--    扫描service层下的包, 要被扫描的类上面要加上@Compoent（或者更详细的@Service注解）--&gt;
+    &lt;context:component-scan base-package&#x3D;&quot;com.zestaken.service&quot;&#x2F;&gt;
+
+&lt;!--    将service层的业务类注入到Spring，可以通过配置，或者注解实现--&gt;
+    &lt;bean id&#x3D;&quot;T_collegeServiceImpl&quot; class&#x3D;&quot;com.zestaken.service.T_collegeServiceImpl&quot;&gt;
+        &lt;property name&#x3D;&quot;t_collegeMapper&quot; ref&#x3D;&quot;t_collegeMapper&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+
+&lt;!--声明式事务配置--&gt;
+    &lt;bean id&#x3D;&quot;transactionManager&quot; class&#x3D;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+&lt;!--        注入数据源--&gt;
+        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;</code></pre>
+<ul>
+<li>如果需要aop的配置，也写在这里。</li>
+</ul>
+<h2 id="springmvc层"><a class="markdownIt-Anchor" href="#springmvc层"></a> SpringMVC层</h2>
+<ul>
+<li>编写WEB-INF目录下的web.xml配置文件：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&quot;
+         xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&#x2F;web-app_4_0.xsd&quot;
+         version&#x3D;&quot;4.0&quot;&gt;
+
+&lt;!--    DispatchServlet配置--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springmvc&lt;&#x2F;servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;&#x2F;servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;
+&lt;!--            &lt;param-value&gt;classpath:spring-mvc.xml&lt;&#x2F;param-value&gt;--&gt;
+&lt;!--            不能只导入Springmvc的配置文件，需要导入所有spring的配置文件，不然有一些bean会找不到--&gt;
+            &lt;param-value&gt;classpath:applicationContext.xml&lt;&#x2F;param-value&gt;
+        &lt;&#x2F;init-param&gt;
+        &lt;load-on-startup&gt;1&lt;&#x2F;load-on-startup&gt;
+    &lt;&#x2F;servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;&#x2F;servlet-name&gt;
+        &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;
+    &lt;&#x2F;servlet-mapping&gt;
+    
+&lt;!--    乱码过滤配置--&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;&#x2F;filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;
+            &lt;param-value&gt;utf-8&lt;&#x2F;param-value&gt;
+        &lt;&#x2F;init-param&gt;
+    &lt;&#x2F;filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;
+        &lt;url-pattern&gt;*&lt;&#x2F;url-pattern&gt;
+    &lt;&#x2F;filter-mapping&gt;
+
+&lt;!--    配置session--&gt;
+    &lt;session-config&gt;
+        &lt;session-timeout&gt;15&lt;&#x2F;session-timeout&gt;
+    &lt;&#x2F;session-config&gt;
+&lt;&#x2F;web-app&gt;&gt;</code></pre>
+<ul>
+<li>编写spring-mvc.xml配置文件：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
+       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+       xmlns:mvc&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&quot;
+       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;
+       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context
+            https:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;comtext&#x2F;spring-context.xsd
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc
+            http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&#x2F;spring-mvc.xsd&quot;&gt;
+
+&lt;!--    注解驱动--&gt;
+    &lt;mvc:annotation-driven&#x2F;&gt;
+&lt;!--    静态资源过滤--&gt;
+    &lt;mvc:default-servlet-handler&#x2F;&gt;
+&lt;!--    扫描包：controller--&gt;
+    &lt;context:component-scan base-package&#x3D;&quot;com.zestaken.controller&quot;&#x2F;&gt;
+
+&lt;!--    视图解析器--&gt;
+    &lt;bean class&#x3D;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name&#x3D;&quot;prefix&quot; value&#x3D;&quot;&#x2F;WEB-INF&#x2F;jsp&#x2F;&quot;&#x2F;&gt;
+        &lt;property name&#x3D;&quot;suffix&quot; value&#x3D;&quot;.jsp&quot;&#x2F;&gt;
+    &lt;&#x2F;bean&gt;
+&lt;&#x2F;beans&gt;</code></pre>
+<h2 id="编写实际项目"><a class="markdownIt-Anchor" href="#编写实际项目"></a> 编写实际项目</h2>
+<ul>
+<li>编写web.xml(WEB-INF)目录下的：</li>
+</ul>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&quot;
+         xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
+         xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee http:&#x2F;&#x2F;xmlns.jcp.org&#x2F;xml&#x2F;ns&#x2F;javaee&#x2F;web-app_4_0.xsd&quot;
+         version&#x3D;&quot;4.0&quot;&gt;
+
+&lt;!--    DispatchServlet配置--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springmvc&lt;&#x2F;servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;&#x2F;servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;
+&lt;!--            &lt;param-value&gt;classpath:spring-mvc.xml&lt;&#x2F;param-value&gt;--&gt;
+&lt;!--            不能只导入Springmvc的配置文件，需要导入所有spring的配置文件，不然有一些bean会找不到--&gt;
+            &lt;param-value&gt;classpath:applicationContext.xml&lt;&#x2F;param-value&gt;
+        &lt;&#x2F;init-param&gt;
+        &lt;load-on-startup&gt;1&lt;&#x2F;load-on-startup&gt;
+    &lt;&#x2F;servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;&#x2F;servlet-name&gt;
+        &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;
+    &lt;&#x2F;servlet-mapping&gt;
+
+&lt;!--    &lt;context-param&gt;--&gt;
+&lt;!--        &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;--&gt;
+
+&lt;!--        &lt;param-value&gt;classpath:applicationContext.xml&lt;&#x2F;param-value&gt;--&gt;
+&lt;!--    &lt;&#x2F;context-param&gt;--&gt;
+
+    
+&lt;!--    乱码过滤配置--&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;&#x2F;filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;
+            &lt;param-value&gt;utf-8&lt;&#x2F;param-value&gt;
+        &lt;&#x2F;init-param&gt;
+    &lt;&#x2F;filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;
+        &lt;url-pattern&gt;*&lt;&#x2F;url-pattern&gt;
+    &lt;&#x2F;filter-mapping&gt;
+
+&lt;!--    配置session--&gt;
+    &lt;session-config&gt;
+        &lt;session-timeout&gt;15&lt;&#x2F;session-timeout&gt;
+    &lt;&#x2F;session-config&gt;
+
+&lt;&#x2F;web-app&gt;</code></pre>
+<ul>
+<li>编写controller：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package com.zestaken.controller;
+
+import com.zestaken.pojo.T_college;
+import com.zestaken.service.T_collegeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+
+@Controller
+@RequestMapping(&quot;&#x2F;college&quot;)
+public class T_collegeController &#123;
+
+    &#x2F;&#x2F;controller调service层
+    @Autowired
+    @Qualifier(&quot;T_collegeServiceImpl&quot;)
+    private T_collegeService t_collegeService;
+
+    public void setT_collegeService(T_collegeService t_collegeService) &#123;
+        this.t_collegeService &#x3D; t_collegeService;
+    &#125;
+
+    @RequestMapping(&quot;&#x2F;allCollege&quot;)
+    public  String queryAllCollege(Model model) &#123;
+        List&lt;T_college&gt; t_colleges &#x3D; t_collegeService.queryAllCollege();
+        model.addAttribute(&quot;msg&quot;, t_colleges);
+        return &quot;allCollege&quot;;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>编写页面：
+<ul>
+<li><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313220441.png" alt="" /></li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;%--
+  Created by IntelliJ IDEA.
+  User: 12246
+  Date: 2021&#x2F;3&#x2F;13
+  Time: 19:15
+  To change this template use File | Settings | File Templates.
+--%&gt;
+&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot; language&#x3D;&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;首页&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;
+    &lt;a href&#x3D;&quot;$&#123;pageContext.request.contextPath&#125;&#x2F;college&#x2F;allCollege&quot;&gt;进入学院展示页面&lt;&#x2F;a&gt;
+&lt;&#x2F;h1&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<pre class="line-numbers language-jsp" data-language="jsp"><code class="language-jsp">&lt;%--
+  Created by IntelliJ IDEA.
+  User: 12246
+  Date: 2021&#x2F;3&#x2F;13
+  Time: 19:14
+  To change this template use File | Settings | File Templates.
+--%&gt;
+&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot; language&#x3D;&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;allCollege&lt;&#x2F;title&gt;
+&lt;&#x2F;head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;$&#123;msg&#125;&lt;&#x2F;h1&gt;
+&lt;&#x2F;body&gt;
+&lt;&#x2F;html&gt;</code></pre>
+<ul>
+<li>配置Tomcat，启动项目。</li>
+<li>最后总架构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210313220644.png" alt="" /></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/SpringMVC/" rel="tag"># SpringMVC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html" rel="prev" title="C语言-错误处理与信号处理">
+                  <i class="fa fa-angle-left"></i> C语言-错误处理与信号处理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Arch/index.html" rel="next" title="Arch">
+                  Arch <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="数组与广义表  数组  数组的定义   数组的逻辑结构  一维数组：  多维数组：     数组的抽象数据类型：    数组的基本操作：   数组运算的关键在于找到对应元素的下标。     数组的存储结构  顺序存储结构：数组中的所有元素存储在一块地址连续的内存单元中,使用的是顺序存储结构。（不要把数组与顺序存储结构搞混，顺序存储结构是单指与链式存储结构相对的地址连续的内存单元存储法，只是在c语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章 数组与广义表">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="数组与广义表  数组  数组的定义   数组的逻辑结构  一维数组：  多维数组：     数组的抽象数据类型：    数组的基本操作：   数组运算的关键在于找到对应元素的下标。     数组的存储结构  顺序存储结构：数组中的所有元素存储在一块地址连续的内存单元中,使用的是顺序存储结构。（不要把数组与顺序存储结构搞混，顺序存储结构是单指与链式存储结构相对的地址连续的内存单元存储法，只是在c语">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155005.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155216.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155800.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155900.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809160821.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809161853.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809163051.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809164751.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809165211.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809165539.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809170742.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809172226.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809173413.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809173945.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174220.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174446.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174817.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809180021.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809175328.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809181332.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809181930.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809182315.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809182537.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809183912.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190222.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190609.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190842.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809191544.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809200538.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809201328.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200810091754.jpg">
+<meta property="article:published_time" content="2020-08-09T02:53:37.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155005.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html","path":"/post/专业基础/数据结构/第五章 数组与广义表/index.html","title":"第五章 数组与广义表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第五章 数组与广义表 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text"> 数组与广义表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text"> 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 数组的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.2.1.</span> <span class="nav-text"> 一维数组：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.2.2.</span> <span class="nav-text"> 多维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E4%BC%98%E5%85%88%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text"> 行优先存储</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%89%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E8%A1%8C%E4%BC%98%E5%85%88%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.2.2.1.1.</span> <span class="nav-text"> 三维数组的行优先存储</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#n%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E8%A1%8C%E4%BC%98%E5%85%88%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.2.2.1.2.</span> <span class="nav-text"> n维数组的行优先存储</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E4%BC%98%E5%85%88%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text"> 列优先存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 特殊矩阵的压缩存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.3.1.</span> <span class="nav-text"> 对称矩阵的压缩存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.3.2.</span> <span class="nav-text"> 三角矩阵的压缩存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="nav-number">1.1.3.3.</span> <span class="nav-text"> 对角矩阵的压缩存储：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.4.</span> <span class="nav-text"> 稀疏矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%89%E5%85%83%E7%BB%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.1.4.1.</span> <span class="nav-text"> 稀疏矩阵的三元组表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.4.1.1.</span> <span class="nav-text"> 三元组定义</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E5%8F%8A%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.4.2.</span> <span class="nav-text"> 三元组线性表的顺序结构存储及算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%89%E5%85%83%E7%BB%84"><span class="nav-number">1.1.4.2.1.</span> <span class="nav-text"> 创建三元组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%E5%85%83%E7%BB%84%E7%9A%84%E5%85%83%E7%B4%A0%E8%B5%8B%E5%80%BC"><span class="nav-number">1.1.4.2.2.</span> <span class="nav-text"> 三元组的元素赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%96%E5%87%BA%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC"><span class="nav-number">1.1.4.2.3.</span> <span class="nav-text"> 取出指定位置元素的值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E4%B8%89%E5%85%83%E7%BB%84"><span class="nav-number">1.1.4.2.4.</span> <span class="nav-text"> 输出三元组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%BD%AC%E7%BD%AE"><span class="nav-number">1.1.4.2.5.</span> <span class="nav-text"> 矩阵转置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.1.4.3.</span> <span class="nav-text"> 稀疏矩阵的十字链表表示</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第五章 数组与广义表 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第五章 数组与广义表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-09 10:53:37" itemprop="dateCreated datePublished" datetime="2020-08-09T10:53:37+08:00">2020-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="数组与广义表"><a class="markdownIt-Anchor" href="#数组与广义表"></a> 数组与广义表</h1>
+<h2 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h2>
+<h3 id="数组的定义"><a class="markdownIt-Anchor" href="#数组的定义"></a> 数组的定义</h3>
+<ul>
+<li>
+<p>数组的逻辑结构</p>
+<ul>
+<li>一维数组：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155005.jpg" alt="" /></li>
+<li>多维数组：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155216.jpg" alt="" /></li>
+</ul>
+</li>
+<li>
+<p>数组的抽象数据类型：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155800.jpg" alt="" /></p>
+</li>
+<li>
+<p>数组的基本操作：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809155900.jpg" alt="" /></p>
+<ul>
+<li>数组运算的关键在于找到对应元素的下标。</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组的存储结构"><a class="markdownIt-Anchor" href="#数组的存储结构"></a> 数组的存储结构</h3>
+<ul>
+<li>顺序存储结构：数组中的所有元素存储在一块地址连续的内存单元中,使用的是顺序存储结构。（不要把数组与顺序存储结构搞混，顺序存储结构是单指与链式存储结构相对的地址连续的内存单元存储法，只是在c语言中，顺序存储结构由数组来表现）</li>
+<li>数组类型的性质
+<ul>
+<li>数据元素的数目固定；</li>
+<li>所有数据元素具有相同的数据类型；</li>
+<li>每个数据元素都有一个（组）唯一的下标；</li>
+<li>数组是一种<strong>随机存储结构</strong>，数组中的元素可以随机存取。（随机存取即直接用下标存取矩阵中的元素）</li>
+</ul>
+</li>
+</ul>
+<h4 id="一维数组"><a class="markdownIt-Anchor" href="#一维数组"></a> 一维数组：</h4>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809160821.jpg" alt="" /></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mi mathvariant="normal">与</mi><msub><mi>a</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">a_i与a_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">与</span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>之间有i-1个元素，占领了（i-1）*k个存储单元。</li>
+</ul>
+<h4 id="多维数组"><a class="markdownIt-Anchor" href="#多维数组"></a> 多维数组</h4>
+<ul>
+<li>行优先存储：以行序为主序的存储</li>
+<li>列优先存储：以列序为主序的存储</li>
+<li>分为这两种存储方式的原因是：虽然在我们的理解中多维数组就像矩阵一样，但实际在计算机中它是连续存储（就像一排排完的）,所以区分行列的优先度就显得很重要。</li>
+</ul>
+<h5 id="行优先存储"><a class="markdownIt-Anchor" href="#行优先存储"></a> 行优先存储</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809161853.jpg" alt="" /></p>
+<ul>
+<li>计算每一个元素前面的元素个数时，先计算前面有多少行，再计算本行前面有多少个元素。</li>
+</ul>
+<h6 id="三维数组的行优先存储"><a class="markdownIt-Anchor" href="#三维数组的行优先存储"></a> 三维数组的行优先存储</h6>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809163051.jpg" alt="" /></p>
+<ul>
+<li>三个下标之间的关系可以类比二维数组行优先存储理解：二维数组的a[i][j]中，i是行数，j是列数，在计算机中存储时，相当与每一行看做一个整体（一维数组）然后依标号的顺序存储，一行中包含很多列。三维数组的a[i][j][k]中，i是页数，j是行数，k是列数，在计算机存储中，相当于将一页看做一个整体（二维数组），然后根据标号的顺序存储，一页中包含很多行和列，单独看一页中的存储顺序便相当于又是按照二维数组的存储方式来存储的。</li>
+<li>计算公式的理解：先计算前面有多少页<code>i -1</code>,每一页的总元素个数为行列最大数相乘；再计算本页前面有多少行<code>j -1</code>每行的元素个数即为最大的列数，最后计算本行前面有多少列<code>k - 1</code>。</li>
+</ul>
+<h6 id="n维数组的行优先存储"><a class="markdownIt-Anchor" href="#n维数组的行优先存储"></a> n维数组的行优先存储</h6>
+<ul>
+<li>第一个元素为a[1][1][1]算：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809164751.jpg" alt="" /></li>
+<li>第一个元素不为a[1][1][1]算：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809165211.jpg" alt="" /></li>
+</ul>
+<h5 id="列优先存储"><a class="markdownIt-Anchor" href="#列优先存储"></a> 列优先存储</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809165539.jpg" alt="" /></p>
+<ul>
+<li>所有计算公式都与行优先存储的公式结构相同，顺序相反。即行优先存储从第一个下标<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>i</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">i_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">i</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>算到第n个下标<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>i</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">i_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">i</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>,而列优先存储的公式都是从第n个下标算到第1个下标。</li>
+</ul>
+<h3 id="特殊矩阵的压缩存储"><a class="markdownIt-Anchor" href="#特殊矩阵的压缩存储"></a> 特殊矩阵的压缩存储</h3>
+<ul>
+<li>特殊矩阵的主要形式
+<ol>
+<li>对称矩阵</li>
+<li>上三角矩阵/下三角矩阵</li>
+<li>对角矩阵（带状矩阵）</li>
+</ol>
+</li>
+<li>特殊矩阵的共性：都是方阵，行数和列数相同。</li>
+<li>特殊矩阵压缩存储后，由于它矩阵元素分布的规律，仍然<strong>具有随机存取</strong>的特性。</li>
+</ul>
+<h4 id="对称矩阵的压缩存储"><a class="markdownIt-Anchor" href="#对称矩阵的压缩存储"></a> 对称矩阵的压缩存储</h4>
+<ul>
+<li>
+<p>对称矩阵定义<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809170742.jpg" alt="" /></p>
+<ul>
+<li>a[i][j] == a[j][i]</li>
+</ul>
+</li>
+<li>
+<p>对称矩阵的压缩存储</p>
+<ul>
+<li>基本思想：
+<ul>
+<li>利用其关于主对角线对称的特性，只存储下三角和主对角线上的元素，以节省空间。</li>
+<li>下三角和主对角线上的元素的特征是，行标大于或等于列标（i &gt;= j）。</li>
+<li>用一维数组存储对称矩阵。</li>
+</ul>
+</li>
+<li>压缩前后的对应关系<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809172226.jpg" alt="" />
+<ul>
+<li>原矩阵有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>个元素，而压缩后储存在一维数组中的只有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n+1)/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mord">2</span></span></span></span>个元素。但是原矩阵中的所有元素都可以在这个一维数组中找到。</li>
+<li>原矩阵第i行储存了i个元素在一维数组中，所以第i行第j列元素前有（1 + 2 + 3 + …+i-1）+ j-1个元素。这个个数，也对应着在一维数组中该元素的下标（若非c语言，要在个数后加1）。</li>
+<li>若要找到上三角的元素，则根据对称性，只需要将行列的下标对换，代入一维数组的下标计算公式即可。</li>
+<li>存储位置计算公式：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809173413.jpg" alt="" /></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="三角矩阵的压缩存储"><a class="markdownIt-Anchor" href="#三角矩阵的压缩存储"></a> 三角矩阵的压缩存储</h4>
+<ul>
+<li>上三角矩阵
+<ul>
+<li>基本思想
+<ul>
+<li>与对称矩阵类似，只是未存储的部分全部为0，需要一维数组在最后留一个位置来储存这个常数。</li>
+</ul>
+</li>
+<li>压缩前后的对应关系：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809173945.jpg" alt="" />
+<ul>
+<li>原矩阵第i行存入一维数组的元素个数为n-i+1个元素。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>下三角矩阵：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174220.jpg" alt="" /></li>
+<li>按列优先存储压缩三角矩阵：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174446.jpg" alt="" />
+<ul>
+<li>将计算公式的行列对换即可；</li>
+<li>注意：一维数组的<strong>初始下标是从0还是1</strong>开始。</li>
+</ul>
+</li>
+</ul>
+<h4 id="对角矩阵的压缩存储"><a class="markdownIt-Anchor" href="#对角矩阵的压缩存储"></a> 对角矩阵的压缩存储：</h4>
+<ul>
+<li>三对角矩阵的定义：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809174817.jpg" alt="" /></li>
+<li>压缩的基本思想：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809180021.jpg" alt="" />
+<ul>
+<li>每个元素前有多少个元素是按照每行三个元素计算：3（i-1），之后再减去第一行少的一个元素，加上本行前有多少个:j-i+1</li>
+</ul>
+</li>
+<li>压缩前后的对应关系<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809175328.jpg" alt="" />
+<ul>
+<li>每个元素前有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mo stretchy="false">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>j</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2(i-1)+j-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>个元素。</li>
+</ul>
+</li>
+</ul>
+<h3 id="稀疏矩阵"><a class="markdownIt-Anchor" href="#稀疏矩阵"></a> 稀疏矩阵</h3>
+<ul>
+<li>稀疏矩阵的定义：一个阶数较大的矩阵中的非零元素个数相对于总元素个数十分小时，称该矩阵为稀疏矩阵。</li>
+<li>稀疏矩阵的压缩存储：
+<ol>
+<li>三元组表示法：仍然使用线性表，即顺序存储结构存储；</li>
+<li>十字链表表示法：使用链表表示。</li>
+</ol>
+</li>
+<li>稀疏矩阵与特殊矩阵不同，它的非零元素分布并没有规律，所以稀疏矩阵压缩后就<strong>丧失了随机存取</strong>的特性。</li>
+</ul>
+<h4 id="稀疏矩阵的三元组表示"><a class="markdownIt-Anchor" href="#稀疏矩阵的三元组表示"></a> 稀疏矩阵的三元组表示</h4>
+<h5 id="三元组定义"><a class="markdownIt-Anchor" href="#三元组定义"></a> 三元组定义</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809181332.jpg" alt="" /></p>
+<ul>
+<li>其中i，j存储的是该元素在稀疏矩阵中的行标和下标（与普通矩阵不同的是，它的行标和下标是从0开始算的）,而a[i][j]存储的是该元素具体的值。</li>
+</ul>
+<h4 id="三元组线性表的顺序结构存储及算法"><a class="markdownIt-Anchor" href="#三元组线性表的顺序结构存储及算法"></a> 三元组线性表的顺序结构存储及算法</h4>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809181930.jpg" alt="" /></p>
+<h5 id="创建三元组"><a class="markdownIt-Anchor" href="#创建三元组"></a> 创建三元组</h5>
+<ul>
+<li>基本原理<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809182315.jpg" alt="" /></li>
+<li>算法实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809182537.jpg" alt="" />
+<ul>
+<li>将非零元素按行序扫描到的顺序存储进顺序表中，即可实现三元组中的元素是按行序为主序排列。</li>
+</ul>
+</li>
+</ul>
+<h5 id="三元组的元素赋值"><a class="markdownIt-Anchor" href="#三元组的元素赋值"></a> 三元组的元素赋值</h5>
+<ul>
+<li>分为两种情况：
+<ul>
+<li>只是修改非零元素的值</li>
+<li>增加一个非零元素，即将原来矩阵中的0元素改为非零元素。</li>
+</ul>
+</li>
+<li>算法实现:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809183912.jpg" alt="" />  <pre class="line-numbers language-c" data-language="c"><code class="language-c">bool Value(TSMatrix *t, ElemType  e, int i, int j) &#x2F;&#x2F;三元组的赋值
+&#123;
+int k &#x3D; 0;
+if(i &gt; t.Rows || j &gt; t.Cols)
+    return false; &#x2F;&#x2F;坐标不合理  
+
+while(k &lt; t.Terms &amp;&amp; i &gt; t.elem[k].row)  &#x2F;&#x2F;先查找行
+    k++;
+
+while(k &lt; t.Terms &amp;&amp; i &#x3D;&#x3D; t.elem[k].row &amp;&amp; j &gt; t.elem[k].col) &#x2F;&#x2F;查列
+    k++;
+
+    if(i &#x3D;&#x3D; t.elem[k].row &amp;&amp; j &#x3D;&#x3D; t.elem[k].col) &#x2F;&#x2F;判断条件，如果存在这样的一个元素
+        t.elem[k].val&#x3D;e; &#x2F;&#x2F;那么把这个元素赋值给它
+
+
+    else &#x2F;&#x2F;如果不存在的话,此时的k在列标比预期列标大得最少的元素位置上
+    &#123;
+    for(int k1 &#x3D; t.Terms-1; k &lt; k1; k1--) &#x2F;&#x2F;先进行移位操作
+    &#123;
+        t.elem[k1+1].row&#x3D;t.elem[k1].row; &#x2F;&#x2F;行
+        t.elem[k1+1].col&#x3D;t.elem[k1].col; &#x2F;&#x2F;列
+        t.elem[k1+1].val&#x3D;t.elem[k1].val; &#x2F;&#x2F;值
+    &#125;
+        t.elem[k].row&#x3D;i; &#x2F;&#x2F;行
+        t.elem[k].col&#x3D;j; &#x2F;&#x2F;列
+        t.elem[k].val&#x3D;e; &#x2F;&#x2F;值
+        t.Terms++; &#x2F;&#x2F;个数加1
+    &#125;
+    return true;
+&#125;</code></pre>
+<ul>
+<li>前面的算法有严重错误，后面的算法来做参考</li>
+<li>若能找到对应的非零元素，则直接修改；</li>
+<li>若不能找到对应的非零元素，则将k此时位置及以后的元素后移一位，将新元素值赋给k此时所在的位置。</li>
+</ul>
+</li>
+</ul>
+<h5 id="取出指定位置元素的值"><a class="markdownIt-Anchor" href="#取出指定位置元素的值"></a> 取出指定位置元素的值</h5>
+<ul>
+<li>基本原理:在三元组中查找该位置，若能查到，则将该位置的元素值取出，若不能查到，则该位置的元素值应为0。不能直接根据位置取出元素（随机存取），还需经过查找的过程。（类比数组与链表的区别，数组可以直接拿出某一位置的元素值，而链表必须逐次查找）</li>
+<li>算法实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190222.jpg" alt="" />
+<ul>
+<li>注意：算法有误，查找时的条件应为<code>i &gt; t.data[k].row ;j &gt; t.data[k].col</code></li>
+<li>没有找到该位置只是对应着该位置元素为0，不是出错了。</li>
+</ul>
+</li>
+</ul>
+<h5 id="输出三元组"><a class="markdownIt-Anchor" href="#输出三元组"></a> 输出三元组</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190609.jpg" alt="" /></p>
+<ul>
+<li>只是输出三元组，不是输出一个矩阵，不用管零元素。</li>
+</ul>
+<h5 id="矩阵转置"><a class="markdownIt-Anchor" href="#矩阵转置"></a> 矩阵转置</h5>
+<ul>
+<li>
+<p>矩阵转置的定义<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809190842.jpg" alt="" /></p>
+</li>
+<li>
+<p>直接转置的非高效算法<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809191544.jpg" alt="" /></p>
+<ul>
+<li>按照列从1到n依次查找，每一个列数都需要将整个三元组扫描一遍，设列数为n,非零元素个数为t,时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+<li>
+<p>更加高效的算法：</p>
+<ul>
+<li>基本原理：
+<ul>
+<li>通过记录每个列标号的个数，来确定在新三元组中该列标号的元素出现的位置，然后直接将元素值填入该位置即可。</li>
+<li>设置两个数组，分别记录某列标号出现的次数，以及该列标号在新三元组中第一次出现的位置。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809200538.jpg" alt="" />
+<ul>
+<li>此处列标号是从0开始算起。在第二个公式中，1 &lt;= col &lt;= t.n</li>
+<li>position的计算就是将上一个列标号第一次出现的位置加上该列标号的数目。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>算法实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809201328.jpg" alt="" />
+<ul>
+<li>第一步先将矩阵的总行数与列数逆置；</li>
+<li>之后通过遍历原三元组，确定每列的非零元的个数，通过<code>++bum[t.data[k].col]</code>来实现对每一列非零元个数的计数，着实秒啊！</li>
+<li>第三步，利用num数组，计算出position数组的值；</li>
+<li>最后遍历原三元数组，通过每个元素的列标号col来确认它在新三元组中的位置；</li>
+<li>值得点赞的是，在每个列标号col对应的元素存入新三元组之后,通过<code>++position[col]</code>的操作，来确定下一个第col列非零元素的位置。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="稀疏矩阵的十字链表表示"><a class="markdownIt-Anchor" href="#稀疏矩阵的十字链表表示"></a> 稀疏矩阵的十字链表表示</h4>
+<ul>
+<li>
+<p>基本原理：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200810091754.jpg" alt="" /></p>
+<ul>
+<li>每个非零元素对应一个结点，该结点中储存该元素的行标和列标以及元素值，另外还设有两个分别向右和向下的指针域。</li>
+<li>每行的所有结点链起来，再设置一个头结点，构成一个带头结点的单链表；</li>
+<li>每列的所有结点链起来，在设置一个列结点，构成一个带头结点的单链表；</li>
+<li>将所有行的头结点用一个数组储存起来，将所有列的头结点用一个数组储存起来；</li>
+</ul>
+</li>
+<li>
+<p>结点的定义</p>
+  <pre class="line-numbers language-c" data-language="c"><code class="language-c">typedef struct OLNode&#123;
+int i,j;&#x2F;&#x2F;元素的行标和列标
+int data;&#x2F;&#x2F;元素的值
+struct OLNode * right,*down;&#x2F;&#x2F;两个指针域
+&#125;OLNode, *Olink;</code></pre>
+</li>
+<li>
+<p>十字链表的定义</p>
+  <pre class="line-numbers language-c" data-language="c"><code class="language-c">typedef struct
+&#123;
+OLink *rhead, *chead; &#x2F;&#x2F;存储行和列链表头指针的两个数组
+int mu, nu, tu;  &#x2F;&#x2F;矩阵的行数,列数和非零元的个数
+&#125;CrossList;</code></pre>
+</li>
+<li>
+<p>十字链表的初始化</p>
+</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">CrossList CreateMatrix_OL(CrossList M)
+&#123;
+    int m, n, t; &#x2F;&#x2F;储存矩阵的行数和列数，以及非零元素个数
+    int i, j, e;
+    OLNode *p, *q;
+
+    printf(&quot;输入矩阵的行数、列数和非0元素个数：&quot;);
+    scanf(&quot;%d%d%d&quot;, &amp;m, &amp;n, &amp;t);
+    M.mu &#x3D; m;
+    M.nu &#x3D; n;
+    M.tu &#x3D; t;
+
+    if (!(M.rhead &#x3D; (OLink*)malloc((m + 1) * sizeof(OLink))) || !(M.chead &#x3D; (OLink*)malloc((n + 1) * sizeof(OLink)))) &#x2F;&#x2F;为头结点分配两个顺序储存空间（数组）
+    &#123;
+        printf(&quot;初始化矩阵失败&quot;);
+        exit(0);
+    &#125;
+
+    for (i &#x3D; 1; i &lt;&#x3D; m; i++)
+    &#123;
+        M.rhead[i] &#x3D; NULL;
+    &#125; &#x2F;&#x2F;初始化所有行的头结点
+
+    for (j &#x3D; 1; j &lt;&#x3D; n; j++)
+    &#123;
+        M.chead[j] &#x3D; NULL;
+    &#125; &#x2F;&#x2F;初始化所有列的头结点
+
+    for (scanf(&quot;%d%d%d&quot;, &amp;i, &amp;j, &amp;e); 0 !&#x3D; i; scanf(&quot;%d%d%d&quot;, &amp;i, &amp;j, &amp;e)) &#123;
+        if (!(p &#x3D; (OLNode*)malloc(sizeof(OLNode))))
+        &#123;
+            printf(&quot;初始化结点失败&quot;);
+            exit(0);
+        &#125;
+        p-&gt;i &#x3D; i;
+        p-&gt;j &#x3D; j;
+        p-&gt;e &#x3D; e;
+
+        &#x2F;&#x2F;链接到行的指定位置
+        if (NULL &#x3D;&#x3D; M.rhead[i] || M.rhead[i]-&gt;j &gt; j)
+        &#123;
+            p-&gt;right &#x3D; M.rhead[i];
+            M.rhead[i] &#x3D; p;
+        &#125; &#x2F;&#x2F;若原来那一行里第一个数据结点的列标就比新结点大或者没有数据结点，则头插法插入
+        else
+        &#123;
+            for (q &#x3D; M.rhead[i]; (q-&gt;right) &amp;&amp; q-&gt;right-&gt;j &lt; j; q &#x3D; q-&gt;right);
+            p-&gt;right &#x3D; q-&gt;right;
+            q-&gt;right &#x3D; p;
+        &#125; &#x2F;&#x2F;若第一个数据结点比新结点的列标小，则向后找比新结点列标大的，若没有就到最后一个结点，然后插入该结点后面
+
+        &#x2F;&#x2F;链接到列的指定位置
+        if (NULL &#x3D;&#x3D; M.chead[j] || M.chead[j]-&gt;i &gt; i)
+        &#123;
+            p-&gt;down &#x3D; M.chead[j];
+            M.chead[j] &#x3D; p;
+        &#125;
+        else
+        &#123;
+            for (q &#x3D; M.chead[j]; (q-&gt;down) &amp;&amp; q-&gt;down-&gt;i &lt; i; q &#x3D; q-&gt;down);
+            p-&gt;down &#x3D; q-&gt;down;
+            q-&gt;down &#x3D; p;
+        &#125;
+    &#125;
+    return M;
+&#125;</code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/index.html" rel="prev" title="第四章 串">
+                  <i class="fa fa-angle-left"></i> 第四章 串
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/index.html" rel="next" title="第六章 树和二叉树">
+                  第六章 树和二叉树 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

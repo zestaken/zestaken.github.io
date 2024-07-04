@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="第九章 内排序  9.1 排序的概念  排序的定义 所谓排序，是整理表中的记录，使之按关键字递增（或递减）有序排列。  内排序与外排序 在排序过程中，若整个表都是放在内存中处理，排序时不涉及数据的内、外存交换，则称之为内排序；反之，若排序过程中要进行数据的内、外存交换，则称之为外排序。  内排序  内排序的分类  基于比较的排序算法  插入排序 交换排序 选择排序 归并排序   不基于比较的排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第九章 内排序">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E5%86%85%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="第九章 内排序  9.1 排序的概念  排序的定义 所谓排序，是整理表中的记录，使之按关键字递增（或递减）有序排列。  内排序与外排序 在排序过程中，若整个表都是放在内存中处理，排序时不涉及数据的内、外存交换，则称之为内排序；反之，若排序过程中要进行数据的内、外存交换，则称之为外排序。  内排序  内排序的分类  基于比较的排序算法  插入排序 交换排序 选择排序 归并排序   不基于比较的排序">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200630103424.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200630103537.png">
+<meta property="article:published_time" content="2020-06-28T09:25:37.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200630103424.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E5%86%85%E6%8E%92%E5%BA%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E5%86%85%E6%8E%92%E5%BA%8F/index.html","path":"/post/专业基础/数据结构/第九章 内排序/index.html","title":"第九章 内排序"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第九章 内排序 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E5%86%85%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text"> 第九章 内排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#91-%E6%8E%92%E5%BA%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text"> 9.1 排序的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 排序的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%A4%96%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 内排序与外排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 内排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.3.1.</span> <span class="nav-text"> 内排序的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#-%E5%9F%BA%E4%BA%8E%E6%AF%94%E8%BE%83%E7%9A%84%E5%86%85%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.1.3.2.</span> <span class="nav-text"> ?-&gt;基于比较的内排序的时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.1.3.3.</span> <span class="nav-text"> 内排序算法的稳定性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%BA%8F%E4%B8%8E%E5%8F%8D%E5%BA%8F"><span class="nav-number">1.1.3.4.</span> <span class="nav-text"> 正序与反序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E6%8E%92%E5%BA%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%84%E7%BB%87"><span class="nav-number">1.1.3.5.</span> <span class="nav-text"> 内排序数据的组织</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#92-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text"> 9.2 插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 1.直接插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E6%8A%98%E5%8D%8A%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E4%BA%8C%E5%88%86%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 2.折半插入排序（二分插入排序）</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B9%9D%E7%AB%A0%20%E5%86%85%E6%8E%92%E5%BA%8F/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第九章 内排序 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第九章 内排序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-28 17:25:37" itemprop="dateCreated datePublished" datetime="2020-06-28T17:25:37+08:00">2020-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="第九章-内排序"><a class="markdownIt-Anchor" href="#第九章-内排序"></a> 第九章 内排序</h1>
+<h2 id="91-排序的概念"><a class="markdownIt-Anchor" href="#91-排序的概念"></a> 9.1 排序的概念</h2>
+<h3 id="排序的定义"><a class="markdownIt-Anchor" href="#排序的定义"></a> 排序的定义</h3>
+<p>所谓排序，是整理表中的记录，使之按关键字递增（或递减）有序排列。</p>
+<h3 id="内排序与外排序"><a class="markdownIt-Anchor" href="#内排序与外排序"></a> 内排序与外排序</h3>
+<p>在排序过程中，若整个表都是放在内存中处理，排序时不涉及数据的内、外存交换，则称之为<strong>内排序</strong>；反之，若排序过程中要进行数据的内、外存交换，则称之为<strong>外排序</strong>。</p>
+<h3 id="内排序"><a class="markdownIt-Anchor" href="#内排序"></a> 内排序</h3>
+<h4 id="内排序的分类"><a class="markdownIt-Anchor" href="#内排序的分类"></a> 内排序的分类</h4>
+<ol>
+<li>基于比较的排序算法
+<ol>
+<li>插入排序</li>
+<li>交换排序</li>
+<li>选择排序</li>
+<li>归并排序</li>
+</ol>
+</li>
+<li>不基于比较的排序算法
+<ol>
+<li>基数排序</li>
+</ol>
+</li>
+</ol>
+<h4 id="-基于比较的内排序的时间复杂度"><a class="markdownIt-Anchor" href="#-基于比较的内排序的时间复杂度"></a> ?-&gt;基于比较的内排序的时间复杂度</h4>
+<ul>
+<li>最好的平均时间复杂度：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></li>
+<li>最好情况是排序序列正序，此时时间复杂度：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<h4 id="内排序算法的稳定性"><a class="markdownIt-Anchor" href="#内排序算法的稳定性"></a> 内排序算法的稳定性</h4>
+<ul>
+<li>如果待排序的表中，存在有多个关键字相同的记录，经过排序后这些具有相同关键字的记录之间的相对次序保持不变，则称这种排序方法是<strong>稳定</strong>的。</li>
+<li>反之，若具有相同关键字的记录之间的相对次序发生变化，则称这种排序方法是<strong>不稳定</strong>的。</li>
+</ul>
+<h4 id="正序与反序"><a class="markdownIt-Anchor" href="#正序与反序"></a> 正序与反序</h4>
+<ul>
+<li>若待排序的表中元素已按关键字排好序，称此表中元素为正序；</li>
+<li>反之，若待排序的表中元素的关键字顺序正好和排好序的顺序相反，称此表中元素为反序。</li>
+<li>有一些排序算法与初始序列的正序或反序有关，另一些排序算法与初始序列的情况无关。</li>
+</ul>
+<h4 id="内排序数据的组织"><a class="markdownIt-Anchor" href="#内排序数据的组织"></a> 内排序数据的组织</h4>
+<p>待排序顺序表的数据元素类型定义：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">typedef struct
+&#123;
+    KeyType key; &#x2F;&#x2F;关键字项
+    InfoType data; &#x2F;&#x2F;其它数据项
+&#125;RecType; &#x2F;&#x2F; 排序的记录类型定义</code></pre>
+<h2 id="92-插入排序"><a class="markdownIt-Anchor" href="#92-插入排序"></a> 9.2 插入排序</h2>
+<h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h3>
+<ul>
+<li>基本原理：将无序区的元素逐个插入有序区（局部有序）</li>
+<li>分类：
+<ol>
+<li>直接插入排序</li>
+<li>折半插入排序</li>
+<li>希尔排序</li>
+</ol>
+</li>
+</ul>
+<h3 id="1直接插入排序"><a class="markdownIt-Anchor" href="#1直接插入排序"></a> 1.直接插入排序</h3>
+<ul>
+<li>
+<p>基本原理：插入排序通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入 ，如此重复，直至完成序列排序。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200630103424.jpg" alt="" /></p>
+</li>
+<li>
+<p>算法分析：</p>
+<ol>
+<li>从序列第一个元素开始，该元素可以认为已经被排序（即有序区第一个元素）</li>
+<li>取出下一个元素，设为待插入元素（即放入临时区：因为需要在有序区中插入一个元素，所以有序区得扩充一格，而临时区既能放置未找到位置的新入元素，又能为之后有序区元素的后移提供操作空间），在已经排序的元素序列中从后向前扫描，如果该元素（已排序）大于待插入元素，将该元素移到下一位置。</li>
+<li>重复步骤2，直到找到已排序的元素小于或者等于待排序元素的位置，插入元素。</li>
+<li>重复2，3步骤，完成排序。（得有两个循环嵌套）</li>
+</ol>
+</li>
+<li>
+<p>实例演示：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200630103537.png" alt="" /></p>
+<ol>
+<li>默认序列的第一个元素12已经被排序</li>
+<li>取下一元素 15，从后往前与已排序序列一次比较，15插入12 之后，已排序序列为[12，15]。</li>
+<li>取下一元素9，重复2步骤，将9插12 之前，已排序序列为[9，12，15]。</li>
+<li>循环上述操作，直至最后一个元素24，插入合适位置，完成排序。</li>
+</ol>
+</li>
+<li>
+<p>直接插入排序代码（c)</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">void InsertSort(RecType R[],int n)
+&#123;
+   int i,j;
+   RecType temp；
+
+   for(i &#x3D; 1; i &lt; n; i++)&#123;
+      temp &#x3D; R[i]; &#x2F;&#x2F; 将取出的无序区元素放入临时区
+      j &#x3D; i - 1;   &#x2F;&#x2F; 找到有序区最后一个元素
+      while(j &gt;&#x3D; 0 &amp;&amp; R[j] &gt; temp)&#123;
+         R[j + 1] &#x3D; R[j];
+         j--;
+      &#125; &#x2F;&#x2F;从后往前逐个扫描有序区元素，直到找到比新入元素小或者相等的元素，同时将比新入元素大的元素这个往后移一位
+      R[j] &#x3D; temp; &#x2F;&#x2F;将新入元素插入扫描找到的元素之后
+   &#125;
+&#125;</code></pre>
+</li>
+<li>
+<p>性能分析</p>
+<ul>
+<li>时间复杂度：
+<ul>
+<li>最好的情况（正序排列）：比较<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>次（每个元素只与自己前面的元素比一次，而第一个元素没有前面的元素），时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></li>
+<li>最坏的情况（反序排列）：比较<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n-1)/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mord">2</span></span></span></span>次（每个元素需与自己前面所有元素比一次），时间复杂度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+<li>平均时间复杂度：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+<li>空间复杂度：
+<ul>
+<li>只有一个临时元素，故空间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+<li>算法稳定性：
+<ul>
+<li>直接插入排序是稳定的排序算法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2折半插入排序二分插入排序"><a class="markdownIt-Anchor" href="#2折半插入排序二分插入排序"></a> 2.折半插入排序（二分插入排序）</h3>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5/index.html" rel="prev" title="第一章 数据结构及算法概念">
+                  <i class="fa fa-angle-left"></i> 第一章 数据结构及算法概念
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E7%BA%BF%E6%80%A7%E8%A1%A8/index.html" rel="next" title="第二章 线性表">
+                  第二章 线性表 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HTTP协议的概念  超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。它是TCP&#x2F;IP协议的一个应用层协议简单来说，HTTP协议就是客户端和服务器交互的一种通迅的格式。 特点：  基于TCP&#x2F;IP的高级协议; 默认端口号：80; 基于请求响应模型：一次请求对应一次响应 无状态：每次请求之间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/HTTP%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="HTTP协议的概念  超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。它是TCP&#x2F;IP协议的一个应用层协议简单来说，HTTP协议就是客户端和服务器交互的一种通迅的格式。 特点：  基于TCP&#x2F;IP的高级协议; 默认端口号：80; 基于请求响应模型：一次请求对应一次响应 无状态：每次请求之间">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201010121055.png">
+<meta property="article:published_time" content="2021-01-01T09:40:01.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="HTTP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201010121055.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/HTTP%E5%8D%8F%E8%AE%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/HTTP%E5%8D%8F%E8%AE%AE/index.html","path":"/post/技术笔记/Web后端/HTTP协议/index.html","title":"HTTP协议"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP协议 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text"> HTTP协议的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#http10%E5%92%8Chttp11"><span class="nav-number">1.1.</span> <span class="nav-text"> HTTP1.0和HTTP1.1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#http%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text"> HTTP请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text"> 请求行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">2.1.1.</span> <span class="nav-text"> 请求头</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E5%93%8D%E5%BA%94"><span class="nav-number">2.2.</span> <span class="nav-text"> HTTP响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%A1%8C"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 响应行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%A4%B4"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 响应头</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/HTTP%E5%8D%8F%E8%AE%AE/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP协议 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP协议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-01 17:40:01" itemprop="dateCreated datePublished" datetime="2021-01-01T17:40:01+08:00">2021-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="http协议的概念"><a class="markdownIt-Anchor" href="#http协议的概念"></a> HTTP协议的概念</h1>
+<ul>
+<li><strong>超文本传输协议（HTTP，HyperText Transfer Protocol)<strong>是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。它是TCP/IP协议的一个应用层协议简单来说，HTTP协议就是</strong>客户端和服务器交互</strong>的一种通迅的格式。</li>
+<li>特点：
+<ul>
+<li>基于TCP/IP的高级协议;</li>
+<li>默认端口号：80;</li>
+<li>基于请求响应模型：<strong>一次请求对应一次响应</strong></li>
+<li>无状态：每次<strong>请求之间相互独立</strong>，不能交互数据.</li>
+</ul>
+</li>
+</ul>
+<h2 id="http10和http11"><a class="markdownIt-Anchor" href="#http10和http11"></a> HTTP1.0和HTTP1.1</h2>
+<ul>
+<li>HTTP1.0协议中，客户端与web服务器建立连接后，只能获得<strong>一个web资源</strong>【短连接，获取资源后就断开连接】</li>
+<li>HTTP1.1协议，允许客户端与web服务器建立连接后，在一个连接上获取<strong>多个web资源</strong>【保持连接】</li>
+</ul>
+<h1 id="http请求"><a class="markdownIt-Anchor" href="#http请求"></a> HTTP请求</h1>
+<ul>
+<li>浏览器向服务器请求某个web资源时，称之为浏览器向服务器发送了一个http请求。一个完整http请求应该包含三个部分：
+<ol>
+<li>请求行【描述客户端的请求方式、请求的资源名称，以及使用的HTTP协议版本号】</li>
+<li>多个消息头【描述客户端请求哪台主机，以及客户端的一些环境信息等】</li>
+<li>一个空行：分割POST请求的请求头和请求体；</li>
+<li>请求体（正文：post方式才有）：封装POST请求消息的请求参数。</li>
+</ol>
+</li>
+</ul>
+<h2 id="请求行"><a class="markdownIt-Anchor" href="#请求行"></a> 请求行</h2>
+<ul>
+<li>请求行：<code>GET /java.html HTTP/1.1</code>。请求行中的<strong>GET称之为请求方式，之后跟请求的路径，最后是请求协议版本</strong>。请求方式有：POST,GET,HEAD,OPTIONS,DELETE,TRACE,PUT。</li>
+<li>常用的请求方式有：<strong>POST,GET</strong>
+<ul>
+<li>一般来说，当我们点击超链接，通过地址栏访问都是get请求方式。通过表单提交的数据一般是post方式。</li>
+<li>可以简单理解GET方式用来<strong>查询数据</strong>,POST方式用来<strong>提交数据</strong>，get的提交速度比post<strong>快</strong>。</li>
+<li>GET方式：
+<ul>
+<li>请求参数在请求行中（即url后）</li>
+<li>请求的url是有限制的。</li>
+</ul>
+</li>
+<li>POST方式：
+<ul>
+<li>请求的参数在请求体中;</li>
+<li>请求的url长度没有限制。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="请求头"><a class="markdownIt-Anchor" href="#请求头"></a> 请求头</h3>
+<ul>
+<li>格式：<code>请求头名称：请求头值</code></li>
+<li><strong>User-Agent</strong>: Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)【浏览器告诉服务器，我访问你使用的浏览器的版本信息】
+<ul>
+<li>可以在服务器端捕获该头的信息，解决浏览器的兼容问题。</li>
+</ul>
+</li>
+<li><strong>Referer</strong>: <a target="_blank" rel="noopener" href="http://www.it315.org/index.jsp%E3%80%90%E6%B5%8F%E8%A7%88%E5%99%A8%E5%91%8A%E8%AF%89%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%BD%93%E5%89%8D%E8%AF%B7%E6%B1%82%E6%98%AF%E4%BB%8E%E9%82%A3%E4%B8%AA%E9%A1%B5%E9%9D%A2%E6%9D%A5%E7%9A%84---%E5%8F%8D%E7%9B%97%E9%93%BE%E3%80%91">http://www.it315.org/index.jsp【浏览器告诉服务器，当前请求是从那个页面来的---反盗链】</a>
+<ul>
+<li>可以用作<strong>反盗链</strong>和<strong>统计流量来源信息</strong>。</li>
+</ul>
+</li>
+<li>Accept: text/html,image/* 【浏览器告诉服务器，它支持的数据类型】</li>
+<li>Accept-Charset: ISO-8859-1 【浏览器告诉服务器，它支持哪种字符集】</li>
+<li>Accept-Encoding: gzip,compress 【浏览器告诉服务器，它支持的压缩格式】</li>
+<li>Accept-Language: en-us,zh-cn 【浏览器告诉服务器，它的语言环境】</li>
+<li>Host: <a target="_blank" rel="noopener" href="http://www.it315.org:80">www.it315.org:80</a>【浏览器告诉服务器，它想访问哪台主机】</li>
+<li>If-Modified-Since: Tue, 11 Jul 2000 18:23:51 GMT【浏览器告诉服务器，缓存数据的时间】</li>
+<li>Cookie【浏览器告诉服务器，带来的Cookie是什么】</li>
+<li>Connection: close/Keep-Alive 【浏览器告诉服务器，请求完后是断开链接还是保持链接】</li>
+<li>Date: Tue, 11 Jul 2000 18:23:51 GMT【浏览器告诉服务器，请求的时间】</li>
+</ul>
+<h2 id="http响应"><a class="markdownIt-Anchor" href="#http响应"></a> HTTP响应</h2>
+<ul>
+<li>一个HTTP响应代表着服务器向浏览器回送数据。一个完整的HTTP响应应该包含四个部分:
+<ol>
+<li>一个响应行【用于描述服务器对请求的处理结果。】</li>
+<li>多个响应头【用于描述服务器的基本信息，以及数据的描述，服务器通过这些数据的描述信息，可以通知客户端如何处理等一会儿它回送的数据】</li>
+<li>一个响应空行</li>
+<li>响应体：服务器向客户端回送的数据</li>
+</ol>
+</li>
+</ul>
+<h3 id="响应行"><a class="markdownIt-Anchor" href="#响应行"></a> 响应行</h3>
+<ul>
+<li>格式： HTTP版本号　状态码　原因叙述</li>
+<li>响应行：HTTP/1.1 200 OK</li>
+<li>状态码用于表示服务器对请求的处理结果和响应的状态，它是一个三位的十进制数。响应状态码分为5类:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201010121055.png" alt="" />
+<ol>
+<li>1xx:服务器接收客户端消息，但没有接收完成，等待一段时间后，发送1xx代码;</li>
+<li>2xx：成功。代表：200</li>
+<li>3xx:重定向。代表：302（重定向），304（访问缓存）。</li>
+<li>4xx：客户端错误
+<ol>
+<li>404：请求路径没有对应资源;</li>
+<li>405：请求方式没有对应的doXxx方法;</li>
+</ol>
+</li>
+<li>5xx:服务器端错误。代表：500（服务器内部出现异常）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="响应头"><a class="markdownIt-Anchor" href="#响应头"></a> 响应头</h3>
+<ul>
+<li>格式：头名称：值</li>
+<li><strong>Content-Type</strong>: text/html; charset=UTF8 【服务器告诉浏览器本次响应体数据的格式（html）以及编码格式（UTF-8）】</li>
+<li><strong>Content-Disposition</strong>:
+<ul>
+<li>attachment; filename=aaa.zip【服务器告诉浏览器以下载方式打开数据】</li>
+<li>in-line:默认值，在当前页面打开数据</li>
+</ul>
+</li>
+<li>Location: <a target="_blank" rel="noopener" href="http://www.it315.org/index.jsp">http://www.it315.org/index.jsp</a> 【服务器告诉浏览器要跳转到哪个页面】</li>
+<li>Server:apache tomcat【服务器告诉浏览器，服务器的型号是什么】</li>
+<li>Content-Encoding: gzip 【服务器告诉浏览器数据压缩的格式】</li>
+<li>Content-Length: 80 【服务器告诉浏览器回送数据的长度】</li>
+<li>Content-Language: zh-cn 【服务器告诉浏览器，服务器的语言环境】</li>
+<li>Last-Modified: Tue, 11 Jul 2000 18:23:51 GMT【服务器告诉浏览器该资源上次更新时间】</li>
+<li>Refresh: 1;url=http://www.it315.org【服务器告诉浏览器要定时刷新】</li>
+<li>Transfer-Encoding: chunked 【服务器告诉浏览器数据以分块方式回送】</li>
+<li>Set-Cookie:SS=Q0=5Lb_nQ; path=/search【服务器告诉浏览器要保存Cookie】</li>
+<li>Expires: -1【服务器告诉浏览器不要设置缓存】</li>
+<li>Cache-Control: no-cache 【服务器告诉浏览器不要设置缓存】</li>
+<li>Pragma: no-cache 【服务器告诉浏览器不要设置缓存】</li>
+<li>Connection: close/Keep-Alive 【服务器告诉浏览器连接方式】</li>
+<li>Date: Tue, 11 Jul 2000 18:23:51 GMT【服务器告诉浏览器回送数据的时间】</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/XML/index.html" rel="prev" title="XML">
+                  <i class="fa fa-angle-left"></i> XML
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/BeanUtils/index.html" rel="next" title="BeanUtils">
+                  BeanUtils <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

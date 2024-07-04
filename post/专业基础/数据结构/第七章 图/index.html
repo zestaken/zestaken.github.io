@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="图 由于考试压力。。。还有待完善。。。  图的定义   图由顶点集合和边集合产生   有向图和无向图   有向图的边带有箭头，而无向图的边没有箭头。 无向边用()表示，而有向边用&lt;&gt;表示。   图的基本术语  端点和邻接点   一条边的两头的顶点为端点，这两个端点互为邻接点。   顶点的度、入度和出度   有向图的度又分为出度和入度。 度、顶点数和边数的关系   每个顶点的度都代表了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七章 图">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%9B%BE/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="图 由于考试压力。。。还有待完善。。。  图的定义   图由顶点集合和边集合产生   有向图和无向图   有向图的边带有箭头，而无向图的边没有箭头。 无向边用()表示，而有向边用&lt;&gt;表示。   图的基本术语  端点和邻接点   一条边的两头的顶点为端点，这两个端点互为邻接点。   顶点的度、入度和出度   有向图的度又分为出度和入度。 度、顶点数和边数的关系   每个顶点的度都代表了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815081734.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815081931.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082218.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082421.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082652.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815083033.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084016.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084731.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084909.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815085209.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815085655.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815103923.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815104350.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105816.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105755.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105816.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815110730.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111128.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111437.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111929.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815112323.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815124639.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815125018.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815131029.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815131254.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815175445.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815180314.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815180909.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815181559.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815184154.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815183638.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815191255.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815192349.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194234.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194402.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194938.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815213644.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214032.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214256.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214557.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214910.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815215424.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815215915.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815220035.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815221045.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816082837.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083255.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083559.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083708.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816084857.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085251.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085325.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085705.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816095434.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816095547.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816103616.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816113957.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816114726.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816114934.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200817233805.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818212756.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192549.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214447.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214607.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214753.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818220136.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192155.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192337.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192801.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192903.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819193108.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194244.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194303.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194415.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194512.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194656.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194743.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194928.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819195159.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200318.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200530.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200744.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200922.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819211309.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820225224.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820225920.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820230947.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231244.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231404.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231640.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231813.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231922.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232022.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232312.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232421.jpg">
+<meta property="article:published_time" content="2020-08-14T16:45:37.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815081734.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%9B%BE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%9B%BE/index.html","path":"/post/专业基础/数据结构/第七章 图/index.html","title":"第七章 图"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第七章 图 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text"> 图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text"> 图的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%90%91%E5%9B%BE%E5%92%8C%E6%97%A0%E5%90%91%E5%9B%BE"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 有向图和无向图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 图的基本术语</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text"> 图的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 邻接矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 邻接表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 十字链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E5%A4%9A%E9%87%8D%E8%A1%A8"><span class="nav-number">1.2.4.</span> <span class="nav-text"> 邻接多重表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text"> 图的基本运算（邻接表）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.3.1.</span> <span class="nav-text"> 图的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%BE%93%E5%87%BA"><span class="nav-number">1.3.2.</span> <span class="nav-text"> 图的输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%94%80%E6%AF%81"><span class="nav-number">1.3.3.</span> <span class="nav-text"> 图的销毁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8%E8%BD%AC%E6%8D%A2%E4%B8%BA%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">1.3.4.</span> <span class="nav-text"> 邻接表转换为邻接矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.4.</span> <span class="nav-text"> 图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%E5%AF%B9%E6%97%A0%E5%90%91%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="nav-number">1.4.1.</span> <span class="nav-text"> 深度优先遍历（对无向连通图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%E5%AF%B9%E6%97%A0%E5%90%91%E8%BF%9E%E9%80%9A%E5%9B%BE"><span class="nav-number">1.4.2.</span> <span class="nav-text"> 广度优先遍历（对无向连通图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E8%BF%9E%E9%80%9A%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.4.3.</span> <span class="nav-text"> 非连通图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-number">1.4.3.1.</span> <span class="nav-text"> 深度优先遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-number">1.4.3.2.</span> <span class="nav-text"> 广度优先遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E9%81%8D%E5%8E%86%E6%9D%A5%E5%88%A4%E6%96%AD%E6%97%A0%E5%90%91%E5%9B%BE%E6%98%AF%E5%90%A6%E8%BF%9E%E9%80%9A"><span class="nav-number">1.4.3.3.</span> <span class="nav-text"> 利用遍历来判断无向图是否连通</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.4.</span> <span class="nav-text"> 深度优先遍历的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%9F%90%E4%B8%A4%E4%B8%AA%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E7%AE%80%E5%8D%95%E8%B7%AF%E5%BE%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">1.4.4.1.</span> <span class="nav-text"> 判断某两个顶点之间是否存在简单路径（深度优先）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%9F%90%E4%B8%A4%E4%B8%AA%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%80%E6%9D%A1%E7%AE%80%E5%8D%95%E8%B7%AF%E5%BE%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">1.4.4.2.</span> <span class="nav-text"> 输出某两个顶点之间的一条简单路径(深度优先)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%9F%90%E4%B8%A4%E4%B8%AA%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%A8%E9%83%A8%E7%AE%80%E5%8D%95%E8%B7%AF%E5%BE%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88"><span class="nav-number">1.4.4.3.</span> <span class="nav-text"> ？？输出某两个顶点之间的全部简单路径（深度优先）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%9F%90%E4%B8%AA%E9%A1%B6%E7%82%B9%E7%9A%84%E5%85%A8%E9%83%A8%E5%9B%9E%E8%B7%AF"><span class="nav-number">1.4.4.4.</span> <span class="nav-text"> ??输出某个顶点的全部回路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.5.</span> <span class="nav-text"> 广度优先遍历的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E4%B8%8D%E5%B8%A6%E6%9D%83%E6%97%A0%E5%90%91%E8%BF%9E%E9%80%9A%E5%9B%BE%E6%9F%90%E4%B8%A4%E9%A1%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E4%B8%80%E6%9D%A1%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.5.1.</span> <span class="nav-text"> 求不带权无向连通图某两顶点之间的一条最短路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A0%91%E5%92%8C%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">1.5.</span> <span class="nav-text"> 生成树和最小生成树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.5.1.</span> <span class="nav-text"> 生成树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E7%AE%97%E6%B3%95%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%AD%98%E5%82%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text"> 最小生成树的构造算法（邻接矩阵存储）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%AE%E9%87%8C%E5%A7%86prim%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.2.1.</span> <span class="nav-text"> 普里姆（Prim）算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8B%E9%B2%81%E6%96%AF%E5%8D%A1%E5%B0%94kruskal%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.2.2.</span> <span class="nav-text"> 克鲁斯卡尔（Kruskal）算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">1.6.</span> <span class="nav-text"> 最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.6.1.</span> <span class="nav-text"> 最短路径定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98-%E7%8B%84%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89dijkstra%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.2.</span> <span class="nav-text"> 单源最短路径问题-狄克斯特拉（Dijkstra）算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98-floyed%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.3.</span> <span class="nav-text"> 多源最短路径问题-Floyed算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%9C%89%E5%90%91%E5%9B%BE"><span class="nav-number">1.7.</span> <span class="nav-text"> 拓扑排序（有向图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%A6%82%E5%BF%B5"><span class="nav-number">1.7.1.</span> <span class="nav-text"> 拓扑排序概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%93%8D%E4%BD%9C"><span class="nav-number">1.7.2.</span> <span class="nav-text"> 拓扑排序操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aoe%E7%BD%91%E4%B8%8E%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.8.</span> <span class="nav-text"> AOE网与关键路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aoe%E7%BD%91"><span class="nav-number">1.8.1.</span> <span class="nav-text"> AOE网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.8.2.</span> <span class="nav-text"> 关键路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.8.2.1.</span> <span class="nav-text"> 关键路径定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.8.2.2.</span> <span class="nav-text"> 求解关键路径</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0%20%E5%9B%BE/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第七章 图 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第七章 图
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-15 00:45:37" itemprop="dateCreated datePublished" datetime="2020-08-15T00:45:37+08:00">2020-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="图"><a class="markdownIt-Anchor" href="#图"></a> 图</h1>
+<p>由于考试压力。。。还有待完善。。。</p>
+<h2 id="图的定义"><a class="markdownIt-Anchor" href="#图的定义"></a> 图的定义</h2>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815081734.jpg" alt="" /></p>
+<ul>
+<li>图由顶点集合和边集合产生</li>
+</ul>
+<h3 id="有向图和无向图"><a class="markdownIt-Anchor" href="#有向图和无向图"></a> 有向图和无向图</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815081931.jpg" alt="" /></p>
+<ul>
+<li>有向图的边带有箭头，而无向图的边没有箭头。</li>
+<li>无向边用<code>()</code>表示，而有向边用<code>&lt;&gt;</code>表示。</li>
+</ul>
+<h3 id="图的基本术语"><a class="markdownIt-Anchor" href="#图的基本术语"></a> 图的基本术语</h3>
+<ul>
+<li><strong>端点和邻接点</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082218.jpg" alt="" />
+<ul>
+<li>一条边的两头的顶点为端点，这两个端点互为邻接点。</li>
+</ul>
+</li>
+<li><strong>顶点的度、入度和出度</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082421.jpg" alt="" />
+<ul>
+<li>有向图的度又分为出度和入度。</li>
+<li>度、顶点数和边数的关系<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815082652.jpg" alt="" />
+<ul>
+<li>每个顶点的度都代表了一条边，但是又因为每个边两头会有两个顶点，所以把所有顶点的度相加再除以2便是边的数目。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>完全图</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815083033.jpg" alt="" />
+<ul>
+<li>完全无向图：每个顶点都与剩下的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>个顶点直接有边相连，总共有n个结点，但是这样算，每条边都被算了两次，所以总边数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n-1)/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord">/</span><span class="mord">2</span></span></span></span>。</li>
+<li>完全有向图：因为每两个顶点之间都有两条方向不同的边，所以总边数直接就为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n(n-1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>,无需再除以2。</li>
+</ul>
+</li>
+<li><strong>稠密图和稀疏图</strong>
+<ul>
+<li>稠密图：接近完全图的图；</li>
+<li>稀疏图：含有边数较少的图（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mo>&lt;</mo><mo>&lt;</mo><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e&lt;&lt;n(n-1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>）。</li>
+</ul>
+</li>
+<li><strong>子图</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084016.jpg" alt="" />
+<ul>
+<li>类似集合中子集的关系。</li>
+</ul>
+</li>
+<li><strong>路径和路径长度</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084731.jpg" alt="" />
+<ul>
+<li>路径上无重复结点的路径为简单路径（开始和结尾可以重复）。</li>
+</ul>
+</li>
+<li><strong>回路和环</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815084909.jpg" alt="" />
+<ul>
+<li>开始与结尾相同的简单路径为简单回路或简单环。</li>
+</ul>
+</li>
+<li><strong>连通、连通图和连通分量</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815085209.jpg" alt="" />
+<ul>
+<li>连通图的连通分量为自身；而非连通图的连通分量可能有多个；</li>
+<li>非连通图的连通分量是原来图中不相连的几个部分；如果原来连通的部分再被拆开，则不是连通分量。例如：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815085655.jpg" alt="" />
+<ul>
+<li>图2和图3是图1的连通分量，而图4不是。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>强连通图和强连通分量</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815103923.jpg" alt="" />
+<ul>
+<li>强连通图是针对有向图而言的，任意两个结点之间连通的前提下，还要这两个结点间可以互通。</li>
+<li>在非强连通图中找强连通分量的方法：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815104350.jpg" alt="" />
+<ul>
+<li>先找出一个有向环，在这个环内各个顶点之间是互通的，然后再去增加环外与环上任一顶点互通的顶点，从而这个顶点肯定与环内其余顶点互通，从而构建出了强连通分量。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>权和网</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105816.jpg" alt="" />
+<ul>
+<li>给边加上权，带权图即为网。</li>
+</ul>
+</li>
+</ul>
+<h2 id="图的存储结构"><a class="markdownIt-Anchor" href="#图的存储结构"></a> 图的存储结构</h2>
+<p>1.邻接矩阵：</p>
+<ul>
+<li>特别适合于稠密图的存储。</li>
+<li>一个图的邻接矩阵的表示是唯一的。</li>
+<li>无向图与有向图均可存储。<br />
+2.邻接表：</li>
+<li>特别适合稀疏图的存储；</li>
+<li>一个图的邻接表表示不唯一。</li>
+<li>普通邻接表不能表现边的方向性，所以存储有向图需要使用<strong>逆邻接表</strong>。<br />
+3.十字链表
+<ul>
+<li>储存有向图<br />
+4.邻接多重表</li>
+</ul>
+</li>
+<li>存储无向图</li>
+</ul>
+<h3 id="邻接矩阵"><a class="markdownIt-Anchor" href="#邻接矩阵"></a> 邻接矩阵</h3>
+<ul>
+<li><strong>邻接矩阵定义</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105755.jpg" alt="" />
+<ul>
+<li>通过数组下标与顶点的编号之间的对应关系，来表示两个顶点之间的边。因为矩阵的大小是根据顶点数固定了的，所以当图很稀疏时，即图中的边数较少时，会有很多空间的浪费。</li>
+<li>由此可知，无向图的邻接矩阵一定是一个主对角线上的元素全为0的对称矩阵。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815105816.jpg" alt="" /></li>
+</ul>
+</li>
+<li><strong>邻接矩阵存储类型定义</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815110730.jpg" alt="" />
+<ul>
+<li>需要设立一个二维数组（邻接矩阵）来存储边的信息，一个一维数组来存储顶点的信息；</li>
+<li>顶点的信息中包括顶点的编号和它的数据信息。</li>
+<li>实质是一种顺序存储结构。</li>
+</ul>
+</li>
+</ul>
+<h3 id="邻接表"><a class="markdownIt-Anchor" href="#邻接表"></a> 邻接表</h3>
+<ul>
+<li><strong>邻接表的定义</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111128.jpg" alt="" />
+<ul>
+<li>通过链表来表示顶点之间边的关系；因为链表的长度是动态的，所以当图较稀疏时，也不会有太多存储空间浪费。</li>
+<li>用一个数组来记录每个顶点的信息。</li>
+<li>每个顶点对应的单链表只是表示它们是顶点的邻接点，而单链表结点之间并无关系。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111437.jpg" alt="" /></li>
+</ul>
+</li>
+<li><strong>邻接表存储类型定义</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815111929.jpg" alt="" />
+<ul>
+<li>边结点类型即单链表结点的类型；</li>
+<li>头结点类型即存储在数组中的顶点类型；</li>
+<li>通过在数组中检索到顶点，再由顶点通过顶点类型中定义的指向对应单链表的指针来找到该顶点的边信息。</li>
+</ul>
+</li>
+<li><strong>逆邻接表</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815112323.jpg" alt="" />
+<ul>
+<li>用于存储有向图；</li>
+<li>对于每个顶点的单链表中，存储的是有边指向该顶点的顶点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="十字链表"><a class="markdownIt-Anchor" href="#十字链表"></a> 十字链表</h3>
+<ul>
+<li><strong>十字链表的基本概念</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815124639.jpg" alt="" />
+<ul>
+<li>在邻接表的基础上，每个顶点结点增加一个指向边结点的指针。即每个顶点结点中既记录了出边的信息，又记录了入边的信息；</li>
+<li>每个边结点增加相对的起点和终点信息（起点即指向它的顶点，终点即它指向的顶点）,另外使用指向下一个相同终点或起点的指针（即指向对同一个顶点的入边或者出边）,来为某一个顶点的入边或者出边形成一个相对的单链表。</li>
+</ul>
+</li>
+<li><strong>十字链表的实现模型</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815125018.jpg" alt="" />
+<ul>
+<li>例如：0顶点的两条入边，2和3在第一列被链起来了；而3的三条出边2，0，1在最后一行被链起来了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="邻接多重表"><a class="markdownIt-Anchor" href="#邻接多重表"></a> 邻接多重表</h3>
+<ul>
+<li><strong>邻接多重表的基本概念</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815131029.jpg" alt="" />
+<ul>
+<li>与十字链表类似，只不过去掉了方向性（即起点与终点之分）</li>
+</ul>
+</li>
+<li><strong>邻接多重表的实现模型</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815131254.jpg" alt="" />
+<ul>
+<li>例如：0的两条边，3和1在第一行通过靠0来识别的指针链起来了；1的三条边，0、2和4通过以1为标识来识别的指针在第一列链起来了。</li>
+</ul>
+</li>
+</ul>
+<h2 id="图的基本运算邻接表"><a class="markdownIt-Anchor" href="#图的基本运算邻接表"></a> 图的基本运算（邻接表）</h2>
+<h3 id="图的创建"><a class="markdownIt-Anchor" href="#图的创建"></a> 图的创建</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815175445.jpg" alt="" /></p>
+<ul>
+<li>先给邻接表分配空间（AdjGraph）;</li>
+<li>再让所有头结点（即储存图顶点的数组adjlist）指向第一条边结点的指针域为空；</li>
+<li>遍历邻接矩阵中的所有元素，将存在的边，存入边结点类型中（Arcnode）,之后再将边结点以头插法的方式插入到头结点后面。</li>
+<li>有两重循环，时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<h3 id="图的输出"><a class="markdownIt-Anchor" href="#图的输出"></a> 图的输出</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815180314.jpg" alt="" /></p>
+<ul>
+<li>把邻接表的头结点的编号，相邻结点，边的权重，依次打印即可。</li>
+</ul>
+<h3 id="图的销毁"><a class="markdownIt-Anchor" href="#图的销毁"></a> 图的销毁</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815180909.jpg" alt="" /></p>
+<ul>
+<li>依次遍历所有头结点；</li>
+<li>在遍历每个头结点时，遍历它身后的边结点链，并逐个释放。</li>
+</ul>
+<h3 id="邻接表转换为邻接矩阵"><a class="markdownIt-Anchor" href="#邻接表转换为邻接矩阵"></a> 邻接表转换为邻接矩阵</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815181559.jpg" alt="" /></p>
+<ul>
+<li>进入头结点后的边结点链表，然后将当前扫描的边结点编号作为邻接矩阵的列标（头结点编号作为行标）,并修改当前行标列标下的邻接矩阵元素的权重值。</li>
+<li>虽有两重循环，但实际只对所有头结点和边结点访问了一次，所以算法的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>e</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n+e)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">e</span><span class="mclose">)</span></span></span></span>,n为头结点数，e为边结点数。而把邻接矩阵转化为邻接表的的算法，却对许多没有存在的边也要访问一次，所以时间复杂度要高一些。</li>
+</ul>
+<h2 id="图的遍历"><a class="markdownIt-Anchor" href="#图的遍历"></a> 图的遍历</h2>
+<ul>
+<li>图的遍历：从给定的图中的任意一个顶点开始，按照某种方法，沿着图的边访问图中所有的顶点，且每个顶点仅被访问一次。</li>
+<li>图的遍历序列：通过图的遍历得到的顶点序列称为图的遍历序列。</li>
+<li>图的遍历方法：
+<ol>
+<li>深度优先遍历（DFS：depth-first search）</li>
+<li>广度优先遍历(BFS: breadth-first search)</li>
+</ol>
+</li>
+</ul>
+<h3 id="深度优先遍历对无向连通图"><a class="markdownIt-Anchor" href="#深度优先遍历对无向连通图"></a> 深度优先遍历（对无向连通图）</h3>
+<ul>
+<li>
+<p><strong>基本原理</strong><br />
+1.首先访问出发点v，并将其标记为已访问过；<br />
+2.然后依次从v出发搜索v的每个邻接点w。若w未曾访问过，则以w为新的出发点继续进行深度优先遍历，直至图中所有和<strong>源点v有路径相通的顶点</strong>均已被访问为止。<br />
+3.若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点为新的源点重复上述过程，直至图中所有的顶点均已被访问为止。<br />
+4.注意：<strong>深度优先遍历尽可能优先往深层次进行搜索。</strong><br />
+5.<strong>使用一次深度优先遍历只能访问到初始点所在连通分量中的所有顶点，不可能访问到其它连通分量中的顶点</strong></p>
+</li>
+<li>
+<p><strong>实现过程</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815184154.jpg" alt="" /></p>
+<ul>
+<li>按照访问一个顶点之后便找它的邻接点来访问的递归思路，可以一直穷尽一条通路；</li>
+<li>一条路走完之后，便重新找一个没有被访问过的顶点，继续重复这样的访问；</li>
+<li>直到最后所有顶点都已被访问过，便停止访问。</li>
+</ul>
+</li>
+<li>
+<p><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815183638.jpg" alt="" /></p>
+<ul>
+<li>设计一个<strong>全局数组</strong>，用它的下标代表顶点的编号，每次一个顶点被访问过之后，就将该数组对应的元素置为1，表示该顶点已经被访问过了；</li>
+<li>最后退出递归时，是因为到了通路的最后一个顶点，这个顶点唯一的邻接点已经被访问过了，然后终止循环退出；但是，一旦退出递归，若这条通路上的所有顶点，都不与某个顶点向连通，那个顶点便永远无法访问到,这也是这种算法只能遍历无向连通图的原因。</li>
+</ul>
+</li>
+</ul>
+<h3 id="广度优先遍历对无向连通图"><a class="markdownIt-Anchor" href="#广度优先遍历对无向连通图"></a> 广度优先遍历（对无向连通图）</h3>
+<ul>
+<li>
+<p><strong>基本原理</strong><br />
+1.首先访问出发点v<br />
+2.接着依次访问v的所有邻接点w1、w2…wt<br />
+3.然后依次访问w1、w2…wt邻接的所有未曾访问过的顶点。<br />
+4.以此类推，直至图中所有和源点v有路径相通的顶点都已访问到为止。此时从v开始的搜索过程结束。<br />
+5.注意：广度优先遍历按层次优先搜索最近的结点，一层一层往外搜索。深度优先是不断深挖每一个被访问了的顶点的邻接点，广度优先是先将当前顶点的所有邻接点访问完。<br />
+6. <strong>同深度优先遍历一样，由于每次访问的都是与当前顶点有一定关系的顶点，所以只能适用于遍历无向连通图</strong></p>
+</li>
+<li>
+<p><strong>实现过程</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815191255.jpg" alt="" /></p>
+<ul>
+<li>先访问完当前顶点的所有未被访问过的邻接点；</li>
+<li>到最后一个邻接点时，转向其它顶点。</li>
+<li>直到所有顶点均已被访问，便停止访问。</li>
+</ul>
+</li>
+<li>
+<p><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815192349.jpg" alt="" /></p>
+<ul>
+<li>使用队列来实现广度优先遍历，并未像深度优先算法一样才用递归的方法;</li>
+<li>设置一个标记数组（无需全局数组，因为广度优先算法直接使用队列，借用一个循环便可完成，不须递归使用函数）,来确定某个顶点是否已经被访问过了。</li>
+<li>将第一个要访问的顶点访问后进队；</li>
+<li>之后设置循环将队列元素出队并访问它的未被访问过的邻接点，然后将每个被访问的邻接点被访问后都进队，直到当前出队的元素的所有邻接点均已被访问完，之后再出队一个元素，重复此过程，直到队列为空。由于访问的元素与初始元素都有关系，所以这种算法只能用来遍历无向连通图。</li>
+</ul>
+</li>
+</ul>
+<h3 id="非连通图的遍历"><a class="markdownIt-Anchor" href="#非连通图的遍历"></a> 非连通图的遍历</h3>
+<ul>
+<li>可以通过多次调用DFS或者BFS算法，来访问多个连通分量。</li>
+</ul>
+<h4 id="深度优先遍历"><a class="markdownIt-Anchor" href="#深度优先遍历"></a> 深度优先遍历</h4>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194234.jpg" alt="" /></p>
+<ul>
+<li>其中<code>DFS</code>算法是前面遍历无向连通图的深度优先算法；</li>
+</ul>
+<h4 id="广度优先遍历"><a class="markdownIt-Anchor" href="#广度优先遍历"></a> 广度优先遍历</h4>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194402.jpg" alt="" /></p>
+<ul>
+<li>其中<code>BFS</code>算法是前面遍历无向连通图的广度优先算法。</li>
+<li>此处的标记数组visted是全局数组。</li>
+</ul>
+<h4 id="利用遍历来判断无向图是否连通"><a class="markdownIt-Anchor" href="#利用遍历来判断无向图是否连通"></a> 利用遍历来判断无向图是否连通</h4>
+<ul>
+<li><strong>基本思路</strong>
+<ul>
+<li>使用某种遍历算法遍历该邻接表；</li>
+<li>若一次遍历后，标记数组visited的所有元素均为1，即所有元素都已被遍历过了，则该图是连通图，反之，则不是。</li>
+</ul>
+</li>
+<li><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815194938.jpg" alt="" />
+<ul>
+<li>在调用依次遍历算法后，在遍历标记数组，看是否有元素为0.</li>
+</ul>
+</li>
+</ul>
+<h3 id="深度优先遍历的应用"><a class="markdownIt-Anchor" href="#深度优先遍历的应用"></a> 深度优先遍历的应用</h3>
+<h4 id="判断某两个顶点之间是否存在简单路径深度优先"><a class="markdownIt-Anchor" href="#判断某两个顶点之间是否存在简单路径深度优先"></a> 判断某两个顶点之间是否存在简单路径（深度优先）</h4>
+<ul>
+<li>
+<p><strong>基本思路</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815213644.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214032.jpg" alt="" /></p>
+</li>
+</ul>
+<h4 id="输出某两个顶点之间的一条简单路径深度优先"><a class="markdownIt-Anchor" href="#输出某两个顶点之间的一条简单路径深度优先"></a> 输出某两个顶点之间的一条简单路径(深度优先)</h4>
+<ul>
+<li>
+<p><strong>基本思路</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214256.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214557.jpg" alt="" /></p>
+</li>
+</ul>
+<h4 id="输出某两个顶点之间的全部简单路径深度优先"><a class="markdownIt-Anchor" href="#输出某两个顶点之间的全部简单路径深度优先"></a> ？？输出某两个顶点之间的全部简单路径（深度优先）</h4>
+<ul>
+<li>
+<p><strong>基本思路</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815214910.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815215424.jpg" alt="" /></p>
+</li>
+</ul>
+<h4 id="输出某个顶点的全部回路"><a class="markdownIt-Anchor" href="#输出某个顶点的全部回路"></a> ??输出某个顶点的全部回路</h4>
+<ul>
+<li>
+<p><strong>基本思路</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815215915.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>具体算法</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815220035.jpg" alt="" /></p>
+</li>
+</ul>
+<h3 id="广度优先遍历的应用"><a class="markdownIt-Anchor" href="#广度优先遍历的应用"></a> 广度优先遍历的应用</h3>
+<h4 id="求不带权无向连通图某两顶点之间的一条最短路径"><a class="markdownIt-Anchor" href="#求不带权无向连通图某两顶点之间的一条最短路径"></a> 求不带权无向连通图某两顶点之间的一条最短路径</h4>
+<ul>
+<li><strong>算法实现</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200815221045.jpg" alt="" />
+<ul>
+<li>为什么这样找就是最短的？</li>
+</ul>
+</li>
+</ul>
+<h2 id="生成树和最小生成树"><a class="markdownIt-Anchor" href="#生成树和最小生成树"></a> 生成树和最小生成树</h2>
+<h3 id="生成树的定义"><a class="markdownIt-Anchor" href="#生成树的定义"></a> 生成树的定义</h3>
+<ul>
+<li><strong>连通图的生成树</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816082837.jpg" alt="" />
+<ul>
+<li>连通图的最小生成树含有全部n个顶点，和对应的n-1条边。</li>
+</ul>
+</li>
+<li><strong>带权连通图的最小生成树</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083255.jpg" alt="" />
+<ul>
+<li>最小生成树是针对于带权连通图而言的；</li>
+<li>所有边权值之和最小的生成树称为该带权连通图的最小生成树。</li>
+</ul>
+</li>
+<li><strong>遍历方法产生生成树</strong>
+<ul>
+<li>深度优先生成树：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083559.jpg" alt="" /></li>
+<li>广度优先生成树：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816083708.jpg" alt="" /></li>
+<li><strong>一个连通图的生成树不一定是唯一的</strong></li>
+</ul>
+</li>
+<li><strong>非连通图的生成森林</strong>
+<ul>
+<li>多次调用遍历过程。每个连通分量中的顶点集和走过的边一起构成一棵生成树。</li>
+<li>所有连通分量的生成树组成非连通图的<strong>生成森林</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="最小生成树的构造算法邻接矩阵存储"><a class="markdownIt-Anchor" href="#最小生成树的构造算法邻接矩阵存储"></a> 最小生成树的构造算法（邻接矩阵存储）</h3>
+<h4 id="普里姆prim算法"><a class="markdownIt-Anchor" href="#普里姆prim算法"></a> 普里姆（Prim）算法</h4>
+<ul>
+<li><strong>基本思想</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816084857.jpg" alt="" />
+<ul>
+<li>在一个集合中存储已经被访问过的顶点，然后每次在与这些被访问过的顶点相连的边中选一条权值最小的边，然后将该边的另一个未被访问的顶点加入集合中，重复这个步骤，直到所有的顶点都被加入了这个集合。</li>
+</ul>
+</li>
+<li><strong>过程示例</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085251.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085325.jpg" alt="" /></li>
+<li><strong>具体算法</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816085705.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816095434.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816095547.jpg" alt="" />
+<ul>
+<li>INF 即无穷大的意思，它经常取32767或者65535这样不可能会取到的值，权重为INF表示，这两个顶点不直接相连。</li>
+<li>设置两个数组，lowcost存储与已访问过的顶点相连的边的权重,比如lowcost[j]表示j到已访问结点的边的权重。而closest存储已访问过的顶点的下标。</li>
+<li>第一步，给两个数组赋初值，lowcost的初值就是与初始顶点与剩余顶点的所有边的权重（到自己的权重为0，到邻接的顶点的权重为实际权重，到不相邻的顶点的权重为INF）,closest的初值便为便为初始顶点。</li>
+<li>之后，比较lowcost中元素的大小，找到最小的权重对应的顶点，记录它的编号到k中，**将lowcost[k]设为0，表示编号为k的顶点已经访问过了。</li>
+<li>找到k顶点后，将与k元素相连的边的权重与lowcost中储存的边的权重比较，若较小，则存入lowcost中，同时将对应位置的closest设置为k;例如：若lowcost[j]&lt;g.edges[k][j],则将closest[j]设为k,因为closest与lowcost是一一对应的，lowcost和closest的下标都对应未被访问过的顶点（已经被访问过的顶点会由于lowcost[j]而被跳过）,而lowcost的值对应的是与已访问顶点之间权重较小的边的权重，closest的值对应的就是这条边另一头已经被访问过的顶点。</li>
+<li>找k的循环循环n-1次，则将整个图的所有元素都被访问了。</li>
+<li>每次找到一个k顶点，则将对应的边和顶点输出。（边就是closest[k]到k,顶点就是closest[k]和k)。</li>
+</ul>
+</li>
+<li><strong>时间复杂度</strong>
+<ul>
+<li>该算法中有两重循环，外重循环n-1次，内重n+n次。所以算法的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>.</li>
+</ul>
+</li>
+<li><strong>Prim算法的特点</strong>
+<ul>
+<li>适合于稠密图求最小生成树，因为每两个顶点间，不管是否存在边，都会被检查，所以如果图很稀疏，那么无用的检查就会很多。</li>
+</ul>
+</li>
+</ul>
+<h4 id="克鲁斯卡尔kruskal算法"><a class="markdownIt-Anchor" href="#克鲁斯卡尔kruskal算法"></a> 克鲁斯卡尔（Kruskal）算法</h4>
+<ul>
+<li><strong>基本思想</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816103616.jpg" alt="" />
+<ul>
+<li>Prim算法是以顶点为中心，依次寻找相邻的权值最小的边；而Kruskal算法是一边为中心，逐次选取权值较小的边，最后包含n-1条边便组成了最小生成树。</li>
+<li>不过需要注意的是，一旦选取的边生成的回路，便要舍弃这条边。</li>
+</ul>
+</li>
+<li><strong>算法实现</strong>
+<ul>
+<li>存放边的结构：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816113957.jpg" alt="" /></li>
+<li>具体算法：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816114726.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200816114934.jpg" alt="" /><br />
+* 设置一个标识数组vset来确定一条边的两个顶点是否已经被连接为一个连通分量（一个集合中）,来防止选取的边是生成树形成回路。<br />
+* 用一个边数组存储所有的边，并将数组中的边按照权值递增排序。<br />
+* 依次选取边数组中的边（因为事先已经排好序了）,利用标识数组vest确定这条边的两个顶点不在一个连通分量中，则输出该边，并将该边的两个顶点对应的表示数组值，改为相同（都为边的起始顶点值），之后选取下一条边；否则，跳过该边，选取下一条边；<br />
+* 当选取成功了n-1条边时，终止程序。</li>
+</ul>
+</li>
+<li><strong>Krustal算法的特点</strong>
+<ul>
+<li>因为是根据边来选择，所以适合于边稀疏图</li>
+</ul>
+</li>
+<li><strong>Krustal算法的时间复杂度</strong>
+<ul>
+<li>该算法的时间复杂度为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>e</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>e</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(elog_2e)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">e</span><span class="mclose">)</span></span></span></span>,其中e为边数。</li>
+</ul>
+</li>
+</ul>
+<h2 id="最短路径"><a class="markdownIt-Anchor" href="#最短路径"></a> 最短路径</h2>
+<h3 id="最短路径定义"><a class="markdownIt-Anchor" href="#最短路径定义"></a> 最短路径定义</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200817233805.jpg" alt="" /></p>
+<ul>
+<li>对带权有向图而言，路径为从此顶点到目的顶点，而路径长度则为这条路径上所有边的权值之和。</li>
+</ul>
+<h3 id="单源最短路径问题-狄克斯特拉dijkstra算法"><a class="markdownIt-Anchor" href="#单源最短路径问题-狄克斯特拉dijkstra算法"></a> 单源最短路径问题-狄克斯特拉（Dijkstra）算法</h3>
+<ul>
+<li>
+<p><strong>问题描述</strong></p>
+<ul>
+<li>给定一个<strong>带权有向图</strong>G与源点v，求从v到G中其他顶点的最短路径（限定各边上的<strong>权值大于或者等于0</strong>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>基本原理</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818212756.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192549.jpg" alt="" /></p>
+<ul>
+<li>一步步求出每个顶点与源点的最短距离，每次求最短路径都是基于已经求出最短路径的顶点而求更远顶点的最短路径。</li>
+</ul>
+</li>
+<li>
+<p><strong>基本过程</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214447.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214607.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818214753.jpg" alt="" /></p>
+<ul>
+<li>将顶点分为两个集合，一个是已经计算过最短路径的，一个没有；</li>
+<li>每次从未被计算过的集合中寻找距离已被计算过的集合最短的顶点，加入该集合中。</li>
+<li>最后直到所有顶点都已被计算过最短路径。</li>
+</ul>
+</li>
+<li>
+<p><strong>具体算法</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200818220136.jpg" alt="" /></p>
+</li>
+</ul>
+<h3 id="多源最短路径问题-floyed算法"><a class="markdownIt-Anchor" href="#多源最短路径问题-floyed算法"></a> 多源最短路径问题-Floyed算法</h3>
+<ul>
+<li><strong>问题描述</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192155.jpg" alt="" /></li>
+<li><strong>基本原理</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192337.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192801.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819192903.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819193108.jpg" alt="" /></li>
+<li><strong>基本过程</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194244.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194303.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194415.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194512.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194656.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194743.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819194928.jpg" alt="" /></li>
+<li><strong>具体算法</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819195159.jpg" alt="" /></li>
+</ul>
+<h2 id="拓扑排序有向图"><a class="markdownIt-Anchor" href="#拓扑排序有向图"></a> 拓扑排序（有向图）</h2>
+<h3 id="拓扑排序概念"><a class="markdownIt-Anchor" href="#拓扑排序概念"></a> 拓扑排序概念</h3>
+<p>I</p>
+<ul>
+<li><strong>拓扑序列与拓扑排序</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200318.jpg" alt="" /></li>
+</ul>
+<h3 id="拓扑排序操作"><a class="markdownIt-Anchor" href="#拓扑排序操作"></a> 拓扑排序操作</h3>
+<ul>
+<li><strong>基本过程</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200530.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200744.jpg" alt="" /></li>
+<li><strong>具体算法</strong>
+<ul>
+<li><strong>顶点类型</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819200922.jpg" alt="" /></li>
+<li><strong>算法</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200819211309.jpg" alt="" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="aoe网与关键路径"><a class="markdownIt-Anchor" href="#aoe网与关键路径"></a> AOE网与关键路径</h2>
+<h3 id="aoe网"><a class="markdownIt-Anchor" href="#aoe网"></a> AOE网</h3>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820225224.jpg" alt="" /></p>
+<h3 id="关键路径"><a class="markdownIt-Anchor" href="#关键路径"></a> 关键路径</h3>
+<h4 id="关键路径定义"><a class="markdownIt-Anchor" href="#关键路径定义"></a> 关键路径定义</h4>
+<pre><code>![](https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820225342.jpg)
+</code></pre>
+<h4 id="求解关键路径"><a class="markdownIt-Anchor" href="#求解关键路径"></a> 求解关键路径</h4>
+<ul>
+<li><strong>事件的最早开始时间和最迟开始时间</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820225920.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820230947.jpg" alt="" /></li>
+<li><strong>活动的最早开始时间和最迟开始时间</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231244.jpg" alt="" /></li>
+<li><strong>求关键活动</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231404.jpg" alt="" /></li>
+<li><strong>示例</strong><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231640.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231813.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820231922.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232022.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232312.jpg" alt="" /><br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200820232421.jpg" alt="" /></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%85%AD%E7%AB%A0%20%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91/index.html" rel="prev" title="第六章 树和二叉树">
+                  <i class="fa fa-angle-left"></i> 第六章 树和二叉树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/Git/index.html" rel="next" title="Git">
+                  Git <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="&lt;errno.h&gt;:错误  标准库中的一些函数通过向&lt;erron.h&gt;中声明的int型errno变量存储一个错误码（正整数）来表示有错误发生。 如果使用的一个库函数，通过给errno赋值来产生程序运行出错的信号，我们可以在调用这个函数之后，&#x3D;&#x3D;检查erron的值是否为0&#x3D;&#x3D;，来判断函数调用过程中是否有错误发生。 使用errno来检测函数调用的错误，需要&#x3D;&#x3D;在函数调用前将e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言-错误处理与信号处理">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="&lt;errno.h&gt;:错误  标准库中的一些函数通过向&lt;erron.h&gt;中声明的int型errno变量存储一个错误码（正整数）来表示有错误发生。 如果使用的一个库函数，通过给errno赋值来产生程序运行出错的信号，我们可以在调用这个函数之后，&#x3D;&#x3D;检查erron的值是否为0&#x3D;&#x3D;，来判断函数调用过程中是否有错误发生。 使用errno来检测函数调用的错误，需要&#x3D;&#x3D;在函数调用前将e">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-02T11:47:46.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:33:59.307Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html","path":"/post/专业基础/C语言/C语言-错误处理与信号处理/index.html","title":"C语言-错误处理与信号处理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言-错误处理与信号处理 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#errnoh%E9%94%99%E8%AF%AF"><span class="nav-number">1.</span> <span class="nav-text"> &lt;errno.h&gt;:错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#signalh%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text"> &lt;signal.h&gt;：信号处理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言-错误处理与信号处理 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言-错误处理与信号处理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-02 19:47:46" itemprop="dateCreated datePublished" datetime="2021-03-02T19:47:46+08:00">2021-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:33:59" itemprop="dateModified" datetime="2021-09-26T21:33:59+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="errnoh错误"><a class="markdownIt-Anchor" href="#errnoh错误"></a> <code>&lt;errno.h&gt;</code>:错误</h1>
+<ul>
+<li>标准库中的一些函数通过向<code>&lt;erron.h&gt;</code>中声明的<strong>int型errno变量</strong>存储一个错误码（正整数）来表示有错误发生。</li>
+<li>如果使用的一个库函数，通过给errno赋值来产生程序运行出错的信号，我们可以在调用这个函数之后，==检查erron的值是否为0==，来判断函数调用过程中是否有错误发生。</li>
+<li>使用errno来检测函数调用的错误，需要==在函数调用前将errno置零==。</li>
+<li>errno中存储的错误值经常是以下两个宏：
+<ul>
+<li><strong>EDOM(定义域错误)</strong>：传递给函数的一个参数==超出了定义域==，使用这个宏。</li>
+<li><strong>ERANGE(取值范围错误)</strong>：函数的==返回值太大,无法用返回类型==。</li>
+</ul>
+</li>
+<li>与变量errno有关的两个函数（都不属于<code>&lt;errno.h&gt;</code>）:
+<ul>
+<li><strong>perror</strong>函数：
+<ul>
+<li>在<code>&lt;stdio.h&gt;</code>中声明，用于显示描述错误的信息；perror函数会==输出到stderr流==。</li>
+<li>原型：<code>void perror(const char *s)</code></li>
+<li>参数：
+<ul>
+<li>一个作为部分错误消息的字符串。</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>依次显示下列内容：
+<ol>
+<li>调用perror的参数；</li>
+<li>一个分号；</li>
+<li>一个空格；</li>
+<li>一条出错消息：消息的内容根据errno的值决定；</li>
+<li>一个换行符。</li>
+</ol>
+</li>
+<li>示例：<code>perror(&quot;sqrt error&quot;); sqrt error: Numercial argument out of domain</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>strerror</strong>函数：
+<ul>
+<li>在<code>&lt;string.h&gt;</code>声明，当以错误码为参数调用strerror时，函数会==返回一个指针,它指向一个描述这个错误的字符串==；</li>
+<li>原型：<code>char *strerror(int errnum)</code></li>
+<li>参数：
+<ul>
+<li>strerror函数的参数==通常是errno的值==，但以任意整数为参数都能返回一个字符串。</li>
+</ul>
+</li>
+<li>示例：<code>puts(strerror(EDOM))</code></li>
+</ul>
+</li>
+<li>对于同一个错误，perror函数和strerror函数返回的消息的值是相同的。</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">errno &#x3D; 0;
+
+y &#x3D; sqrt(x);
+if(errno !&#x3D; 0) &#123;
+    perror(&quot;sqrt error&quot;);
+    puts(strerror(erron));
+&#125;</code></pre>
+<h1 id="signalh信号处理"><a class="markdownIt-Anchor" href="#signalh信号处理"></a> <code>&lt;signal.h&gt;</code>：信号处理</h1>
+<ul>
+<li><code>&lt;signal.h&gt;</code>提供了==处理异常情况（异常情况又称为信号）的工具==。</li>
+<li><strong>信号</strong>：当有错误或者外部事件发生时，称为产生了一个信号。很多信号可以在程序执行过程中的任意时刻发生。</li>
+<li><strong>信号类型</strong>：
+<ul>
+<li>==运行时错误==，如（除以0）；</li>
+<li>==发生在程序以外的事件==，如：操作系统对正在运行的程序的中断信号。</li>
+</ul>
+</li>
+<li><strong>信号宏</strong>：
+<ul>
+<li>信号宏：<code>&lt;signal.h&gt;</code>中定义了一系列的宏,==用于表示不同的信号==；</li>
+<li>6种信号宏：
+<ol>
+<li><code>SIGABRT</code>:异常终止；</li>
+<li><code>SIGFPE</code>:在算术运算中发生错误；</li>
+<li><code>SIGILL</code>:无效指令；</li>
+<li><code>SIGINT</code>:中断；</li>
+<li><code>SIGSEGV</code>:无效存储访问；</li>
+<li><code>SIGTERM</code>:终止请求。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>signal</strong>函数：
+<ul>
+<li>signal是<code>&lt;signal.h&gt;</code>提供的，用来==安装信号处理函数，以便将来给定的信号发生时使用==。</li>
+<li>原型：<code>void (*signal(int sig, void (*func)(int)))(int)</code></li>
+<li>参数：
+<ul>
+<li>第一个参数是==特定信号的编码（表示不同信号的宏）==；</li>
+<li>第二个参数是==一个指向会在信号发生时处理这一信号的函数的指针==；</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>一旦调用信号处理函数返回,==程序会从信号发生点恢复并继续执行==，除了SIGABRT和SIGFPE两种信号。</li>
+<li>signal的返回值是一个==指向指定信号的前一个处理函数的指针==。可以用于恢复原来的处理函数。</li>
+<li>如果一个signal函数调用失败，==会返回SIG_ERR（一个在<code>&lt;signal.h&gt;</code>中定义的宏）并在errno中存入一个正值。==</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>信号处理函数</strong>:
+<ul>
+<li>自定义信号处理函数：
+<ul>
+<li>每个信号处理函数都必须有一个==int类型的参数==，且返回类型为void。</li>
+<li>当一个特定的信号产生并调用相应的信号处理函数时，==信号的编码会作为参数传递给处理函数==。</li>
+</ul>
+</li>
+<li>预定义的信号处理函数：<code>&lt;signal.h&gt;</code>提供了一些预定义的信号处理函数,这些函数==都是用宏表示的==。
+<ul>
+<li><strong>SIG_DFL</strong>:
+<ul>
+<li>按==默认==方式处理信号。</li>
+<li>调用该函数的结果是由实现定义的，但大多数情况下会导致程序终止。</li>
+</ul>
+</li>
+<li><strong>SIG_IGN</strong>:
+<ul>
+<li>当指定的信号产生时，==忽略该信号==；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>raise</strong>函数：
+<ul>
+<li><code>&lt;signal.h&gt;</code>中声明，用来==使程序主动触发信号==。</li>
+<li>原型：<code>int raise(int sig)</code></li>
+<li>参数：
+<ul>
+<li>sig参数用于==指定所需信号的编码==；</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>raise函数的返回值，代表产生信号是否成功：==成功为0，失败为非0==。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/index.html" rel="prev" title="C语言-输入输出">
+                  <i class="fa fa-angle-left"></i> C语言-输入输出
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/SpringMVC/index.html" rel="next" title="SpringMVC">
+                  SpringMVC <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

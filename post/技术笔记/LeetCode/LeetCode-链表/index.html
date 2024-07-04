@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1. 删除中间结点 面试题02.03  题目：   实现一种算法，删除单向链表中间的某个节点（即不是第一个或最后一个节点），假定你只能访问该节点。 示例： 输入：单向链表a-&gt;b-&gt;c-&gt;d-&gt;e-&gt;f中的节点c 结果：不返回任何数据，但该链表变为a-&gt;b-&gt;d-&gt;e-&gt;f  java解法    因为只知道当前结点以及这个结点之后的所有结点，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-链表">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="1. 删除中间结点 面试题02.03  题目：   实现一种算法，删除单向链表中间的某个节点（即不是第一个或最后一个节点），假定你只能访问该节点。 示例： 输入：单向链表a-&gt;b-&gt;c-&gt;d-&gt;e-&gt;f中的节点c 结果：不返回任何数据，但该链表变为a-&gt;b-&gt;d-&gt;e-&gt;f  java解法    因为只知道当前结点以及这个结点之后的所有结点，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/igLWdV.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/HOrmk9.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/jBZsRi.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SeBJuw.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Ohem7h.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tI6YFk.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/HnPiyE.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/zEFNJ0.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/2DxNqn.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/1UHBvW.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tcmvgZ.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/jJzS6t.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/45jteX.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/9REX8i.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924090500.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924090534.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924094116.png">
+<meta property="article:published_time" content="2020-09-25T03:20:59.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:22.000Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/igLWdV.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%93%BE%E8%A1%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%93%BE%E8%A1%A8/index.html","path":"/post/技术笔记/LeetCode/LeetCode-链表/index.html","title":"LeetCode-链表"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LeetCode-链表 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%88%A0%E9%99%A4%E4%B8%AD%E9%97%B4%E7%BB%93%E7%82%B9-%E9%9D%A2%E8%AF%95%E9%A2%980203"><span class="nav-number">1.</span> <span class="nav-text"> 1. 删除中间结点 面试题02.03</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%93%BE%E8%A1%A8%E8%BD%AC%E6%95%B4%E6%95%B0-1290"><span class="nav-number">2.</span> <span class="nav-text"> 2. 二进制链表转整数 1290</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E7%BB%93%E7%82%B9-%E5%89%91%E6%8C%87-offer-22"><span class="nav-number">3.</span> <span class="nav-text"> 3. 链表中倒数第k个结点 剑指 Offer 22</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8-%E5%89%91%E6%8C%87offer-06"><span class="nav-number">4.</span> <span class="nav-text"> 4. 从尾到头打印链表 剑指offer 06.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%8A%82%E7%82%B9-%E9%9D%A2%E8%AF%95%E9%A2%980201"><span class="nav-number">5.</span> <span class="nav-text"> 5. 移除重复节点 面试题02.01</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-206"><span class="nav-number">6.</span> <span class="nav-text"> 6. 反转链表 206</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8-21"><span class="nav-number">7.</span> <span class="nav-text"> 7. 合并两个有序链表 21</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-2"><span class="nav-number">7.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9-24"><span class="nav-number">8.</span> <span class="nav-text"> 8. 两两交换链表中的节点 24</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-3"><span class="nav-number">8.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8-160"><span class="nav-number">9.</span> <span class="nav-text"> 9. 相交链表 160</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-4"><span class="nav-number">9.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8-234"><span class="nav-number">10.</span> <span class="nav-text"> 10. 回文链表 234</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E8%A7%A3%E6%B3%95-5"><span class="nav-number">10.1.</span> <span class="nav-text"> Java解法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/LeetCode-%E9%93%BE%E8%A1%A8/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LeetCode-链表 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-链表
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 11:20:59" itemprop="dateCreated datePublished" datetime="2020-09-25T11:20:59+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:22" itemprop="dateModified" datetime="2022-09-17T19:41:22+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>21k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>19 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-删除中间结点-面试题0203"><a class="markdownIt-Anchor" href="#1-删除中间结点-面试题0203"></a> 1. 删除中间结点 面试题02.03</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>实现一种算法，删除单向链表中间的某个节点（即不是第一个或最后一个节点），假定你只能访问该节点。</p>
+<p>示例：</p>
+<p>输入：单向链表a-&gt;b-&gt;c-&gt;d-&gt;e-&gt;f中的节点c<br />
+结果：不返回任何数据，但该链表变为a-&gt;b-&gt;d-&gt;e-&gt;f</p>
+<ul>
+<li>java解法</li>
+</ul>
+<hr />
+<ul>
+<li>因为只知道当前结点以及这个结点之后的所有结点，所以无法直接删除当前结点。</li>
+<li>可以将当前结点后的一个结点的值赋给当前结点，然后删除之后的结点，达到删除当前结点的等效效果。（我变成你，再杀了你，就相当于杀了我自己）。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public  void deleteNode(ListNode node) &#123;
+        node.val &#x3D; node.next.val;
+        node.next &#x3D; node.next.next;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode node1 &#x3D; new ListNode(1);
+        ListNode node2 &#x3D; new ListNode(2);
+        ListNode node3 &#x3D; new ListNode(3);
+        ListNode node4 &#x3D; new ListNode(4);
+        ListNode node5 &#x3D; new ListNode(5);
+        node1.next &#x3D; node2;
+        node2.next &#x3D; node3;
+        node3.next &#x3D; node4;
+        node4.next &#x3D; node5;
+        node5.next &#x3D; null;
+
+        System.out.print(node1.val);
+        for(ListNode node &#x3D; node2; node !&#x3D; null; node &#x3D; node.next) &#123;
+            System.out.print(&quot;-&gt;&quot;+node.val);
+        &#125;
+        System.out.println();
+
+        Solution solution &#x3D; new Solution();
+        solution.deleteNode(node3);
+
+        System.out.print(node1.val);
+        for(ListNode node &#x3D; node2; node !&#x3D; null; node &#x3D; node.next) &#123;
+            System.out.print(&quot;-&gt;&quot;+node.val);
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+<h1 id="2-二进制链表转整数-1290"><a class="markdownIt-Anchor" href="#2-二进制链表转整数-1290"></a> 2. 二进制链表转整数 1290</h1>
+<ul>
+<li>题目</li>
+</ul>
+<hr />
+<p>给你一个单链表的引用结点 head。链表中每个结点的值不是 0 就是 1。已知此链表是一个整数数字的二进制表示形式。</p>
+<p>请你返回该链表所表示数字的 十进制值 。</p>
+<p></p>
+<p>示例 1：</p>
+<p>输入：head = [1,0,1]<br />
+输出：5<br />
+解释：二进制数 (101) 转化为十进制数 (5)</p>
+<ul>
+<li>java解法</li>
+</ul>
+<hr />
+<ul>
+<li>法一：
+<ul>
+<li>根据数字读取顺序确定对应位的权重</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">import java.util.Scanner;
+
+public class BtoD  &#123;
+    public int binaryToDecimal(SinglyLinkedList head) &#123;
+        int nums &#x3D; 0;
+        int result &#x3D; 0;
+        int temp &#x3D; 0;
+        int index &#x3D; 1;
+        SinglyLinkedList node &#x3D; head;
+        for( nums &#x3D; 0; node !&#x3D; null; node &#x3D; node.next, nums++);
+
+        node &#x3D; head;
+        for(; node !&#x3D; null; ) &#123;
+            temp &#x3D; nums; &#x2F;&#x2F;数字是第几位
+            &#x2F;&#x2F;算出对应位的权重
+            for(index &#x3D; 1; temp - 1 &gt; 0; temp--) &#123;
+                index *&#x3D; 2;
+            &#125;
+            result +&#x3D; index * node.val;
+            node &#x3D; node.next;
+            nums--;
+        &#125;
+
+        return result;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Scanner in &#x3D; new Scanner(System.in);
+
+        System.out.println(&quot;请输入一串二进制数字，以-1结束：&quot;);
+        int temp &#x3D; in.nextInt();
+        SinglyLinkedList fnode  &#x3D; new SinglyLinkedList(temp);
+        SinglyLinkedList head &#x3D; fnode; &#x2F;&#x2F;保存头结点
+        temp &#x3D; in.nextInt();
+        while (temp !&#x3D; -1) &#123;
+            SinglyLinkedList lnode &#x3D; new SinglyLinkedList(temp);
+            fnode.next &#x3D; lnode;
+            fnode &#x3D; lnode; &#x2F;&#x2F;使当前结点始终为链表末尾的结点
+            temp &#x3D; in.nextInt();
+        &#125;
+
+        BtoD converse &#x3D; new BtoD();
+        System.out.println(&quot;十进制的结果为：&quot; + converse.binaryToDecimal(head));
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：
+<ul>
+<li>使用ArrayList，将链表中的数字依次存入集合中，再根据集合的索引确定对应位的权重</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+
+    public int getDecimalValue(ListNode head) &#123;
+        ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;();
+        &#x2F;&#x2F;存入集合
+        for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+            list.add(node.val);
+        &#125;
+        int n &#x3D; list.toArray().length - 1;
+        int decimalValue &#x3D; 0;
+        
+        &#x2F;&#x2F;确定对应位权重并计算出结果
+        for(int i &#x3D; 0; i &lt;&#x3D; n; i++) &#123;
+            decimalValue +&#x3D; list.get(i) * (int)Math.pow(2,n - i);
+        &#125;
+
+        return  decimalValue;
+    &#125;
+
+
+    public static void main(String[] args) &#123;
+            ListNode node1 &#x3D; new ListNode(1);
+            ListNode node2 &#x3D; new ListNode(0);
+            ListNode node3 &#x3D; new ListNode(1);
+            node1.next &#x3D; node2;
+            node2.next &#x3D; node3;
+            node3.next &#x3D; null;
+
+            Solution solution &#x3D; new Solution();
+            System.out.println(solution.getDecimalValue(node1));
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法三：使用位运算
+<ul>
+<li>当一个数进行左移或右移时候(每左移一位相当于乘上了一个2），如果是正数的情况下，空位补0，如：10 左移一位置，那么就变成 100，利用这个性质，结合这个题目，我们可知道如果将位移后出现的空位再加上我们所获得的值，就可以计算出对应的十进制。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public int getDecimalValue(ListNode head) &#123;
+    int sum &#x3D; 0;
+    for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+        sum &#x3D; (sum &lt;&lt; 1) + node.val;
+    &#125;
+    return  sum;
+&#125;</code></pre>
+<h1 id="3-链表中倒数第k个结点-剑指-offer-22"><a class="markdownIt-Anchor" href="#3-链表中倒数第k个结点-剑指-offer-22"></a> 3. 链表中倒数第k个结点 剑指 Offer 22</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
+<p></p>
+<p>示例：</p>
+<p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 k = 2.</p>
+<p>返回链表 4-&gt;5.</p>
+<ul>
+<li>Java解法</li>
+</ul>
+<hr />
+<ul>
+<li>法一：数出链表的总结点个数，然后推出正序的排名。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static int kthtoLast(SinglyLinkedList head, int k) &#123;
+        int nums &#x3D; 1;
+        SinglyLinkedList node &#x3D; head;
+        
+        &#x2F;&#x2F;得出当前链表的总结点个数
+        while (node.next !&#x3D; null) &#123; 
+            node &#x3D; node.next;
+            nums++;
+        &#125;
+
+        int index &#x3D; nums - k + 1; &#x2F;&#x2F;根据逆序排名得出正序排名
+        
+        &#x2F;&#x2F;找到要求的结点
+        node &#x3D; head;
+        for (int i &#x3D; 1; i &lt; index; i++) &#123;
+            node &#x3D; node.next;
+        &#125;
+
+        return node.val;
+    &#125;</code></pre>
+<p>测试代码：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public static void main(String[] args) &#123;
+        Scanner in &#x3D; new Scanner(System.in);
+
+        System.out.println(&quot;请输入一串数字，以-1结束：&quot;);
+        SinglyLinkedList head &#x3D; new SinglyLinkedList();
+        KthtoLast.getIn(head);
+
+        System.out.println(&quot;输入要返回倒数第几个数：&quot;);
+        int k &#x3D; in.nextInt();
+
+        KthtoLast reverse &#x3D; new KthtoLast();
+        System.out.println(&quot;结果为: &quot; + reverse.kthtoLast(head, k));
+
+
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：使用ArrayList来记录链表中节点的相对位置。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public ListNode getKthFromEnd(ListNode head, int k) &#123;
+        ArrayList&lt;ListNode&gt; list &#x3D; new ArrayList&lt;&gt;();
+        for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+            list.add(node);
+        &#125;
+        int n &#x3D; list.toArray().length - k;
+
+        return list.get(n);
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode head &#x3D; new ListNode(1);
+        ListNode node1 &#x3D; head;
+        for(int i &#x3D; 2; i &lt;&#x3D; 6; i++) &#123;
+            ListNode node &#x3D; new ListNode(i);
+            node1.next &#x3D; node;
+            node1 &#x3D; node1.next;
+        &#125;
+
+        Solution solution &#x3D; new Solution();
+        ListNode node &#x3D; solution.getKthFromEnd(head,3);
+        System.out.println(node.val);
+
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法三：
+<ul>
+<li>若只遍历一次，可使用两个指针，第一个指针先走k-1步，之后第二个指针再跟上，始终保持k-1步的距离，这样当第一个指针遍历完成时，第二个指针所在就是倒数第K个节点。</li>
+<li>注意代码鲁棒性：
+<ol>
+<li>链表为空</li>
+<li>链表节点少于K</li>
+<li>k为零</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode()&#123;&#125;;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public ListNode getKthFromEnd(ListNode head, int k) &#123;
+        int i &#x3D; 0;
+        ListNode slow &#x3D; head;
+
+        for(ListNode fast &#x3D; head; fast.next !&#x3D; null; fast &#x3D; fast.next) &#123;
+            i++;
+            if(i &gt; k - 1) &#123;
+                slow &#x3D; slow.next;
+            &#125;
+        &#125;
+
+        return  slow;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode head &#x3D; new ListNode(1);
+        ListNode node1 &#x3D; head;
+        for(int i &#x3D; 2; i &lt;&#x3D; 6; i++) &#123;
+            ListNode node &#x3D; new ListNode(i);
+            node1.next &#x3D; node;
+            node1 &#x3D; node1.next;
+        &#125;
+
+        Solution solution &#x3D; new Solution();
+        ListNode node &#x3D; solution.getKthFromEnd(head,3);
+        System.out.println(node.val);
+
+    &#125;
+&#125;</code></pre>
+<h1 id="4-从尾到头打印链表-剑指offer-06"><a class="markdownIt-Anchor" href="#4-从尾到头打印链表-剑指offer-06"></a> 4. 从尾到头打印链表 剑指offer 06.</h1>
+<ul>
+<li>题目：</li>
+</ul>
+<hr />
+<p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<p><strong>示例 1：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,3,2]
+输出：[2,3,1]</code></pre>
+<ul>
+<li>
+<p>Java解法</p>
+<hr />
+</li>
+<li>
+<p>法一：</p>
+<ul>
+<li>每次遍历到相对的最后一个结点，通过一个计数变量来判断是否到达了最后一个结点。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"> public static int[] reversePrint(SinglyLinkedList head) &#123;
+         SinglyLinkedList node &#x3D; new SinglyLinkedList();
+         int nums &#x3D; 1;
+         int i &#x3D; 0;
+         node &#x3D; head;
+ 
+         &#x2F;&#x2F;计算链表中有多少个元素
+         &#x2F;&#x2F;注意判断链表为空的情况
+         if(node &#x3D;&#x3D; null)&#123;
+             nums &#x3D; 0;
+         &#125;
+         else &#123;
+             while (node.next !&#x3D; null) &#123;
+                 node &#x3D; node.next;
+                 nums++;
+             &#125;
+         &#125;
+ 
+         int[] result &#x3D; new int[nums];
+ 
+         node &#x3D; head;
+ 
+         if(nums &#x3D;&#x3D; 0) &#123;
+             return result;&#x2F;&#x2F;当链表为空时直接返回一个空数组
+         &#125;
+         else &#123;
+             do &#123;
+                 &#x2F;&#x2F;每次从第一个结点开始遍历到最后一个结点，将最后一个结点的值存入数组中
+                 &#x2F;&#x2F;如果有三个数，只需循环两次便可达到最后一个结点
+                 for(int j &#x3D; 1; j &lt; nums; j++) &#123;
+                     node &#x3D; node.next;
+                 &#125;
+                 result[i] &#x3D; node.val;
+                 node &#x3D; head;
+                 i++;
+                 &#x2F;&#x2F;将链表的长度减一，表示最后一个结点已经被输出了
+                 nums--;
+             &#125; while(nums !&#x3D; 0);
+ 
+             return result;
+         &#125;
+ &#125;
+ &#x2F;&#x2F;测试代码
+ @Test
+ public void testReversePrint() throws Exception &#123;
+     &#x2F;&#x2F;设置测试链表为｛1， 3， 2｝
+     SinglyLinkedList head &#x3D; new  SinglyLinkedList();
+     head.val &#x3D; 1;
+     SinglyLinkedList node1 &#x3D; new SinglyLinkedList();
+     head.next &#x3D; node1;
+     node1.val&#x3D; 3;
+     SinglyLinkedList node2 &#x3D; new SinglyLinkedList();
+   node2.val &#x3D; 2;
+    node1.next &#x3D; node2;
+
+    int[] result &#x3D; new int[3];
+    result &#x3D; SinglyLinkedList.reversePrint(head);
+    &#x2F;&#x2F;预期结果为｛2，3，1｝
+    int[] exp &#x3D; &#123;2, 3, 1&#125;;
+    &#x2F;&#x2F;断言判断结果是否为｛2， 3，1｝
+    Assert.assertArrayEquals(result, exp);
+&#125; </code></pre>
+</li>
+<li>
+<p>法二：先获取链表的长度，再使用一个定长的数组，但是对数组的赋值是从逆向开始的。这样避免了对链表的逆转。</p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public int[] reversePrint(ListNode head) &#123;
+        int n &#x3D; 0;
+        for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+            n++;
+        &#125;
+
+        int[] result &#x3D; new int[n];
+        ListNode node &#x3D; head;
+        for(int t &#x3D; n; t &gt; 0; t--) &#123;
+            result[t - 1] &#x3D; node.val;
+            node &#x3D; node.next;
+        &#125;
+
+        return result;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode head &#x3D; new ListNode(1);
+        ListNode node1 &#x3D; head;
+        for(int i &#x3D; 2; i &lt;&#x3D; 6; i++) &#123;
+            ListNode node &#x3D; new ListNode(i);
+            node1.next &#x3D; node;
+            node1 &#x3D; node1.next;
+        &#125;
+
+        Solution solution &#x3D; new Solution();
+        int[] result &#x3D; solution.reversePrint(head);
+        for(int i : result) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法三：使用栈,利用栈的先进后出特性，将压入栈的元素自然弹出，就达到来逆序的效果</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public int[] reversePrint(ListNode head) &#123;
+        Stack&lt;ListNode&gt; stack &#x3D; new Stack&lt;&gt;();
+        for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+            stack.push(node);
+        &#125;
+        int n &#x3D; stack.size();
+        int[] result &#x3D; new int[n];
+        for(int i &#x3D; 0; i &lt; n; i++) &#123;
+            result[i] &#x3D; stack.pop().val;
+        &#125;
+        return result;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode head &#x3D; new ListNode(1);
+        ListNode node1 &#x3D; head;
+        for(int i &#x3D; 2; i &lt;&#x3D; 6; i++) &#123;
+            ListNode node &#x3D; new ListNode(i);
+            node1.next &#x3D; node;
+            node1 &#x3D; node1.next;
+        &#125;
+
+        Solution solution &#x3D; new Solution();
+        int[] result &#x3D; solution.reversePrint(head);
+        for(int i : result) &#123;
+            System.out.println(i);
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法四：使用ArrayList集合记录链表中的节点，再反向遍历该集合，将值存到数组中。</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public int[] reversePrint(ListNode head) &#123;
+        ArrayList&lt;ListNode&gt; list &#x3D; new ArrayList&lt;&gt;();
+        for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D; node.next) &#123;
+            list.add(node);
+        &#125;
+        int[] result &#x3D; new int[list.toArray().length];
+        int j &#x3D; 0;
+        for(int i &#x3D; list.toArray().length - 1; i &gt;&#x3D; 0; i--) &#123;
+            result[j] &#x3D; list.get(i).val;
+            j++;
+        &#125;
+
+        return result;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode head &#x3D; new ListNode(1);
+        ListNode node1 &#x3D; head;
+        for(int i &#x3D; 2; i &lt;&#x3D; 6; i++) &#123;
+            ListNode node &#x3D; new ListNode(i);
+            node1.next &#x3D; node;
+            node1 &#x3D; node1.next;
+        &#125;
+
+        Solution solution &#x3D; new Solution();
+        int[] result &#x3D; solution.reversePrint(head);
+        for(int i : result) &#123;
+            System.out.println(i);
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+<h1 id="5-移除重复节点-面试题0201"><a class="markdownIt-Anchor" href="#5-移除重复节点-面试题0201"></a> 5. 移除重复节点 面试题02.01</h1>
+<ul>
+<li>
+<p>题目</p>
+<hr />
+<p>编写代码，移除未排序链表中的重复节点。保留最开始出现的节点。</p>
+<p>示例1:</p>
+<p>输入：[1, 2, 3, 3, 2, 1]<br />
+输出：[1, 2, 3]</p>
+</li>
+<li>
+<p>Java解法</p>
+<hr />
+<ul>
+<li>法一：
+<ul>
+<li>将链表中的元素在逐个遍历时存入一个数组中，在遍历时进行比对，如果出现相同元素值，则跳过该元素</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;删除链表中重复结点的方法
+    public SinglyLinkedList removeDuplicateNodes(SinglyLinkedList head) &#123;
+
+        SinglyLinkedList node &#x3D; head;
+        int nums &#x3D; 0;
+
+        &#x2F;&#x2F;计算链表中元素的个数
+        while(node !&#x3D; null) &#123;
+            node &#x3D; node.next;
+            nums++;
+        &#125;
+        &#x2F;&#x2F;注意排除链表为一个空链表的情形（即head为一个null）
+        if(nums &#x3D;&#x3D; 0) &#123;
+            return head;
+        &#125;
+
+        &#x2F;&#x2F;用于储存已经读出的元素值的数组
+        int[] temp &#x3D; new int[nums];
+        int i &#x3D; 0;
+        int j &#x3D; 0;
+
+        &#x2F;&#x2F;遍历数组并跳过重复结点,将遍历的结果存入数组中
+        node &#x3D; head;
+        while(node !&#x3D; null) &#123;
+            if(i &#x3D;&#x3D; 0) &#123;
+                temp[i] &#x3D; node.val;
+                node &#x3D; node.next;
+                i++;
+            &#125;
+            else &#123;
+                for( j &#x3D; i - 1; j &gt;&#x3D; 0; j--) &#123;
+                    if(node.val &#x3D;&#x3D; temp[j]) &#123;
+                        node &#x3D; node.next;
+                        nums--;
+                        break;
+                    &#125;
+                &#125;
+                if(j &gt;&#x3D; 0) &#123;
+                    continue;
+                &#125;
+                else &#123;
+                    temp[i] &#x3D; node.val;
+                    node &#x3D; node.next;
+                    i++;
+                &#125;
+            &#125;
+        &#125;
+
+        &#x2F;&#x2F;将数组中的结果重新存入链表中
+        node &#x3D; head;
+        for(i &#x3D; 0; i &lt; nums - 1; i++) &#123;
+            node.val &#x3D; temp[i];
+            node &#x3D; node.next;
+        &#125;
+        &#x2F;&#x2F;最后一个结点需要单独赋值，因为需要将它的next设为null
+        node.val &#x3D; temp[nums - 1];
+        node.next &#x3D; null;
+
+        return head;
+    &#125;
+&#x2F;&#x2F;测试用例
+&#x2F;**
+ *
+ * Method:  removeDuplicateNodes(SinglyLinkedList head)
+ *
+ *&#x2F;
+@Test
+public void testRemoveDuplicateNodes() throws Exception &#123;
+    &#x2F;&#x2F;创建测试链表为｛1，2，3， 3， 2，1｝
+    SinglyLinkedList head &#x3D; new  SinglyLinkedList();
+    head.val &#x3D; 1;
+    SinglyLinkedList node1 &#x3D; new SinglyLinkedList();
+    head.next &#x3D; node1;
+    node1.val&#x3D; 2;
+    SinglyLinkedList node2 &#x3D; new SinglyLinkedList();
+    node2.val &#x3D; 3;
+    node1.next &#x3D; node2;
+    SinglyLinkedList node3 &#x3D; new SinglyLinkedList();
+    node3.val &#x3D; 3;
+    node2.next &#x3D; node3;
+    SinglyLinkedList node4 &#x3D; new SinglyLinkedList();
+    node4.val &#x3D; 2;
+    node3.next &#x3D; node4;
+    SinglyLinkedList node5 &#x3D; new SinglyLinkedList();
+    node5.val &#x3D; 1;
+    node4.next &#x3D; node5;
+
+    head &#x3D; head.removeDuplicateNodes(head);
+
+    SinglyLinkedList node &#x3D; head;
+    int nums &#x3D; 0;
+
+    &#x2F;&#x2F;计算链表中元素的个数
+    while(node !&#x3D; null) &#123;
+        node &#x3D; node.next;
+        nums++;
+    &#125;
+
+    &#x2F;&#x2F;用于储存读出的元素值的数组
+    int[] temp &#x3D; new int[nums];
+    int i &#x3D; 0;
+    int j &#x3D; 0;
+
+    &#x2F;&#x2F;遍历数组,将遍历的结果存入数组中
+    node &#x3D; head;
+    while(node !&#x3D; null) &#123;
+        temp[i] &#x3D; node.val;
+        node &#x3D; node.next;
+        i++;
+    &#125;
+
+    &#x2F;&#x2F;预期结果
+    int[] exp &#x3D; &#123;1, 2, 3&#125;;
+
+    Assert.assertArrayEquals(temp, exp);
+
+&#125;
+</code></pre>
+<ul>
+<li>法二：
+<ul>
+<li>将已经出现的元素值存入ArrayList集合中，设置双指针，遍历集合，当出现重复元素时，利用双指针跳过当前节点。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class ListNode &#123;
+    int val;
+    ListNode next;
+    ListNode(int x) &#123;
+        val &#x3D; x;
+    &#125;
+&#125;
+
+class Solution &#123;
+    public ListNode removeDuplicateNodes(ListNode head) &#123;
+        ArrayList&lt;Integer&gt; list &#x3D; new ArrayList&lt;&gt;();
+
+        ListNode front &#x3D; head;
+        ListNode cur &#x3D; head;
+        OUT:
+        while(cur !&#x3D; null) &#123;
+            for(int i : list) &#123;
+                if(i &#x3D;&#x3D; cur.val) &#123;
+                    &#x2F;&#x2F;如果是重复元素，保持front指针不动，只移动当前元素指针cur
+                    front.next &#x3D; cur.next;
+                    cur &#x3D; cur.next;
+                    continue OUT;
+                &#125;
+            &#125;
+            list.add(cur.val);
+            front &#x3D; cur;
+            cur &#x3D; cur.next;
+        &#125;
+
+        return  head;
+    &#125;
+
+    public static void main(String[] args) &#123;
+        ListNode node1 &#x3D; new ListNode(1);
+        ListNode node2 &#x3D; new ListNode(2);
+        ListNode node3 &#x3D; new ListNode(3);
+        ListNode node4 &#x3D; new ListNode(3);
+        ListNode node5 &#x3D; new ListNode(2);
+        ListNode node6 &#x3D; new ListNode(1);
+        node1.next &#x3D; node2;
+        node2.next &#x3D; node3;
+        node3.next &#x3D; node4;
+        node4.next &#x3D; node5;
+        node5.next &#x3D; node6;
+        node6.next &#x3D; null;
+
+        Solution solution &#x3D; new Solution();
+        solution.removeDuplicateNodes(node1);
+        for(ListNode node &#x3D; node1; node !&#x3D; null; node &#x3D; node.next) &#123;
+            System.out.println(node.val);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法三：
+<ul>
+<li>哈希表:思路与法二类似，只是哈希表不能存储重复元素，判断无需遍历，速度提升。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">class Solution &#123;
+    public ListNode removeDuplicateNodes(ListNode head) &#123;
+         if (head &#x3D;&#x3D; null) &#123;
+            return head;
+        &#125;
+        Set&lt;Integer&gt; occurred &#x3D; new HashSet&lt;Integer&gt;();
+        occurred.add(head.val);
+        ListNode pos &#x3D; head;
+        &#x2F;&#x2F; 枚举前驱节点
+        while (pos.next !&#x3D; null) &#123;
+            &#x2F;&#x2F; 当前待删除节点
+            ListNode cur &#x3D; pos.next;
+            if (occurred.add(cur.val)) &#123;
+                pos &#x3D; pos.next;
+            &#125; else &#123;
+                pos.next &#x3D; pos.next.next;
+            &#125;
+        &#125;
+        pos.next &#x3D; null;
+        return head;
+    &#125;
+&#125;</code></pre>
+<h1 id="6-反转链表-206"><a class="markdownIt-Anchor" href="#6-反转链表-206"></a> 6. 反转链表 206</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list/">题目</a></li>
+</ul>
+<hr />
+<p>给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。</p>
+<p>示例1:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/igLWdV.jpg" alt="igLWdV" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,2,3,4,5]
+输出：[5,4,3,2,1]</code></pre>
+<p>示例2:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/HOrmk9.jpg" alt="HOrmk9" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,2]
+输出：[2,1]</code></pre>
+<p>示例3:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; []
+输出：[]</code></pre>
+<p>提示：<br />
+链表中节点的数目范围是<code>[0, 5000]</code><br />
+<code>-5000 &lt;= Node.val &lt;= 5000</code></p>
+<h2 id="java解法"><a class="markdownIt-Anchor" href="#java解法"></a> Java解法</h2>
+<ul>
+<li>法一：迭代遍历法。从头遍历每个节点，并记录当前节点的前一节点和后一节点，然后使当前节点的next指向前一节点，然后当前节点移动到后一节点，直到当前节点为空。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/jBZsRi.png" alt="jBZsRi" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ReverseLinkedList206 &#123;
+
+    public ListNode reverseList(ListNode head) &#123;
+        &#x2F;&#x2F;定义前一节点和后一节点
+        ListNode pre &#x3D; null; &#x2F;&#x2F; pre开始为null，因为head之前没有节点
+        ListNode next;
+        while(head !&#x3D; null) &#123;
+            &#x2F;&#x2F;记录当前节点的下一节点
+            next &#x3D; head.next;
+            &#x2F;&#x2F;当前节点的下一节点变为pre
+            head.next &#x3D; pre;
+            &#x2F;&#x2F;同时移动当前节点和对应的前一节点到下一节点
+            pre &#x3D; head;
+            head &#x3D; next;
+        &#125;
+        &#x2F;&#x2F;最后返回pre
+        &#x2F;&#x2F;因为，head此时指向空，pre是其前一位正好指向原链表的最后一节点，即新链表的头节点
+        return pre;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：递归的思想。逆向思考，假设当前节点的之后的节点都已经完成的反转，每一次递归只要考虑当前节点和之后已经反转好的链表之间的反向连接问题即可，每一次递归返回已经完成反转连接的当前节点。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/SeBJuw.png" alt="SeBJuw" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class ReverseLinkedList206 &#123;
+
+    &#x2F;**
+     * 递归解法
+     * @param head
+     * @return
+     *&#x2F;
+    public ListNode reverseList(ListNode head) &#123;
+        &#x2F;&#x2F;当当前节点或其下一节点为null时返回
+        if(head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null) &#123;
+            return head;
+        &#125;
+        &#x2F;&#x2F;逆向考虑，每次调用本方法说明当前节点的前面节点都已经完成了反转
+        &#x2F;&#x2F;现在只需将当前节点和前面反转好的链表反向连接好就行
+        ListNode nextHead &#x3D; reverseList1(head.next);
+        head.next.next &#x3D; head;
+        &#x2F;&#x2F;因为是逆向思考，所以反转后当前节点的下一节点始终为null，前面的情况并不清楚
+        head.next &#x3D; null;
+        return nextHead;
+&#125;</code></pre>
+<h1 id="7-合并两个有序链表-21"><a class="markdownIt-Anchor" href="#7-合并两个有序链表-21"></a> 7. 合并两个有序链表 21</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">题目</a></li>
+</ul>
+<hr />
+<p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br />
+示例1:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/Ohem7h.jpg" alt="Ohem7h" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：l1 &#x3D; [1,2,4], l2 &#x3D; [1,3,4]
+输出：[1,1,2,3,4,4]</code></pre>
+<p>示例2:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：l1 &#x3D; [], l2 &#x3D; []
+输出：[]</code></pre>
+<p>示例3:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：l1 &#x3D; [], l2 &#x3D; [0]
+输出：[0]</code></pre>
+<p>提示：<br />
+两个链表的节点数目范围是 <code>[0, 50]</code><br />
+<code>-100 &lt;= Node.val &lt;= 100</code><br />
+l1 和 l2 均按 非递减顺序 排列</p>
+<h2 id="java解法-2"><a class="markdownIt-Anchor" href="#java解法-2"></a> Java解法</h2>
+<ul>
+<li>法一：非递归解法。遍历两个链表，比较大小之后加入合并链表后。注意，如果有一条链表遍历完成了，可以直接将另一条链表的剩余部分直接连在合并链表后。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tI6YFk.png" alt="tI6YFk" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class MergeTwoSortedLists21 &#123;
+
+    &#x2F;**
+     * 非递归解法
+     * @param l1
+     * @param l2
+     * @return
+     *&#x2F;
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) &#123;
+
+        &#x2F;&#x2F;设置一个头节点，便于链表的创建
+        ListNode head &#x3D; new ListNode();
+        &#x2F;&#x2F;指向合并链表的当前节点
+        ListNode cur &#x3D; head;
+        &#x2F;&#x2F;指向l1, l2的当前节点
+        ListNode cur1 &#x3D; l1;
+        ListNode cur2 &#x3D; l2;
+        if(l1 &#x3D;&#x3D; null &amp;&amp; l2 &#x3D;&#x3D; null) &#123;
+            return null;
+        &#125;
+        &#x2F;&#x2F;临时存储两个链表的当前节点的值
+        int val1;
+        int val2;
+        &#x2F;&#x2F;当两个链表都不为空时
+        while(cur1 !&#x3D; null &amp;&amp; cur2 !&#x3D; null) &#123;
+            val1 &#x3D; cur1.val;
+            val2 &#x3D; cur2.val;
+
+            if(val1 &lt;&#x3D; val2) &#123;
+                &#x2F;&#x2F;如果val1不大于val2
+                &#x2F;&#x2F;将l1的当前节点连在合并链表末尾节点后，
+                cur.next &#x3D; cur1;
+                &#x2F;&#x2F;相应移动当前节点指针，l2的当前节点指针不变
+                cur &#x3D; cur1;
+                cur1 &#x3D; cur1.next;
+            &#125; else &#123;
+                cur.next &#x3D; cur2;
+                cur &#x3D; cur2;
+                cur2 &#x3D; cur2.next;
+            &#125;
+        &#125;
+        &#x2F;&#x2F;如果有一个链表提前遍历完了，直接将另一个链表的剩余部分连在合并链表后
+        if(cur1 &#x3D;&#x3D; null &amp;&amp; cur2 !&#x3D; null) &#123;
+            cur.next &#x3D; cur2;
+        &#125; else if(cur2 &#x3D;&#x3D; null &amp;&amp; cur1 !&#x3D; null) &#123;
+            cur.next &#x3D; cur1;
+        &#125;
+        &#x2F;&#x2F;头节点是虚拟的，从它的下一节点开始才有值
+        return head.next;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：递归解法。比较两个链表的头节点，将头节点较小的头部截取，将截取之后的链表与另一个链表合并后，再连在该头节点之后。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/HnPiyE.png" alt="HnPiyE" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;**
+ * 递归解法
+ * @param l1
+ * @param l2
+ * @return
+ *&#x2F;
+public ListNode mergeTwoLists1(ListNode l1, ListNode l2) &#123;
+    &#x2F;&#x2F;当有链表为空时，直接返回非空链表
+    if(l2 &#x3D;&#x3D; null) &#123;
+        return l1;
+    &#125;
+    if(l1 &#x3D;&#x3D; null) &#123;
+        return l2;
+    &#125;
+    &#x2F;&#x2F;当l2的头节点比l1小时，将
+    if(l1.val &gt; l2.val) &#123;
+        &#x2F;&#x2F;因为l2的头节点较小，所以将l2之后的节点和l1合并然后将其连在当前头节点之后
+        l2.next &#x3D; mergeTwoLists1(l1, l2.next);
+        return l2;
+    &#125;
+    l1.next &#x3D; mergeTwoLists1(l2, l1.next);
+    return l1;
+&#125;</code></pre>
+<h1 id="8-两两交换链表中的节点-24"><a class="markdownIt-Anchor" href="#8-两两交换链表中的节点-24"></a> 8. 两两交换链表中的节点 24</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">题目</a></li>
+</ul>
+<hr />
+<p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。<br />
+你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。<br />
+示例1:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/zEFNJ0.jpg" alt="zEFNJ0" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,2,3,4]
+输出：[2,1,4,3]</code></pre>
+<p>示例2:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; []
+输出：[]</code></pre>
+<p>示例3:</p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1]
+输出：[1]</code></pre>
+<p>提示：<br />
+链表中节点的数目在范围 <code>[0, 100]</code>内<br />
+<code>0 &lt;= Node.val &lt;= 100</code></p>
+<h2 id="java解法-3"><a class="markdownIt-Anchor" href="#java解法-3"></a> Java解法</h2>
+<ul>
+<li>法一：通过“指针”变化来转换节点之间的相对位置
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/2DxNqn.png" alt="2DxNqn" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class SwapNodesInPairs24 &#123;
+
+    public ListNode swapPairs(ListNode head) &#123;
+        &#x2F;&#x2F;设置一个前导节点，便于连接两组交换的元素
+        ListNode pre &#x3D; new ListNode();
+        pre.next &#x3D; head;
+        ListNode cur &#x3D; head;
+        ListNode head1 &#x3D; head;
+        if(head !&#x3D; null &amp;&amp; head.next !&#x3D; null) &#123;
+            head1 &#x3D; head.next;
+        &#125;
+        &#x2F;&#x2F;遍历整个链表，然后每次处理连续两位
+        while (cur !&#x3D; null &amp;&amp; cur.next !&#x3D; null) &#123;
+                ListNode temp1;
+                temp1 &#x3D;  cur.next;
+                pre.next &#x3D; temp1;
+                cur.next &#x3D; temp1.next;
+                temp1.next &#x3D; cur;
+                &#x2F;&#x2F;每次移动前导节点指针2位
+                pre &#x3D; pre.next.next;
+                &#x2F;&#x2F;每次将当前节点指针移动到前导节点指针之后
+                cur &#x3D; pre.next;
+        &#125;
+        return head1;
+    &#125;
+
+&#125;</code></pre>
+<h1 id="9-相交链表-160"><a class="markdownIt-Anchor" href="#9-相交链表-160"></a> 9. 相交链表 160</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">题目</a></li>
+</ul>
+<hr />
+<p>给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 。<br />
+图示两个链表在节点 c1 开始相交：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/1UHBvW.jpg" alt="1UHBvW" /><br />
+题目数据 保证 整个链式结构中不存在环。<br />
+注意，函数返回结果后，链表必须 保持其原始结构。<br />
+示例1：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/tcmvgZ.jpg" alt="tcmvgZ" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,4,5], listB &#x3D; [5,0,1,8,4,5], skipA &#x3D; 2, skipB &#x3D; 3
+输出：Intersected at &#39;8&#39;
+解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。
+从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。
+在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</code></pre>
+<p>示例 2：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/jJzS6t.jpg" alt="jJzS6t" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1
+输出：Intersected at &#39;2&#39;
+解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。
+从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。
+在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</code></pre>
+<p>示例3:<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/45jteX.jpg" alt="45jteX" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：intersectVal &#x3D; 0, listA &#x3D; [2,6,4], listB &#x3D; [1,5], skipA &#x3D; 3, skipB &#x3D; 2
+输出：null
+解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。
+由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+这两个链表不相交，因此返回 null 。</code></pre>
+<p>提示：</p>
+<pre class="line-numbers language-none"><code class="language-none">listA 中节点数目为 m
+listB 中节点数目为 n
+0 &lt;&#x3D; m, n &lt;&#x3D; 3 * 104
+1 &lt;&#x3D; Node.val &lt;&#x3D; 105
+0 &lt;&#x3D; skipA &lt;&#x3D; m
+0 &lt;&#x3D; skipB &lt;&#x3D; n
+如果 listA 和 listB 没有交点，intersectVal 为 0
+如果 listA 和 listB 有交点，intersectVal &#x3D;&#x3D; listA[skipA + 1] &#x3D;&#x3D; listB[skipB + 1]</code></pre>
+<h2 id="java解法-4"><a class="markdownIt-Anchor" href="#java解法-4"></a> Java解法</h2>
+<ul>
+<li>法一：遍历一个链表，将其节点与另一个链表中所有节点对比，如果与另一个链表中的某个节点相同，则该节点就是相交节点。时间复杂度是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>级别，很慢。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/uPic/9REX8i.png" alt="9REX8i" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class IntersectionOfTwoLinkedLists160 &#123;
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) &#123;
+        &#x2F;&#x2F;如果两个链表头节点就相交
+        if(headA &#x3D;&#x3D; headB) &#123;
+            return headA;
+        &#125;
+        &#x2F;&#x2F;如果有一个链表为空
+        if(headA &#x3D;&#x3D; null || headB &#x3D;&#x3D; null) &#123;
+            return null;
+        &#125;
+        ListNode cur1 &#x3D; headA;
+        ListNode cur2 &#x3D; headB;
+        &#x2F;&#x2F;遍历链表对比节点
+        while (cur1 !&#x3D; null) &#123;
+            while(cur2 !&#x3D; null) &#123;
+                if(cur1 !&#x3D; cur2) &#123;
+                    cur2 &#x3D; cur2.next;
+                &#125;else &#123;
+                    return cur1;
+                &#125;
+            &#125;
+            &#x2F;&#x2F;每次都从另一个链表的头节点开始
+            cur2 &#x3D; headB;
+            cur1 &#x3D; cur1.next;
+        &#125;
+        return null;
+    &#125;
+&#125;</code></pre>
+<h1 id="10-回文链表-234"><a class="markdownIt-Anchor" href="#10-回文链表-234"></a> 10. 回文链表 234</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-linked-list/">题目</a></li>
+</ul>
+<hr />
+<p>给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。<br />
+示例1：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924090500.png" alt="" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,2,2,1]
+输出：true</code></pre>
+<p>示例2：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924090534.png" alt="" /></p>
+<pre class="line-numbers language-none"><code class="language-none">输入：head &#x3D; [1,2]
+输出：false</code></pre>
+<p>提示：<br />
+链表中节点数目在范围<code>[1, 105]</code>内<br />
+<code>0 &lt;= Node.val &lt;= 9</code></p>
+<h2 id="java解法-5"><a class="markdownIt-Anchor" href="#java解法-5"></a> Java解法</h2>
+<ul>
+<li>法一：回文的实质是链表前后对称。对称问题的关键在于找到对称轴。找到对称轴后利用栈的压栈和出栈来比较前后两部分是否相同。需要注意的是链表结点数为奇数和偶数的对称轴情况不太相同。
+<ul>
+<li>结果：<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/img/20210924094116.png" alt="" /></li>
+<li>代码：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">public class PalindromeLinkedList234 &#123;
+
+    public boolean isPalindrome(ListNode head) &#123;
+
+        Stack&lt;Integer&gt; stack &#x3D; new Stack&lt;&gt;();
+        &#x2F;&#x2F;统计链表结点的数量
+        ListNode node &#x3D; head;
+        int count &#x3D; 0;
+        while (node !&#x3D; null) &#123;
+            count++;
+            node &#x3D; node.next;
+        &#125;
+        count -&#x3D; 1;
+
+        &#x2F;&#x2F;将链表结点数量为奇数和偶数分别处理
+        if(count % 2 &#x3D;&#x3D; 0) &#123;
+            &#x2F;&#x2F;链表结点数量为奇数
+            &#x2F;&#x2F;找到链表的“对称轴”，将前半部分结点的压栈，然后遍历后半部分，与出栈的值比较
+            ListNode node1 &#x3D; head;
+            for(int i &#x3D; 0; i &lt; count &#x2F; 2; i++) &#123;
+                stack.push(node1.val);
+                node1 &#x3D; node1.next;
+            &#125;
+            &#x2F;&#x2F;奇数个结点，以中间结点为对称轴，不用比较其值，直接跳过
+            node1 &#x3D; node1.next;
+            for(int i &#x3D; 1 + count &#x2F; 2; i &lt;&#x3D; count; i++) &#123;
+                int val &#x3D; stack.pop();
+                if(val &#x3D;&#x3D; node1.val) &#123;
+                    node1 &#x3D; node1.next;
+                &#125; else &#123;
+                    return false;
+                &#125;
+            &#125;
+        &#125; else &#123;
+            &#x2F;&#x2F;链表结点数量为偶数
+            ListNode node2 &#x3D; head;
+            for(int i &#x3D; 0; i &lt;&#x3D; count &#x2F; 2; i++) &#123;
+                stack.push(node2.val);
+                node2 &#x3D; node2.next;
+            &#125;
+            for(int i &#x3D; 1 + count &#x2F; 2; i &lt;&#x3D; count; i++) &#123;
+                int val &#x3D; stack.pop();
+                if(val &#x3D;&#x3D; node2.val) &#123;
+                    node2 &#x3D; node2.next;
+                &#125; else &#123;
+                    return false;
+                &#125;
+            &#125;
+        &#125;
+
+        return true;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>法二：将链表值复制到数组，同时从数组两端向中间遍历，比较值是否相同。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Maven/index.html" rel="prev" title="Maven">
+                  <i class="fa fa-angle-left"></i> Maven
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Java/junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html" rel="next" title="junit单元测试">
+                  junit单元测试 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

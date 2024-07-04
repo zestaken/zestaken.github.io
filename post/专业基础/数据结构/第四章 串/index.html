@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="第四章 串  串的定义   串：   串也是一种线性表    串相等：   长度相等且对应位置相等。 所有的空串相等。    子串：   类似子集的定义。    基本运算：     串的存储结构  顺序串：用顺序存储结构（数组）存储，且为存储结构为定长。 堆串：用顺序存储结构存储，但存储结构的长度是根据串的长度来动态分配的。 块链串：用链式存储结构来存储。   串的顺序存储结构（顺序串）  串的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章 串">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="第四章 串  串的定义   串：   串也是一种线性表    串相等：   长度相等且对应位置相等。 所有的空串相等。    子串：   类似子集的定义。    基本运算：     串的存储结构  顺序串：用顺序存储结构（数组）存储，且为存储结构为定长。 堆串：用顺序存储结构存储，但存储结构的长度是根据串的长度来动态分配的。 块链串：用链式存储结构来存储。   串的顺序存储结构（顺序串）  串的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105608.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105722.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105846.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803110231.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803110825.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803111043.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803112812.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803112812.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200804175856.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200804180356.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808224454.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808231126.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808232839.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808233020.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808233855.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808234131.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808234936.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809000140.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809001808.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809003107.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809003450.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809094650.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809102612.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809111243.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809104129.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809111243.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809113921.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809114109.jpg">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809114507.jpg">
+<meta property="article:published_time" content="2020-08-03T02:53:37.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105608.jpg">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/index.html","path":"/post/专业基础/数据结构/第四章 串/index.html","title":"第四章 串"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第四章 串 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text"> 第四章 串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text"> 串的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text"> 串的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E9%A1%BA%E5%BA%8F%E4%B8%B2"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 串的顺序存储结构（顺序串）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.1.</span> <span class="nav-text"> 串的顺序存储结构的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.1.2.</span> <span class="nav-text"> 串的顺序存储结构的基本运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E4%B8%B2%E7%9A%84%E6%8F%92%E5%85%A5"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text"> 顺序串的插入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E4%B8%B2%E7%9A%84%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.1.2.2.</span> <span class="nav-text"> 顺序串的删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.2.1.2.3.</span> <span class="nav-text"> 顺序串的比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2"><span class="nav-number">1.2.2.</span> <span class="nav-text"> 堆串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text"> 堆串的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.2.</span> <span class="nav-text"> 堆串的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E8%B5%8B%E5%80%BC"><span class="nav-number">1.2.2.2.1.</span> <span class="nav-text"> 堆串赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E6%8F%92%E5%85%A5"><span class="nav-number">1.2.2.2.2.</span> <span class="nav-text"> 堆串的插入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E5%A4%8D%E5%88%B6"><span class="nav-number">1.2.2.2.3.</span> <span class="nav-text"> 堆串的复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E5%88%A4%E7%A9%BA"><span class="nav-number">1.2.2.2.4.</span> <span class="nav-text"> 堆串的判空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.2.2.2.5.</span> <span class="nav-text"> 堆串的比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E6%B8%85%E7%A9%BA"><span class="nav-number">1.2.2.2.6.</span> <span class="nav-text"> 堆串的清空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E5%A0%86%E4%B8%B2%E7%9A%84%E5%AD%90%E4%B8%B2"><span class="nav-number">1.2.2.2.7.</span> <span class="nav-text"> 求堆串的子串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E5%AD%90%E4%B8%B2%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.2.2.2.8.</span> <span class="nav-text"> 堆串的子串定位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%97%E9%93%BE%E4%B8%B2"><span class="nav-number">1.2.3.</span> <span class="nav-text"> 块链串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B2%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="nav-number">1.3.</span> <span class="nav-text"> 串的模式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#brute-force%E8%9B%AE%E7%89%9B%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text"> Brute-Force(蛮牛)匹配算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kmp%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.2.</span> <span class="nav-text"> KMP匹配算法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E5%9B%9B%E7%AB%A0%20%E4%B8%B2/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第四章 串 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第四章 串
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-03 10:53:37" itemprop="dateCreated datePublished" datetime="2020-08-03T10:53:37+08:00">2020-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="第四章-串"><a class="markdownIt-Anchor" href="#第四章-串"></a> 第四章 串</h1>
+<h2 id="串的定义"><a class="markdownIt-Anchor" href="#串的定义"></a> 串的定义</h2>
+<ul>
+<li>
+<p>串：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105608.jpg" alt="" /></p>
+<ul>
+<li>串也是一种线性表</li>
+</ul>
+</li>
+<li>
+<p>串相等：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105722.jpg" alt="" /></p>
+<ul>
+<li>长度相等且对应位置相等。</li>
+<li>所有的空串相等。</li>
+</ul>
+</li>
+<li>
+<p>子串：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803105846.jpg" alt="" /></p>
+<ul>
+<li>类似子集的定义。</li>
+</ul>
+</li>
+<li>
+<p>基本运算：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803110231.jpg" alt="" /></p>
+</li>
+</ul>
+<h2 id="串的存储结构"><a class="markdownIt-Anchor" href="#串的存储结构"></a> 串的存储结构</h2>
+<ol>
+<li>顺序串：用顺序存储结构（数组）存储，且为存储结构为定长。</li>
+<li>堆串：用顺序存储结构存储，但存储结构的长度是根据串的长度来动态分配的。</li>
+<li>块链串：用链式存储结构来存储。</li>
+</ol>
+<h3 id="串的顺序存储结构顺序串"><a class="markdownIt-Anchor" href="#串的顺序存储结构顺序串"></a> 串的顺序存储结构（顺序串）</h3>
+<h4 id="串的顺序存储结构的定义"><a class="markdownIt-Anchor" href="#串的顺序存储结构的定义"></a> 串的顺序存储结构的定义</h4>
+<ul>
+<li>两种类型：
+<ul>
+<li>紧缩格式</li>
+<li>非紧缩格式<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803110825.jpg" alt="" /></li>
+</ul>
+</li>
+<li>结点定义（下面讨论的都是非紧缩）<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803111043.jpg" alt="" /></li>
+</ul>
+<h4 id="串的顺序存储结构的基本运算"><a class="markdownIt-Anchor" href="#串的顺序存储结构的基本运算"></a> 串的顺序存储结构的基本运算</h4>
+<h5 id="顺序串的插入"><a class="markdownIt-Anchor" href="#顺序串的插入"></a> 顺序串的插入</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803112812.jpg" alt="" /></p>
+<ul>
+<li>先判断插入位置是否合理</li>
+<li>之后判断能否完全插入一个串
+<ol>
+<li>若两个串合起来的长度<code>s-&gt;len +t.len</code>也小于s的最大长度，则可以完全插入</li>
+</ol>
+<ul>
+<li>第一步先将原串pos位置及以后的字符向后平移(即复制到后面的位置上去）；</li>
+<li>然后将要插入的串依次赋值到pos位置及它之后空出来的位置上；</li>
+<li>最后修改整个串的长度，即两串的长度相加。</li>
+</ul>
+<ol start="2">
+<li>若插入后只能保存t串的字符(二串相加的总长度大于最大长度，但pos位置后留的位置比t串的长度长)</li>
+</ol>
+<ul>
+<li>第一步还是先将s串自pos位开始的字符向后平移，但要给t串留出足够空间，即s串能移多少算多少；</li>
+<li>第二步将t串复制进来；</li>
+<li>最后串的长度就是s的最大长度。</li>
+</ul>
+<ol start="3">
+<li>若插入之后只能保存t串的部分字符（即pos后的位置在不移s串元素过去的情况下，仍然比t串短）
+<ul>
+<li>直接将t串复制到pos位置及以后，到最大长度为止，能复制多少算多少。</li>
+<li>最后串的长度就是最大长度。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h5 id="顺序串的删除"><a class="markdownIt-Anchor" href="#顺序串的删除"></a> 顺序串的删除</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200803112812.jpg" alt="" /></p>
+<ul>
+<li>先判断删除位置和个数是否合理：pos位置既不能超出边界，在加上要删除的位数之后也不能超出边界<code>pos &gt; (s-&gt;len - k)</code></li>
+<li>先找到待删除区域外的第一个元素，然后依次向前复制，直达到达串的边界。</li>
+<li>最后修改串的长度。</li>
+</ul>
+<h5 id="顺序串的比较"><a class="markdownIt-Anchor" href="#顺序串的比较"></a> 顺序串的比较</h5>
+<ul>
+<li>比较规则：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200804175856.jpg" alt="" />
+<ul>
+<li>先不管长短，先比较共同区域内元素的大小；</li>
+<li>若共同区域内的元素全都相同，再比较串的长短。（即可能会出现较短的串是较大串的情况）</li>
+</ul>
+</li>
+<li>具体算法：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200804180356.jpg" alt="" />
+<ul>
+<li>先找出共同长度（即较短串的长度）;</li>
+<li>之后在共同长度内比较；</li>
+<li>若共同长度内字符全部一致，则再比较长度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="堆串"><a class="markdownIt-Anchor" href="#堆串"></a> 堆串</h3>
+<h4 id="堆串的定义"><a class="markdownIt-Anchor" href="#堆串的定义"></a> 堆串的定义</h4>
+<ul>
+<li>为每个串动态分配空间（这个存储空间的实质是一个数组）储存该字符串的信息，然后设置一个指向该串的指针作为串名。每次对字符串进行增删操作就直接分配新的存储空间，释放原来的空间，修改空间的长度。看<a href="#%E5%A0%86%E4%B8%B2%E7%9A%84%E6%8F%92%E5%85%A5">堆串的插入</a>能够更好理解堆串的本质。</li>
+<li>与普通的顺序串相比，堆串每次存储字符串的空间是定量(根据字符串实际的长度）再分配的,而不是直接提前规定好存储字符串的空间的长度（即数组的MaxSize）。</li>
+<li>堆的定义<pre class="line-numbers language-c" data-language="c"><code class="language-c">typedef struct
+&#123;
+  char* ch; &#x2F;&#x2F;指示串的起始地址，即为串分配一个空间，指向这个空间的指针为ch
+  int len; &#x2F;&#x2F;指示串的长度
+&#125;HString;</code></pre>
+<ul>
+<li>一个堆即一个堆串的一个基本单元</li>
+</ul>
+</li>
+</ul>
+<h4 id="堆串的基本操作"><a class="markdownIt-Anchor" href="#堆串的基本操作"></a> 堆串的基本操作</h4>
+<h5 id="堆串赋值"><a class="markdownIt-Anchor" href="#堆串赋值"></a> 堆串赋值</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808224454.jpg" alt="" /></p>
+<ul>
+<li>先要判断串是否<strong>不为空</strong>，如果是的话，就释放原来的空间，等待重新分配。</li>
+<li>之后将要赋值进来的字符数组的长度计数出来，以便可以分配对应长度的空间。</li>
+<li>分配一个长度相同的空间，然后用<code>ch</code>指针指向它;</li>
+<li>如果要赋值进来的的字符数组是空的，则将<code>ch</code>指针置为NULL。</li>
+</ul>
+<h5 id="堆串的插入"><a class="markdownIt-Anchor" href="#堆串的插入"></a> 堆串的插入</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808231126.jpg" alt="" /></p>
+<ul>
+<li>先分配一个长度为二串相加的存储空间；</li>
+<li>插入操作：
+<ol>
+<li>将原串pos位置之前的字符复制到新的存储空间里;</li>
+<li>在新存储空间的pos位置开始（包含pos位置）,将带插入的串复制进去；</li>
+<li>在之后将原串的剩余部分复制进去。</li>
+</ol>
+<ul>
+<li>注意：临界点的判断条件，例如复制待插入的串是从pos位置开始的，即原来的pos位置被新的字符占领了，原来处于pos位置的字符相对的向后移。</li>
+</ul>
+</li>
+<li>最后修改表示长度的len变量；释放原串的存储空间，将指示串位置的ch指针指向新分配的空间。</li>
+<li>该基本思想还可以用来实现两串的连接。</li>
+</ul>
+<h5 id="堆串的复制"><a class="markdownIt-Anchor" href="#堆串的复制"></a> 堆串的复制</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808232839.jpg" alt="" /></p>
+<ul>
+<li>分配新空间，顺序复制字符，修改长度变量即可。</li>
+</ul>
+<h5 id="堆串的判空"><a class="markdownIt-Anchor" href="#堆串的判空"></a> 堆串的判空</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808233020.jpg" alt="" /></p>
+<ul>
+<li>判断长度是否为0来判读堆串是否为空；</li>
+</ul>
+<h5 id="堆串的比较"><a class="markdownIt-Anchor" href="#堆串的比较"></a> 堆串的比较</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808233855.jpg" alt="" /></p>
+<ul>
+<li>先逐字符比较，若仍未出结果再比较长度。</li>
+</ul>
+<h5 id="堆串的清空"><a class="markdownIt-Anchor" href="#堆串的清空"></a> 堆串的清空</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808234131.jpg" alt="" /></p>
+<ul>
+<li>先释放堆串的空间，再将指针置为NULL，长度设为0；</li>
+</ul>
+<h5 id="求堆串的子串"><a class="markdownIt-Anchor" href="#求堆串的子串"></a> 求堆串的子串</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200808234936.jpg" alt="" /></p>
+<ul>
+<li>先要判断求的子串的长度和位置是否合理；</li>
+<li>之后再将子串复制进一个新的堆串中。</li>
+</ul>
+<h5 id="堆串的子串定位"><a class="markdownIt-Anchor" href="#堆串的子串定位"></a> 堆串的子串定位</h5>
+<p><img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809000140.jpg" alt="" /></p>
+<ul>
+<li>先从两个字符串的第一个字符开始比较，若字符相等，则依次比较二者的下一个字符；</li>
+<li>若字符不相等，则将原串的下标<strong>回溯</strong>到第一个字符的下一位，子串的下标归为0继续在比较。即相当于对应原串的每一个字符都可以生成一个子串，每个字符对应的子串都要与目标子串比较，直到找到目标子串。</li>
+<li>比较结束的条件是目标子串已遍历完,最后返回子串第一个字符的位置（即当前下标位置i减去子串的长度j或者t.len）。</li>
+</ul>
+<h3 id="块链串"><a class="markdownIt-Anchor" href="#块链串"></a> 块链串</h3>
+<ul>
+<li>块链串即使用链表储存字符串，每一个结点存储一部分字符(类似一句话是整个字符串，而一个结点相当于一个单词)。然后使用next指针连接结点，串成一个大的字符串。</li>
+<li>块链串结点定义：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809001808.jpg" alt="" />
+<ul>
+<li>一个结点中包含一个数据域（char类型的数组）和一个指针域（指向下一结点）。</li>
+<li>设置一个储存块链串信息的结构，其中包含该串头结点，尾结点，和长度的信息。</li>
+<li>块链串没有设置空的头结点。</li>
+</ul>
+</li>
+</ul>
+<h2 id="串的模式匹配"><a class="markdownIt-Anchor" href="#串的模式匹配"></a> 串的模式匹配</h2>
+<ul>
+<li>在一个串中找到它的子串的位置称为串的模式匹配</li>
+</ul>
+<h3 id="brute-force蛮牛匹配算法"><a class="markdownIt-Anchor" href="#brute-force蛮牛匹配算法"></a> Brute-Force(蛮牛)匹配算法</h3>
+<ul>
+<li>
+<p>简称为BF算法，又名简单匹配算法。</p>
+</li>
+<li>
+<p>基本思想：穷举<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809003107.jpg" alt="" /></p>
+</li>
+<li>
+<p>算法实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809003450.jpg" alt="" /></p>
+<ul>
+<li>先从两个字符串的第一个字符(若pos不为0,则原串从pos位置开始比较）开始比较，若字符相等，则依次比较二者的下一个字符；</li>
+<li>若字符不相等，则将原串的下标<strong>回溯</strong><code>i = i - j + 1</code>到第一个字符的下一位，子串的下标归为0继续在比较。即相当于对应原串的每一个字符都可以生成一个子串，每个字符对应的子串都要与目标子串比较，直到找到目标子串。</li>
+<li>比较结束的条件是目标子串已遍历完,最后返回子串第一个字符的位置（即当前下标位置i减去子串的长度j或者t.len）。</li>
+</ul>
+</li>
+<li>
+<p>算法分析：</p>
+<ul>
+<li>最好情况下的时间复杂度（即原串的第一个字符就可以找到子串）😮(m),其中m为子串的问题规模。</li>
+<li>最坏情况下的时间复杂度：O(n x m) ,其中n为原串的问题规模。</li>
+<li>平均的时间复杂度：O(n x m)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="kmp匹配算法"><a class="markdownIt-Anchor" href="#kmp匹配算法"></a> KMP匹配算法</h3>
+<ul>
+<li>
+<p>KMP是三个提出该算法的人的名字的首字母缩写。KMP算法相对于BF算法，主要消除了原串指针的回溯。</p>
+</li>
+<li>
+<p>算法的思想：（i,j均采用数组的下标表示法）</p>
+<ol>
+<li>若子串没有重复的字符，则当扫描到j位因为字符不相等而退出一轮扫描的时候，说明原串第i位(扫描结束时，j == i)之前的字符与子串第j位之前的字符相等，又因为子串中没有相同的字符，所以子串的的首位字符与原串的前i位字符不相等，所以直接省去子串首字符与原串前i位字符相比较的步骤，跳到与原串第i位开始的字符相比较。这个过程中，<strong>j又回溯</strong>到了子串首字符，而<strong>i没有回溯</strong>直接继续向前推进。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809094650.jpg" alt="" /></li>
+<li>若子串中有重复的字符，则若继续按照没有重复字符的方法，在原串第i位前可能与子串首字符相等的字符就会直接失去比较机会，而实际上它们是有可能与子串匹配的。故此我们先记录下子串中不同字符位置前的字符相等情况（通过创建next数组）,将每一次比较终止第j位前的字符分为三种类型：
+<ol>
+<li>若j位前的字符无重复情况，则j回溯为到首字符,跳到与原串第i位后的字符继续比较（同整个子串无重复字符的情况类似）;</li>
+<li>若第j位前的字符前缀与后缀相同（即像：abcab,或者aa,或者aba等）,则j回溯到前缀后的第一位字符，该字符与原串的第i位字符继续比较。因为前缀等于后缀，而原串与子串的这一部分字符相等，所以前缀与原串第i位前的相同长度的部分字符相等，所以可以直接跳过前缀与其的比较，直接进行前缀后的第一个字符与原串的第i个字符的比较。</li>
+<li>若第j位前的字符中有相等的情况，但是没有出现前后缀相等的情况（即像：abcdae）,此时j回溯到子串的首字符，然后继续与原串第i位字符开始比较。因为既然子串第j位前字符没有前缀与后缀相等的情况，又有原串的第i位字符前的的字符与子串相同长的字符相等，故与字符开头的部分字符不相等，所以可以直接跳过。例如：子串为abcdaef,原串为abcdaegabcdaef,第一次比较在子串的f位置，原串的g位置停下，若担心漏掉第二次a出现的情况，子串的首字符a与原串的第二个字符a开始比较，肯定是不能匹配成功的。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>next值的求法：</p>
+<ul>
+<li>
+<p>思想：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809102612.jpg" alt="" /></p>
+<ul>
+<li>next取值的三种情况，其中其它情况对应着字符无重复，和字符没有形成相等的前后缀的情况。</li>
+<li>next[j] = -1说明，子串的第j位之前没有任何用于加速匹配的信息（因为此时才开始扫描子串的首字符）,下一趟应从子串的开头j++ =&gt; j=0开始匹配。</li>
+<li>next[j]的值取决于前缀的长度，因为在有前缀的情况下，next[j]代表前缀后第一个字符的下标。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809111243.jpg" alt="" /></li>
+</ul>
+</li>
+<li>
+<p>求next的算法：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809104129.jpg" alt="" /></p>
+<ul>
+<li>j的值一直在增加（中间会有停顿，但不会回缩），而k的值则再-1，0,和其它数之间循环；</li>
+<li>每遇到一个没有与前面的字符重复的字符，k都会回退到-1。</li>
+<li>要想理解这个算法只有用一个字符串来走来试试（如aabaacd）,词穷了，实在难以用语言描述。。。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>KMP算法实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809111243.jpg" alt="" /></p>
+<ul>
+<li>先挨个字符比较，直到遇到不同的字符终止。之后j根据next修改，i不变，再继续比较。</li>
+<li>最后返回匹配到的子串的首字符的下标<code>i - t.len</code>,因为最后一次比较后i还再加了一次，所以直接减去子串的长度即为首字符的下标。</li>
+</ul>
+</li>
+<li>
+<p>KMP算法分析：</p>
+<ul>
+<li>平均时间复杂度：求next数组的时间复杂度为O(m),后面的匹配中时间复杂度为O(n)，所以总的平均时间复杂度O(n+m)。</li>
+</ul>
+</li>
+<li>
+<p>KMP算法的改进</p>
+<ul>
+<li>在计算出next值得同时，如果该位字符与它的next值指向的另一位字符相等，则该位的字符的nextval就指向另一位字符的nextval，如果不等，则该位字符的nextval值就是原来的next值。</li>
+<li>解决的问题：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809113921.jpg" alt="" /></li>
+<li>求nextval的算法<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809114109.jpg" alt="" />
+<ul>
+<li>在原来的基础上增加了将nextval的值修改为与其next指向的相等的字符的nextval值。</li>
+</ul>
+</li>
+<li>KMP算法的改进实现：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20200809114507.jpg" alt="" />
+<ul>
+<li>除了将next改为了nextval没有任何区别。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/Make%E5%8F%8AMakefile/index.html" rel="prev" title="Make及Makefile">
+                  <i class="fa fa-angle-left"></i> Make及Makefile
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%94%E7%AB%A0%20%E6%95%B0%E7%BB%84%E4%B8%8E%E5%B9%BF%E4%B9%89%E8%A1%A8/index.html" rel="next" title="第五章 数组与广义表">
+                  第五章 数组与广义表 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

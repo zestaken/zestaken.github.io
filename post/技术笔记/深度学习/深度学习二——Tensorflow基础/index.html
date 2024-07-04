@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Tensorflow基础数据操作  为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：  获取数据； 在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。   数据存储对象：nnn维数组，也称为张量（tensor）。 无论使用哪个深度学习框架，它的张量类（在PyTorch和TensorFlow中为Tensor）都与Nu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习二——Tensorflow基础">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="Tensorflow基础数据操作  为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：  获取数据； 在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。   数据存储对象：nnn维数组，也称为张量（tensor）。 无论使用哪个深度学习框架，它的张量类（在PyTorch和TensorFlow中为Tensor）都与Nu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-25T07:47:19.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:56:55.788Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="Tensorflow">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html","path":"/post/技术笔记/深度学习/深度学习二——Tensorflow基础/index.html","title":"深度学习二——Tensorflow基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>深度学习二——Tensorflow基础 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorflow%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text"> Tensorflow基础数据操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorflow%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text"> Tensorflow数组对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorflow%E7%9A%84%E6%95%B0%E7%BB%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text"> Tensorflow的数组基本运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="nav-number">3.1.</span> <span class="nav-text"> 广播机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87"><span class="nav-number">3.2.</span> <span class="nav-text"> 索引和切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E7%9C%81%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text"> 节省内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96-python-%E5%AF%B9%E8%B1%A1%E8%BD%AC%E5%8C%96"><span class="nav-number">3.4.</span> <span class="nav-text"> 与其他 Python 对象转化</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BA%8C%E2%80%94%E2%80%94Tensorflow%E5%9F%BA%E7%A1%80/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="深度学习二——Tensorflow基础 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深度学习二——Tensorflow基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-25 15:47:19" itemprop="dateCreated datePublished" datetime="2021-10-25T15:47:19+08:00">2021-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:56:55" itemprop="dateModified" datetime="2022-09-17T19:56:55+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="tensorflow基础数据操作"><a class="markdownIt-Anchor" href="#tensorflow基础数据操作"></a> Tensorflow基础数据操作</h1>
+<ul>
+<li>为了能够完成各种操作，我们需要某种方法来存储和操作数据。一般来说，我们需要做两件重要的事情：
+<ol>
+<li>获取数据；</li>
+<li>在将数据读入计算机后对其进行处理。如果没有某种方法来存储数据，那么获取数据是没有意义的。</li>
+</ol>
+</li>
+<li>数据存储对象：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>维数组，也称为<em>张量</em>（tensor）。</li>
+<li>无论使用哪个深度学习框架，它的<em>张量类</em>（在PyTorch和TensorFlow中为<code>Tensor</code>）都与Numpy的<code>ndarray</code>类似，但又比Numpy的<code>ndarray</code>多一些重要功能：
+<ol>
+<li>深度学习框架很好地支持GPU加速计算，而NumPy仅支持CPU计算；</li>
+<li>张量类支持自动微分。这些功能使得张量类更适合深度学习。</li>
+</ol>
+</li>
+</ul>
+<h1 id="tensorflow数组对象"><a class="markdownIt-Anchor" href="#tensorflow数组对象"></a> Tensorflow数组对象</h1>
+<ul>
+<li>首先，我们导入<code>tensorflow</code>。由于名称有点长，我们经常使用短别名<code>tf</code>导入它。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import tensorflow as tf</code></pre>
+<ul>
+<li>**张量（tensor）**表示由一个数值组成的数组，这个数组可能有多个维度。具有一个轴的张量对应数学上的<em>向量</em>（vector）。具有两个轴的张量对应数学上的<em>矩阵</em>（matrix）。具有两个轴以上的张量没有特殊的数学名称。</li>
+<li>可以使用<code>arange</code>创建一个行向量<code>x</code>。这个行向量包含从0开始的前12个整数，它们被默认创建为浮点数。张量中的每个值都称为张量的<em>元素</em>（element）。例如，张量<code>x</code>中有12个元素。
+<ul>
+<li>除非额外指定，否则新的张量将存储在内存中，并采用基于CPU的计算。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; tf.range(12)
+x</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(12,), dtype=int32, numpy=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11], dtype=int32)&gt;
+</code></pre>
+<ul>
+<li><code>shape</code>属性可以通过张量的<code>shape</code>属性来访问张量的<em>形状</em>（沿每个轴的长度）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x.shape</code></pre>
+<pre><code>TensorShape([12])
+</code></pre>
+<ul>
+<li>如果只想知道张量中元素的总数，即形状的所有元素乘积，可以检查它的大小（size）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.size(x)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=int32, numpy=12&gt;
+</code></pre>
+<ul>
+<li>要改变一个张量的形状而不改变元素数量和元素值，可以调用<code>reshape</code>函数。例如，可以把张量<code>x</code>从形状为（12,）的行向量转换为形状为（3,4）的矩阵。
+<ul>
+<li>这个新的张量包含与转换前相同的值，但是它被看成一个3行4列的矩阵。要重点说明一下，虽然张量的形状发生了改变，但其元素值并没有变。注意，通过改变张量的形状，张量的大小不会改变。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D; tf.reshape(x, (3, 4))
+X</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=int32, numpy=
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]], dtype=int32)&gt;
+</code></pre>
+<ul>
+<li>不需要通过手动指定每个维度来改变形状。也就是说，如果我们的目标形状是（高度,宽度），那么在知道宽度后，高度应当会隐式得出，我们不必自己做除法。在上面的例子中，为了获得一个3行的矩阵，我们手动指定了它有3行和4列。
+<ul>
+<li>幸运的是，张量在给出其他部分后可以自动计算出一个维度。我们可以通过在希望张量自动推断的维度放置<code>-1</code>来调用此功能。在上面的例子中，我们可以用<code>x.reshape(-1,4)</code>或<code>x.reshape(3,-1)</code>来取代<code>x.reshape(3,4)</code>。</li>
+</ul>
+</li>
+<li>有时，我们希望[<strong>使用全0、全1、其他常量或者从特定分布中随机采样的数字</strong>]来初始化矩阵。我们可以创建一个形状为（2,3,4）的张量，其中所有元素都设置为0。代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.zeros((2, 3, 4))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3, 4), dtype=float32, numpy=
+array([[[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]],
+
+       [[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>同样，我们可以创建一个形状为<code>(2,3,4)</code>的张量，其中所有元素都设置为1。代码如下：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.ones((2, 3, 4))</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(2, 3, 4), dtype=float32, numpy=
+array([[[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]],
+
+       [[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>有时我们想通过<strong>从某个特定的概率分布中随机采样来得到张量中每个元素的值</strong>。例如，当我们构造数组来作为神经网络中的参数时，我们通常会随机初始化参数的值。以下代码创建一个形状为（3,4）的张量。其中的每个元素都从均值为0、标准差为1的标准高斯（正态）分布中随机采样。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.random.normal(shape&#x3D;[3, 4])</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=
+array([[ 1.3451171 ,  1.8505315 , -0.36672395, -0.5327307 ],
+       [-1.9183167 , -1.1994293 ,  0.37904397,  0.8061889 ],
+       [-0.3106889 ,  0.22559305, -0.96131563, -0.30276218]],
+      dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>我们还可以[<strong>通过提供包含数值的Python列表（或嵌套列表）来为所需张量中的每个元素赋予确定值</strong>]。在这里，最外层的列表对应于轴0，内层的列表对应于轴1。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.constant([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=int32, numpy=
+array([[2, 1, 4, 3],
+       [1, 2, 3, 4],
+       [4, 3, 2, 1]], dtype=int32)&gt;
+</code></pre>
+<h1 id="tensorflow的数组基本运算"><a class="markdownIt-Anchor" href="#tensorflow的数组基本运算"></a> Tensorflow的数组基本运算</h1>
+<ul>
+<li>对数组一些最简单且最有用的操作是<em>按元素</em>（elementwise）操作。它们将标准标量运算符应用于数组的每个元素。</li>
+<li>对于将两个数组作为输入的函数，按元素运算将二元运算符应用于两个数组中的<em>每对位置对应</em>的元素。我们可以基于任何从标量到标量的函数来创建按元素函数。</li>
+<li>对于任意具有相同形状的张量，[<strong>常见的标准算术运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>和<code>**</code>）都可以被升级为按元素运算</strong>]。我们可以在同一形状的任意两个张量上调用按元素操作。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x &#x3D; tf.constant([1.0, 2, 4, 8])
+y &#x3D; tf.constant([2.0, 2, 2, 2])
+x + y, x - y, x * y, x &#x2F; y, x ** y  # **运算符是求幂运算</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 3.,  4.,  6., 10.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([-1.,  0.,  2.,  6.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 2.,  4.,  8., 16.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([0.5, 1. , 2. , 4. ], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 1.,  4., 16., 64.], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>可以(<strong>按按元素方式应用更多的计算</strong>)，包括像求指数幂这样的一元运算符。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.exp(x)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=
+array([2.7182817e+00, 7.3890562e+00, 5.4598148e+01, 2.9809580e+03],
+      dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>除了按元素计算外，我们还可以执行线性代数运算，包括向量点积和矩阵乘法。</li>
+<li>[<strong>我们也可以把多个张量<em>连结</em>（concatenate）在一起</strong>]，把它们端对端地叠起来形成一个更大的张量。我们只需要提供张量列表，并给出沿哪个轴连结。</li>
+<li>下面的例子分别演示了当我们沿行（轴-0，形状的第一个元素）和按列（轴-1，形状的第二个元素）连结两个矩阵时会发生什么情况。我们可以看到，第一个输出张量的轴-0长度（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">6</span></span></span></span>）是两个输入张量轴-0长度的总和（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">3 + 3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">3</span></span></span></span>）；第二个输出张量的轴-1长度（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>8</mn></mrow><annotation encoding="application/x-tex">8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">8</span></span></span></span>）是两个输入张量轴-1长度的总和（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>+</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">4 + 4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span></span></span></span>）。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D; tf.reshape(tf.range(12, dtype&#x3D;tf.float32), (3, 4))
+Y &#x3D; tf.constant([[2.0, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+tf.concat([X, Y], axis&#x3D;0), tf.concat([X, Y], axis&#x3D;1)</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(6, 4), dtype=float32, numpy=
+ array([[ 0.,  1.,  2.,  3.],
+        [ 4.,  5.,  6.,  7.],
+        [ 8.,  9., 10., 11.],
+        [ 2.,  1.,  4.,  3.],
+        [ 1.,  2.,  3.,  4.],
+        [ 4.,  3.,  2.,  1.]], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(3, 8), dtype=float32, numpy=
+ array([[ 0.,  1.,  2.,  3.,  2.,  1.,  4.,  3.],
+        [ 4.,  5.,  6.,  7.,  1.,  2.,  3.,  4.],
+        [ 8.,  9., 10., 11.,  4.,  3.,  2.,  1.]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>[<strong>通过<em>逻辑运算符</em>构建二元张量</strong>]。以<code>X == Y</code>为例子。对于每个位置，如果<code>X</code>和<code>Y</code>在该位置相等，则新张量中相应项的值为1，这意味着逻辑语句<code>X == Y</code>在该位置处为真，否则该位置为0。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X &#x3D;&#x3D; Y</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=bool, numpy=
+array([[False,  True, False,  True],
+       [False, False, False, False],
+       [False, False, False, False]])&gt;
+</code></pre>
+<ul>
+<li>[<strong>对张量中的所有元素进行求和会产生一个只有一个元素的张量。</strong>]</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tf.reduce_sum(X)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=66.0&gt;
+</code></pre>
+<h2 id="广播机制"><a class="markdownIt-Anchor" href="#广播机制"></a> 广播机制</h2>
+<ul>
+<li>在上面的部分中，我们看到了如何在相同形状的两个张量上执行按元素操作。在某些情况下，[<strong>即使形状不同，我们仍然可以通过调用<em>广播机制</em>（broadcasting mechanism）来执行按元素操作</strong>]。</li>
+<li>这是Tensorflow的自动机制，这种机制的工作方式如下：首先，通过适当复制元素来扩展一个或两个数组，以便在转换之后，两个张量具有相同的形状。其次，对生成的数组执行按元素操作。在大多数情况下，我们将沿着数组中长度为1的轴进行广播，如下例子：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; tf.reshape(tf.range(3), (3, 1))
+b &#x3D; tf.reshape(tf.range(2), (1, 2))
+a, b</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(3, 1), dtype=int32, numpy=
+ array([[0],
+        [1],
+        [2]], dtype=int32)&gt;,
+ &lt;tf.Tensor: shape=(1, 2), dtype=int32, numpy=array([[0, 1]], dtype=int32)&gt;)
+</code></pre>
+<ul>
+<li>由于<code>a</code>和<code>b</code>分别是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>×</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">3\times1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">1\times2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>矩阵，如果我们让它们相加，它们的形状不匹配。我们将两个矩阵<em>广播</em>为一个更大的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>3</mn><mo>×</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">3\times2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>矩阵，如下所示：矩阵<code>a</code>将复制列，矩阵<code>b</code>将复制行，然后再按元素相加。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a + b</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 2), dtype=int32, numpy=
+array([[0, 1],
+       [1, 2],
+       [2, 3]], dtype=int32)&gt;
+</code></pre>
+<h2 id="索引和切片"><a class="markdownIt-Anchor" href="#索引和切片"></a> 索引和切片</h2>
+<ul>
+<li>就像在任何其他Python数组中一样，张量中的元素可以通过索引访问。与任何Python数组一样：第一个元素的索引是0；可以指定范围以包含第一个元素和最后一个之前的元素。与标准Python列表一样，我们可以通过<em>使用负索引根据元素到列表尾部的相对位置访问元素</em>。</li>
+<li>因此，我们[可以用<code>[-1]</code>选择最后一个元素，可以用<code>[1:3]</code>选择第二个和第三个元素（从1， 2 ,索引3是右开边界）]，如下所示：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X[-1], X[1:3]</code></pre>
+<pre><code>(&lt;tf.Tensor: shape=(4,), dtype=float32, numpy=array([ 8.,  9., 10., 11.], dtype=float32)&gt;,
+ &lt;tf.Tensor: shape=(2, 4), dtype=float32, numpy=
+ array([[ 4.,  5.,  6.,  7.],
+        [ 8.,  9., 10., 11.]], dtype=float32)&gt;)
+</code></pre>
+<ul>
+<li>TensorFlow中的<code>Tensors</code>对象是不可变的，也不能被赋值。TensorFlow中的<code>Variables</code>是支持赋值的可变容器。请记住，TensorFlow中的梯度不会通过<code>Variable</code>反向传播。</li>
+<li>除了为整个<code>Variable</code>分配一个值之外，我们还可以通过索引来写入<code>Variable</code>的元素。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X_var &#x3D; tf.Variable(X)
+X_var[1, 2].assign(-100) # 将索引为(1, 2)的元素修改为-100
+X_var</code></pre>
+<pre><code>&lt;tf.Variable 'Variable:0' shape=(3, 4) dtype=float32, numpy=
+array([[   0.,    1.,    2.,    3.],
+       [   4.,    5., -100.,    7.],
+       [   8.,    9.,   10.,   11.]], dtype=float32)&gt;
+</code></pre>
+<ul>
+<li>如果我们想[<strong>为多个元素赋值相同的值，我们只需要索引所有元素，然后为它们赋值。</strong>]。例如，<code>[0:2, :]</code>访问第1行和第2行，其中“:”代表沿轴1（列）的所有元素。虽然我们讨论的是矩阵的索引，但这也适用于向量和超过2个维度的张量。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">X_var &#x3D; tf.Variable(X)
+X_var[0:2, :].assign(tf.ones(X_var[0:2,:].shape, dtype &#x3D; tf.float32) * 12) # 将第一行和第二行元素全部修改为12
+X_var</code></pre>
+<pre><code>&lt;tf.Variable 'Variable:0' shape=(3, 4) dtype=float32, numpy=
+array([[12., 12., 12., 12.],
+       [12., 12., 12., 12.],
+       [ 8.,  9., 10., 11.]], dtype=float32)&gt;
+</code></pre>
+<h2 id="节省内存"><a class="markdownIt-Anchor" href="#节省内存"></a> 节省内存</h2>
+<ul>
+<li>[<strong>运行一些操作可能会导致为新结果分配内存</strong>]。例如，如果我们用<code>Y = X + Y</code>，我们将取消引用<code>Y</code>指向的张量，而是指向新分配的内存处的张量。</li>
+<li>在下面的例子中，我们用Python的<code>id()</code>函数演示了这一点，它给我们提供了内存中引用对象的确切地址。运行<code>Y = Y + X</code>后，我们会发现<code>id(Y)</code>指向另一个位置。这是因为Python首先计算<code>Y + X</code>，为结果分配新的内存，然后使<code>Y</code>指向内存中的这个新位置。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">before &#x3D; id(Y)
+Y &#x3D; Y + X
+id(Y) &#x3D;&#x3D; before</code></pre>
+<pre><code>False
+</code></pre>
+<ul>
+<li>
+<p>在机器学习中，我们可能有数百兆的参数，并且在一秒内多次更新所有参数。通常情况下，我们希望原地执行这些更新。其次，我们可能通过多个变量指向相同参数。如果我们不原地更新，其他引用仍然会指向旧的内存位置，这样我们的某些代码可能会无意中引用旧的参数。</p>
+</li>
+<li>
+<p><code>Variables</code>是TensorFlow中的可变容器。它们提供了一种存储模型参数的方法。我们可以通过<code>assign</code>将一个操作的结果分配给一个<code>Variable</code>。为了说明这一点，我们创建了一个与另一个张量<code>Y</code>相同的形状的<code>Z</code>，使用<code>zeros_like</code>来分配一个全<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>的块。</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">Z &#x3D; tf.Variable(tf.zeros_like(Y))
+print(&#39;id(Z):&#39;, id(Z))
+Z.assign(X + Y)
+print(&#39;id(Z):&#39;, id(Z))</code></pre>
+<pre><code>id(Z): 140470903098192
+id(Z): 140470903098192
+</code></pre>
+<ul>
+<li>即使你将状态持久存储在<code>Variable</code>中，你也可能希望避免为不是模型参数的张量过度分配内存，从而进一步减少内存使用量。由于TensorFlow的<code>Tensors</code>是不可变的，而且梯度不会通过<code>Variable</code>流动，因此TensorFlow没有提供一种明确的方式来原地运行单个操作。
+<ul>
+<li>但是，TensorFlow提供了<code>tf.function</code>修饰符，将计算封装在TensorFlow图中，该图在运行前经过编译和优化。这允许TensorFlow删除未使用的值，并复用先前分配的且不再需要的值。这样可以最大限度地减少TensorFlow计算的内存开销。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">@tf.function
+def computation(X, Y):
+    Z &#x3D; tf.zeros_like(Y)  # 这个未使用的值将被删除
+    A &#x3D; X + Y  # 当不再需要时，分配将被复用
+    B &#x3D; A + Y
+    C &#x3D; B + Y
+    return C + Y
+
+computation(X, Y)</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=
+array([[ 8.,  9., 26., 27.],
+       [24., 33., 42., 51.],
+       [56., 57., 58., 59.]], dtype=float32)&gt;
+</code></pre>
+<h2 id="与其他-python-对象转化"><a class="markdownIt-Anchor" href="#与其他-python-对象转化"></a> 与其他 Python 对象转化</h2>
+<ul>
+<li><code>tensor</code>对象[<strong>转换为NumPy张量</strong>]很容易，反之也很容易。
+<ul>
+<li>转换后的结果不共享内存。这个小的不便实际上是非常重要的：当你在CPU或GPU上执行操作的时候，如果Python的NumPy包也希望使用相同的内存块执行其他操作，你不希望停下计算来等它。</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">A &#x3D; X.numpy()
+B &#x3D; tf.constant(A)
+type(A), type(B)</code></pre>
+<pre><code>(numpy.ndarray, tensorflow.python.framework.ops.EagerTensor)
+</code></pre>
+<ul>
+<li>要(<strong>将大小为1的张量转换为Python标量</strong>)，我们可以调用<code>item</code>函数或Python的内置函数。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; tf.constant([3.5]).numpy()
+a, a.item(), float(a), int(a)</code></pre>
+<pre><code>(array([3.5], dtype=float32), 3.5, 3.5, 3)
+</code></pre>
+<ul>
+<li>将Pandas对象转化为Tensorflow的tensor张量对象。</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
+
+inputs &#x3D; pd.DataFrame(range(5))
+inputs</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tensor &#x3D; tf.constant(inputs.values)
+tensor</code></pre>
+<pre><code>&lt;tf.Tensor: shape=(5, 1), dtype=int64, numpy=
+array([[0],
+       [1],
+       [2],
+       [3],
+       [4]])&gt;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/Tensorflow/" rel="tag"># Tensorflow</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%80%E2%80%94%E2%80%94%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0/index.html" rel="prev" title="深度学习一——机器学习与深度学习概述">
+                  <i class="fa fa-angle-left"></i> 深度学习一——机器学习与深度学习概述
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%89%E2%80%94%E2%80%94%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6/index.html" rel="next" title="深度学习三——深度学习中的数学">
+                  深度学习三——深度学习中的数学 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

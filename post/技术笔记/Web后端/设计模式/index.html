@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Java设计模式简介  设计模式（Design pattern）:是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。（23中设计模式别称：GOF23）  模式：在某些场景下，针对某类问题的某种通用的解决方案。 场景：项目所在的环境 问题：约束条件，项目目标等 解决方案：通用、可复用的设计，解决约束达到目标。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="Java设计模式简介  设计模式（Design pattern）:是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。（23中设计模式别称：GOF23）  模式：在某些场景下，针对某类问题的某种通用的解决方案。 场景：项目所在的环境 问题：约束条件，项目目标等 解决方案：通用、可复用的设计，解决约束达到目标。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210121160034.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210121162916.png">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210207173309.jpg">
+<meta property="article:published_time" content="2021-01-21T03:21:04.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.983Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210121160034.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html","path":"/post/技术笔记/Web后端/设计模式/index.html","title":"设计模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>设计模式 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text"> Java设计模式简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text"> 代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text"> 静态代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text"> 工厂设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text"> 简单工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 工厂方法模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text"> 抽象工厂模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F-2"><span class="nav-number">4.</span> <span class="nav-text"> 代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86-2"><span class="nav-number">4.1.</span> <span class="nav-text"> 静态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text"> 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">4.2.1.</span> <span class="nav-text"> jdk动态代理</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="设计模式 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          设计模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-21 11:21:04" itemprop="dateCreated datePublished" datetime="2021-01-21T11:21:04+08:00">2021-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="java设计模式简介"><a class="markdownIt-Anchor" href="#java设计模式简介"></a> Java设计模式简介</h1>
+<ul>
+<li>设计模式（Design pattern）:是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。（23中设计模式别称：GOF23）
+<ul>
+<li>模式：在某些场景下，针对某类问题的某种通用的解决方案。</li>
+<li>场景：项目所在的环境</li>
+<li>问题：约束条件，项目目标等</li>
+<li>解决方案：通用、可复用的设计，解决约束达到目标。</li>
+</ul>
+</li>
+<li>设计模式的三个分类：
+<ul>
+<li>创建型模式：对象实例化的模式，创建型模式用于解耦对象的实例化过程。
+<ul>
+<li>五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li>
+</ul>
+</li>
+<li>结构型模式：把类或对象结合在一起形成一个更大的结构。
+<ul>
+<li>适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</li>
+</ul>
+</li>
+<li>行为型模式：类和对象如何交互，及划分责任和算法。
+<ul>
+<li>策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210121160034.png" alt="" /></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>7大设计模式原则：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>设计原则</th>
+<th>设计原则定义</th>
+<th>设计原则详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>开闭原则</td>
+<td>开闭原则是指一个软件实体，如类、模块和函数应该对扩展开放,对修改关闭，也就是说一个软件实体应该通过扩展来实现变化，而不是通过修改已有的代码来实现变化。</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/open-close-principle.html">开闭原则详解</a></td>
+</tr>
+<tr>
+<td>里氏替换原则</td>
+<td>里氏替换原则是关于继承的一个原则，遵循里氏替换原则能够更好地发挥继承的作用，里氏替换原则最早是在1988年，由麻省理工学院的一位姓里的女士（Barbara Liskov）提出来的。子类可以扩展父类的功能，但不能改变父类的功能</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/liskov-substitution-principle.html">里氏替换原则详解</a></td>
+</tr>
+<tr>
+<td>迪米特原则</td>
+<td>迪米特原则它要求一个对象应该对其他对象有最少的了解，所以迪米特法则又叫做最少知识原则。</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/law-of-demeter.html">迪米特原则详解</a></td>
+</tr>
+<tr>
+<td>单一职责原则</td>
+<td>单一职责原则(Single Responsibility Principle)是面向对象设计原则的一种。单一职责原则是指不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/single-responsibility-principle.html">单一职责原则详解</a></td>
+</tr>
+<tr>
+<td>接口分离原则</td>
+<td>接口分离原则指在设计时采用多个与特定客户类有关的接口比采用一个通用的接口要好。</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/interface-segregation-principle.html">接口分离原则详解</a></td>
+</tr>
+<tr>
+<td>依赖倒置原则</td>
+<td>依赖倒置原则指的是高层模块(稳定)不应该依赖于低层模块(变化)，二者都应该依赖于抽象(稳定)。抽象(稳定)不应该依赖于实现细节(变化)，实现细节应该依赖于抽象(稳定)。即面向接口编程</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/dependence-inversion-principle.html">依赖倒置原则</a></td>
+</tr>
+<tr>
+<td>组合/聚合复用原则</td>
+<td>组合/聚合复用原则是指尽量使用组合/聚合，不要使用类继承。</td>
+<td><a target="_blank" rel="noopener" href="https://geek-docs.com/design-pattern/design-principle/composite-aggregate-reuse-principle.html">组合/聚合复用原则详解</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>23种设计模式简述：
+<ol>
+<li>单例模式：某个类只能有一个实例，提供一个全局的访问点。</li>
+<li>工厂方法模式：工厂方法模式是简单工厂模式的进一步抽象和推广，是GoF设计模式的一种。由于使用了面向对象的多态性，工厂方法模式保持了简单工厂模式的优点，而且克服了它的缺点。</li>
+<li>抽象工厂模式：创建相关或依赖对象的家族，而无需明确指定具体类。</li>
+<li>建造者模式：封装一个复杂对象的构建过程，并可以按步骤构造。</li>
+<li>原型模式：通过复制现有的实例来创建新的实例。</li>
+<li>适配器模式：将一个类的方法接口转换成客户希望的另外一个接口。</li>
+<li>组合模式：将对象组合成树形结构以表示“部分-整体”的层次结构。</li>
+<li>装饰模式：动态的给对象添加新的功能。</li>
+<li>代理模式：为其他对象提供一个代理以便控制这个对象的访问。</li>
+<li>享元（蝇量）模式：通过共享技术来有效的支持大量细粒度的对象。</li>
+<li>外观模式：对外提供一个统一的方法，来访问子系统中的一群接口。</li>
+<li>桥接模式：将抽象部分和它的实现部分分离，使它们都可以独立的变化。</li>
+<li>模板模式：定义一个算法结构，而将一些步骤延迟到子类实现。</li>
+<li>解释器模式：给定一个语言，定义它的文法的一种表示，并定义一个解释器。</li>
+<li>策略模式：定义一系列算法，把他们封装起来，并且使它们可以相互替换。</li>
+<li>状态模式：允许一个对象在其对象内部状态改变时改变它的行为。</li>
+<li>观察者模式：对象间的一对多的依赖关系。</li>
+<li>备忘录模式：在不破坏封装的前提下，保持对象的内部状态。</li>
+<li>中介者模式：用一个中介对象来封装一系列的对象交互。</li>
+<li>命令模式：将命令请求封装为一个对象，使得可以用不同的请求来进行参数化。</li>
+<li>访问者模式：在不改变数据结构的前提下，增加作用于一组对象元素的新功能。</li>
+<li>责任链模式：将请求的发送者和接收者解耦，使的多个对象都有处理这个请求的机会。</li>
+<li>迭代器模式：一种遍历访问聚合对象中各个元素的方法，不暴露该对象的内部结构。</li>
+</ol>
+</li>
+</ul>
+<h1 id="代理模式"><a class="markdownIt-Anchor" href="#代理模式"></a> 代理模式</h1>
+<ul>
+<li>代理模式(Proxy Pattern) 是一种结构型设计模式， 让你能够提供对象的替代品或其占位符。 代理控制着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。代理模式给某一个对象提供一个代理，并<strong>由代理对象控制对原对象的引用</strong>。代理模式的英文叫做Proxy或Surrogate，它是一种对象结构型模式。。<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210121162916.png" alt="" /></li>
+<li>三种代理模式：
+<ol>
+<li>静态代理；</li>
+<li>JDK动态代理；</li>
+<li>Cglib动态代理。</li>
+</ol>
+</li>
+</ul>
+<h2 id="静态代理"><a class="markdownIt-Anchor" href="#静态代理"></a> 静态代理</h2>
+<h1 id="工厂设计模式"><a class="markdownIt-Anchor" href="#工厂设计模式"></a> 工厂设计模式</h1>
+<ul>
+<li>属于创建者模式；</li>
+<li>实现了创建者和调用者的分离；</li>
+<li>分类：
+<ol>
+<li>简单工厂模式；</li>
+<li>工厂方法模式；</li>
+<li>抽象工厂模式；</li>
+</ol>
+</li>
+<li>主要遵循原则：
+<ol>
+<li>开闭原则；</li>
+<li>依赖倒置原则；</li>
+<li>迪米特原则；</li>
+</ol>
+</li>
+<li>核心本质：
+<ol>
+<li>实例化对象不使用new，用工厂方法替代；</li>
+<li>将选择实现类，创建对象统一管理和控制，从而将调用者和我们的实现类解耦。</li>
+</ol>
+</li>
+</ul>
+<h2 id="简单工厂模式"><a class="markdownIt-Anchor" href="#简单工厂模式"></a> 简单工厂模式</h2>
+<ul>
+<li>用来生产同一等级结构中的任意产品（对于增加新的产品，需要扩展已有的代码）</li>
+<li>虽然不符合开闭原则，但是因为其简单，所以实际中使用得最多。</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">
+&#x2F;&#x2F;车接口
+package simpliFactory;
+
+
+public interface Car &#123;
+
+    void name();
+&#125;
+
+&#x2F;&#x2F;benci车实体类
+package simpliFactory;
+
+public class BenciCar implements Car &#123;
+
+    @Override
+    public void name() &#123;
+        System.out.println(&quot;benci&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;bmw车实体类
+package simpliFactory;
+
+public class BMWCar implements Car &#123;
+
+    @Override
+    public void name() &#123;
+        System.out.println(&quot;BMW&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;车工厂
+package simpliFactory;
+
+public class CarFactory &#123;
+    public static Car getCar(String name) &#123;
+      &#x2F;&#x2F;想要增加新的车型，必须修改这里面的代码
+        if(name.equals(&quot;bmw&quot;)) &#123;
+            return new BMWCar();
+        &#125;else if(name.equals(&quot;benci&quot;)) &#123;
+            return new BenciCar();
+        &#125;else &#123;
+            return null;
+        &#125;
+    &#125;
+&#125;
+
+&#x2F;&#x2F;消费者从车工厂购买车
+package simpliFactory;
+
+public class Consumer &#123;
+    public static void main(String[] args) &#123;
+        Car car1 &#x3D; CarFactory.getCar(&quot;bmw&quot;);
+        Car car2 &#x3D; CarFactory.getCar(&quot;benci&quot;);
+
+        car1.name();
+        car2.name();
+    &#125;
+&#125;</code></pre>
+<h2 id="工厂方法模式"><a class="markdownIt-Anchor" href="#工厂方法模式"></a> 工厂方法模式</h2>
+<ul>
+<li>用来生产同一等级结构中的固定产品（支持增加任意产品）</li>
+<li>不修改已有类的前提下，通过增加<strong>新的工厂类</strong>来实现扩展。</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">
+&#x2F;&#x2F;车接口
+package methodFactory;
+
+public interface Car &#123;
+
+    void name();
+&#125;
+&#x2F;&#x2F;车工厂接口
+package methodFactory;
+
+public interface CarFactory &#123;
+     Car getCar();
+&#125;
+&#x2F;&#x2F;BMW车实体类
+package methodFactory;
+
+public class BMWCar implements Car &#123;
+
+    @Override
+    public void name() &#123;
+        System.out.println(&quot;BMW&quot;);
+    &#125;
+&#125;
+&#x2F;&#x2F;Benci车实体类
+package methodFactory;
+
+public class BenciCar implements Car &#123;
+
+    @Override
+    public void name() &#123;
+        System.out.println(&quot;benci&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;BMW车工厂类
+package methodFactory;
+
+public class BMWFactory implements CarFactory &#123;
+    @Override
+    public  Car getCar() &#123;
+        return new BMWCar();
+    &#125;
+&#125;
+
+&#x2F;&#x2F;Benci车工厂类
+package methodFactory;
+
+public class BenciFactory implements CarFactory&#123;
+    @Override
+    public Car getCar() &#123;
+        return new BenciCar();
+    &#125;
+&#125;
+
+&#x2F;&#x2F;消费者从对应的工厂获取对应的车
+package methodFactory;
+
+public class Consumer &#123;
+    public static void main(String[] args) &#123;
+        Car car1 &#x3D; new BMWFactory().getCar();
+        Car car2 &#x3D; new BenciFactory().getCar();
+
+        car1.name();
+        car2.name();
+    &#125;
+&#125;</code></pre>
+<h2 id="抽象工厂模式"><a class="markdownIt-Anchor" href="#抽象工厂模式"></a> 抽象工厂模式</h2>
+<ul>
+<li>抽象工厂提供了一个创建一系列相关或相互依赖产品（即一个产品簇）的接口，无需指定它们具体的类。</li>
+<li>核心：将一个系列的产品统一到一起创建。增加新系列的产品容易，但是修改产品簇中的产品困难。</li>
+<li>示例：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20210207173309.jpg" alt="" /></li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;产品簇中产品之一-手机接口
+package abstractFactory;
+
+public interface IphoneProduct &#123;
+
+    void call();
+&#125;
+
+&#x2F;&#x2F;产品簇中产品之一-路由器接口
+package abstractFactory;
+
+public interface IRouterProduct &#123;
+
+    void openWifi();
+&#125;
+
+
+&#x2F;&#x2F;小米系列产品之手机实体类
+package abstractFactory;
+
+public class XIaomiPhone  implements IphoneProduct&#123;
+    @Override
+    public void call() &#123;
+        System.out.println(&quot;小米打电话&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;小米系列产品之路由器实体类
+package abstractFactory;
+
+public class XIaomiRouter implements IRouterProduct &#123;
+    @Override
+    public void openWifi() &#123;
+        System.out.println(&quot;小米路由器连wifi&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;华为系列产品之手机实体类
+package abstractFactory;
+
+public class HuaweiPhone  implements IphoneProduct&#123;
+    @Override
+    public void call() &#123;
+        System.out.println(&quot;华为打电话&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;华为系列产品之路由器实体类
+package abstractFactory;
+
+public class HuaweiRouter implements IRouterProduct&#123;
+    @Override
+    public void openWifi() &#123;
+        System.out.println(&quot;华为路由器连wifi&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;抽象工厂-用于生产生产不同系列产品的工厂
+package abstractFactory;
+
+public interface IProductFactory &#123;
+
+    IphoneProduct producePhone();
+    IRouterProduct produceRouter();
+&#125;
+
+&#x2F;&#x2F;小米系列产品的生产工厂
+package abstractFactory;
+
+public class XiaomiProductFactory implements IProductFactory &#123;
+    @Override
+    public IphoneProduct producePhone() &#123;
+        return new XIaomiPhone();
+    &#125;
+
+    @Override
+    public IRouterProduct produceRouter() &#123;
+        return new XIaomiRouter();
+    &#125;
+&#125;
+
+&#x2F;&#x2F;华为系列产品的生产工厂
+package abstractFactory;
+
+public class HuaweiProductFactory implements IProductFactory &#123;
+    @Override
+    public IphoneProduct producePhone() &#123;
+        return new HuaweiPhone();
+    &#125;
+
+    @Override
+    public IRouterProduct produceRouter() &#123;
+        return new HuaweiRouter();
+    &#125;
+&#125;
+
+
+&#x2F;&#x2F;从不同工厂取出不同系列产品
+package abstractFactory;
+
+public class Client &#123;
+
+    public static void main(String[] args) &#123;
+        IProductFactory xiaomi &#x3D; new XiaomiProductFactory();
+        IphoneProduct phone1 &#x3D; xiaomi.producePhone();
+        IRouterProduct router1 &#x3D; xiaomi.produceRouter();
+
+        IProductFactory huawei &#x3D; new HuaweiProductFactory();
+        IphoneProduct phone2 &#x3D; huawei.producePhone();
+        IRouterProduct router2 &#x3D; huawei.produceRouter();
+
+        phone1.call();
+        router1.openWifi();
+
+        phone2.call();
+        router2.openWifi();
+    &#125;
+&#125;</code></pre>
+<h1 id="代理模式-2"><a class="markdownIt-Anchor" href="#代理模式-2"></a> 代理模式</h1>
+<h2 id="静态代理-2"><a class="markdownIt-Anchor" href="#静态代理-2"></a> 静态代理</h2>
+<ul>
+<li>抽象角色：一般用接口或抽象类来解决，用来统一真实角色和代理角色的核心功能。</li>
+<li>真实角色：被代理的角色；</li>
+<li>代理角色：代理真实角色，代理真实角色后，一般会增加一些附属功能。</li>
+<li>客户：访问代理对象的人。</li>
+</ul>
+<hr />
+<ul>
+<li>优点：
+<ul>
+<li>可以使真实角色的业务简化，不用去关注一些公共的业务；</li>
+<li>公共业务交给代理角色，实现了业务的分工；</li>
+<li>公共业务发生扩展的时候，方便集中管理，不用去直接修改原有代码，只用增强代理角色的功能。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>一个真实角色就会产生一个代理角色，代码量会翻倍。</li>
+</ul>
+</li>
+<li>代码实现步骤：
+<ol>
+<li>接口：</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package staticProxy;
+
+&#x2F;&#x2F;真实角色和代理角色都要实现相同的接口，以确保代理和真实角色的核心功能统一，例如，房东不需要婚介所
+public interface Rent &#123;
+    void rent();
+&#125;</code></pre>
+<ol start="2">
+<li>真实角色：</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package staticProxy;
+
+&#x2F;&#x2F;房东-真实角色
+public class Host implements Rent&#123;
+    @Override
+    public void rent() &#123;
+        System.out.println(&quot;房东出租房屋&quot;);
+    &#125;
+&#125;</code></pre>
+<pre><code>3. 代理角色：
+</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package staticProxy;
+
+&#x2F;&#x2F;中介-代理角色
+public class Proxy implements Rent &#123;
+
+    private Host host;
+
+    public Proxy(Host host)&#123;
+        this.host &#x3D; host;
+    &#125;
+
+    &#x2F;&#x2F;代理角色除了实现真实角色的功能外，往往还需实现一些附属功能，这正是代理的作用所在。
+    @Override
+    public void rent() &#123; &#x2F;&#x2F;核心功能rent中添加一些附属功能
+        seeHouse();
+        host.rent();
+        fare();
+    &#125;
+
+    public void seeHouse() &#123;
+        System.out.println(&quot;中介带客户看房子&quot;);
+    &#125;
+
+    public void fare() &#123;
+        System.out.println(&quot;中介收取费用&quot;);
+    &#125;
+&#125;</code></pre>
+<pre><code>4. 客户：
+</code></pre>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package staticProxy;
+
+public class Client &#123;
+
+    public static void main(String[] args) &#123;
+        Host host &#x3D; new Host();
+        Proxy proxy &#x3D; new Proxy(host);
+        proxy.rent();
+    &#125;
+&#125;</code></pre>
+<h2 id="动态代理"><a class="markdownIt-Anchor" href="#动态代理"></a> 动态代理</h2>
+<ul>
+<li>动态代理和静态代理发挥的作用相同，只是代理角色生成的方式不同；</li>
+<li>动态代理的代理类是动态生成的，不是像静态代理类一样是我们事先写好的；</li>
+<li>动态代理的分类：
+<ol>
+<li>基于接口的动态代理；</li>
+<li>基于类的动态代理；</li>
+</ol>
+</li>
+<li>动态代理的实现方式：
+<ol>
+<li>jdk动态代理–基于接口；</li>
+<li>cglib–基于类；</li>
+<li>javasist–java字节码实现；</li>
+</ol>
+</li>
+</ul>
+<h3 id="jdk动态代理"><a class="markdownIt-Anchor" href="#jdk动态代理"></a> jdk动态代理</h3>
+<ul>
+<li>jdk的动态代理是通过Proxy类和 InvocationHandler接口实现的；</li>
+<li>Proxy类提供生成满足对应接口的代理实例的静态方法；</li>
+<li>InvocationHandler是一个接口，每一个动态生成的代理实例都有一个对应的实现了InvocationHandler接口的类。</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;统一真实角色和代理角色的接口
+public interface Rent &#123;
+    void rent();
+&#125;
+
+&#x2F;&#x2F;真实角色1
+public class Host implements Rent &#123;
+    @Override
+    public void rent() &#123;
+        System.out.println(&quot;房东1出租房子&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;真实角色2
+public class Host2 implements Rent &#123;
+    @Override
+    public void rent() &#123;
+        System.out.println(&quot;房东2出租房屋&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;代理处理类，用于生成实现和真实角色一样接口的代理实例
+public class ProxyInvocationHandler implements InvocationHandler &#123;
+
+    &#x2F;&#x2F;需要实现的接口
+    private Object target;
+
+    &#x2F;&#x2F;设置对应的接口
+    public void setTarget(Object target)&#123;
+        this.target &#x3D; target;
+    &#125;
+
+    &#x2F;&#x2F;获取代理实例
+    public Object getProxy()&#123;
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(),target.getClass().getInterfaces(),this);
+    &#125;
+
+    &#x2F;&#x2F;实现代理实例的方法
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+        Object result &#x3D; method.invoke(target,args);
+        log(method.getName());
+        return result;
+    &#125;
+
+    &#x2F;&#x2F;添加代理实例的附属方法
+    public void log(String methodName) &#123;
+        System.out.println(&quot;执行了&quot;+methodName+&quot;方法&quot;);
+    &#125;
+&#125;
+
+&#x2F;&#x2F;通过代理实现租房
+public class Client &#123;
+    public static void main(String[] args) &#123;
+        Host host1 &#x3D; new Host();
+        Host2 host2 &#x3D; new Host2();
+
+        ProxyInvocationHandler pih &#x3D; new ProxyInvocationHandler();&#x2F;&#x2F;生成代理处理对象
+        pih.setTarget(host1);&#x2F;&#x2F;设置需要被代理的真实对象
+        Rent proxy &#x3D; (Rent)pih.getProxy();&#x2F;&#x2F;生成对应的代理对象
+        proxy.rent();
+
+        pih.setTarget(host2);
+        Rent proxy2 &#x3D; (Rent) pih.getProxy();
+        proxy2.rent();
+    &#125;
+&#125;</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/Listener/index.html" rel="prev" title="Listener">
+                  <i class="fa fa-angle-left"></i> Listener
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/JQuery/index.html" rel="next" title="JQuery">
+                  JQuery <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

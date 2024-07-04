@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="流  流(Stream): C语言中，流表示&#x3D;&#x3D;任意输入的源或任意输出的目的地&#x3D;&#x3D;。 流经常表示存储在不同介质的&#x3D;&#x3D;文件&#x3D;&#x3D;，也经常和&#x3D;&#x3D;不存储文件的设备(如网络端口，打印机)&#x3D;&#x3D;关联。 &lt;stido.h&gt;中的函数可以处理各种形式的流。   文件指针  文件指针(file pointer)：C程序中&#x3D;&#x3D;对流的访问是通过文件指针来实现的&#x3D;&#x3D;。 文件指针的类型：FILE *  FILE类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言-输入输出">
+<meta property="og:url" content="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="流  流(Stream): C语言中，流表示&#x3D;&#x3D;任意输入的源或任意输出的目的地&#x3D;&#x3D;。 流经常表示存储在不同介质的&#x3D;&#x3D;文件&#x3D;&#x3D;，也经常和&#x3D;&#x3D;不存储文件的设备(如网络端口，打印机)&#x3D;&#x3D;关联。 &lt;stido.h&gt;中的函数可以处理各种形式的流。   文件指针  文件指针(file pointer)：C程序中&#x3D;&#x3D;对流的访问是通过文件指针来实现的&#x3D;&#x3D;。 文件指针的类型：FILE *  FILE类">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-01T08:55:28.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:33:59.307Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/index.html","path":"/post/专业基础/C语言/C语言-输入输出/index.html","title":"C语言-输入输出"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C语言-输入输出 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text"> 流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88"><span class="nav-number">1.1.</span> <span class="nav-text"> 文件指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B5%81%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.2.</span> <span class="nav-text"> 标准流和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text"> 文本文件和二进制文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text"> 文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text"> 打开文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text"> 关闭文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E6%89%93%E5%BC%80%E7%9A%84%E6%B5%81%E9%99%84%E5%8A%A0%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text"> 为打开的流附加文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">2.4.</span> <span class="nav-text"> 从命令行获取文件名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6"><span class="nav-number">2.5.</span> <span class="nav-text"> 临时文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2"><span class="nav-number">2.6.</span> <span class="nav-text"> 文件缓冲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%A0%E9%99%A4%E4%B8%8E%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">2.7.</span> <span class="nav-text"> 文件删除与重命名</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C语言-输入输出 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言-输入输出
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-01 16:55:28" itemprop="dateCreated datePublished" datetime="2021-03-01T16:55:28+08:00">2021-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:33:59" itemprop="dateModified" datetime="2021-09-26T21:33:59+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">专业基础</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="流"><a class="markdownIt-Anchor" href="#流"></a> 流</h1>
+<ul>
+<li><strong>流(Stream)</strong>: C语言中，流表示==任意输入的源或任意输出的目的地==。</li>
+<li>流经常表示存储在不同介质的==文件==，也经常和==不存储文件的设备(如网络端口，打印机)==关联。</li>
+<li><code>&lt;stido.h&gt;</code>中的函数可以处理各种形式的流。</li>
+</ul>
+<h2 id="文件指针"><a class="markdownIt-Anchor" href="#文件指针"></a> 文件指针</h2>
+<ul>
+<li><strong>文件指针(file pointer)</strong>：C程序中==对流的访问是通过文件指针来实现的==。</li>
+<li><strong>文件指针的类型</strong>：<code>FILE *</code>
+<ul>
+<li>FILE类型是在<code>&lt;stdio.h&gt;</code>中声明的。</li>
+<li>示例:<code>FILE *fp1;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="标准流和重定向"><a class="markdownIt-Anchor" href="#标准流和重定向"></a> 标准流和重定向</h2>
+<ul>
+<li><code>&lt;stdio.h&gt;</code>提供了3个标准流：
+<ol>
+<li><code>stdin</code>:标准输入流，默认是键盘。</li>
+<li><code>stdout</code>:标准输出流，默认是屏幕。</li>
+<li><code>stderr</code>:标准错误，默认是屏幕。</li>
+</ol>
+</li>
+<li><strong>标准流的特性</strong>：
+<ul>
+<li>这三个标准流==可以直接使用，不需要对其进行声明，也不用打开或者关闭==。</li>
+<li>stdin,stdout,stderr是三个==文件指针==。</li>
+</ul>
+</li>
+<li><strong>重定向</strong>：
+<ul>
+<li>操作系统通过==重定向的操作改变标准流的默认含义==。</li>
+<li><strong>输出重定向</strong>：使stdin流表示文件，而不是键盘,通过在命令行中使用<code>&lt;</code>实现，如：<code>demo &lt;in.dat</code>,运行demo程序时从in.dat文件中获取数据。</li>
+<li><strong>输出重定向</strong>：使stdout流表示文件，而不是屏幕，通过在命令行中使用<code>&gt;</code>实现，如：<code>demo &gt;out.dat</code>，运行demo程序时输出到out.dat文件中。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文本文件和二进制文件"><a class="markdownIt-Anchor" href="#文本文件和二进制文件"></a> 文本文件和二进制文件</h2>
+<ul>
+<li><code>&lt;stdio.h&gt;</code>支持<strong>文本文件</strong>和<strong>二进制文件</strong>。</li>
+<li><strong>文本文件(text file)</strong>：
+<ul>
+<li>在文本文件中，==字节表示字符==；</li>
+<li><strong>文本文件分为若干行</strong>：
+<ul>
+<li>文本文件的每一行通常==以一两个特殊字符结尾==；</li>
+<li>windows系统是以==回车符<code>\x0d</code>和回行符<code>\x0a</code>==结尾；</li>
+<li>unix操作系统是以==一个单独的回行符<code>\x0a</code>==结尾。</li>
+</ul>
+</li>
+<li><strong>文本文件末尾可以包含一个特殊的文件末尾标识符</strong>：
+<ul>
+<li>文件末尾标识==不是必须的，但一旦存在，就标志着文件的结束==。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>二进制文件</strong>：
+<ul>
+<li>在二进制文件中，==字节可以表示很多类型的数据==。</li>
+<li>二进制文件==不分行，没有行末标记和文件末尾标记==。</li>
+</ul>
+</li>
+</ul>
+<h1 id="文件操作"><a class="markdownIt-Anchor" href="#文件操作"></a> 文件操作</h1>
+<ul>
+<li><code>&lt;stdio.h&gt;</code>提供了一系列的文件操作，包括打开文件，关闭文件，改变文件的缓冲方式，删除文件以及重命名文件等。</li>
+</ul>
+<h2 id="打开文件"><a class="markdownIt-Anchor" href="#打开文件"></a> 打开文件</h2>
+<ul>
+<li><strong><code>fopen()</code>函数</strong>：
+<ul>
+<li>将文件打开并用作==流==；</li>
+<li>原型：<code>FILE *fopen(const char *filename, const char *mode)</code></li>
+<li><strong>filename</strong>：要打开文件的文件名（可能包含文件的==路径信息==。）
+<ul>
+<li>路径：在windows系统中的路径中含有<code>\</code>,会被C语言识别为转移字符，而导致错误。常用<code>\\</code>或者<code>/</code>来替换路径中的<code>\</code>。</li>
+</ul>
+</li>
+<li><strong>mode</strong>:==模式字符串==，用来指定打算对文件执行的操作。对==文本文件和对二进制文件的模式字符串是不一样的==。
+<ul>
+<li>对<strong>文本文件</strong>的六种模式字符串：
+<ol>
+<li><code>&quot;r&quot;</code>:打开文件用于读；</li>
+<li><code>&quot;w&quot;</code>:打开文件用于写(文件不需要存在)</li>
+<li><code>&quot;a&quot;</code>:打开文件用于追加（文件不需要存在）</li>
+<li><code>&quot;r+&quot;</code>&quot;:打开文件用于==读和写，从文件头开始==；</li>
+<li><code>&quot;w+&quot;</code>:打开文件用于==读和写（如果文件存在就清空）==；</li>
+<li><code>&quot;a+&quot;</code>:打开文件用于==读和写（如果文件存在就追加）==。</li>
+</ol>
+</li>
+<li>对<strong>二进制文件</strong>也有六种模式字符串，只需要在文件文件的基础上==加上b==即可。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：
+<ul>
+<li>fopen函数的返回值是一个==文件指针==；</li>
+<li>当无法代开文件时，会==返回一个空指针==。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="关闭文件"><a class="markdownIt-Anchor" href="#关闭文件"></a> 关闭文件</h2>
+<ul>
+<li><strong><code>flclose()</code>函数</strong>:
+<ul>
+<li>关闭不再使用的文件。</li>
+<li>原型：<code>int fclose(FILE *stream)</code></li>
+<li><strong>参数</strong>：
+<ul>
+<li>==必须是来自fopen函数或者freopen函数的文件指针==；</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：
+<ul>
+<li>如果成功关闭的文件，返回==0==；</li>
+<li>如果失败，返回==EOF==(EOP是<code>&lt;stdio.h&gt;</code>中定义的宏)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="为打开的流附加文件"><a class="markdownIt-Anchor" href="#为打开的流附加文件"></a> 为打开的流附加文件</h2>
+<ul>
+<li><strong><code>freopen()</code>函数</strong>：
+<ul>
+<li>该函数为已经打开的流附加上一个不同的文件。</li>
+<li>原型:<code>FILE *freopen(const char *filename, const char *mode, FILE *stream)</code></li>
+<li><strong>参数</strong>:
+<ul>
+<li>前两个参数同fopen一样；</li>
+<li>第三个参数是一个文件指针，指向一个已经打开了的流。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：
+<ul>
+<li>正常的返回值是它的第三个参数，一个文件指针；</li>
+<li>如果无法打开新文件，返回==空指针==。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="从命令行获取文件名"><a class="markdownIt-Anchor" href="#从命令行获取文件名"></a> 从命令行获取文件名</h2>
+<ul>
+<li>执行程序时，可以通过将==文件名放入命令行的方式为程序提供文件名==。</li>
+<li>示例：命令<code>demo demo1.txt demo2.txt</code>，其中demo是程序名，剩下的是文件名。在C语言中<code>argv[1]</code>指向字符串<code>demo1.txt</code>,<code>argv[2]</code>指向字符串<code>demo2.txt</code></li>
+</ul>
+<h2 id="临时文件"><a class="markdownIt-Anchor" href="#临时文件"></a> 临时文件</h2>
+<ul>
+<li><strong>临时文件</strong>：==只在程序运行时==存在的文件。</li>
+<li><code>&lt;stdio.h&gt;</code>提供了两个函数来处理临时文件。</li>
+<li><code>tmpfile()</code>:
+<ul>
+<li>tmpfile函数用于==创建临时文件==（用wb+模式打开），这个临时文件在==关闭它或者程序终止==时消失。</li>
+<li>原型：<code>FILE *tmpfile(void)</code></li>
+<li>返回值：
+<ul>
+<li>如果创建文件成功，会返回==文件指针==；</li>
+<li>如果创建失败，返回==空指针==。</li>
+</ul>
+</li>
+<li>特点：
+<ul>
+<li>无法知道tmpfile创建的临时文件的==文件名==；</li>
+<li>无法使用tmpfile创建的文件成为==永久性的==。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tmpnam()</code>:
+<ul>
+<li>tmpname函数为临时文件==产生名字==。</li>
+<li>原型：<code>char *tmpnam(char *s);</code></li>
+<li>参数：
+<ul>
+<li>如果参数是一个空指针，tmpnam会==将生成的文件名存储到一个静态字符数组变量中去，并且返回指向这个变量的指针==；</li>
+<li>传递给tmpnam的参数应该是一个==字符数组==，tmpnam会将文件名存储到这个字符数组中去，并==返回指向这个数组第一个元素的指针==。</li>
+</ul>
+</li>
+<li>tmpnam函数常与fopen函数配合生成具有名字的临时文件。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件缓冲"><a class="markdownIt-Anchor" href="#文件缓冲"></a> 文件缓冲</h2>
+<ul>
+<li>使用文件缓冲的原因：向外存写入或者读出数据都是==相对较慢==的操作。</li>
+<li><strong>缓冲(buffering)</strong>：将写入流或者输入流中的数据，先写入==缓冲区==，最后再将缓冲区的内容写入实际的设备。</li>
+<li><code>&lt;stdio.h&gt;</code>中的缓冲函数，会在缓冲有用时==自动进行缓冲操作==，缓冲是在后台发生的。</li>
+<li><strong><code>fflush</code>函数</strong>：
+<ul>
+<li>调用fflush函数，可以按照我们希望的频率==将缓冲区的内容写到相应设备上去==。</li>
+<li>原型：<code>int fflush(FILE *stream)</code></li>
+<li>参数：
+<ul>
+<li>如果传递的是一个==文件指针==，则将与该文件指针相关联的文件的缓冲区内容写到实际设备。</li>
+<li>如果传递的是一个==空指针==，则将所有缓冲区内容写到实际设备上去。</li>
+</ul>
+</li>
+<li>返回值；
+<ul>
+<li>调用成功，==返回0==;</li>
+<li>调用失败，==返回EOF==。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>setvbuf</code>函数</strong>:
+<ul>
+<li>改变缓冲流的方法，并且允许控制缓冲区的大小和位置。</li>
+<li>原型：<code>int setvbuf(FILE *stream, char *buf, int mode, size_t size);</code></li>
+<li>参数：
+<ul>
+<li><code>stream</code>:需要改变缓冲方式的流；</li>
+<li><code>buf</code>:期望的==缓冲区的地址==；
+<ul>
+<li>如果实参为空指针，则会==创建一个指定大小的缓冲区==。</li>
+</ul>
+</li>
+<li><code>mode</code>:期望的缓冲类型，只能为==下列三个宏==：
+<ol>
+<li><code>_IOFBF</code>:==满缓冲==，当缓冲区为空时，从流读入数据；当缓冲区满时，向流写入数据；</li>
+<li><code>_IOLBF</code>:==行缓冲==，每次从流读入一行数据或者向流写入一行数据；</li>
+<li><code>_IONBF</code>:==无缓冲==，直接从流读入数据或者直接向流写入数据，而没有缓冲区。</li>
+</ol>
+</li>
+<li><code>size</code>:缓冲区内==字节的数量==。</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>调用成功，==返回0==；</li>
+<li>调用失败，==返回非零值==。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>setbuf</code>函数：
+<ul>
+<li>setvbuf的早期版。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件删除与重命名"><a class="markdownIt-Anchor" href="#文件删除与重命名"></a> 文件删除与重命名</h2>
+<ul>
+<li><strong><code>remove</code>函数</strong>：
+<ul>
+<li>用于删除文件；</li>
+<li>原型：<code>int remove(const char *filename)</code></li>
+<li>参数：
+<ul>
+<li><strong>文件名</strong>；</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>成功，0；</li>
+<li>失败，非零值。</li>
+</ul>
+</li>
+<li>要删除的文件需要<strong>关闭</strong>。</li>
+</ul>
+</li>
+<li><strong><code>rename</code>函数</strong>：
+<ul>
+<li>改变文件的名字；</li>
+<li>原型：<code>int rename(const char *old, const char *new)</code></li>
+<li>参数：
+<ul>
+<li>old：原来的文件名；</li>
+<li>new：新的文件名。</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>成功，0；</li>
+<li>失败，非零值。</li>
+</ul>
+</li>
+<li>注意：
+<ul>
+<li>要改名的文件需要<strong>关闭</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E6%8C%87%E9%92%88/index.html" rel="prev" title="C语言-指针">
+                  <i class="fa fa-angle-left"></i> C语言-指针
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/C%E8%AF%AD%E8%A8%80/C%E8%AF%AD%E8%A8%80-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%B8%8E%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/index.html" rel="next" title="C语言-错误处理与信号处理">
+                  C语言-错误处理与信号处理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

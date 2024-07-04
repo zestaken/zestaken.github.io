@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="XML概述 参考手册  概念：Extensible Markup Language 可扩展标记语言  可扩展：标签都是自定义的。   功能：  存储数据  作为配置文件 在网络中传输     XML与HTML：  都是w3c（万维网联盟）的产物 xml的标签都是自定义的，html的标签是预定义的； xml的语法严格，html的语法松散； xml是存储数据的，html是展示数据的。     基本语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XML">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/XML/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="XML概述 参考手册  概念：Extensible Markup Language 可扩展标记语言  可扩展：标签都是自定义的。   功能：  存储数据  作为配置文件 在网络中传输     XML与HTML：  都是w3c（万维网联盟）的产物 xml的标签都是自定义的，html的标签是预定义的； xml的语法严格，html的语法松散； xml是存储数据的，html是展示数据的。     基本语">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201225180146.png">
+<meta property="article:published_time" content="2020-12-25T01:31:06.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="XML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201225180146.png">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/XML/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/XML/index.html","path":"/post/技术笔记/Web后端/XML/index.html","title":"XML"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>XML | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xml%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> XML概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text"> 基本语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text"> 组成部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F"><span class="nav-number">4.</span> <span class="nav-text"> 约束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text"> 解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jsoup"><span class="nav-number">6.</span> <span class="nav-text"> Jsoup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">6.1.</span> <span class="nav-text"> 快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">6.2.</span> <span class="nav-text"> 对象的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.3.</span> <span class="nav-text"> 快速查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#selector%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">6.3.1.</span> <span class="nav-text"> selector:选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xpath"><span class="nav-number">6.3.2.</span> <span class="nav-text"> XPath</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/XML/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="XML | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          XML
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-25 09:31:06" itemprop="dateCreated datePublished" datetime="2020-12-25T09:31:06+08:00">2020-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web后端</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="xml概述"><a class="markdownIt-Anchor" href="#xml概述"></a> XML概述</h1>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/xml/index.asp">参考手册</a></p>
+<ul>
+<li>概念：Extensible Markup Language 可扩展标记语言
+<ul>
+<li>可扩展：标签都是自定义的。</li>
+</ul>
+</li>
+<li>功能：
+<ul>
+<li>存储数据
+<ul>
+<li>作为配置文件</li>
+<li>在网络中传输</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>XML与HTML：
+<ul>
+<li>都是w3c（万维网联盟）的产物</li>
+<li>xml的标签都是自定义的，html的标签是预定义的；</li>
+<li>xml的语法严格，html的语法松散；</li>
+<li>xml是存储数据的，html是展示数据的。</li>
+</ul>
+</li>
+</ul>
+<h1 id="基本语法"><a class="markdownIt-Anchor" href="#基本语法"></a> 基本语法</h1>
+<ul>
+<li>xml文档的后缀名为<code>xml</code>;</li>
+<li>xml文档的<strong>第一行</strong>定义为<strong>文档声明</strong>。</li>
+<li>xml中<strong>有且仅有一个根标签</strong>。</li>
+<li>属性值必须用引号（单双均可）引起来。</li>
+<li>标签必须正确关闭（要么是围堵标签，要么是自闭和标签）;</li>
+<li>xml标签名称<strong>区分大小写</strong>。</li>
+</ul>
+<h1 id="组成部分"><a class="markdownIt-Anchor" href="#组成部分"></a> 组成部分</h1>
+<ol>
+<li>文档声明
+<ol>
+<li>格式：<code>&lt;?xml 属性列表 ?&gt;</code></li>
+<li>属性列表：
+<ol>
+<li>version:版本号，<strong>必须的属性</strong>;</li>
+<li>encoding:编码方式。告知解析引擎当前文档使用的字符集，默认值：ISO-8859-1</li>
+<li>standalone:是否独立，一般不会用</li>
+</ol>
+<ul>
+<li>yes：不依赖于其他文件</li>
+<li>no：依赖其他文件</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>指令
+<ol>
+<li>示例：<code>&lt;?xml-stylesheet type=&quot;text/css&quot; href=&quot;a.css&quot;&gt;</code></li>
+</ol>
+</li>
+<li>标签
+<ul>
+<li>名称可以含字母、数字以及其他的字符</li>
+<li>名称不能以数字或者标点符号开始</li>
+<li>名称不能以字符 “xml”（或者 XML、Xml）开始</li>
+<li>名称不能包含空格</li>
+</ul>
+</li>
+<li>属性
+<ul>
+<li>id属性值唯一</li>
+</ul>
+</li>
+<li>文本
+<ul>
+<li><strong>CDATA</strong>区：在该区域中的数据会被原样展示
+<ul>
+<li>格式：<code>&lt;![CDATA[需要展示的数据]]&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="约束"><a class="markdownIt-Anchor" href="#约束"></a> 约束</h1>
+<ul>
+<li>约束：规定XML文档的书写规则</li>
+<li>XML与约束之间的关系图：<br />
+<img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201225180146.png" alt="" /></li>
+<li>分类：
+<ul>
+<li>DTD:简单的约束技术</li>
+<li>Schema:复杂的约束技术</li>
+</ul>
+</li>
+<li>DTD：
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/dtd/dtd_intro.asp">参考资料</a></li>
+<li>约束文件名的后缀为<code>.dtd</code></li>
+<li>引入dtd文档到xml文档中，之后如果xml的书写不满足dtd文档的规范，则会报错。
+<ul>
+<li>内部dtd：将约束规则定义在xml文档中
+<ul>
+<li>样式；<code>&lt;!DOCTYPE 根标签名 [dtd约束规则内容]&gt;</code></li>
+</ul>
+</li>
+<li>外部dtd：将约束的规则定义在外部的dtd文件中
+<ul>
+<li>本地：<code>&lt;!DOCTYPE 根标签名 SYSTEM &quot;dtd文件在本机的位置（相对路径）&quot;&gt;</code></li>
+<li>网络:<code>&lt;!DOCTYPE 根标签名 PUBLIC &quot;dtd在本地的文件名&quot;&quot;dtd文件在网络的位置（URL）&quot;&gt;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无法规定标签内的内容</li>
+</ul>
+</li>
+<li>Schema:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/schema/index.asp">参考资料</a></li>
+<li>是DTD的替代者，可以规定标签体内的内容格式。</li>
+<li>Schema文档的后缀名为<code>.xsd</code></li>
+<li>在xml文档中引入Schema文档：
+<ol>
+<li>填写xml文档的的<strong>根元素</strong></li>
+<li>引入xsi前缀：<code>xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</code>,后面的内容又很多种选择，可以根据ide的提示内容来选择。</li>
+<li>引入xsd文件的命名空间：<code>xsi:schemaLocation=&quot;http://www.w3school.com.cn note.xsd&quot;</code>前面的内容可以自定义，后面的内容是xsd文件名</li>
+<li>为每一个xsd约束声明一个前缀，作为标识：<code>xmlns=&quot;http://www.w3school.com.cn</code>或者<code>xmlns:a=&quot;http://www.w3school2.com.cn</code>,如果没有指定前缀的话则默认为空前缀。</li>
+<li>引入的每个xsd文件对应一个前缀，该xsd文件内的标签在使用时必须带上该xsd文件的前缀，（空前缀除外）。如：<code>&lt;students&gt;&lt;/students&gt;</code>和<code>&lt;a:students&gt;&lt;/a:students&gt;</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="解析"><a class="markdownIt-Anchor" href="#解析"></a> 解析</h1>
+<ul>
+<li>对xml文档的操作：
+<ol>
+<li>解析（读取）：将文档中的数据<strong>读取到内存中</strong>。</li>
+<li>写入：将内存中的数据保存到xml文档中，持久化的存储。</li>
+</ol>
+</li>
+<li>解析xml的方式：
+<ol>
+<li>DOM：将标记语言文档<strong>一次性</strong>加载进内存，在内存中形成一颗DOM树。
+<ol>
+<li>优点：操作方便，可以对文档进行<strong>CRUD</strong>的所有操作。</li>
+<li>缺点:因为一次性读取，且DOM树占内存，所以十分消耗内存。</li>
+</ol>
+</li>
+<li>SAX：<strong>逐行</strong>读取，基于事件驱动的。
+<ol>
+<li>优点：不占内存</li>
+<li>缺点：<strong>只能读取</strong>，不能CRUD。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>XML常见的解析器：基于不同的解析的方式写出来的<strong>工具包</strong>。
+<ul>
+<li>JAXP：sun公司提供的解析器，支持DOM和SAX思想，不常用。</li>
+<li>DOM4J:非常优秀的基于DOM思想的解析器。</li>
+<li>Jsoup:jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据。也可以用来解析XML。</li>
+<li>PULL：Android操作系统内置的解析器，基于SAX思想。</li>
+</ul>
+</li>
+</ul>
+<h1 id="jsoup"><a class="markdownIt-Anchor" href="#jsoup"></a> Jsoup</h1>
+<h2 id="快速入门"><a class="markdownIt-Anchor" href="#快速入门"></a> 快速入门</h2>
+<ul>
+<li>步骤：
+<ol>
+<li>导入jar包
+<ol>
+<li>在<a target="_blank" rel="noopener" href="https://jsoup.org/download">官网</a>下载jar包</li>
+</ol>
+</li>
+<li>获取Document对象
+<ol>
+<li>获取对应xml的路径：<code>String path = JsoupDemo1.class.getClassLoader().getResource(&quot;student.xml&quot;).getPath();</code>即：<code>String path = 类名.class.getClassLoader().getResource(&quot;xml文档名&quot;).getPath();</code></li>
+<li>解析xml文档，加载文档进内存，获取DOM树（对应Document对象）：<code>Document document = Jsoup.parse(new File(path),&quot;utf-8&quot;);</code> 即：<code>Document document = Jsoup.parse(new File(path),&quot;和xml文档一致的字符集&quot;);</code></li>
+</ol>
+</li>
+<li>获取对应的标签（Element对象）
+<ol>
+<li><code>Elements elements = document.getElementsByTagName(&quot;student&quot;);</code></li>
+</ol>
+</li>
+<li>获取数据
+<ol>
+<li>获取元素对象：<code>Elements elements = document.getElementsByTag(&quot;name&quot;);</code>即：<code>Elements elements = Document对象名.getElementsByTag(&quot;标签名&quot;);</code></li>
+<li>Elements是一个类似集合的对象，它里面会依次存好符合条件的所有元素对象。
+<ol>
+<li>获取指定对象:<code>elements.get(0);</code></li>
+<li>获取指定对象，如：<code>elemets.get(0).text();</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">package xml.jsoup;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.File;
+import java.io.IOException;
+
+public class JsoupDemo1 &#123;
+
+    public static void main(String[] args) throws IOException &#123;
+        &#x2F;&#x2F;1.获取Document对象
+        &#x2F;&#x2F;1.1获取xml文件的路径
+        String path &#x3D; JsoupDemo1.class.getClassLoader().getResource(&quot;student.xml&quot;).getPath();
+        &#x2F;&#x2F;1.2获取Document对象
+        Document document &#x3D; Jsoup.parse(new File(path), &quot;UTF-8&quot;);
+
+        &#x2F;&#x2F;2.获取对应的xml标签
+
+        Elements e &#x3D;  document.getElementsByTag(&quot;student&quot;);
+
+        System.out.println(e.text());
+    &#125;
+&#125;</code></pre>
+<h2 id="对象的使用"><a class="markdownIt-Anchor" href="#对象的使用"></a> 对象的使用</h2>
+<ul>
+<li>Jsoup:工具类，可以解析html或xml文档，返回Document对象
+<ul>
+<li>parse方法：解析html或者xml文档，返回Document对象
+<ul>
+<li><code>parse(File in ,String charseName)</code>:解析本地的xml或html文件</li>
+<li><code>parse(String html)</code>:解析xml或者html字符串；</li>
+<li><code>parse(URL url, int timeoutMills);</code>:通过网络路径获取指定的html或xml的文档对象。（可以用来爬虫）
+<ul>
+<li>timeoutMills：指的是<strong>超时时间</strong>，如果超过这个时间还没有响应的话则认为获取失败。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Document:文档对象，代表内存中的DOM树
+<ul>
+<li>用于获取任意Element对象：
+<ul>
+<li><code>getElementById(String id)</code>:根据id属性值获取唯一的element对象；</li>
+<li><code>getElemnetsByTag(String tagName)</code>:根据标签名称获取元素对象<strong>集合</strong>；</li>
+<li><code>getElementsByAttribute(String key)</code>:根据属性名称获取元素对象的<strong>集合</strong></li>
+<li><code>getElementsByAttributeValue(String key, String value)</code>:根据对应的<strong>属性名和属性值</strong>获取元素的集合。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Elements：元素ELement对象的集合，可以当作<code>ArrayList&lt;Element&gt;</code>来使用</li>
+<li>Element：元素对象
+<ul>
+<li>同样的方法但是只能获取当前元素的子元素对象：
+<ul>
+<li><code>getElementById(String id)</code>:根据id属性值获取唯一的element对象；</li>
+<li><code>getElemnetsByTag(String tagName)</code>:根据标签名称获取元素对象<strong>集合</strong>；</li>
+<li><code>getElementsByAttribute(String key)</code>:根据属性名称获取元素对象的<strong>集合</strong></li>
+<li><code>getElementsByAttributeValue(String key, String value)</code>:根据对应的<strong>属性名和属性值</strong>获取元素的集合。</li>
+</ul>
+</li>
+<li>获取属性：
+<ul>
+<li><code>String attr(String key)</code>:根据属性名称获取属性值</li>
+</ul>
+</li>
+<li>获取文本内容：
+<ul>
+<li><code>String text()</code>:获取文本内容；</li>
+<li><code>String html()</code>:获取标签体的所有内容（包括子标签的字符串内容）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Node：节点对象。
+<ul>
+<li>是Document和Element的父类。</li>
+</ul>
+</li>
+</ul>
+<h2 id="快速查询"><a class="markdownIt-Anchor" href="#快速查询"></a> 快速查询</h2>
+<h3 id="selector选择器"><a class="markdownIt-Anchor" href="#selector选择器"></a> selector:选择器</h3>
+<ul>
+<li>使用的方法：<code>Elements select(String cssQuery)</code>;</li>
+<li>语法：
+<ul>
+<li>cssQuery是将css选择器的写法，写到一个字符串中，可以类比css选择器理解</li>
+<li>参照jsoup-javadoc中的网页文档查找selector理解。</li>
+</ul>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;查询name标签
+Elements elements &#x3D; document.select(&quot;name&quot;);
+&#x2F;&#x2F;查询id值为zhangjie的元素
+ELements elements &#x3D; document.select(&quot;#zhangjie&quot;);
+&#x2F;&#x2F;获取student标签并且number属性值为java的age子标签
+
+&#x2F;&#x2F;1.获取student标签并且number属性值为java
+Elements elements &#x3D; document.select(&quot;student[number&#x3D;\&quot;java\&quot;]&quot;);
+&#x2F;&#x2F;2.获取age子标签
+Elements elemetns &#x3D; document.select(&quot;student[number&#x3D;\&quot;java\&quot;] &gt; age&quot;);</code></pre>
+<h3 id="xpath"><a class="markdownIt-Anchor" href="#xpath"></a> XPath</h3>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/xpath/index.asp">参考文档</a></p>
+<ul>
+<li>XPath是一门在 XML 文档中查找信息的语言。XPath 用于在 XML 文档中通过元素和属性进行导航。</li>
+<li>使用Jsoup的xpath需要额外jar包：JsoupXpath-x.x.x.jar</li>
+<li>使用步骤：
+<ol>
+<li>获取Document对象</li>
+<li>根据Document对象创建JXDocument对象：
+<ol>
+<li><code>JXDocument jxDocument = new JXDocument(document);</code></li>
+</ol>
+</li>
+<li>集合xpath语法查询
+<ol>
+<li><code>List&lt;JXNode&gt; jxNodes = jxDocument.selN(&quot;xpath语法&quot;);</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>示例：</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">&#x2F;&#x2F;查询所有student标签
+List&lt;JXNode&gt; jxNodes &#x3D; jxDocuement.selN(&quot;&#x2F;&#x2F;student&quot;);
+&#x2F;&#x2F;查询所有student标签下的name标签
+List&lt;JXNode&gt; jxNodes &#x3D; jxDocument.selN(&quot;&#x2F;&#x2F;student&#x2F;name&quot;);
+&#x2F;&#x2F;查询student标签下带有id属性的name标签且id属性值为zhangjie
+List&lt;JXNode&gt; jxNodes &#x3D; jxDocument.selN(&quot;&#x2F;&#x2F;student&#x2F;name[@id&#x3D;&#39;zhangjie&#39;]);</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/XML/" rel="tag"># XML</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/Bootstrap/index.html" rel="prev" title="Bootstrap">
+                  <i class="fa fa-angle-left"></i> Bootstrap
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/HTTP%E5%8D%8F%E8%AE%AE/index.html" rel="next" title="HTTP协议">
+                  HTTP协议 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

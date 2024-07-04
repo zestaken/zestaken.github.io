@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="合并数据集  索引上的合并 import pandas as pd import numpy as np  连接的方法：  通过列与索引合并 通过索引和索引合并 复合索引和多个列来合并     生成索引的两种方式  构建数据表（DataFrame）自动生成索引：使用pandas库的DataFrame对象，花括号中以键值对的形式，给出列名和值，索引会自动按序生成  left1 &#x3D; pd.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python数据处理技术">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="合并数据集  索引上的合并 import pandas as pd import numpy as np  连接的方法：  通过列与索引合并 通过索引和索引合并 复合索引和多个列来合并     生成索引的两种方式  构建数据表（DataFrame）自动生成索引：使用pandas库的DataFrame对象，花括号中以键值对的形式，给出列名和值，索引会自动按序生成  left1 &#x3D; pd.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-14T09:01:19.000Z">
+<meta property="article:modified_time" content="2022-09-17T11:41:21.983Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html","path":"/post/技术笔记/Python/Python数据处理技术/index.html","title":"Python数据处理技术"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python数据处理技术 | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text"> 合并数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8A%E7%9A%84%E5%90%88%E5%B9%B6"><span class="nav-number">1.1.</span> <span class="nav-text"> 索引上的合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 生成索引的两种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 连接的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.1.</span> <span class="nav-text"> 内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.2.</span> <span class="nav-text"> 外连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95%E5%90%88%E5%B9%B6"><span class="nav-number">1.1.2.3.</span> <span class="nav-text"> 通过复合索引合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87join%E5%87%BD%E6%95%B0%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.4.</span> <span class="nav-text"> 通过join函数连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%B4%E5%90%91%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.5.</span> <span class="nav-text"> 轴向连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E9%87%8D%E5%8F%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 合并重叠数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text"> 数据转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text"> 移除重复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text"> 数据替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text"> 检测异常值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E5%92%8C%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7"><span class="nav-number">3.</span> <span class="nav-text"> 排列和随机采样</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python数据处理技术 | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python数据处理技术
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-14 17:01:19" itemprop="dateCreated datePublished" datetime="2021-10-14T17:01:19+08:00">2021-10-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="合并数据集"><a class="markdownIt-Anchor" href="#合并数据集"></a> 合并数据集</h1>
+<h2 id="索引上的合并"><a class="markdownIt-Anchor" href="#索引上的合并"></a> 索引上的合并</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
+import numpy as np</code></pre>
+<ul>
+<li>连接的方法：
+<ul>
+<li>通过列与索引合并</li>
+<li>通过索引和索引合并</li>
+<li>复合索引和多个列来合并</li>
+</ul>
+</li>
+</ul>
+<h3 id="生成索引的两种方式"><a class="markdownIt-Anchor" href="#生成索引的两种方式"></a> 生成索引的两种方式</h3>
+<ul>
+<li>构建数据表（DataFrame）自动生成索引：使用pandas库的DataFrame对象，花括号中以键值对的形式，给出列名和值，索引会自动按序生成</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">left1 &#x3D; pd.DataFrame(&#123;&#39;key&#39;: [&#39;a&#39;, &#39;b&#39;, &#39;a&#39;,&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;value&#39;: range(6)&#125;)
+left1</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>a</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>a</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>b</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>c</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>可以通过设置index参数来指定索引创造DataFrame对象</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">right1 &#x3D; pd.DataFrame(&#123;&#39;group_val&#39;:[3.5, 7]&#125;, index&#x3D;[&#39;a&#39;, &#39;b&#39;])
+right1</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>group_val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h3 id="连接的模式"><a class="markdownIt-Anchor" href="#连接的模式"></a> 连接的模式</h3>
+<ul>
+<li>根据索引和列来合并两个表，使用<code>merge()</code>函数，参数依次为：左表（DataFrame对象)，右表，left_on参数指定左表的某一列用于合并，right_index参数指定使用右表的索引来合并（因为索引是唯一的，所以直接设置True或false即可），同理也有right_on和left_index参数，只是left_on和left_index参数不能同时使用</li>
+<li>内连接：<code>merge()</code>函数的默认方式，求两张表的交集</li>
+<li>外连接：求两种表的并集，如果有的元素，一个表有而另一个表没有，则在代表另一个表值的列使用<code>NaN</code>填充</li>
+</ul>
+<h4 id="内连接"><a class="markdownIt-Anchor" href="#内连接"></a> 内连接</h4>
+<ul>
+<li>内连接的使用示例：</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge1 &#x3D; pd.merge(left1, right1, left_on&#x3D;&#39;key&#39;, right_index&#x3D;True)
+merge1</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value</th>
+      <th>group_val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>0</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>a</td>
+      <td>2</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>a</td>
+      <td>3</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>1</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>b</td>
+      <td>4</td>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="外连接"><a class="markdownIt-Anchor" href="#外连接"></a> 外连接</h4>
+<ul>
+<li>外连接：求两张表的并集,<code>merge()</code>函数需要设置<code>how</code>参数来启动外连接模式</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge2 &#x3D; pd.merge(left1, right1, left_on&#x3D;&#39;key&#39;, right_index&#x3D;True,how&#x3D;&#39;outer&#39;)
+merge2</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>value</th>
+      <th>group_val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>0</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>a</td>
+      <td>2</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>a</td>
+      <td>3</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>1</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>b</td>
+      <td>4</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>c</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h4 id="通过复合索引合并"><a class="markdownIt-Anchor" href="#通过复合索引合并"></a> 通过复合索引合并</h4>
+<ul>
+<li>
+<p>通过复合索引和两个列来合并</p>
+<ul>
+<li>通过自动生成索引创建左表</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">lefth &#x3D; pd.DataFrame(&#123;&#39;key1&#39;: [&#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Nevada&#39;, &#39;Nevada&#39;], &#39;key2&#39;: [2000, 2001, 2002, 2001, 2002], 
+                      &#39;data&#39;: np.arange(5a)&#125;)
+lefth</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>​	指定两个列作为复合索引</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">righth &#x3D; pd.DataFrame(np.arange(6*2).reshape(6, 2), index &#x3D; [[&#39;Nevada&#39;, &#39;Nevada&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;, &#39;Ohio&#39;], 
+                                                            [2001, 2000, 2000, 2000, 2001, 2002]],
+                     columns&#x3D;[&#39;event1&#39;, &#39;event2&#39;])
+righth</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>event1</th>
+      <th>event2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">Nevada</th>
+      <th>2001</th>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">Ohio</th>
+      <th>2000</th>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2000</th>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2001</th>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2002</th>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>使用<code>merge()</code>函数内连接两个表</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge3 &#x3D; pd.merge(lefth, righth, left_on&#x3D;[&#39;key1&#39;, &#39;key2&#39;], right_index&#x3D;True)
+merge3</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data</th>
+      <th>event1</th>
+      <th>event2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>2</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>结果分析：因为Nevada 2000这个组合在左表中存在而在右表中不存在，所以在合并表中并没有出现</li>
+</ul>
+<hr />
+<ul>
+<li>让两个表都使用索引来合并</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">left2 &#x3D; pd.DataFrame([[1., 2.,], [3., 4.], [5., 6.]], index&#x3D;[&#39;a&#39;, &#39;c&#39;, &#39;e&#39;], 
+                     columns&#x3D;[&#39;Ohio&#39;, &#39;Nevada&#39;])
+left2</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ohio</th>
+      <th>Nevada</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>3.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>e</th>
+      <td>5.0</td>
+      <td>6.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">right2 &#x3D; pd.DataFrame([[7., 8.], [9., 10.], [11., 12.], [13., 14.]], index&#x3D;[&#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;], 
+                      columns&#x3D;[&#39;Missouri&#39;, &#39;Alabama&#39;])
+right2</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missouri</th>
+      <th>Alabama</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>b</th>
+      <td>7.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>11.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>e</th>
+      <td>13.0</td>
+      <td>14.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge4 &#x3D; pd.merge(left2, right2, left_index &#x3D; True, right_index &#x3D; True)
+merge4</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ohio</th>
+      <th>Nevada</th>
+      <th>Missouri</th>
+      <th>Alabama</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>c</th>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>e</th>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>13.0</td>
+      <td>14.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<hr />
+<h4 id="通过join函数连接"><a class="markdownIt-Anchor" href="#通过join函数连接"></a> 通过join函数连接</h4>
+<ul>
+<li>通过<code>join</code>函数来合并：
+<ul>
+<li>有主表：左表-&gt;所以默认左连接（左表的都保留，右表和左表相同索引的才保留，右表不存在的用<code>NaN</code>填充）</li>
+<li>同样可以通过<code>how</code>参数来设置连接方式</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge5 &#x3D; left2.join(right2)
+merge5</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ohio</th>
+      <th>Nevada</th>
+      <th>Missouri</th>
+      <th>Alabama</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>e</th>
+      <td>5.0</td>
+      <td>6.0</td>
+      <td>13.0</td>
+      <td>14.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>可以通过<code>on</code>参数来使用左表的特定列来合并</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">merge6 &#x3D; lefth.join(righth, on&#x3D;[&#39;key1&#39;, &#39;key2&#39;])
+merge6</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key1</th>
+      <th>key2</th>
+      <th>data</th>
+      <th>event1</th>
+      <th>event2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>4.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Ohio</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>6.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Ohio</td>
+      <td>2001</td>
+      <td>1</td>
+      <td>8.0</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ohio</td>
+      <td>2002</td>
+      <td>2</td>
+      <td>10.0</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nevada</td>
+      <td>2001</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Nevada</td>
+      <td>2002</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<hr />
+<h4 id="轴向连接"><a class="markdownIt-Anchor" href="#轴向连接"></a> 轴向连接</h4>
+<ul>
+<li>轴向连接：将多个同样的表合并为一个表（增加行数）concatennation
+<ul>
+<li>使用Numpy的函数<code>concatenate()</code></li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">arr &#x3D; np.arange(12).reshape(3, 4)
+arr</code></pre>
+<pre><code>array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+</code></pre>
+<ul>
+<li>使用<code>concatenate()</code>函数横向或纵向合并两个arr</li>
+<li>通过<code>axis</code>参数来控制合并的方向</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">arr1 &#x3D; np.concatenate([arr, arr], axis&#x3D;1) # 横向合并
+arr1</code></pre>
+<pre><code>array([[ 0,  1,  2,  3,  0,  1,  2,  3],
+       [ 4,  5,  6,  7,  4,  5,  6,  7],
+       [ 8,  9, 10, 11,  8,  9, 10, 11]])
+</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">arr2 &#x3D; np.concatenate([arr, arr], axis&#x3D;0) # 纵向合并
+arr2</code></pre>
+<pre><code>array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11],
+       [ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+</code></pre>
+<h3 id="合并重叠数据"><a class="markdownIt-Anchor" href="#合并重叠数据"></a> 合并重叠数据</h3>
+<ul>
+<li>创建两个列一致，部分数据一致的一位序列Series</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a &#x3D; pd.Series([np.nan, 2.5, np.nan, 3.5, 4.5, np.nan], index&#x3D;[&#39;f&#39;, &#39;e&#39;, &#39;d&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;])
+a</code></pre>
+<pre><code>f    NaN
+e    2.5
+d    NaN
+c    3.5
+b    4.5
+a    NaN
+dtype: float64
+</code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">b &#x3D; pd.Series(np.arange(len(a), dtype&#x3D;np.float64), index&#x3D;[&#39;f&#39;, &#39;e&#39;, &#39;d&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;])
+b[-1] &#x3D; np.nan #-1下标指代序列的最后一位元素
+b</code></pre>
+<pre><code>f    0.0
+e    1.0
+d    2.0
+c    3.0
+b    4.0
+a    NaN
+dtype: float64
+</code></pre>
+<ul>
+<li>合并两个数据集，以a表为标准，a表中存在的数据保持原样，a表中不存在（NaN）的数据从b中合并过来</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">c &#x3D; np.where(pd.isnull(a), b, a) # 当a为空时取b的值，否则取a的值
+c</code></pre>
+<pre><code>array([0. , 2.5, 2. , 3.5, 4.5, nan])
+</code></pre>
+<h1 id="数据转换"><a class="markdownIt-Anchor" href="#数据转换"></a> 数据转换</h1>
+<h2 id="移除重复数据"><a class="markdownIt-Anchor" href="#移除重复数据"></a> 移除重复数据</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data &#x3D; pd.DataFrame(&#123;&#39;k1&#39;:[&#39;one&#39;]*3+[&#39;two&#39;]*4, &#39;k2&#39;:[1,1,2,3,3,4,4]&#125;)
+data</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k1</th>
+      <th>k2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>one</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>one</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>one</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>two</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>two</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>two</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>two</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>使用DataFrame对象的<code>duplicated()</code>函数检测是否重复行（是为true），返回一个Series对象</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dup &#x3D; data.duplicated()
+dup</code></pre>
+<pre><code>0    False
+1     True
+2    False
+3    False
+4     True
+5    False
+6     True
+dtype: bool
+</code></pre>
+<ul>
+<li><code>drop_duplicates()</code>方法去重, 可以指定用于比较是否相同的某一(或多）列（不一定完全重复),默认保留index最小的行，可以通过设置<code>keep='last'</code>参数保留index最大的数据</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">nodup &#x3D; data.drop_duplicates(keep&#x3D;&#39;last&#39;)
+nodup</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k1</th>
+      <th>k2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>one</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>one</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>two</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>two</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>给data添加一列</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data[&#39;v1&#39;] &#x3D; range(7)
+data</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k1</th>
+      <th>k2</th>
+      <th>v1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>one</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>one</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>one</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>two</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>two</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>two</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>two</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>可以指定通过具体哪些列来判断是否重复</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">nodup2 &#x3D; data.drop_duplicates([&#39;k1&#39;, &#39;k2&#39;], keep&#x3D;&#39;last&#39;)
+nodup2</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>k1</th>
+      <th>k2</th>
+      <th>v1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>one</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>one</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>two</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>two</td>
+      <td>4</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h2 id="数据替换"><a class="markdownIt-Anchor" href="#数据替换"></a> 数据替换</h2>
+<ul>
+<li>定义一个series</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data &#x3D; pd.Series([1., -999, 2., -1000, 3.])
+data</code></pre>
+<pre><code>0       1.0
+1    -999.0
+2       2.0
+3   -1000.0
+4       3.0
+dtype: float64
+</code></pre>
+<ul>
+<li>通过<code>replace()</code>方法将-999替换为NaN</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data.replace(-999, np.nan)</code></pre>
+<pre><code>0       1.0
+1       NaN
+2       2.0
+3   -1000.0
+4       3.0
+dtype: float64
+</code></pre>
+<ul>
+<li>可以同时替换多个值，例如将-999和-1000同时替换为NaN</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data.replace([-999, -1000], np.nan)</code></pre>
+<pre><code>0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    3.0
+dtype: float64
+</code></pre>
+<ul>
+<li>可以实现不同的值对应替换替换为不同的值,例如将-999替换为NaN，-1000替换为0</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data.replace([-999, -1000], [np.nan, 0])</code></pre>
+<pre><code>0    1.0
+1    NaN
+2    2.0
+3    0.0
+4    3.0
+dtype: float64
+</code></pre>
+<h2 id="检测异常值"><a class="markdownIt-Anchor" href="#检测异常值"></a> 检测异常值</h2>
+<ul>
+<li>创建一个含有正态分布数据的DataFrame, 通过DataFrame对象的<code>describe()</code>方法来获取统计特征值</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data &#x3D; pd.DataFrame(np.random.randn(1000, 4))
+data.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.013166</td>
+      <td>-0.000481</td>
+      <td>-0.030189</td>
+      <td>-0.009518</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.976413</td>
+      <td>1.016713</td>
+      <td>0.997048</td>
+      <td>1.008174</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-3.016676</td>
+      <td>-3.162513</td>
+      <td>-3.282324</td>
+      <td>-3.535175</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.649836</td>
+      <td>-0.688303</td>
+      <td>-0.703782</td>
+      <td>-0.698088</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.004212</td>
+      <td>0.011474</td>
+      <td>0.009120</td>
+      <td>-0.001872</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.695183</td>
+      <td>0.679623</td>
+      <td>0.639148</td>
+      <td>0.649286</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4.407439</td>
+      <td>4.139005</td>
+      <td>2.763371</td>
+      <td>3.721676</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>选出含有大于3或者小于-3的值的行</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data[(np.abs(data) &gt;3).any(1)]</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>38</th>
+      <td>-0.795664</td>
+      <td>-0.330065</td>
+      <td>-3.016717</td>
+      <td>2.120561</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>-0.629000</td>
+      <td>0.860827</td>
+      <td>-0.125433</td>
+      <td>-3.535175</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>-0.544495</td>
+      <td>-1.288971</td>
+      <td>-3.029938</td>
+      <td>0.279044</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>-3.016676</td>
+      <td>0.869205</td>
+      <td>-1.010988</td>
+      <td>-0.573853</td>
+    </tr>
+    <tr>
+      <th>254</th>
+      <td>4.407439</td>
+      <td>1.526187</td>
+      <td>-1.255663</td>
+      <td>-0.069301</td>
+    </tr>
+    <tr>
+      <th>276</th>
+      <td>-0.646509</td>
+      <td>-2.390895</td>
+      <td>1.456119</td>
+      <td>-3.337455</td>
+    </tr>
+    <tr>
+      <th>308</th>
+      <td>1.139149</td>
+      <td>4.139005</td>
+      <td>-1.131373</td>
+      <td>0.575723</td>
+    </tr>
+    <tr>
+      <th>493</th>
+      <td>3.189728</td>
+      <td>0.442730</td>
+      <td>-1.561426</td>
+      <td>0.402213</td>
+    </tr>
+    <tr>
+      <th>509</th>
+      <td>0.267529</td>
+      <td>-3.162513</td>
+      <td>1.107551</td>
+      <td>-1.028598</td>
+    </tr>
+    <tr>
+      <th>535</th>
+      <td>-0.679389</td>
+      <td>3.022345</td>
+      <td>-0.983833</td>
+      <td>0.965855</td>
+    </tr>
+    <tr>
+      <th>758</th>
+      <td>-0.182049</td>
+      <td>0.552248</td>
+      <td>1.448889</td>
+      <td>3.721676</td>
+    </tr>
+    <tr>
+      <th>841</th>
+      <td>1.724263</td>
+      <td>1.075039</td>
+      <td>-3.282324</td>
+      <td>1.537926</td>
+    </tr>
+    <tr>
+      <th>895</th>
+      <td>-1.313186</td>
+      <td>3.063947</td>
+      <td>0.154505</td>
+      <td>1.813358</td>
+    </tr>
+    <tr>
+      <th>931</th>
+      <td>1.180028</td>
+      <td>3.300766</td>
+      <td>-0.809880</td>
+      <td>-1.084533</td>
+    </tr>
+    <tr>
+      <th>933</th>
+      <td>-0.037565</td>
+      <td>0.175728</td>
+      <td>-3.255756</td>
+      <td>1.189677</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>将选出的行的异常值用3或者-3替换</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">data[np.abs(data) &gt; 3] &#x3D; np.sign(data) * 3
+data.describe()</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.011585</td>
+      <td>-0.001845</td>
+      <td>-0.029604</td>
+      <td>-0.009367</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.970417</td>
+      <td>1.011010</td>
+      <td>0.995229</td>
+      <td>1.002956</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-3.000000</td>
+      <td>-3.000000</td>
+      <td>-3.000000</td>
+      <td>-3.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.649836</td>
+      <td>-0.688303</td>
+      <td>-0.703782</td>
+      <td>-0.698088</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.004212</td>
+      <td>0.011474</td>
+      <td>0.009120</td>
+      <td>-0.001872</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.695183</td>
+      <td>0.679623</td>
+      <td>0.639148</td>
+      <td>0.649286</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>2.763371</td>
+      <td>3.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<h1 id="排列和随机采样"><a class="markdownIt-Anchor" href="#排列和随机采样"></a> 排列和随机采样</h1>
+<ul>
+<li>
+<p>使用<code>permutation()</code>函数可以实现对series或者DataFreame对象的随机排列工作。</p>
+</li>
+<li>
+<p>先生成一个五行4列的矩阵</p>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df &#x3D; pd.DataFrame(np.arange(5 * 4).reshape(5, 4))
+df</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>再生成一个随机排列的5位数组，用于按这个顺序打乱矩阵</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">sampler &#x3D; np.random.permutation(5)
+sampler</code></pre>
+<pre><code>array([3, 2, 0, 4, 1])
+</code></pre>
+<ul>
+<li>按照sampler排列的顺序排列矩阵，因为sampler是随机排列的，所以实现了打乱矩阵，随机采样的效果</li>
+<li><code>take()</code>函数可以实现按照特定序列实现矩阵的行调换的功能</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df.take(sampler)</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<ul>
+<li>合并实现，并只取出3行数据</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">df.take(np.random.permutation(len(df))[:3])</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th &#123;
+    vertical-align: top;
+&#125;
+
+.dataframe thead th &#123;
+    text-align: right;
+&#125;
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%93%8D%E4%BD%9C/index.html" rel="prev" title="Python数据库连接与操作">
+                  <i class="fa fa-angle-left"></i> Python数据库连接与操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Numpy%E5%B7%A5%E5%85%B7%E5%8C%85/index.html" rel="next" title="Numpy工具包">
+                  Numpy工具包 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

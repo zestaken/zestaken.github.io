@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="vim  vim中的六种基本模式  几乎所有的编辑器都会有插入和执行命令两种模式，并且大多数的编辑器使用了与Vim截然不同的方式：命令目录（鼠标或者键盘驱动），组合键（通常通过control键（CTRL）和alt键（ALT）组成）或者鼠标输入。Vim和vi一样，仅仅通过键盘来在这些模式之中切换。这就使得Vim可以不用进行菜单或者鼠标操作，并且最小化组合键的操作。对文字录入员或者程序员可以大大增强">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim">
+<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/vim/index.html">
+<meta property="og:site_name" content="ZestJourney">
+<meta property="og:description" content="vim  vim中的六种基本模式  几乎所有的编辑器都会有插入和执行命令两种模式，并且大多数的编辑器使用了与Vim截然不同的方式：命令目录（鼠标或者键盘驱动），组合键（通常通过control键（CTRL）和alt键（ALT）组成）或者鼠标输入。Vim和vi一样，仅仅通过键盘来在这些模式之中切换。这就使得Vim可以不用进行菜单或者鼠标操作，并且最小化组合键的操作。对文字录入员或者程序员可以大大增强">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-16T09:25:37.000Z">
+<meta property="article:modified_time" content="2021-09-26T13:39:56.530Z">
+<meta property="article:author" content="Zestaken">
+<meta property="article:tag" content="杂技术">
+<meta property="article:tag" content="VIM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/vim/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/vim/index.html","path":"/post/技术笔记/杂技术/vim/index.html","title":"vim"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>vim | ZestJourney</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">ZestJourney</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">乐游记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vim"><span class="nav-number">1.</span> <span class="nav-text"> vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E4%B8%AD%E7%9A%84%E5%85%AD%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text"> vim中的六种基本模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%88%87%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text"> vim三种常用模式的切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E7%BB%88%E7%AB%AF%E4%B8%8B%E8%BF%9B%E5%85%A5vim"><span class="nav-number">1.3.</span> <span class="nav-text"> Linux终端下进入vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%E5%85%89%E6%A0%87%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text"> 普通模式下光标移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text"> 进入插入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%9D%E5%AD%98%E6%96%87%E6%A1%A3"><span class="nav-number">1.6.</span> <span class="nav-text"> 命令行模式下保存文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%80%E5%87%BAvim"><span class="nav-number">1.7.</span> <span class="nav-text"> 退出vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%E5%88%A0%E9%99%A4%E6%96%87%E6%9C%AC"><span class="nav-number">1.8.</span> <span class="nav-text"> 普通模式下删除文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E7%9A%84%E9%87%8D%E5%A4%8D%E5%91%BD%E4%BB%A4"><span class="nav-number">1.9.</span> <span class="nav-text"> vim的重复命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F%E4%B8%8B%E6%B8%B8%E6%A0%87%E7%9A%84%E5%BF%AB%E9%80%9F%E8%B7%B3%E8%BD%AC"><span class="nav-number">1.10.</span> <span class="nav-text"> 普通模式下，游标的快速跳转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E9%97%B4%E8%B7%B3%E8%BD%AC"><span class="nav-number">1.10.1.</span> <span class="nav-text"> 行间跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E8%B7%B3%E8%BD%AC"><span class="nav-number">1.10.2.</span> <span class="nav-text"> 行内跳转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%B2%98%E8%B4%B4%E5%92%8C%E5%89%AA%E5%88%87"><span class="nav-number">1.11.</span> <span class="nav-text"> 复制粘贴和剪切</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%8F%8A%E7%B2%98%E8%B4%B4%E6%96%87%E6%9C%AC"><span class="nav-number">1.11.1.</span> <span class="nav-text"> 复制及粘贴文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E5%88%87%E5%8F%8A%E7%B2%98%E8%B4%B4%E6%96%87%E6%9C%AC"><span class="nav-number">1.11.2.</span> <span class="nav-text"> 剪切及粘贴文本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9B%BF%E6%8D%A2%E5%92%8C%E6%92%A4%E9%94%80undo%E6%93%8D%E4%BD%9C"><span class="nav-number">1.12.</span> <span class="nav-text"> 字符的替换和撤销（undo操作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E7%BC%A9%E8%BF%9B"><span class="nav-number">1.13.</span> <span class="nav-text"> 快速缩进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E6%96%87%E6%9C%AC%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.14.</span> <span class="nav-text"> 调整文本的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%9F%A5%E6%89%BE"><span class="nav-number">1.15.</span> <span class="nav-text"> 快速查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91"><span class="nav-number">1.16.</span> <span class="nav-text"> 多文件编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8vim%E7%BC%96%E8%BE%91%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="nav-number">1.16.1.</span> <span class="nav-text"> 使用vim编辑多个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5vim%E5%90%8E%E6%89%93%E5%BC%80%E6%96%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.16.2.</span> <span class="nav-text"> 进入vim后打开新文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%96%87%E4%BB%B6"><span class="nav-number">1.16.3.</span> <span class="nav-text"> 恢复文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.17.</span> <span class="nav-text"> 可视模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E7%AA%97%E6%93%8D%E4%BD%9C"><span class="nav-number">1.18.</span> <span class="nav-text"> 视窗操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%8A%A0%E5%AF%86"><span class="nav-number">1.19.</span> <span class="nav-text"> 文档加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8shell%E5%91%BD%E4%BB%A4"><span class="nav-number">1.20.</span> <span class="nav-text"> 执行外部shell命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E5%B8%AE%E5%8A%A9%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.21.</span> <span class="nav-text"> vim帮助系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E5%8A%9F%E8%83%BD%E8%AE%BE%E5%AE%9A"><span class="nav-number">1.22.</span> <span class="nav-text"> vim功能设定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim%E7%9A%84%E5%8A%9F%E8%83%BD%E8%AE%BE%E5%AE%9A"><span class="nav-number">1.22.1.</span> <span class="nav-text"> vim的功能设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%9B%AE%E5%89%8D%E7%9A%84%E8%AE%BE%E5%AE%9A"><span class="nav-number">1.22.2.</span> <span class="nav-text"> 获取目前的设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set%E5%8A%9F%E8%83%BD%E7%9A%84%E8%AF%B4%E6%98%8E"><span class="nav-number">1.22.3.</span> <span class="nav-text"> set功能的说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E9%85%8D%E7%BD%AE"><span class="nav-number">1.23.</span> <span class="nav-text"> vim配置</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zestaken</p>
+  <div class="site-description" itemprop="description">吾好梦中读书~</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/vim/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zestaken">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZestJourney">
+      <meta itemprop="description" content="吾好梦中读书~">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="vim | ZestJourney">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vim
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-16 17:25:37" itemprop="dateCreated datePublished" datetime="2020-07-16T17:25:37+08:00">2020-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-09-26 21:39:56" itemprop="dateModified" datetime="2021-09-26T21:39:56+08:00">2021-09-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">杂技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="vim"><a class="markdownIt-Anchor" href="#vim"></a> vim</h1>
+<h2 id="vim中的六种基本模式"><a class="markdownIt-Anchor" href="#vim中的六种基本模式"></a> vim中的六种基本模式</h2>
+<hr />
+<p>几乎所有的编辑器都会有插入和执行命令两种模式，并且大多数的编辑器使用了与Vim截然不同的方式：命令目录（鼠标或者键盘驱动），组合键（通常通过control键（CTRL）和alt键（ALT）组成）或者鼠标输入。Vim和vi一样，仅仅通过键盘来在这些模式之中切换。这就使得Vim可以不用进行菜单或者鼠标操作，并且最小化组合键的操作。对文字录入员或者程序员可以大大增强速度和效率。Vim具有6种基本模式和5种派生模式。</p>
+<ol>
+<li><strong>普通模式(Normal mode)</strong></li>
+</ol>
+<ul>
+<li>在普通模式中，用的编辑器命令，比如移动光标，删除文本等等。这也是Vim启动后的默认模式。这正好和许多新用户期待的操作方式相反（大多数编辑器默认模式为插入模式）。</li>
+<li>Vim强大的编辑能来自于其普通模式命令。普通模式命令往往需要一个操作符结尾。例如普通模式命令dd删除当前行，但是第一个&quot;d&quot;的后面可以跟另外的移动命令来代替第二个d，比如用移动到下一行的&quot;j&quot;键就可以删除当前行和下一行。另外还可以指定命令重复次数，2dd（重复dd两次），和dj的效果是一样的。用户学习了各种各样的文本间移动／跳转的命令和其他的普通模式的编辑命令，并且能够灵活组合使用的话，能够比那些没有模式的编辑器更加高效地进行文本编辑。</li>
+<li>在普通模式中，有很多方法可以进入插入模式。比较普通的方式是按a（append／追加）键或者i（insert／插入）键。</li>
+</ul>
+<ol start="2">
+<li><strong>插入模式(Insert mode)</strong></li>
+</ol>
+<ul>
+<li>在这个模式中，大多数按键都会向文本缓冲中插入文本。大多数新用户希望文本编辑器编辑过程中一直保持这个模式。</li>
+<li>在插入模式中，可以按ESC键回到普通模式。</li>
+</ul>
+<ol start="3">
+<li><strong>可视模式(Visual mode)</strong></li>
+</ol>
+<ul>
+<li>这个模式与普通模式比较相似。但是移动命令会扩大高亮的文本区域。高亮区域可以是字符、行或者是一块文本。当执行一个非移动命令时，命令会被执行到这块高亮的区域上。Vim的&quot;文本对象&quot;也能和移动命令一样用在这个模式中。</li>
+</ul>
+<ol start="4">
+<li><strong>选择模式(Select mode)</strong></li>
+</ol>
+<ul>
+<li>这个模式和无模式编辑器的行为比较相似（Windows标准文本控件的方式）。这个模式中，可以用鼠标或者光标键高亮选择文本，不过输入任何字符的话，Vim会用这个字符替换选择的高亮文本块，并且自动进入插入模式。</li>
+</ul>
+<ol start="5">
+<li><strong>命令行模式(Command line mode)</strong></li>
+</ol>
+<ul>
+<li>在命令行模式中可以输入会被解释成并执行的文本。例如执行命令（:键），搜索（/和?键）或者过滤命令（!键）。在命令执行之后，Vim返回到命令行模式之前的模式，通常是普通模式。</li>
+</ul>
+<ol start="6">
+<li><strong>Ex模式(Ex mode)</strong></li>
+</ol>
+<ul>
+<li>这和命令行模式比较相似，在使用:visual命令离开Ex模式前，可以一次执行多条命令。</li>
+</ul>
+<h2 id="vim三种常用模式的切换"><a class="markdownIt-Anchor" href="#vim三种常用模式的切换"></a> vim三种常用模式的切换</h2>
+<ul>
+<li>vim启动进入普通模式，处于插入模式或命令行模式时只需要按Esc或者Ctrl+[即可进入普通模式。普通模式中按i（插入）或a（附加）键都可以进入插入模式，普通模式中按:进入命令行模式。命令行模式中输入wq回车后保存并退出vim。</li>
+</ul>
+<h2 id="linux终端下进入vim"><a class="markdownIt-Anchor" href="#linux终端下进入vim"></a> Linux终端下进入vim</h2>
+<ul>
+<li>使用vim命令进入vim界面
+<ul>
+<li>vim后面加上你要打开的已存在的文件名或者不存在（则作为新建文件）的文件名。</li>
+<li>直接使用vim也可以打开vim编辑器，但是不会打开任何文件。（进入命令行模式后输入:e 文件路径 同样可以打开相应文件。）</li>
+</ul>
+</li>
+</ul>
+<h2 id="普通模式下光标移动"><a class="markdownIt-Anchor" href="#普通模式下光标移动"></a> 普通模式下光标移动</h2>
+<ul>
+<li>常用的移动光标的命令</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>操 作 说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>将光标向左移动一格</td>
+</tr>
+<tr>
+<td>l</td>
+<td>将光标向右移动一格</td>
+</tr>
+<tr>
+<td>j</td>
+<td>将光标向上移动一格</td>
+</tr>
+<tr>
+<td>k</td>
+<td>将光标向下移动一格</td>
+</tr>
+<tr>
+<td>W或w</td>
+<td>将光标移动到下一个字</td>
+</tr>
+<tr>
+<td>e</td>
+<td>将光标移动到本单词的最后一个字符。如果光标所在的位置为本单词的最后一个字符，则跳动到下一个单字的最后一个字符。标点符号如“.”、“,”或“/”等字符都会被当成一个字</td>
+</tr>
+<tr>
+<td>b</td>
+<td>将光标移动到单词的第一个字符，如果光标所在位置为本单词的第一个字符，则跳到上一个单词的第一个字符</td>
+</tr>
+<tr>
+<td>0</td>
+<td>将光标移动到该行的最前面</td>
+</tr>
+<tr>
+<td>$</td>
+<td>将光移动到该行的最后面</td>
+</tr>
+<tr>
+<td>G</td>
+<td>将光标移动到最后一行的开头</td>
+</tr>
+<tr>
+<td>{</td>
+<td>将光标移动到前面的“{”处。在C语言编程时，如果按两次就会找到函数开头“{”处，如果再次连续按两次还可以找到上一个函数的开头处(若全文没有“{”，则直接将光标移至文本开头</td>
+</tr>
+<tr>
+<td>}</td>
+<td>同“{”的使用，将光标移动到后面的“}”（若全文没有“}”，则直接将光标移至全文末尾）</td>
+</tr>
+<tr>
+<td>Ctrl＋b</td>
+<td>如果想要翻看文章的前后，可以使用Page Down和Page Up；但当这两个键不能使用时，可以使用Ctrl＋b将光标向前卷一页，相当于Page Up（方向键+shift)</td>
+</tr>
+<tr>
+<td>Ctrl＋f</td>
+<td>将光标向后卷一页，相当于Page Down</td>
+</tr>
+<tr>
+<td>Ctrl＋u</td>
+<td>将光标向前移半页</td>
+</tr>
+<tr>
+<td>Ctrl＋d</td>
+<td>将光标向后移半页</td>
+</tr>
+<tr>
+<td>Ctrl＋e</td>
+<td>将光标向下卷一行</td>
+</tr>
+<tr>
+<td>Ctrl＋y</td>
+<td>将光标向上卷一行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="进入插入模式"><a class="markdownIt-Anchor" href="#进入插入模式"></a> 进入插入模式</h2>
+<ul>
+<li>在普通模式下使用下面的键将进入插入模式，并可以从相应的位置开始输入。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>在当前光标处进行编辑（实际插入位置在光标之前）</td>
+</tr>
+<tr>
+<td>I</td>
+<td>在行首插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在行末插入</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在光标后插入编辑</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前行后插入一个新行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前行前插入一个新行</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>替换从光标所在位置后到一个单词结尾的字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="命令行模式下保存文档"><a class="markdownIt-Anchor" href="#命令行模式下保存文档"></a> 命令行模式下保存文档</h2>
+<ul>
+<li>从普通模式输入:进入命令行模式，输入w回车，保存文档。输入:w 文件名可以将文档另存为其他文件名或存到其它路径下</li>
+</ul>
+<h2 id="退出vim"><a class="markdownIt-Anchor" href="#退出vim"></a> 退出vim</h2>
+<ul>
+<li>命令行模式:</li>
+<li>从普通模式输入:进入命令行模式，输入wq回车，保存并退出编辑。</li>
+<li>以下为其它几种退出方式：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:q!</td>
+<td>强制退出，不保存</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>:wq!</td>
+<td>强制保存并退出</td>
+</tr>
+<tr>
+<td>:w 文件路径</td>
+<td>另存为</td>
+</tr>
+<tr>
+<td>:saveas 文件路径</td>
+<td>另存为</td>
+</tr>
+<tr>
+<td>:x</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并退出</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>普通模式：<br />
+普通模式下输入Shift+zz即可保存退出vim</li>
+</ul>
+<h2 id="普通模式下删除文本"><a class="markdownIt-Anchor" href="#普通模式下删除文本"></a> 普通模式下删除文本</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>d＋d</td>
+<td>连按两次d，可将光标所在的行删除，若是连续删除，可以按住d不放</td>
+</tr>
+<tr>
+<td>d＋w</td>
+<td>删除光标所在位置的单词，若是光标在两个字之间，则删除光标后面的一个字符</td>
+</tr>
+<tr>
+<td>n＋d＋d</td>
+<td>删除包括光标所在行及向下的n行(n为数字)</td>
+</tr>
+<tr>
+<td>n＋d＋上方向键</td>
+<td>删除包括光标所在行及向上的n行</td>
+</tr>
+<tr>
+<td>n＋d＋下方向键</td>
+<td>同n＋d＋d命令</td>
+</tr>
+<tr>
+<td>D或者d$</td>
+<td>将光标所在行后所有的单词删除</td>
+</tr>
+<tr>
+<td>x</td>
+<td>将光标所在位置的字符删除</td>
+</tr>
+<tr>
+<td>X</td>
+<td>将光标所在位置前一个字符删除</td>
+</tr>
+<tr>
+<td>n＋x</td>
+<td>删除光标所在位置及其后的n个字符</td>
+</tr>
+<tr>
+<td>n＋X</td>
+<td>删除光标所在位置及其前的n个字符</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vim的重复命令"><a class="markdownIt-Anchor" href="#vim的重复命令"></a> vim的重复命令</h2>
+<ul>
+<li>在普通模式下.(小数点)表示重复上一次的命令操作</li>
+<li>例如：普通模式下输入x，删除第一个字符，输入.(小数点)会再次删除一个字符，除此之外也可以重复dd的删除操作</li>
+<li>进入普通模式输入N<command>，N 表示重复后面的次数</li>
+<li>在普通模式下，你还可以使用dw或者daw(delete a word)删除一个单词，所以你可以很容易的联想到dnw(n替换为相应数字) 表示删除n个单词</li>
+<li>例如：输入10x，删除10个连续字符,输入3dd，将会删除3行文本。</li>
+</ul>
+<h2 id="普通模式下游标的快速跳转"><a class="markdownIt-Anchor" href="#普通模式下游标的快速跳转"></a> 普通模式下，游标的快速跳转</h2>
+<h3 id="行间跳转"><a class="markdownIt-Anchor" href="#行间跳转"></a> 行间跳转</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nG(n Shift+g)</td>
+<td>游标移动到第 n 行(如果默认没有显示行号，请先进入命令模式，输入:set nu以显示行号)</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>游标移动到到第一行</td>
+</tr>
+<tr>
+<td>G(Shift+g)</td>
+<td>到最后一行</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>小技巧：你在完成依次跳转后，可以使用 Ctrl+o 快速回到上一次(<strong>跳转前</strong>即中途用hjkl移动的不算，只是调回大跳转前的位置)光标所在位置,这个技巧很实用，比如当你在写代码时，忽然想起有个 bug，需要修改，这时候你跳过去改好了，只需要按下 Ctrl+o 就可以回到你之前的位置。</li>
+</ul>
+<h3 id="行内跳转"><a class="markdownIt-Anchor" href="#行内跳转"></a> 行内跳转</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w</td>
+<td>到下一个单词的开头</td>
+</tr>
+<tr>
+<td>e</td>
+<td>到当前单词的结尾</td>
+</tr>
+<tr>
+<td>b</td>
+<td>到前一个单词的开头</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>到前一个单词的结尾</td>
+</tr>
+<tr>
+<td>0或^</td>
+<td>到行头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>到行尾</td>
+</tr>
+<tr>
+<td>f&lt;字母&gt;</td>
+<td>向后搜索&lt;字母&gt;并跳转到第一个匹配的位置(非常实用)</td>
+</tr>
+<tr>
+<td>F&lt;字母&gt;</td>
+<td>向前搜索&lt;字母&gt;并跳转到第一个匹配的位置</td>
+</tr>
+<tr>
+<td>t&lt;字母&gt;</td>
+<td>向后搜索&lt;字母&gt;并跳转到第一个匹配位置之前的一个字母(不常用)</td>
+</tr>
+<tr>
+<td>T&lt;字母&gt;</td>
+<td>向前搜索&lt;字母&gt;并跳转到第一个匹配位置之后的一个字母(不常用)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>注意：vim是以一些特殊字符和空格来区分单词的，比如中文的一句话在它眼里就是一个单词。</li>
+<li>小技巧：使用~可以将当前光标所在的字母切换大小写，之后光标移动到下一位。</li>
+</ul>
+<h2 id="复制粘贴和剪切"><a class="markdownIt-Anchor" href="#复制粘贴和剪切"></a> 复制粘贴和剪切</h2>
+<h3 id="复制及粘贴文本"><a class="markdownIt-Anchor" href="#复制及粘贴文本"></a> 复制及粘贴文本</h3>
+<ul>
+<li>普通模式中使用y复制</li>
+<li>普通模式中，yy复制游标所在的整行（3yy表示复制3行）</li>
+<li>普通模式中，y^ 复制至行首，或y0。不含光标所在处字符。</li>
+<li>普通模式中，y$ 复制至行尾。含光标所在处字符。</li>
+<li>普通模式中，yw 复制一个单词。</li>
+<li>普通模式中，y2w 复制两个单词。</li>
+<li>普通模式中，yG 复制至文本末。</li>
+<li>普通模式中，y1G 复制至文本开头。</li>
+<li>普通模式中使用 p 粘贴</li>
+<li>普通模式中，p(小写)代表粘贴至光标后（下）</li>
+<li>普通模式中，P(大写)代表粘贴至光标前（上）</li>
+</ul>
+<h3 id="剪切及粘贴文本"><a class="markdownIt-Anchor" href="#剪切及粘贴文本"></a> 剪切及粘贴文本</h3>
+<ul>
+<li>其实前面讲的 dd 删除命令就是剪切，你每次 dd 删除文档内容后，便可以使用p来粘贴，也这一点可以让我们实现一个很爽快的功能——交换上下行：</li>
+<li>ddp ,就这么简单，即实现了快速交换光标所在行与它下面的行。</li>
+</ul>
+<h2 id="字符的替换和撤销undo操作"><a class="markdownIt-Anchor" href="#字符的替换和撤销undo操作"></a> 字符的替换和撤销（undo操作）</h2>
+<ul>
+<li>替换和Undo命令都是针对普通模式下的操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r+&lt;待替换字母&gt;</td>
+<td>将游标所在字母替换为指定字母</td>
+</tr>
+<tr>
+<td>R</td>
+<td>连续替换，直到按下Esc</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>替换整行，即删除游标所在行，并进入插入模式</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>替换一个单词，即删除一个单词，并进入插入模式</td>
+</tr>
+<tr>
+<td>C(大写)</td>
+<td>替换游标以后至行末</td>
+</tr>
+<tr>
+<td>~</td>
+<td>反转游标所在字母大小写</td>
+</tr>
+<tr>
+<td>u{n}</td>
+<td>撤销一次或n次操作</td>
+</tr>
+<tr>
+<td>U(大写)</td>
+<td>撤销当前行的所有修改</td>
+</tr>
+<tr>
+<td>Ctrl+r</td>
+<td>redo，即撤销undo的操作</td>
+</tr>
+</tbody>
+</table>
+<h2 id="快速缩进"><a class="markdownIt-Anchor" href="#快速缩进"></a> 快速缩进</h2>
+<ul>
+<li>普通模式下输入&gt;&gt; 整行将向右缩进（使用，用于格式化代码超爽）</li>
+<li>普通模式下输入&lt;&lt; 整行向左回退</li>
+<li>注： 普通模式下输入:进入命令行模式下对shiftwidth值进行设置可以控制缩进和回退的字符数</li>
+<li>shiftwidth
+<ul>
+<li>设置的命令：<code>set shiftwidth? //查看当前shiftwidth值</code> ,<code>set shiftwidth=10 //设置新的shiftwidth值</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="调整文本的位置"><a class="markdownIt-Anchor" href="#调整文本的位置"></a> 调整文本的位置</h2>
+<ul>
+<li>命令行模式下输入<code>:ce</code>(center)命令使本行内容居中</li>
+<li>命令行模式下输入<code>:ri</code>(right)命令使本行文本靠右</li>
+<li>命令行模式下输入<code>:le</code>(left)命令使本行内容靠左</li>
+</ul>
+<h2 id="快速查找"><a class="markdownIt-Anchor" href="#快速查找"></a> 快速查找</h2>
+<ul>
+<li>普通模式下输入<code>/</code>然后键入需要查找的字符串 按回车后就会进行查找。 ？ 与/ 功能相同，只不过 ？ 是向上而 / 是向下查找。 进入查找之后，输入n 和 N 可以继续查找。 n是查找下一个内容,N查找上一个内容。(下面的四个功能在vscode上好像用不了)</li>
+<li>普通模式下输入<code>\*</code>寻找游标所在处的单词</li>
+<li>普通模式下输入<code>\#</code>同上，但 <code>\#</code> 是向前（上）找，<code>\*</code>则是向后（下）找</li>
+<li>普通模式下输入<code>g\*</code>同<code>\*</code> ，但部分符合该单词即可</li>
+<li>普通模式下输入<code>g\#</code>同<code>\#</code> ，但部分符合该单词即可(以上四个查找n, N 的继续查找命令依然可以用)</li>
+</ul>
+<h2 id="多文件编辑"><a class="markdownIt-Anchor" href="#多文件编辑"></a> 多文件编辑</h2>
+<h3 id="使用vim编辑多个文件"><a class="markdownIt-Anchor" href="#使用vim编辑多个文件"></a> 使用vim编辑多个文件</h3>
+<ul>
+<li>打开vim时同时打开或创建两个文件</li>
+<li>例如：<code>vim 1.txt 2.txt</code></li>
+<li>将默认进入1.txt文件的编辑界面</li>
+<li>命令行模式下输入 <code>:n</code> 编辑 2.txt 文件，可以加 ! 即 <code>:n!</code>强制切换，之前一个文件的输入没有保存，仅仅切换到另一个文件</li>
+<li>命令行模式下输入 <code>:N</code>编辑 1.txt 文件，可以加 ! 即 <code>:N!</code> 强制切换，之前文件内的输入没有保存，仅仅是切换到另一个文件</li>
+</ul>
+<h3 id="进入vim后打开新文件"><a class="markdownIt-Anchor" href="#进入vim后打开新文件"></a> 进入vim后打开新文件</h3>
+<ul>
+<li>命令行模式下输入:e 3.txt 打开新文件3.txt</li>
+<li>命令行模式下输入:e# 回到前一个文件</li>
+<li>命令行模式下输入:ls可以列出以前编辑过的文档</li>
+<li>命令行模式下输入:b 2.txt（或者编号）可以直接进入文件2.txt编辑</li>
+<li>命令行模式下输入:bd 2.txt（或者编号）可以删除以前编辑过的列表中的文件项目</li>
+<li>命令行模式下输入:e! 4.txt，新打开文件4.txt，放弃正在编辑的文件(类似强制转换)</li>
+<li>命令行模式下输入:f 显示正在编辑的文件名</li>
+<li>命令行模式下输入:f new.txt，改变正在编辑的文件名字为new.txt</li>
+</ul>
+<h3 id="恢复文件"><a class="markdownIt-Anchor" href="#恢复文件"></a> 恢复文件</h3>
+<p>如果因为断电等原因造成文档没有保存，可以采用恢复方式，<code>vim -r</code>进入文档后，输入<code>:ewcover &lt;filename&gt;</code>来恢复</p>
+<h2 id="可视模式"><a class="markdownIt-Anchor" href="#可视模式"></a> 可视模式</h2>
+<ul>
+<li>在普通模式下输入 v（小写），进入字符选择模式，就可以移动光标，光标走过的地方就会选取。再次按下v后就会取消选取。</li>
+<li>在普通模式下输入 Shift+v（小写），进入行选择模式，按下V之后就会把整行选取，您可以上下移动光标选更多的行，同样，再按一次 Shift+v 就可以取消选取。</li>
+<li>在普通模式下输入 Ctrl+v（小写），这是区域选择模式，可以进行矩形区域选择，再按一次 Ctrl+v 取消选取。</li>
+<li>在可视模式下输入 d 删除选取区域内容</li>
+<li>在可视模式下输入y复制选取区域内</li>
+</ul>
+<h2 id="视窗操作"><a class="markdownIt-Anchor" href="#视窗操作"></a> 视窗操作</h2>
+<ul>
+<li>vim 可以在一个界面里打开多个窗口进行编辑，这些编辑窗口称为 vim 的视窗。</li>
+<li>打开方法有很多种，例如可以使用在命令行模式下输入 <code>:new</code> 打开一个新的 vim 视窗，并进入视窗编辑一个新文件（普通模式下输入 <code>Ctrl+w</code> 也可以），除了 :new 命令，下述列举的多种方法也可以在命令模式或普通模式下打开新的视窗：
+<ul>
+<li>命令行模式下输入<code>:sp 1.txt</code> 打开新的<strong>水平分屏视窗</strong>来编辑1.txt</li>
+<li>命令行模式下输入<code>:vsp 2.txt</code> 打开新的<strong>垂直分屏视窗</strong>来编辑2.txt</li>
+<li>普通模式下<code>Ctrl+w s</code>将当前窗口分割成两个<strong>水平</strong>的窗口</li>
+<li>普通模式下<code>Ctrl+w v</code> 将当前窗口分割成两个<strong>垂直</strong>的窗口</li>
+<li>普通模式下<code>Ctrl+w q</code>即 <code>:q</code> 结束分割出来的视窗。如果在新视窗中有输入需要使用强制符！即<code>:q!</code></li>
+<li>普通模式下<code>Ctrl+w o</code>打开一个视窗并且<strong>隐藏之前</strong>的所有视窗</li>
+<li>普通模式下<code>Ctrl+w j</code> 移至下面视窗</li>
+<li>普通模式下<code>Ctrl+w k</code> 移至上面视窗</li>
+<li>普通模式下<code>Ctrl+w h</code> 移至左边视窗</li>
+<li>普通模式下<code>Ctrl+w l</code> 移至右边视窗</li>
+<li>普通模式下<code>Ctrl+w J</code> 将当前视窗移至下面</li>
+<li>普通模式下<code>Ctrl+w K</code> 将当前视窗移至上面</li>
+<li>普通模式下<code>Ctrl+w H</code> 将当前视窗移至左边</li>
+<li>普通模式下<code>Ctrl+w L</code> 将当前视窗移至右边</li>
+<li>普通模式下<code>Ctrl+w -</code> 减小视窗的高度</li>
+<li>普通模式下<code>Ctrl+w +</code> 增加视窗的高度</li>
+</ul>
+</li>
+</ul>
+<h2 id="文档加密"><a class="markdownIt-Anchor" href="#文档加密"></a> 文档加密</h2>
+<ul>
+<li>命令：<code>vim -x &lt;filename&gt;</code></li>
+<li>输入您的密码 确认密码 这样在下一次打开时，vim就会要求你输入密码</li>
+</ul>
+<h2 id="执行外部shell命令"><a class="markdownIt-Anchor" href="#执行外部shell命令"></a> 执行外部shell命令</h2>
+<ul>
+<li>在命令行模式中输入!可以执行外部的shell命令
+<ul>
+<li><code>:!ls</code> 用于显示当前目录的内容</li>
+<li><code>:!rm FILENAME</code>用于删除名为 FILENAME 的文件</li>
+<li><code>:w FILENAME</code>可将当前 VIM 中正在编辑的文件另存为 FILENAME 文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="vim帮助系统"><a class="markdownIt-Anchor" href="#vim帮助系统"></a> vim帮助系统</h2>
+<p>vim中的查看帮助</p>
+<ul>
+<li>普通模式下按<code>F1</code>打开vim自己预设的帮助文档</li>
+<li>命令行模式下输入<code>:h shiftwidth</code>打开名为shiftwidth的帮助文件</li>
+<li>命令行模式下输入<code>:ver</code> 显示版本及参数</li>
+</ul>
+<h2 id="vim功能设定"><a class="markdownIt-Anchor" href="#vim功能设定"></a> vim功能设定</h2>
+<h3 id="vim的功能设定"><a class="markdownIt-Anchor" href="#vim的功能设定"></a> vim的功能设定</h3>
+<ul>
+<li>可以在编辑文件的时候进行功能设定，如命令行模式下输入<code>:set nu（显示行数）</code>，设定值退出vim后<strong>不会保存</strong>。要<strong>永久</strong>保存配置需要修改vim配置文件。 vim的配置文件<code>~/.vimrc</code>，可以打开文件进行修改，不过务必小心不要影响vim正常使用</li>
+</ul>
+<h3 id="获取目前的设定"><a class="markdownIt-Anchor" href="#获取目前的设定"></a> 获取目前的设定</h3>
+<ul>
+<li>命令行模式下输入<code>:set</code>或者<code>:se</code>显示所有修改过的配置</li>
+<li>命令行模式下输入<code>:set all</code> 显示所有的设定值</li>
+<li>命令行模式下输入<code>:set option?</code>显示option的设定值</li>
+<li>命令行模式下输入<code>:set nooption</code> 取消当前设定值</li>
+</ul>
+<h3 id="set功能的说明"><a class="markdownIt-Anchor" href="#set功能的说明"></a> set功能的说明</h3>
+<ul>
+<li>命令行模式下输入<code>:set autoindent(ai)</code>设置自动缩进</li>
+<li>命令行模式下输入<code>:set autowrite(aw)</code> 设置自动存档，默认未打开</li>
+<li>命令行模式下输入<code>:set background=dark或light</code>，设置背景风格</li>
+<li>命令行模式下输入<code>:set backup(bk)</code> 设置自动备份，默认未打开</li>
+<li>命令行模式下输入<code>: set cindent(cin)</code> 设置C语言风格缩进</li>
+</ul>
+<h2 id="vim配置"><a class="markdownIt-Anchor" href="#vim配置"></a> vim配置</h2>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9D%82%E6%8A%80%E6%9C%AF/" rel="tag"># 杂技术</a>
+              <a href="/tags/VIM/" rel="tag"># VIM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20%E7%BA%BF%E6%80%A7%E8%A1%A8/index.html" rel="prev" title="第二章 线性表">
+                  <i class="fa fa-angle-left"></i> 第二章 线性表
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/%E6%9D%82%E6%8A%80%E6%9C%AF/GCC%E5%9F%BA%E7%A1%80/index.html" rel="next" title="GCC基础">
+                  GCC基础 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Zestaken</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">678k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:17</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
