@@ -1,238 +1,108 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+    <head>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="UTF-8">
+    
+    <title>Python数据处理技术 - ZestJourney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/css/bootstrap.min.css">
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/css/main.css">
+<script src="https://npm.elemecdn.com/@waline/client@v2/dist/waline.js"></script>
+<link
+  rel="stylesheet"
+  href="https://npm.elemecdn.com/@waline/client@v2/dist/waline.css"
+/>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="合并数据集  索引上的合并 import pandas as pd import numpy as np  连接的方法：  通过列与索引合并 通过索引和索引合并 复合索引和多个列来合并     生成索引的两种方式  构建数据表（DataFrame）自动生成索引：使用pandas库的DataFrame对象，花括号中以键值对的形式，给出列名和值，索引会自动按序生成  left1 &#x3D; pd.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Python数据处理技术">
-<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html">
-<meta property="og:site_name" content="ZestJourney">
-<meta property="og:description" content="合并数据集  索引上的合并 import pandas as pd import numpy as np  连接的方法：  通过列与索引合并 通过索引和索引合并 复合索引和多个列来合并     生成索引的两种方式  构建数据表（DataFrame）自动生成索引：使用pandas库的DataFrame对象，花括号中以键值对的形式，给出列名和值，索引会自动按序生成  left1 &#x3D; pd.">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-14T09:01:19.000Z">
-<meta property="article:modified_time" content="2022-09-17T11:41:21.983Z">
-<meta property="article:author" content="Zestaken">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="大数据">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html","path":"/post/技术笔记/Python/Python数据处理技术/index.html","title":"Python数据处理技术"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Python数据处理技术 | ZestJourney</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">ZestJourney</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">乐游记</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
-        
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text"> 合并数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8A%E7%9A%84%E5%90%88%E5%B9%B6"><span class="nav-number">1.1.</span> <span class="nav-text"> 索引上的合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 生成索引的两种方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text"> 连接的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.1.</span> <span class="nav-text"> 内连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.2.</span> <span class="nav-text"> 外连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95%E5%90%88%E5%B9%B6"><span class="nav-number">1.1.2.3.</span> <span class="nav-text"> 通过复合索引合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87join%E5%87%BD%E6%95%B0%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.4.</span> <span class="nav-text"> 通过join函数连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%B4%E5%90%91%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.1.2.5.</span> <span class="nav-text"> 轴向连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E9%87%8D%E5%8F%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text"> 合并重叠数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text"> 数据转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.</span> <span class="nav-text"> 移除重复数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text"> 数据替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text"> 检测异常值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E5%92%8C%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7"><span class="nav-number">3.</span> <span class="nav-text"> 排列和随机采样</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Zestaken</p>
-  <div class="site-description" itemprop="description">吾好梦中读书~</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">84</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">60</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
-
+<body>
     
-  </aside>
 
 
-    </div>
+        <div>
+            <div class="container-fluid position-relative">
+                <nav class="navbar navbar-expand-lg navbar-dark  text-white bg-transparent">
+                    <div class="container">
+                        
+                        <a class="navbar-brand" href="/">💖我们的秘密基地💖</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav mr-auto">
+                            </ul>
+                            <span class="navbar-text">
+                                💕愿你三冬暖，愿你春不寒🍂
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+                <section class="lover-background"
+                    style="background-image: url(/img/banner.jpg)">
+                </section>
+                <section
+                    class="container lover-container d-flex flex-column align-content-center justify-content-center">
+                    <div class="row align-items-center pb-5 lover">
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zestaken.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">  
+                                    zestaken
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                <div class="heart"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zinny.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">
+                                    zinny
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-hero-waves-area waves-area">
+                    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave"
+                                d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z">
+                            </path>
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="3"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="5"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="7"></use>
+                        </g>
+                    </svg>
+                </section>
+            </div>
 
-    <div class="main-inner post posts-expand">
+            <div id="Pjax">
 
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/index.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zestaken">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZestJourney">
-      <meta itemprop="description" content="吾好梦中读书~">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Python数据处理技术 | ZestJourney">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Python数据处理技术
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-14 17:01:19" itemprop="dateCreated datePublished" datetime="2021-10-14T17:01:19+08:00">2021-10-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-17 19:41:21" itemprop="dateModified" datetime="2022-09-17T19:41:21+08:00">2022-09-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>10k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="合并数据集"><a class="markdownIt-Anchor" href="#合并数据集"></a> 合并数据集</h1>
+  <div class="list-content mx-auto mt-5">
+      <div id="article" class="list-top">
+          <h5 class="list-text"> Python数据处理技术
+          </h5>
+          <article>
+              <article>
+                <h1 id="合并数据集"><a class="markdownIt-Anchor" href="#合并数据集"></a> 合并数据集</h1>
 <h2 id="索引上的合并"><a class="markdownIt-Anchor" href="#索引上的合并"></a> 索引上的合并</h2>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">import pandas as pd
 import numpy as np</code></pre>
@@ -1870,114 +1740,30 @@ sampler</code></pre>
 </table>
 </div>
 
-    </div>
+              </article>
+          </article>
+      </div>
+  </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Python/" rel="tag"># Python</a>
-              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"># 大数据</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Python%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%93%8D%E4%BD%9C/index.html" rel="prev" title="Python数据库连接与操作">
-                  <i class="fa fa-angle-left"></i> Python数据库连接与操作
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Python/Numpy%E5%B7%A5%E5%85%B7%E5%8C%85/index.html" rel="next" title="Numpy工具包">
-                  Numpy工具包 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
 </div>
 
 
 
+        </div>
 
 
+        <!-- <div class="p-5 text-center ">
+  <p class="h6"> <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※ <a
+          href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a></p>
+</div> -->
 
+<div class="p-5 text-center">
+  <img src="/img/beian_icon.png" alt="备案图标" class="icon" style="max-width: 48px; max-height: 48px; vertical-align: middle;">
+  <p class="h6">
+    <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※
+    <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a>
+  </p>
 </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021022902号-1 </a>
-      <img src="/images/beian_icon.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=51010802032250" rel="noopener" target="_blank">川公网安备51010802032250号 </a>
-  </div>
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Zestaken</span>
-  </div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="站点总字数">678k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">10:17</span>
-  </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
 </body>
+
 </html>

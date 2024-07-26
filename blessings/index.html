@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <head>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
+
+    <meta charset="UTF-8">
+    
+    <title>ZestJourney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/css/bootstrap.min.css">
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+
+<script src="https://npm.elemecdn.com/@waline/client@v2/dist/waline.js"></script>
+<link
+  rel="stylesheet"
+  href="https://npm.elemecdn.com/@waline/client@v2/dist/waline.css"
+/>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+</head>
+
+<body>
+    
+
+
+        <div>
+            <div class="container-fluid position-relative">
+                <nav class="navbar navbar-expand-lg navbar-dark  text-white bg-transparent">
+                    <div class="container">
+                        
+                        <a class="navbar-brand" href="/">💖我们的秘密基地💖</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav mr-auto">
+                            </ul>
+                            <span class="navbar-text">
+                                💕愿你三冬暖，愿你春不寒🍂
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+                <section class="lover-background"
+                    style="background-image: url(/img/banner.jpg)">
+                </section>
+                <section
+                    class="container lover-container d-flex flex-column align-content-center justify-content-center">
+                    <div class="row align-items-center pb-5 lover">
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zestaken.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">  
+                                    zestaken
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                <div class="heart"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zinny.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">
+                                    zinny
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-hero-waves-area waves-area">
+                    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave"
+                                d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z">
+                            </path>
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="3"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="5"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="7"></use>
+                        </g>
+                    </svg>
+                </section>
+            </div>
+
+            <div id="Pjax">
+  <div id="respond-page-2" class="respond list-content mx-auto mt-5">
+    <div class="list-top">
+      <h5 class="text-center">累计已经收到<span id="bigfontNum" class="bigfontNum"> 0 </span>条祝福</h5>
+
+      <div id="waline">
+
+      </div>
+      <script>
+
+          Waline.init({
+              el: '#waline',
+              serverURL: 'https://c27jzy5fdtxh.cfc-execute.bj.baidubce.com',
+              locale: {
+                placeholder: '写下对我们的祝福'
+              }
+  
+          });
+
+          setInterval(()=>{
+            var numTag = document.querySelector('.wl-num')
+            if(numTag){
+
+              document.querySelector('#bigfontNum').innerText = numTag.innerText
+            }
+
+          },1000);
+      </script>
+    </div>
+  </div>
+</div>
+
+
+
+        </div>
+
+
+        <!-- <div class="p-5 text-center ">
+  <p class="h6"> <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※ <a
+          href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a></p>
+</div> -->
+
+<div class="p-5 text-center">
+  <img src="/img/beian_icon.png" alt="备案图标" class="icon" style="max-width: 48px; max-height: 48px; vertical-align: middle;">
+  <p class="h6">
+    <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※
+    <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a>
+  </p>
+</div>
+</body>
+
+</html>

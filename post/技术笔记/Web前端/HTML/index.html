@@ -1,245 +1,108 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+    <head>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="UTF-8">
+    
+    <title>HTML - ZestJourney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/css/bootstrap.min.css">
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/css/main.css">
+<script src="https://npm.elemecdn.com/@waline/client@v2/dist/waline.js"></script>
+<link
+  rel="stylesheet"
+  href="https://npm.elemecdn.com/@waline/client@v2/dist/waline.css"
+/>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="概念  最基础的网页开发语言。 HTML：Hyper Text Markup Language 超文本标记语言。 超文本：超文本是用超链接的方法，将不同空间的文字信息组织在一起的网状文本。 标记语言：  由标签（&lt;标签内容&gt;）构成的语言，如html，xml 标记语言不是编程语言，没有逻辑性。   HTML 文档描述网页,HTML 文档包含 HTML 标签和纯文本,HTML 文档也被称">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HTML">
-<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/HTML/index.html">
-<meta property="og:site_name" content="ZestJourney">
-<meta property="og:description" content="概念  最基础的网页开发语言。 HTML：Hyper Text Markup Language 超文本标记语言。 超文本：超文本是用超链接的方法，将不同空间的文字信息组织在一起的网状文本。 标记语言：  由标签（&lt;标签内容&gt;）构成的语言，如html，xml 标记语言不是编程语言，没有逻辑性。   HTML 文档描述网页,HTML 文档包含 HTML 标签和纯文本,HTML 文档也被称">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201208092240.jpg">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201211102931.jpg">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201211103137.jpg">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201212111419.jpg">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201212175934.jpg">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201212201738.jpg">
-<meta property="article:published_time" content="2020-12-08T01:05:40.000Z">
-<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
-<meta property="article:author" content="Zestaken">
-<meta property="article:tag" content="前端">
-<meta property="article:tag" content="HTML">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201208092240.jpg">
-
-
-<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/HTML/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/HTML/index.html","path":"/post/技术笔记/Web前端/HTML/index.html","title":"HTML"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>HTML | ZestJourney</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">ZestJourney</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">乐游记</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
-        
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text"> 概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text"> 快速入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-number">3.</span> <span class="nav-text"> 标签</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%A0%87%E7%AD%BE"><span class="nav-number">3.1.</span> <span class="nav-text"> 文件标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A0%87%E7%AD%BE"><span class="nav-number">3.2.</span> <span class="nav-text"> 文本标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%A0%87%E7%AD%BE"><span class="nav-number">3.3.</span> <span class="nav-text"> 图片标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%A0%87%E7%AD%BE"><span class="nav-number">3.4.</span> <span class="nav-text"> 列表标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E6%A0%87%E7%AD%BE"><span class="nav-number">3.5.</span> <span class="nav-text"> 链接标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#div%E5%92%8Cspan"><span class="nav-number">3.6.</span> <span class="nav-text"> div和span</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE"><span class="nav-number">3.7.</span> <span class="nav-text"> 语义化标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E6%A0%87%E7%AD%BE"><span class="nav-number">3.8.</span> <span class="nav-text"> 表格标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.</span> <span class="nav-text"> 表单标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#form%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.1.</span> <span class="nav-text"> form标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E9%A1%B9%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.2.</span> <span class="nav-text"> 表单项标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#input%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.2.1.</span> <span class="nav-text"> input标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#select%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.2.2.</span> <span class="nav-text"> select标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#textarea%E6%A0%87%E7%AD%BE"><span class="nav-number">3.9.2.3.</span> <span class="nav-text"> textarea标签</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text"> 示例</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Zestaken</p>
-  <div class="site-description" itemprop="description">吾好梦中读书~</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">84</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">60</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
-
+<body>
     
-  </aside>
 
 
-    </div>
+        <div>
+            <div class="container-fluid position-relative">
+                <nav class="navbar navbar-expand-lg navbar-dark  text-white bg-transparent">
+                    <div class="container">
+                        
+                        <a class="navbar-brand" href="/">💖我们的秘密基地💖</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav mr-auto">
+                            </ul>
+                            <span class="navbar-text">
+                                💕愿你三冬暖，愿你春不寒🍂
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+                <section class="lover-background"
+                    style="background-image: url(/img/banner.jpg)">
+                </section>
+                <section
+                    class="container lover-container d-flex flex-column align-content-center justify-content-center">
+                    <div class="row align-items-center pb-5 lover">
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zestaken.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">  
+                                    zestaken
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                <div class="heart"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zinny.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">
+                                    zinny
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-hero-waves-area waves-area">
+                    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave"
+                                d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z">
+                            </path>
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="3"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="5"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="7"></use>
+                        </g>
+                    </svg>
+                </section>
+            </div>
 
-    <div class="main-inner post posts-expand">
+            <div id="Pjax">
 
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/HTML/index.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zestaken">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZestJourney">
-      <meta itemprop="description" content="吾好梦中读书~">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="HTML | ZestJourney">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          HTML
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-08 09:05:40" itemprop="dateCreated datePublished" datetime="2020-12-08T09:05:40+08:00">2020-12-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web前端</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>8 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h1>
+  <div class="list-content mx-auto mt-5">
+      <div id="article" class="list-top">
+          <h5 class="list-text"> HTML
+          </h5>
+          <article>
+              <article>
+                <h1 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h1>
 <ul>
 <li>最基础的网页开发语言。</li>
 <li>HTML：Hyper Text Markup Language 超文本标记语言。</li>
@@ -272,7 +135,7 @@
 <li>html的标签不区分大小写，但是建议使用小写</li>
 <li>示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;html&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;html&gt;
 
     &lt;head&gt;
             &lt;title&gt;title&lt;&#x2F;title&gt;
@@ -312,7 +175,7 @@
 <li>规定文本的字体、字体尺寸、字体颜色:<code>&lt;font color=&quot;red&quot;, size=&quot;5&quot;,face=&quot;楷体&quot;&gt; 我是红色&lt;/font&gt;</code>,face是指的字体。<strong>已经不建议使用，改变样式现在用css</strong></li>
 <li>文本居中：<code>&lt;center&gt;需要居中的内容&lt;/center&gt;</code>,居中是相对于父元素来说的。示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;center&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;center&gt;
 &lt;font color&#x3D;&quot;red&quot;, size&#x3D;&quot;5&quot;,face&#x3D;&quot;楷体&quot;&gt; 我是红色&lt;&#x2F;font&gt;
 &lt;&#x2F;center&gt;</code></pre>
 <ul>
@@ -359,7 +222,7 @@
 </li>
 <li>示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;img src &#x3D; &quot;https:&#x2F;&#x2F;zjpicture.oss-cn-beijing.aliyuncs.com&#x2F;giteePic&#x2F;picgo-master&#x2F;img&#x2F;20201208092240.jpg&quot;&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;img src &#x3D; &quot;https:&#x2F;&#x2F;zjpicture.oss-cn-beijing.aliyuncs.com&#x2F;giteePic&#x2F;picgo-master&#x2F;img&#x2F;20201208092240.jpg&quot;&gt;</code></pre>
 <h2 id="列表标签"><a class="markdownIt-Anchor" href="#列表标签"></a> 列表标签</h2>
 <ul>
 <li>有序列表
@@ -374,7 +237,7 @@
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;ol&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ol&gt;
   &lt;li&gt;Coffee&lt;&#x2F;li&gt;
   &lt;li&gt;Tea&lt;&#x2F;li&gt;
   &lt;li&gt;Milk&lt;&#x2F;li&gt;
@@ -394,7 +257,7 @@
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;ul&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;ul&gt;
   &lt;li&gt;Coffee&lt;&#x2F;li&gt;
   &lt;li&gt;Tea&lt;&#x2F;li&gt;
   &lt;li&gt;Milk&lt;&#x2F;li&gt;
@@ -422,7 +285,7 @@
 </li>
 <li>示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;a href &#x3D; &quot;https:&#x2F;&#x2F;zjpicture.oss-cn-beijing.aliyuncs.com&#x2F;giteePic&#x2F;picgo-master&#x2F;img&#x2F;20201211103137.jpg&quot; target &#x3D; &quot;_blank&quot;&gt;我是超链接&lt;&#x2F;a&gt;</code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;a href &#x3D; &quot;https:&#x2F;&#x2F;zjpicture.oss-cn-beijing.aliyuncs.com&#x2F;giteePic&#x2F;picgo-master&#x2F;img&#x2F;20201211103137.jpg&quot; target &#x3D; &quot;_blank&quot;&gt;我是超链接&lt;&#x2F;a&gt;</code></pre>
 <h2 id="div和span"><a class="markdownIt-Anchor" href="#div和span"></a> div和span</h2>
 <ul>
 <li><code>&lt;span&gt;&lt;/span&gt;</code>:没有任何样式，文本信息在<strong>一行展示</strong>，是行内标签，内联标签。</li>
@@ -463,7 +326,7 @@
 <li>th:定义表头单元格</li>
 <li>示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;table border&#x3D;&quot;1&quot; width&#x3D;&quot;50%&quot; cellpading&#x3D;&quot;0&quot; cellspacing&#x3D;&quot;0&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;red&quot;&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;table border&#x3D;&quot;1&quot; width&#x3D;&quot;50%&quot; cellpading&#x3D;&quot;0&quot; cellspacing&#x3D;&quot;0&quot; align&#x3D;&quot;center&quot; bgcolor&#x3D;&quot;red&quot;&gt;
   &lt;!-- 表头行--&gt;
     &lt;tr&gt;
     &lt;!-- 表头单元格 --&gt;
@@ -574,7 +437,7 @@
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;form action&#x3D;&quot;#&quot;, method&#x3D;&quot;post&quot;&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;form action&#x3D;&quot;#&quot;, method&#x3D;&quot;post&quot;&gt;
     &lt;label for&#x3D;&quot;username&quot;&gt;用户名：&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;text&quot; name &#x3D; &quot;用户名&quot; id &#x3D; &quot;username&quot; placeholder&#x3D;&quot;请输入用户名&quot;&gt; &lt;br&gt;
     &lt;label for&#x3D;&quot;password&quot;&gt;密码：&lt;&#x2F;label&gt;&lt;input type&#x3D;&quot;password&quot; name &#x3D; &quot;password&quot; id&#x3D;&quot;password&quot; placeholder&#x3D;&quot;请输入密码&quot;&gt;&lt;br&gt;
     性别：
@@ -599,7 +462,7 @@
 </li>
 <li>示例：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">省份：&lt;select name&#x3D;&quot;province&quot;&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">省份：&lt;select name&#x3D;&quot;province&quot;&gt;
           &lt;option value&#x3D;&quot;&quot;&gt;--请选择--&lt;&#x2F;option&gt;
           &lt;option value&#x3D;&quot;1&quot; &gt;北京&lt;&#x2F;option&gt;
           &lt;option value&#x3D;&quot;2&quot; selected&gt;上海&lt;&#x2F;option&gt;
@@ -617,7 +480,7 @@
 <ul>
 <li>代码：</li>
 </ul>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html">&lt;!DOCTYPE html&gt;
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">&lt;!DOCTYPE html&gt;
 &lt;html lang&#x3D;&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
@@ -669,114 +532,30 @@
 <img src="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201212201738.jpg" alt="" /></li>
 </ul>
 
-    </div>
+              </article>
+          </article>
+      </div>
+  </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
-              <a href="/tags/HTML/" rel="tag"># HTML</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/java-web%E6%A6%82%E5%BF%B5/index.html" rel="prev" title="java web概念">
-                  <i class="fa fa-angle-left"></i> java web概念
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%89%8D%E7%AB%AF/css/index.html" rel="next" title="css">
-                  css <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
 </div>
 
 
 
+        </div>
 
 
+        <!-- <div class="p-5 text-center ">
+  <p class="h6"> <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※ <a
+          href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a></p>
+</div> -->
 
+<div class="p-5 text-center">
+  <img src="/img/beian_icon.png" alt="备案图标" class="icon" style="max-width: 48px; max-height: 48px; vertical-align: middle;">
+  <p class="h6">
+    <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※
+    <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a>
+  </p>
 </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021022902号-1 </a>
-      <img src="/images/beian_icon.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=51010802032250" rel="noopener" target="_blank">川公网安备51010802032250号 </a>
-  </div>
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Zestaken</span>
-  </div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="站点总字数">678k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">10:17</span>
-  </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
 </body>
+
 </html>

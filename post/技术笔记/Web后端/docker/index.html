@@ -1,236 +1,108 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+    <head>
+    <link href="/styles/main.css" rel="stylesheet" type="text/css"/>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="UTF-8">
+    
+    <title>docker - ZestJourney</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/css/bootstrap.min.css">
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/css/main.css">
+<script src="https://npm.elemecdn.com/@waline/client@v2/dist/waline.js"></script>
+<link
+  rel="stylesheet"
+  href="https://npm.elemecdn.com/@waline/client@v2/dist/waline.css"
+/>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zestaken.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="Docker概述 参考教程  Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。 Docker的应用场景：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。     Dock">
-<meta property="og:type" content="article">
-<meta property="og:title" content="docker">
-<meta property="og:url" content="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/docker/index.html">
-<meta property="og:site_name" content="ZestJourney">
-<meta property="og:description" content="Docker概述 参考教程  Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。 Docker的应用场景：  Web 应用的自动化打包和发布。 自动化测试和持续集成、发布。 在服务型环境中部署和调整数据库或其他的后台应用。 从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。     Dock">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201125085937.jpg">
-<meta property="article:published_time" content="2020-11-23T08:34:04.000Z">
-<meta property="article:modified_time" content="2022-09-17T11:27:52.250Z">
-<meta property="article:author" content="Zestaken">
-<meta property="article:tag" content="后端">
-<meta property="article:tag" content="Docker">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zjpicture.oss-cn-beijing.aliyuncs.com/giteePic/picgo-master/img/20201125085937.jpg">
-
-
-<link rel="canonical" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/docker/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/docker/index.html","path":"/post/技术笔记/Web后端/docker/index.html","title":"docker"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>docker | ZestJourney</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">ZestJourney</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">乐游记</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</header>
-        
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text"> Docker概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E6%9E%B6%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text"> Docker架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text"> Docker安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text"> Docker的基础使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8Chelloworld"><span class="nav-number">3.1.</span> <span class="nav-text"> 运行helloworld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text"> 运行交互式容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text"> 启动容器（后台模式）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%AE%B9%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text"> Docker容器使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">4.1.</span> <span class="nav-text"> Docker客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text"> 容器的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 获取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 启动容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%B7%B2%E5%81%9C%E6%AD%A2%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.3.</span> <span class="nav-text"> 启动已停止的容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">4.2.4.</span> <span class="nav-text"> 后台运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.5.</span> <span class="nav-text"> 停止容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.6.</span> <span class="nav-text"> 进入容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E5%92%8C%E5%AF%BC%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.7.</span> <span class="nav-text"> 导出和导入容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="nav-number">4.2.8.</span> <span class="nav-text"> 删除容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E5%BA%94%E7%94%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text"> web应用使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AAweb%E5%BA%94%E7%94%A8"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 运行一个web应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8"><span class="nav-number">4.3.2.</span> <span class="nav-text"> 查看web应用容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.3.</span> <span class="nav-text"> 查看web应用的日志信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B"><span class="nav-number">4.3.4.</span> <span class="nav-text"> 查看web应用容器的进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.3.5.</span> <span class="nav-text"> 检查web应用程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E9%95%9C%E5%83%8F%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text"> Docker镜像使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E9%95%9C%E5%83%8F%E5%88%97%E8%A1%A8"><span class="nav-number">5.1.</span> <span class="nav-text"> 列出镜像列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%B0%E9%95%9C%E5%83%8F"><span class="nav-number">5.2.</span> <span class="nav-text"> 获取新镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E9%95%9C%E5%83%8F"><span class="nav-number">5.3.</span> <span class="nav-text"> 查找镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F"><span class="nav-number">5.4.</span> <span class="nav-text"> 删除镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">5.5.</span> <span class="nav-text"> 创建镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E9%95%9C%E5%83%8F"><span class="nav-number">5.5.1.</span> <span class="nav-text"> 更新镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F"><span class="nav-number">5.5.2.</span> <span class="nav-text"> 构建镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F%E6%A0%87%E7%AD%BE"><span class="nav-number">5.6.</span> <span class="nav-text"> 设置镜像标签</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%AE%B9%E5%99%A8%E8%BF%9E%E6%8E%A5"><span class="nav-number">6.</span> <span class="nav-text"> Docker容器连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="nav-number">6.1.</span> <span class="nav-text"> 网络端口映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%AE%B9%E5%99%A8%E4%BA%92%E8%81%94"><span class="nav-number">6.2.</span> <span class="nav-text"> Docker容器互联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%91%BD%E5%90%8D"><span class="nav-number">6.2.1.</span> <span class="nav-text"> 容器命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">6.2.2.</span> <span class="nav-text"> 新建网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AE%B9%E5%99%A8"><span class="nav-number">6.2.3.</span> <span class="nav-text"> 连接容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEdns"><span class="nav-number">6.2.4.</span> <span class="nav-text"> 配置DNS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text"> Docker仓库管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerhub"><span class="nav-number">7.1.</span> <span class="nav-text"> DockerHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C"><span class="nav-number">7.1.1.</span> <span class="nav-text"> 注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E5%92%8C%E9%80%80%E5%87%BA"><span class="nav-number">7.1.2.</span> <span class="nav-text"> 登录和退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%92%8C%E6%8B%89%E5%8F%96%E9%95%9C%E5%83%8F"><span class="nav-number">7.1.3.</span> <span class="nav-text"> 查找和拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E9%95%9C%E5%83%8F"><span class="nav-number">7.1.4.</span> <span class="nav-text"> 推送镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dockerfile"><span class="nav-number">8.</span> <span class="nav-text"> Dockerfile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dockermachine"><span class="nav-number">9.</span> <span class="nav-text"> Dockermachine</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker%E5%AE%89%E8%A3%85%E7%9A%84ubuntu%E9%97%AE%E9%A2%98"><span class="nav-number">10.</span> <span class="nav-text"> docker安装的Ubuntu问题</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Zestaken</p>
-  <div class="site-description" itemprop="description">吾好梦中读书~</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">84</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">14</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">60</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-        </div>
-      </div>
-    </div>
-
+<body>
     
-  </aside>
 
 
-    </div>
+        <div>
+            <div class="container-fluid position-relative">
+                <nav class="navbar navbar-expand-lg navbar-dark  text-white bg-transparent">
+                    <div class="container">
+                        
+                        <a class="navbar-brand" href="/">💖我们的秘密基地💖</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav mr-auto">
+                            </ul>
+                            <span class="navbar-text">
+                                💕愿你三冬暖，愿你春不寒🍂
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+                <section class="lover-background"
+                    style="background-image: url(/img/banner.jpg)">
+                </section>
+                <section
+                    class="container lover-container d-flex flex-column align-content-center justify-content-center">
+                    <div class="row align-items-center pb-5 lover">
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zestaken.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">  
+                                    zestaken
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center">
+                                <div class="heart"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column">
+                                <img class="mx-auto avatar-img rounded-circle"
+                                    src="/img/zinny.jpg" alt="">
+                                <h4 class="mx-auto text-white pt-2">
+                                    zinny
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="main-hero-waves-area waves-area">
+                    <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                        <defs>
+                            <path id="gentle-wave"
+                                d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z">
+                            </path>
+                        </defs>
+                        <g class="parallax">
+                            <use xlink:href="#gentle-wave" x="48" y="0"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="3"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="5"></use>
+                            <use xlink:href="#gentle-wave" x="48" y="7"></use>
+                        </g>
+                    </svg>
+                </section>
+            </div>
 
-    <div class="main-inner post posts-expand">
+            <div id="Pjax">
 
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.zestaken.top/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/docker/index.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zestaken">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZestJourney">
-      <meta itemprop="description" content="吾好梦中读书~">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="docker | ZestJourney">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          docker
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-11-23 16:34:04" itemprop="dateCreated datePublished" datetime="2020-11-23T16:34:04+08:00">2020-11-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-17 19:27:52" itemprop="dateModified" datetime="2022-09-17T19:27:52+08:00">2022-09-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">技术笔记</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>10k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="docker概述"><a class="markdownIt-Anchor" href="#docker概述"></a> Docker概述</h1>
+  <div class="list-content mx-auto mt-5">
+      <div id="article" class="list-top">
+          <h5 class="list-text"> docker
+          </h5>
+          <article>
+              <article>
+                <h1 id="docker概述"><a class="markdownIt-Anchor" href="#docker概述"></a> Docker概述</h1>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-tutorial.html">参考教程</a></p>
 <ul>
 <li>Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。</li>
@@ -331,8 +203,8 @@
 <h1 id="docker容器使用"><a class="markdownIt-Anchor" href="#docker容器使用"></a> Docker容器使用</h1>
 <h2 id="docker客户端"><a class="markdownIt-Anchor" href="#docker客户端"></a> Docker客户端</h2>
 <ul>
-<li>docker 客户端非常简单 ,我们可以直接输入 <code>docker</code>命令来查看到 Docker 客户端的所有命令选项。</li>
-<li>可以通过命令 <code>docker &lt;command&gt; --help</code>更深入的了解指定的 Docker 命令使用方法。例如我们要查看 docker stats 指令的具体使用方法：<code>docker stats --help</code></li>
+<li>docker 客户端非常简单 ,我们可以直接输入 <code>docker </code>命令来查看到 Docker 客户端的所有命令选项。</li>
+<li>可以通过命令 <code>docker &lt;command&gt; --help </code>更深入的了解指定的 Docker 命令使用方法。例如我们要查看 docker stats 指令的具体使用方法：<code>docker stats --help</code></li>
 </ul>
 <h2 id="容器的使用"><a class="markdownIt-Anchor" href="#容器的使用"></a> 容器的使用</h2>
 <h3 id="获取镜像"><a class="markdownIt-Anchor" href="#获取镜像"></a> 获取镜像</h3>
@@ -341,7 +213,7 @@
 </ul>
 <h3 id="启动容器"><a class="markdownIt-Anchor" href="#启动容器"></a> 启动容器</h3>
 <ul>
-<li>以下命令使用 ubuntu 镜像启动一个容器，参数为以命令行模式进入该容器：<code>docker run -it ubuntu /bin/bash</code>;</li>
+<li>以下命令使用 ubuntu 镜像启动一个容器，参数为以命令行模式进入该容器：<code> docker run -it ubuntu /bin/bash</code>;</li>
 <li>参数说明：
 <ul>
 <li>-i: 交互式操作。</li>
@@ -375,7 +247,7 @@
 <li>在使用 -d 参数时，容器启动后会进入后台。此时想要进入容器，可以通过以下指令进入：</li>
 <li><code>docker attach</code>：
 <ul>
-<li>示例：<code>docker attach 1e560fca3906</code>,没有参数之类的东西，直接使用容器id进入即可。</li>
+<li>示例：<code>docker attach 1e560fca3906 </code>,没有参数之类的东西，直接使用容器id进入即可。</li>
 </ul>
 </li>
 <li><code>docker exec</code>：推荐大家使用 docker exec 命令，因为使用此命令在退出容器终端后，不会导致容器的停止。
@@ -432,7 +304,7 @@
 0.0.0.0:32769-&gt;5000&#x2F;tcp</code></pre>
 <ul>
 <li>Docker 开放了 5000 端口（默认 Python Flask 端口）映射到主机端口 32769 上。这时我们可以通过浏览器访问WEB应用. 在浏览器地址栏输入<code>localhost:32769</code>即可访问web应用。</li>
-<li>我们也可以通过<code>-p</code> 参数来设置不一样的端口：<code>docker run -d -p 5000:5000 training/webapp python app.py</code>容器内部的 5000 端口映射到我们本地主机的 5000 端口上。</li>
+<li>我们也可以通过<code>-p</code> 参数来设置不一样的端口：<code> docker run -d -p 5000:5000 training/webapp python app.py</code>容器内部的 5000 端口映射到我们本地主机的 5000 端口上。</li>
 <li>查看端口号的快捷方式：<code>docker port &lt;容器id&gt;/&lt;容器名&gt;</code>来直接查看容器的端口的映射情况。</li>
 </ul>
 <h3 id="查看web应用的日志信息"><a class="markdownIt-Anchor" href="#查看web应用的日志信息"></a> 查看web应用的日志信息</h3>
@@ -448,7 +320,7 @@
 </ul>
 <h3 id="查看web应用容器的进程"><a class="markdownIt-Anchor" href="#查看web应用容器的进程"></a> 查看web应用容器的进程</h3>
 <ul>
-<li>我们还可以使用 <code>docker top &lt;容器id&gt;/&lt;容器名&gt;</code> 来查看容器内部运行的进程。</li>
+<li>我们还可以使用 <code>docker top &lt;容器id&gt;/&lt;容器名&gt; </code> 来查看容器内部运行的进程。</li>
 </ul>
 <h3 id="检查web应用程序"><a class="markdownIt-Anchor" href="#检查web应用程序"></a> 检查web应用程序</h3>
 <ul>
@@ -610,7 +482,7 @@ fce072cc88ce    training&#x2F;webapp     &quot;python app.py&quot;    ...     0.
 <li><code>docker run -d -p 5000:5000 training/webapp python app.py</code></li>
 </ul>
 </li>
-<li>另外，我们可以指定容器绑定的<strong>网络地址</strong>，比如绑定 127.0.0.1：<code>docker run -d -p 127.0.0.1:5001:5000 training/webapp python app.py</code>.</li>
+<li>另外，我们可以指定容器绑定的<strong>网络地址</strong>，比如绑定 127.0.0.1：<code> docker run -d -p 127.0.0.1:5001:5000 training/webapp python app.py</code>.</li>
 <li>上面的例子中，默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 <code>/udp</code>。<code>docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</code>。</li>
 </ul>
 <h2 id="docker容器互联"><a class="markdownIt-Anchor" href="#docker容器互联"></a> Docker容器互联</h2>
@@ -647,7 +519,7 @@ fce072cc88ce    training&#x2F;webapp     &quot;python app.py&quot;    ...     0.
 </ul>
 </li>
 </ul>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">apt-get update
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">apt-get update
 apt install iputils-ping</code></pre>
 <ul>
 <li>
@@ -669,8 +541,8 @@ apt install iputils-ping</code></pre>
 &#125;</code></pre>
 <ul>
 <li>设置后，启动容器的 DNS 会自动配置为 114.114.114.114 和 8.8.8.8。配置完，需要重启 docker 才能生效。</li>
-<li>查看容器的 DNS 是否生效可以使用以下命令，它会输出容器的 DNS 信息：<code>docker run -it --rm ubuntu cat etc/resolv.conf</code></li>
-<li>如果只想在<strong>指定的容器设置 DNS</strong>，则可以使用以下命令：<code>docker run -it --rm -h host_ubuntu --dns=114.114.114.114 --dns-search=test.com ubuntu</code></li>
+<li>查看容器的 DNS 是否生效可以使用以下命令，它会输出容器的 DNS 信息：<code>docker run -it --rm  ubuntu  cat etc/resolv.conf</code></li>
+<li>如果只想在<strong>指定的容器设置 DNS</strong>，则可以使用以下命令：<code>docker run -it --rm -h host_ubuntu  --dns=114.114.114.114 --dns-search=test.com ubuntu</code></li>
 <li>参数说明：
 <ul>
 <li>–rm：容器退出时自动清理容器内部的文件系统。</li>
@@ -747,114 +619,30 @@ apt install iputils-ping</code></pre>
 <p>apt-get install git python-virtualenv libssl-dev libffi-dev build-essential libpython-dev python2.7-minimal authbind<br />
 ）</p>
 
-    </div>
+              </article>
+          </article>
+      </div>
+  </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
-              <a href="/tags/Docker/" rel="tag"># Docker</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Linux/linux%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html" rel="prev" title="linux虚拟文件系统">
-                  <i class="fa fa-angle-left"></i> linux虚拟文件系统
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/post/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/Web%E5%90%8E%E7%AB%AF/JDBC/index.html" rel="next" title="JDBC">
-                  JDBC <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
 </div>
 
 
 
+        </div>
 
 
+        <!-- <div class="p-5 text-center ">
+  <p class="h6"> <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※ <a
+          href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a></p>
+</div> -->
 
+<div class="p-5 text-center">
+  <img src="/img/beian_icon.png" alt="备案图标" class="icon" style="max-width: 48px; max-height: 48px; vertical-align: middle;">
+  <p class="h6">
+    <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2021022902号-1</a> ※
+    <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank">川公网安备51010802032250号</a>
+  </p>
 </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021022902号-1 </a>
-      <img src="/images/beian_icon.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=51010802032250" rel="noopener" target="_blank">川公网安备51010802032250号 </a>
-  </div>
-  <div class="copyright">
-    &copy; 
-    <span itemprop="copyrightYear">2024</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">Zestaken</span>
-  </div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-    <span title="站点总字数">678k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">10:17</span>
-  </span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha256-4mJNT2bMXxcc1GCJaxBmMPdmah5ji0Ldnd79DKd1hoM=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
 </body>
+
 </html>
